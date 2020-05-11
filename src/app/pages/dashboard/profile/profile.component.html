@@ -1,0 +1,122 @@
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Perfil de usuario</h1>
+          </div>
+
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle" [src]="this._usersService.usuario.imgProfile | imagen:'User'" alt="User profile picture">
+                </div>
+
+                <h3 class="profile-username text-center">{{this._usersService.usuario.name}}</h3>
+
+                <!-- <p class="text-muted text-center">Software Engineer</p> -->
+                <hr>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Publicaciones</b> <a class="float-right">0</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Likes</b> <a class="float-right">0</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Reseñas</b> <a class="float-right">0</a>
+                  </li>
+                </ul>
+
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills">
+
+                  <li class="nav-item"><a class="nav-link active buttonCustom" href="#settings" data-toggle="tab">Configuraciones</a></li>
+                </ul>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content">
+
+
+                  <div class="tab-pane active" id="settings">
+                      <div class="fileConfig">
+                        <form
+                        ngNativeValidate
+                        #i="ngForm"
+
+                        class="formDataSend" action="">
+                            <div class="form-group">
+                                <label for="exampleInputFile">Foto de perfil</label>
+
+                                <div class="input-group">
+
+                                  <div class="custom-file">
+                                    <input (change)="seleccionImage($event.target.files[0])" ngModel name="img" type="file" class="custom-file-input" id="exampleInputFile">
+                                    <label  class="custom-file-label" for="exampleInputFile">Seleccionar</label>
+                                  </div>
+
+                                  <div class="input-group-append">
+                                    <span (click)="subirImagen('User')" class="input-group-text" id="">Enviar</span>
+                                  </div>
+
+                                </div>
+                        
+                              </div>
+                          </form>
+                      </div>
+                      <hr>
+
+                    <form class="form-horizontal" ngNativeValidate
+                    #f="ngForm"
+                    (ngSubmit)="actualizarPerfil( f )">
+                      <div class="form-group row">
+                        <label for="inputmapUrl" class="col-sm-2 col-form-label">URL Google maps</label>
+                        <div class="col-sm-10">
+                          <textarea ngModel name="mapUrl" class="form-control" id="inputmapUrl" placeholder="Pega aquí tu mapa de google maps"></textarea>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <button type="submit" class="btn buttonCustom btn-success">Actualizar</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.nav-tabs-custom -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->

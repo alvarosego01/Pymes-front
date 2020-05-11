@@ -1,0 +1,88 @@
+@import "~src/generals"
+
+
+// ul.menuRight
+.navBurgerPublic
+    @include responsivo(telefonoTable)
+        margin-left: auto!important
+    // @include responsivo(pcMedio)
+
+    @include responsivo(general)
+        display: none!important
+    @include responsivo(resto)
+        display: none!important
+.navBurgerUser
+
+.logo,
+.menuNav
+    @include responsivo(telefonoTable)
+        display: none!important
+    @include responsivo(pcMedio)
+        display: none!important
+
+form.form-inline
+    margin: auto 0
+    margin-left: 5.5%!important
+    padding: 15px 0
+
+#navBar
+    padding: 0
+    padding-left: 10%
+    padding-right: 10%
+    position: relative
+    @include responsivo(telefonoTable)
+        min-height: 80px!important
+    @include responsivo(pcMedio)
+        min-height: 80px!important
+
+.menuNav.navbar-nav
+    margin-left: 50px
+
+ul.menuRight
+    width: fit-content
+    // margin-right: 25px
+    li
+        padding: 15px 0
+        // width: 250px
+        display: flex
+        flex-direction: row
+        align-content: center
+        justify-content: center
+        // border-left: 1.5px solid rgba(0,0,0,0.4)
+        // border-right: 1.5px solid rgba(0,0,0,0.4)
+        .ico
+            width: fit-content
+            margin-right: 25px
+            img
+                height: 25px
+                width: 25px
+        a
+            padding: 0
+            width: auto
+            display: flex
+            flex-direction: row
+            justify-content: center
+            align-content: center
+            align-items: center
+            margin: auto 0
+            h6
+                margin-bottom: 0
+                display: block
+    li.registerButton
+        position: relative
+        padding-left: 15px
+        margin-left: 15px
+        &::before
+            border-left: 2px solid $GrisClar
+            content: ''
+            position: absolute
+            left: 0
+            top: 0
+            bottom: 0
+            margin: auto 0
+            display: block
+            height: 50%
+    @include responsivo(telefonoTable)
+        display: none!important
+    // @include responsivo(pcMedio)
+

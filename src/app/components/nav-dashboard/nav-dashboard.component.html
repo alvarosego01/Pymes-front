@@ -1,0 +1,115 @@
+<aside  id="navDashboard" class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{
+  'navRespPublic': this._usersService.token == null,
+  'navRespUser': this._usersService.token != null
+}">
+    <!-- Brand Logo -->
+    <div class="entireLogo animated fadeIn fast">
+      <img src="../../../assets/dist/img/logoPyme.svg" alt="">
+
+    </div>
+    <div class="favLogo animated fadeIn fast">
+      <img src="../../../assets/dist/img/faPyme.svg" alt="">
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" >
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex" *ngIf="this._usersService.token != null">
+        <div class="image">
+          <img [src]="this._usersService.usuario.imgProfile | imagen:'User'" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a class="d-block">{{ this._usersService.usuario.name }}</a>
+        </div>
+      </div>
+
+
+
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2 menuNavAside" *ngIf="this._usersService.token == null">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-header">Menú de navegación</li>
+          <li class="nav-item loginButton">
+            <a (click)="openLoginByAside()" class="navButton nav-link" [ngClass]="{
+              'active': this._usersService.loginVisible == true
+            }">
+            <i class="fas fa-user-circle"></i>
+            <p>Ingresar</p>
+
+            </a>
+          </li>
+          <li class="nav-item registerButton">
+            <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">
+              <i class="fas fa-user-plus"></i>
+            <p>Crea tu cuenta</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link navButton " data-widget="pushmenu" href="#" role="button">
+              <i class="fas fa-arrow-left nav-icon"></i>
+              <p>
+                Cerrar
+              </p>
+            </a>
+          </li>
+
+
+
+
+        </ul>
+      </nav>
+      <nav class="mt-2" *ngIf="this._usersService.token != null">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-header">Panel de usuario</li>
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <!-- <li class="nav-item">
+            <a  class="nav-link" >
+              <i class="fas nav-icon fa-house-user"></i>
+              <p>Panel Géneral</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a  class="nav-link" >
+              <i class="fas nav-icon fa-user"></i>
+              <p>Perfil</p>
+            </a>
+          </li> -->
+
+          <li class="nav-item">
+            <a  class="nav-link" [routerLink]="['/dashboard/postControl']" routerLinkActive="active">
+              <i class="fas nav-icon fa-tags"></i>
+              <p>Control de publicaciones</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a (click)="logout()" class="nav-link">
+              <i class="fas fa-sign-out-alt nav-icon"></i>
+              <p>Cerrar sesión</p>
+            </a>
+          </li>
+
+          <li class="nav-item burguerResponsiveUser" >
+            <a class="nav-link navButton " data-widget="pushmenu" href="#" role="button">
+              <i class="fas fa-arrow-left nav-icon"></i>
+              <p>
+                Cerrar
+              </p>
+            </a>
+          </li>
+
+
+
+
+
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
