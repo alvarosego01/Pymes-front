@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { _globalConfig, UsersService } from './services/service.index';
+import { LoginComponent } from './components/login/login.component';
+
+
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +12,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'Pymes-Front';
+  title = 'Mercado Pyme';
+
+
+  constructor(
+    private router: Router,
+    public _globaConfig: _globalConfig,
+    public _usersService: UsersService
+  ) {
+
+   }
+
+
+
 }
