@@ -20,9 +20,14 @@ export class AppComponent {
     public _globaConfig: _globalConfig,
     public _usersService: UsersService
   ) {
-
+    this._globaConfig.spinner = true;
    }
 
+
+
+   ngAfterViewInit(): void{
+     this._globaConfig.spinner = false
+   }
 
 
 }

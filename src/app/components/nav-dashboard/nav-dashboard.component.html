@@ -19,7 +19,7 @@
           <img [src]="this._usersService.usuario.imgProfile | imagen:'User'" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a class="d-block">{{ this._usersService.usuario.name }}</a>
+          <a class="d-block">{{ this._usersService.usuario.name }} {{ this._usersService.usuario.surname }}</a>
         </div>
       </div>
 
@@ -71,13 +71,13 @@
               <p>Panel Géneral</p>
             </a>
           </li>
-
+        -->
           <li class="nav-item">
-            <a  class="nav-link" >
+            <a  class="nav-link" [routerLink]="['/dashboard/profile']" routerLinkActive="active">
               <i class="fas nav-icon fa-user"></i>
-              <p>Perfil</p>
+              <p>Perfil de usuario</p>
             </a>
-          </li> -->
+          </li>
 
           <li class="nav-item">
             <a  class="nav-link" [routerLink]="['/dashboard/postControl']" routerLinkActive="active">

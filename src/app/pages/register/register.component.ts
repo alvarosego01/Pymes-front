@@ -136,6 +136,7 @@ console.log(div);
   userRegister(forma: NgForm, type) {
 
 
+
     if (forma.invalid ){
       this._notifyService.Toast.fire({
         title:'Datos invalidos',
@@ -153,6 +154,13 @@ console.log(div);
     if(forma.value.captcha != this._usuarioService.captcha[2]) {
       this._notifyService.Toast.fire({
         title:'Captcha incorrecto',
+        icon: 'error'
+      });
+      return;
+    }
+    if(forma.value.Pass != forma.value.CPass){
+      this._notifyService.Toast.fire({
+        title:'Confirmación de cuenta invalida',
         icon: 'error'
       });
       return;

@@ -28,15 +28,15 @@ export class PostsService {
   categoryPrincipal = [
     {
       base: "Accesorios",
-      child: ["Bisutería", "Perfumes", "Gafas", "Bolsos"],
+      child: ["Bisutería", "Perfumes", "Gafas", "Bolsos", "Otra"],
     },
     {
       base: "Bebes y niños",
-      child: ["Vestuario", "Zapatos", "Accesorios", "Juguetes"],
+      child: ["Vestuario", "Zapatos", "Accesorios", "Juguetes", "Otra"],
     },
     {
       base: "Belleza",
-      child: ["Maquillaje", "Spas uñas", "Cabello", "Tratamientos", "Cejas"],
+      child: ["Maquillaje", "Spas uñas", "Cabello", "Tratamientos", "Cejas", "Otra"],
     },
     // {
       // base: "Bricolaje",
@@ -48,7 +48,7 @@ export class PostsService {
     // },
     {
       base: "Deporte",
-      child: [],
+      child: ['Otra'],
     },
     // {
     //   base: "Electrónica",
@@ -56,7 +56,11 @@ export class PostsService {
     // },
     {
       base: "Educación",
-      child: ["Cursos", "Diplomados", "Técnicos", "Talleres"],
+      child: ["Cursos", "Diplomados", "Técnicos", "Talleres", "Otra"],
+    },
+      {
+      base: "Hogar",
+      child: ["Ropa", "Electrodomesticos", "Aseo", "Otra"],
     },
     {
       base: "Profesionales",
@@ -67,22 +71,20 @@ export class PostsService {
         "Electricistas",
         "Pintores",
         "Fontaneros",
+        "Otra"
       ],
     },
     {
       base: "Vehículos",
-      child: ["Venta motos", "Carros", "Repuestos", "Llantas", "CDA", "SOAT"],
+      child: ["Venta motos", "Carros", "Repuestos", "Llantas", "CDA", "SOAT", "Otra"],
     },
-    {
-      base: "Hogar",
-      child: ["Ropa", "Electrodomesticos", "Aseo"],
-    },
+
     {
       base: "Tecnología",
       child: [
         "Celulares",
         "Electrodomesticos",
-        // 'Aseo'
+        "Otra"
       ],
     },
     // {
@@ -96,7 +98,7 @@ export class PostsService {
 
     {
       base: "Moda",
-      child: ["Vestuario y zapatos"],
+      child: ["Vestuario y zapatos", "Otra"],
     },
     // {
     //   base: "Motor",
@@ -104,7 +106,7 @@ export class PostsService {
     // },
     {
       base: "Ocio",
-      child: [],
+      child: ["Otra"],
     },
     // {
     //   base: "Perfumeria",
@@ -112,11 +114,11 @@ export class PostsService {
     // },
     {
       base: "Restaurantes",
-      child: [],
+      child: ["Otra"],
     },
     {
       base: "Supermercados",
-      child: ["Minimercados", "Fruterías"],
+      child: ["Minimercados", "Fruterías", "Otra"],
     },
     {
       base: "Salud",
@@ -126,15 +128,16 @@ export class PostsService {
         "Psicologos",
         "Odontologos",
         "Bioenergética",
+        "Otra"
       ],
     },
     {
       base: "Viajes",
-      child: [],
+      child: ["Otra"],
     },
     {
       base: "Otros",
-      child: [],
+      child: ["Otra"],
     },
   ];
 

@@ -30,6 +30,7 @@ export class UsersService {
   loginVisible: Boolean = false;
 
   usuario: any;
+  roleName: string;
   token: string;
 
   captcha: number[] = [0, 0, 0];
@@ -92,13 +93,35 @@ export class UsersService {
       un valor valido o nulo que mostrar
     --------------------------------------- */
   cargarStorage() {
+
+
+
     if (localStorage.getItem("token")) {
       this.token = localStorage.getItem("token");
       this.usuario = JSON.parse(localStorage.getItem("user"));
+
+      switch (this.usuario.role) {
+        case "CLIENTE_ROLE":
+          this.roleName = 'Persona natural';
+          break;
+          case "EMPRESA_ROLE":
+          this.roleName = 'Empresa';
+          break;
+          case "ADMIN_ROLE":
+          this.roleName = 'Administrador';
+          break;
+
+        default:
+          // code...
+          break;
+      }
+
     } else {
       this.token = null;
       this.usuario = null;
     }
+
+
 
     // //console.log('cargar storage token: ', this.token);
   }
@@ -215,6 +238,7 @@ export class UsersService {
           if ( xhr.status === 200 ) {
 
 
+
             resolve( JSON.parse( xhr.response ) );
           } else {
 
@@ -242,6 +266,56 @@ export class UsersService {
   }
 
 
+  updateUserPUT(
+    usuarioNatural: _UserModelNatural = null,
+    usuarioCompany: _UserModelCompany = null,
+    type){
+
+ let url = `${URL_SERVICIOS}/user/${this.usuario._id}/?t=${this.token}`;
+console.log(url);
+    let usuario: any;
+    if (type == "natural") {
+      usuario = usuarioNatural;
+    }
+    if (type == "company") {
+      usuario = usuarioCompany;
+    }
+
+    return this.http.put(url, usuario).pipe(
+      map((resp: any) => {
+        //console.log("respuesta", resp);
+        // alert("Usuario registrado");
+        // swal('Perro registrado', '' , 'success');
+        let n = new _NotifyModel(
+          "nAccountCreatedNoVerify",
+          null,
+          resp.data._id
+        );
+        // this._notifyService.sendNotifyEmailPOST(n).subscribe((resp) => {
+//
+        // });
+        this._notifyService.Toast.fire({
+          title: '¡Usuario modificado!',
+          // text: '¡Gracias por unirte a Mercado Pyme!',
+          icon: 'success'
+        });
+        // console.log(resp);
+        // return true;
+        this.guardarStorage( this.usuario._id , this.token, resp['data'])
+      }),
+      catchError((err) => {
+        this._notifyService.Toast.fire({
+          title: 'Algo ha salido mal, intente más tarde',
+          icon: 'error'
+        });
+
+        return throwError(err);
+      })
+    );
+  }
+
+
+
 
 
 
@@ -253,6 +327,7 @@ export class UsersService {
 
     var x = new Promise((resolve) => {
 
+      // console.log('entra al geo');
       navigator.geolocation.getCurrentPosition( position => {
 
         var l ={

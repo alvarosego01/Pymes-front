@@ -15,10 +15,10 @@ const dashboardRoutes: Routes = [
         canActivate: [LoginVerifyGuard],
         canActivateChild: [LoginVerifyGuard],
         children: [
-            // {
-                // path: 'profile',
-                // component: ProfileComponent
-            // },
+            {
+                path: 'profile',
+                component: ProfileComponent
+            },
             {
                 path: 'postControl',
                 component: PostControlComponent

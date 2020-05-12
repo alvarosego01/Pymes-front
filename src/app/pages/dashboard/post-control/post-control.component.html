@@ -160,7 +160,7 @@
           <hr>
 
              <div class="row">
-              <div class="form-group clearfix col-md-12 col-lg-4">
+              <div class="form-group clearfix col-md-12 col-lg-12">
                 <label for="Type">¿Publicarás productos o servicios?</label>
               <div class="input-group" >
                   <div class="input-group-prepend">
@@ -178,8 +178,10 @@
                       </select>
                 </div>
                 </div>
+              </div>
 
-              <div class="form-group clearfix col-md-12 col-lg-4">
+              <div class="row">
+              <div class="form-group clearfix col-md-12 col-lg-6">
                 <label for="Category">Elige la categoría</label>
               <div class="input-group" >
                   <div class="input-group-prepend">
@@ -200,7 +202,8 @@
                 </div>
 
 
-                <div class="form-group clearfix col-md-12 col-lg-4">
+
+                <div class="form-group clearfix col-md-12 col-lg-6">
                   <label for="subCategory">Sub categoría</label>
                 <div class="input-group" >
                   <div class="input-group-prepend">
@@ -209,7 +212,8 @@
 
                       </span>
                     </div>
-                    <select  ngModel [required] ="this.test == 1" name="subCategory" class="form-control" [disabled] = "this.subCategory.length == 0">
+
+                    <select (change)="setSubCategoryOther($event.target.value)"  ngModel [required] ="this.test == 1" name="subCategory" class="form-control" [disabled] = "this.subCategory.length == 0">
                         <!-- <option value="" disabled selected></option> -->
                         <!-- <option value="Sin categoría" selected>Sin sub categoría</option> -->
                         <option *ngFor="let item of this.subCategory"  value="{{item}}">
@@ -217,10 +221,26 @@
                         </option>
 
                       </select>
-                      <!-- <input  ngModel [required] ="this.test == 1" name="City" type="text" class="form-control" > -->
+
                 </div>
                 </div>
 
+          </div>
+
+
+
+             <div class="row" *ngIf="this.newCategory != null">
+                <div class="form-group clearfix col-md-12 col-lg-12">
+               <label for="redWeb">Escribe una nueva categoría</label>
+             <div class="input-group">
+             <div class="input-group-prepend">
+               <span class="input-group-text">
+                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                 </span>
+             </div>
+             <input [(ngModel)]="this.newCategory" name="newCategory" type="text" class="form-control" >
+           </div>
+           </div>
 
              </div>
 
@@ -264,7 +284,9 @@
                         </option>
 
                       </select>
-                      <!-- <input  ngModel [required] ="this.test == 1" name="City" type="text" class="form-control" > -->
+
+
+
                 </div>
                 </div>
 
@@ -272,7 +294,7 @@
                   <label><br></label>
 
                 <div class="formButtons" style="flex-direction: column;">
-                  <button style="width: 100%;"  type="button" (click)="addCityTarget()" class="buttonCustom btn btn-success btn-flat">+</button>
+                  <button style="width: 100%; margin: 0 auto"  type="button" (click)="addCityTarget()" class="buttonCustom btn btn-success btn-flat">+</button>
                 </div>
 
                 </div>
@@ -334,22 +356,6 @@
               </div>
 
              </div>
-
-             <div class="row">
-
-              <div class="form-group clearfix col-md-12">
-                <label for="mapUrl">Ubícate en el mapa para que tus clientes puedan saber dónde encontrarte</label>
-              <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="fas fa-map-marked-alt"></i>
-                      </span>
-                  </div>
-                  <input (change)="muestraMap()"  ngModel name="mapUrl" [(ngModel)]="mapUrl" type="text" class="form-control" >
-                </div>
-            </div>
-
-              </div>
 
        <div class="titleOpc">
 

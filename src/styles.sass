@@ -102,7 +102,8 @@ a.active
     margin-bottom: 0px
     font-size: 18px
     border-radius: 0!important
-    width: fit-content
+    width: fit-content!important
+    display: block
 .buttonCustom.btn-success
     background-color: $VerdeOscur
     &:hover
@@ -141,6 +142,64 @@ a.active
 #centralContainer
     padding: 0
     padding-bottom: 60px
+    padding-top: 60px
+    @include responsivo(telefonoTable)
+        padding: 60px 1%!important
+
+    @include responsivo(pcMedio)
+        padding: 60px 1%!important
+
+
+
+.centralRegister
+    // width: 80%!important
+    margin: 0 auto
+    display: block
+    .card
+        // width: 80%!important
+        display: block
+        margin: 0 auto
+        width: 100%
+        border-top: 5px solid $VerdeOscur
+        .card-header
+            ul#custom-tabs-three-tab
+                display: flex
+                justify-items: center
+                justify-content: center
+                border: 0
+                padding: 25px 0
+                li
+                    a
+                        border: 0
+                        padding-top: 0
+                        padding-bottom: 0
+                        font-size: 26px
+                        display: flex
+                        flex-direction: row
+                        align-content: center
+                        align-items: center
+                        color: $GrisClar
+                        transition: $trans
+                        span
+                            padding-left: 15px
+                            display: block
+    @include responsivo(telefonoTable)
+        .card
+            width: 100%!important
+    @include responsivo(pcMedio)
+        .card
+            width: 100%!important
+    @include responsivo(general)
+        .card
+            width: 80%!important
+
+    @include responsivo(resto)
+        .card
+            width: 80%!important
+
+
+
+
 
 form.formDataSend
     .form-group
@@ -383,3 +442,14 @@ form.formDataSend .terms .icheck-success label
         .card
             width: 100%!important
     @include responsivo(resto)
+
+
+
+// cards globales de edición y formularios
+.animated.fadeIn.fast.card.card-primary.card-outline.card-tabs
+    border-top: 5px solid $VerdeOscur!important
+
+img.profile-user-img.img-fluid.img-circle
+    width: 150px
+    height: 150px
+    object-fit: cover

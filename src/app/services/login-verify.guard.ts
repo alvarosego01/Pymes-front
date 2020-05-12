@@ -26,7 +26,7 @@ export class LoginVerifyGuard implements CanActivate, CanActivateChild {
       }else{
         // //console.log('Bloqueado por el guard');
         // si falla entonces lleva al login
-        this.router.navigate(['/aboutUs']);
+        this.router.navigate(['/us']);
         return false;
 
       }
@@ -41,7 +41,7 @@ export class LoginVerifyGuard implements CanActivate, CanActivateChild {
       }else{
         // //console.log('Bloqueado por el guard');
         // si falla entonces lleva al aboutUs
-        this.router.navigate(['/aboutUs']);
+        this.router.navigate(['/us']);
         return false;
 
       }

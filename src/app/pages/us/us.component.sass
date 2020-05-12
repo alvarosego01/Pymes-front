@@ -9,7 +9,7 @@
         background-color: $GrisFondo2
         margin-bottom: 0!important
         .image
-            background-image: url('../../../assets/dist/img/aboutUs/Imagen-Nosotros-Completa.jpg')
+            background-image: url('../../../assets/dist/img/aboutUs/headerUS.jpg')
             background-position-x: right
             background-position-y: center
             background-size: cover
@@ -46,8 +46,15 @@
             // max-width: unset!important
         .infoIcons
             margin: 50px 0
-            padding-left: 10%
+            // padding-left: 10%
             // padding-right: 10%
+            @include responsivo(general)
+                padding-left: 5%
+
+            @include responsivo(resto)
+                padding-left: 5%
+
+
             .row
                 margin-bottom: 25px
                 .dataVenta

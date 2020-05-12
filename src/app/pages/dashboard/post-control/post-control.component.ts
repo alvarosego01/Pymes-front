@@ -39,7 +39,7 @@ export class PostControlComponent implements OnInit {
 
   cityTargets: any = [];
 
-
+  newCategory: string = null;
 
 
   coordsMap:any = {};
@@ -372,7 +372,18 @@ this.initCitys();
     });
   }
 
+
+setSubCategoryOther(e){
+  console.log(e);
+
+
+  this.newCategory = (e == 'Otra')? e : null;
+}
+
+
   createPublication(forma: NgForm){
+
+    console.log(forma,' el envio de post');
 
 if(this.cityTargets.length == 0){
   this._notifyService.Toast.fire({
@@ -405,8 +416,8 @@ if(forma.value.captcha != this._usersService.captcha[2]) {
 }
 
   var cat = {
-    principal: forma.value.Category,
-    child: forma.value.subCategory,
+    principal: forma.value.Category.base,
+    child: (forma.value.subCategory == 'Otra')? this.newCategory: forma.value.subCategory,
   }
 
   var precio = {
@@ -437,6 +448,7 @@ if(forma.value.captcha != this._usersService.captcha[2]) {
     _cityTarget: JSON.stringify(this.cityTargets),
     _socialNet: JSON.stringify(social),
     _mapUrl: JSON.stringify(this.coordsMap),
+    // _target: JSON.stringify(this.);
     // _files:
   }
 

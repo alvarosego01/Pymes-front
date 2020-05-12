@@ -15,18 +15,18 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-12 col-lg-3">
 
             <!-- Profile Image -->
-            <div class="card card-primary card-outline">
+            <div class="animated fadeIn fast card card-primary card-outline card-tabs">
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle" [src]="this._usersService.usuario.imgProfile | imagen:'User'" alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center">{{this._usersService.usuario.name}}</h3>
+                <h3 class="profile-username text-center">{{this._usersService.usuario.name}} {{this._usersService.usuario.surname}}</h3>
 
-                <!-- <p class="text-muted text-center">Software Engineer</p> -->
+                <p class="text-muted text-center">{{this._usersService.roleName}}</p>
                 <hr>
 
                 <ul class="list-group list-group-unbordered mb-3">
@@ -50,19 +50,20 @@
 
           </div>
           <!-- /.col -->
-          <div class="col-md-9">
-            <div class="card">
+          <div class="col-md-12 col-lg-9">
+            <div class="card animated fadeIn fast">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
+                  <li class="nav-item"><a class="nav-link active buttonCustom" href="#profilePic" data-toggle="tab">Foto de perfil</a></li>
 
-                  <li class="nav-item"><a class="nav-link active buttonCustom" href="#settings" data-toggle="tab">Configuraciones</a></li>
+                  <li class="nav-item"><a class="nav-link buttonCustom" href="#settings" data-toggle="tab">Modificación de cuenta</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
 
 
-                  <div class="tab-pane active" id="settings">
+                  <div class="tab-pane active" id="profilePic">
                       <div class="fileConfig">
                         <form
                         ngNativeValidate
@@ -76,36 +77,337 @@
 
                                   <div class="custom-file">
                                     <input (change)="seleccionImage($event.target.files[0])" ngModel name="img" type="file" class="custom-file-input" id="exampleInputFile">
-                                    <label  class="custom-file-label" for="exampleInputFile">Seleccionar</label>
+                                    <label  class="custom-file-label" for="exampleInputFile">{{this.imageName}}</label>
                                   </div>
 
                                   <div class="input-group-append">
-                                    <span (click)="subirImagen('User')" class="input-group-text" id="">Enviar</span>
+                                    <span (click)="subirImagen('User')" class="input-group-text" id="">Cambiar</span>
                                   </div>
 
                                 </div>
-                        
+
                               </div>
                           </form>
                       </div>
-                      <hr>
 
-                    <form class="form-horizontal" ngNativeValidate
-                    #f="ngForm"
-                    (ngSubmit)="actualizarPerfil( f )">
-                      <div class="form-group row">
-                        <label for="inputmapUrl" class="col-sm-2 col-form-label">URL Google maps</label>
-                        <div class="col-sm-10">
-                          <textarea ngModel name="mapUrl" class="form-control" id="inputmapUrl" placeholder="Pega aquí tu mapa de google maps"></textarea>
-                        </div>
-                      </div>
 
-                      <div class="form-group row">
-                        <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn buttonCustom btn-success">Actualizar</button>
-                        </div>
+
+                  </div>
+
+                   <div class="tab-pane" id="settings">
+
+
+                 <form
+            ngNativeValidate
+            #f="ngForm"
+
+            (ngSubmit)="userModifyAccount( f , 'natural')"
+            class="formDataSend" action="">
+
+            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                    Datos personales
+                  </h4>
+                  <hr>
+                      <div class="row">
+                     <div class="form-group clearfix col-md-12 col-lg-6">
+                      <label for="Name">Nombres</label>
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <input  [(ngModel)]="this.name" name="Name"  type="text" class="form-control"  >
+                  </div>
+                  </div>
+
+                  <div class="form-group clearfix col-md-12 col-lg-6">
+                    <label for="Surname">Apellidos</label>
+                  <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fa fa-user" aria-hidden="true"></i>
+                      </span>
+                  </div>
+                  <input  [(ngModel)]="this.surname" name="Surname"  type="text" class="form-control"  >
+                </div>
+                </div>
+
+
+                   <div class="form-group clearfix col-md-12 col-lg-6">
+                    <label for="Age">Edad</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <input  [(ngModel)]="this.year" name="Age"  type="number" class="form-control" >
+                  </div>
+                  </div>
+
+                  <div class="form-group clearfix col-md-12 col-lg-6">
+                    <label for="Gender">Género</label>
+                  <div class="input-group" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-venus-mars" aria-hidden="true"></i>
+                        </span>
                       </div>
-                    </form>
+                      <select  [(ngModel)]="this.gender" name="Gender" class="form-control" >
+                          <option value="" disabled selected></option>
+                          <option value="Femenino">Femenino</option>
+                          <option value="Masculino">Masculino</option>
+                          <option value="No especificar">No especificar</option>
+
+                        </select>
+                  </div>
+                  </div>
+
+
+                  </div>
+
+                  <div class="row">
+
+                    <div class="form-group clearfix col-md-12 col-lg-6">
+                      <label for="TypeId">Tipo de documento</label>
+                    <div class="input-group" >
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">
+
+                            <i class="fas fa-id-badge"></i>
+                          </span>
+                        </div>
+                        <select  [(ngModel)]="this.typeId" name="TypeId" class="form-control" >
+                            <option value="" disabled selected></option>
+                            <option *ngFor="let item of this._globalConfig.tipoIdentificacion" (click)="permitId(item)"  value="{{item}}">
+                              {{item}}
+                            </option>
+
+
+                          </select>
+                    </div>
+                    </div>
+
+
+                    <div class="form-group clearfix col-md-12 col-lg-6">
+                      <label for="Identification">Número de identificación</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="fas fa-id-card"></i>
+                            </span>
+                        </div>
+                        <input  [(ngModel)]="this.identification" name="Identification"  type="text" class="form-control"  >
+                      </div>
+                  </div>
+
+                  </div>
+
+                  <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                    Actividad económica
+                  </h4>
+                  <hr>
+                  <div class="row">
+                    <div class="form-group clearfix col-md-12 col-lg-12">
+                      <!-- Select multiple-->
+                      <div class="form-group">
+                        <label>¿Cuál es tu sector económico?</label>
+                        <select  multiple="" class="form-control"  name="estadosActividad" [(ngModel)]="this.estadosActividad">
+
+                          <option *ngFor="let item of this._globalConfig.actividadEconomica" value="{{item}}">
+                            {{item}}
+                          </option>
+
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12">
+                      <div class="row">
+
+
+                          <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Producción') == true">
+                            <label for="Identification">¿Qué produces?</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fas fa-users"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="this.ProduccionActivity" name="ProducciónActivity" type="text" class="form-control"  >
+                              </div>
+                            </div>
+                          <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Comercialización') == true">
+                            <label for="Identification">¿Qué comercializas?</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fas fa-users"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="this.ComercializacionActivity" name="ComercializaciónActivity" type="text" class="form-control"  >
+                              </div>
+                            </div>
+                          <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Servicios') == true">
+                            <label for="Identification">¿Cuál servicio?</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fas fa-users"></i>
+                                    </span>
+                                </div>
+                                <input [(ngModel)]="this.ServiciosActivity" name="ServiciosActivity" type="text" class="form-control"  >
+                              </div>
+                          </div>
+                          <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Otro') == true">
+                            <label for="Identification">Describe tu actividad</label>
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="fas fa-users"></i>
+                                  </span>
+                              </div>
+                              <input [(ngModel)]="this.OtroActivity" name="OtroActivity" type="text" class="form-control"  >
+                            </div>
+                        </div>
+
+
+                        </div>
+
+                     </div>
+
+
+                  </div>
+
+                  <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                    Información de contacto
+                  </h4>
+                  <hr>
+
+                        <div class="row">
+                    <div class="form-group clearfix col-md-12 col-lg-6">
+                      <label for="Phone">Teléfono</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <input  [(ngModel)]="this.phone" name="Phone" type="tel" class="form-control"  >
+                      </div>
+                  </div>
+
+                  <div class="form-group clearfix col-md-12 col-lg-6">
+                    <label for="celPhone">Teléfono celular</label>
+                  <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fas fa-mobile-alt"></i>
+                          </span>
+                      </div>
+                      <input  [(ngModel)]="this.celPhone" name="celPhone" type="tel" class="form-control"  >
+                    </div>
+                </div>
+
+                <div class="form-group clearfix col-md-12 col-lg-6">
+                  <label for="Department">Departamento</label>
+                <div class="input-group" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                           <i class="fa fa-home" aria-hidden="true"></i>
+
+                        </span>
+                      </div>
+                      <select [(ngModel)]="this.department" (change)="setCiudades($event.target.value)" name="Department" class="form-control"  >
+                          <option  selected >{{this.department}}</option>
+                          <option *ngFor="let item of this._globalConfig.departamentos;"   value="{{item | json}}">
+                            {{item.departamento}}
+                          </option>
+
+                        </select>
+                  </div>
+                  </div>
+
+                   <div class="form-group clearfix col-md-12 col-lg-6">
+                    <label for="City">Ciudad</label>
+                  <div class="input-group" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                           <i class="fa fa-home" aria-hidden="true"></i>
+
+                        </span>
+                      </div>
+                      <select  [(ngModel)]="this.city" name="City" class="form-control" >
+                          <option value="" selected>{{this.city}}</option>
+                          <option *ngFor="let item of this.ciudades"  value="{{item}}">
+                            {{item}}
+                          </option>
+
+                        </select>
+
+                  </div>
+                  </div>
+
+
+                  </div>
+
+                   <div class="titleOpc">
+
+                  <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                    Tu geolocalización
+                  </h4>
+
+                   <div class="formButtons centerCustom">
+
+                    <button type="button" (click)="captrarLocalizacion()" class="buttonCustom btn btn-success btn-flat">Localizar</button>
+
+                  </div>
+
+                  </div>
+                  <hr>
+
+                  <div class="row" *ngIf="this.activateMap == true">
+                    <div class="col-12">
+
+      <div [innerHtml]="this.coordsMap.mapUrl | safeUrl" style="width: 100%"></div>
+
+
+
+                    </div>
+                  </div>
+
+
+                  <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                    Datos de cuenta
+                </h4>
+                <hr>
+                  <div class="row">
+                     <div class="form-group clearfix col-md-12 col-lg-12">
+                      <label for="Email">Email</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                              <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
+                        <input  [(ngModel)]="this.email" name="Email" type="email" class="form-control" >
+                    </div>
+                    </div>
+
+
+                  </div>
+
+
+
+                  <div class="row formButtons centerCustom">
+                    <button type="submit" class="buttonCustom btn btn-success btn-flat">Actualizar</button>
+                  </div>
+
+            </form>
+
+
+
                   </div>
                   <!-- /.tab-pane -->
                 </div>
