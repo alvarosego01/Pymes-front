@@ -4,21 +4,29 @@
 // ul.menuRight
 .navBurgerPublic
     @include responsivo(telefonoTable)
-        margin-left: auto!important
+        // margin-left: auto!important
     // @include responsivo(pcMedio)
-
     @include responsivo(general)
         display: none!important
     @include responsivo(resto)
         display: none!important
 .navBurgerUser
 
-.logo,
+// .logo,
 .menuNav
     @include responsivo(telefonoTable)
         display: none!important
     @include responsivo(pcMedio)
         display: none!important
+
+.logo
+    @include responsivo(telefonoTable)
+        margin-left: auto!important
+
+    // @include responsivo(pcMedio)
+
+
+
 
 form.form-inline
     margin: auto 0

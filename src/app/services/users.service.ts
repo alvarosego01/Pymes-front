@@ -47,6 +47,7 @@ export class UsersService {
   }
 
 
+
   estaLogueado(){
 
     return (this.token.length > 5 )? true : false;
@@ -56,6 +57,8 @@ export class UsersService {
   login( usuario: _UserModelNatural ){
 
     let url =  URL_SERVICIOS + '/login';
+
+    console.log(url);
     // this._globalConfig.spinner = true;
     // una vez logeado hace falta grabar la sesión en el local storage designado.
     return this.http.post( url, usuario ).pipe(

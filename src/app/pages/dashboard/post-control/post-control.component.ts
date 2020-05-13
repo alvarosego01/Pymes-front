@@ -241,7 +241,7 @@ ngDepartment = '';
             });
             return;
             }
-            if(r[0] == 500 && r[1] == 500){
+            if(r[0] > 200 && r[1] > 200){
               this.urlFiles.push(event.target.result);
               this.imagenesSubir.push(fileup);
               //console.log(this.imagenesSubir, 'imgsubir');
@@ -249,7 +249,7 @@ ngDepartment = '';
             }else{
               this._notifyService.Toast.fire({
                 title:'Dimensiones no permitidas',
-                text: 'Solo se permiten imagenes de 500x500 de tamaño',
+                text: 'Solo se permiten imagenes con más de 200px de ancho y alto de tamaño',
                 icon: 'error'
               });
             }

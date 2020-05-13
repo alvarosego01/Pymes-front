@@ -67,7 +67,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Pymes-Front:build"
+            "browserTarget": "Pymes-Front:build",
+            // "proxyConfig": "src/proxy.conf.json",
+             // "browserTarget": "your-application-name:build",
           },
           "configurations": {
             "production": {
