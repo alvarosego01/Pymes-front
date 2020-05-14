@@ -1,5 +1,5 @@
 import { Router } from "@angular/router";
-import { URL_SERVICIOS } from "./../config/config";
+import { _SERVICIOS } from "./../config/config";
 import { Injectable } from "@angular/core";
 
 // se importa la clase o el modelo de datos de tipo usuario
@@ -150,7 +150,7 @@ export class PostsService {
   {}
 
   getMyPublications() {
-    let url = `${URL_SERVICIOS}/post/publicaciones?t=${this._usersService.token}`;
+    let url = `${_SERVICIOS}/post/publicaciones?t=${this._usersService.token}`;
 
     // una vez logeado hace falta grabar la sesión en el local storage designado.
     return this.http.get(url).pipe(
@@ -192,6 +192,7 @@ export class PostsService {
       // formData = this.createFormData( post._cityTarget,formData, '_cityTarget');
       // formData = this.createFormData( post._socialNet,formData, '_socialNet');
 
+      formData.append("_infoContact", post._infoContact);
       formData.append("_category", post._category);
       formData.append("_rangoPrize", post._rangoPrize);
       formData.append("_cityTarget", post._cityTarget);
@@ -212,7 +213,7 @@ export class PostsService {
         }
       };
       // this._globalConfig.spinner = false;
-      let url = URL_SERVICIOS + "/post" + "?t=" + token;
+      let url = _SERVICIOS + "/post" + "?t=" + token;
 
       //console.log('la url', url);
       //console.log('formada', formData);
@@ -222,28 +223,8 @@ export class PostsService {
     });
   }
 
-  createFormData(
-    object: Object,
-    form?: FormData,
-    namespace?: string
-  ): FormData {
-    const formData = form || new FormData();
-    for (let property in object) {
-      if (!object.hasOwnProperty(property) || !object[property]) {
-        continue;
-      }
-      const formKey = namespace ? `${namespace}[${property}]` : property;
-      if (object[property] instanceof Date) {
-        formData.append(formKey, object[property].toISOString());
-      } else if (
-        typeof object[property] === "object" &&
-        !(object[property] instanceof File)
-      ) {
-        this.createFormData(object[property], formData, formKey);
-      } else {
-        formData.append(formKey, object[property]);
-      }
-    }
-    return formData;
-  }
+
+ 
+
+
 }

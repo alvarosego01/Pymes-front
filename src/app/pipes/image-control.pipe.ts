@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { URL_SERVICIOS } from '../config/config';
+import { _SERVICIOS } from '../config/config';
 
 @Pipe({
   name: 'imagen'
@@ -8,7 +8,7 @@ export class ImagenPipe implements PipeTransform {
 
   transform( img: string, tipo: string = 'User'): any {
 
-    let url = URL_SERVICIOS + '/img';
+    let url = _SERVICIOS + '/img';
 
     if ( !img ) {
       return url + '/User/xxx';

@@ -114,11 +114,13 @@ console.log(div);
 
 
   async captrarLocalizacion(){
+    
    let x = this._usuarioService.getLocation();
 
    this._globaConfig.spinner = true;
    this.activateMap = false
-    await x.then(r => {
+   this._usuarioService.promiseTimeout(5000, x);
+    x.then(r => {
 
       console.log(r);
       this.coordsMap = r;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
-import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { _PostModel } from 'src/app/models/postModel';
 import { NotifyService, _globalConfig,
   //  PostsService
@@ -15,7 +15,7 @@ import { PostsService } from 'src/app/services/posts.service';
 export class PostControlComponent implements OnInit {
 
 
-  test = 1;
+  test = 0;
 
 
   imagenSubir: File;
@@ -58,6 +58,9 @@ ngCity = this._usersService.usuario.city;
 ngEmail = this._usersService.usuario.email;
 ngDepartment = '';
 
+
+
+
   constructor(
     public _usersService: UsersService,
     public _notifyService: NotifyService,
@@ -92,7 +95,7 @@ ngDepartment = '';
 
    this._globalConfig.spinner = true;
    this.activateMap = false
-    await x.then(r => {
+    x.then(r => {
 
       console.log(r);
       this.coordsMap = r;
@@ -183,106 +186,6 @@ ngDepartment = '';
     }
   }
 
- selectFiles(event){
-
-    //console.log(event.target.files);
-    if(event.target.files){
-
-      for (let index = 0; index < File.length; index++) {
-
-        var reader = new FileReader();
-
-        reader.readAsDataURL(event.target.files[index]);
-        var fileup = event.target.files[index];
-        reader.onload = (event:any) => {
-          var image = new Image();
-          image.src = event.target.result;
-
-          if ( event.target.result.indexOf('image') < 0 && this.typeAdjuntos != 'Catálogo PDF') {
-
-            // this.imagenSubir = null;
-            this._notifyService.Toast.fire({
-              title: 'Solo imágenes',
-              text: 'El archivo seleccionado no es una imagen',
-              icon: 'error'
-            });
-            return;
-          }
-          if ( event.target.result.indexOf('PDF') < 0 && this.typeAdjuntos == 'Catálogo PDF') {
-
-            // this.imagenSubir = null;
-            this._notifyService.Toast.fire({
-              title: 'Solo PDF',
-              text: 'El archivo seleccionado no es una archivo PDF',
-              icon: 'error'
-            });
-            return;
-          }
-
-          if(this.typeAdjuntos != 'Catálogo PDF'){
-
-          // return;
-          var x = new Promise((resolve,reject) => {
-
-            image.onload = function() {
-              //console.log('datos de imagn',image);
-                var k = [image.width, image.height];
-                resolve(k);
-            };
-          })
-
-           x.then(r => {
-
-            if(this.urlFiles.length+1 > this.nroFotos ){
-                 this._notifyService.Toast.fire({
-              title: 'Limite de imágenes',
-              text: `Solo puedes seleccionar ${this.nroFotos} imágenes`,
-              icon: 'error'
-            });
-            return;
-            }
-            if(r[0] > 200 && r[1] > 200){
-              this.urlFiles.push(event.target.result);
-              this.imagenesSubir.push(fileup);
-              //console.log(this.imagenesSubir, 'imgsubir');
-              //console.log(this.urlFiles, 'urlfiles');
-            }else{
-              this._notifyService.Toast.fire({
-                title:'Dimensiones no permitidas',
-                text: 'Solo se permiten imagenes con más de 200px de ancho y alto de tamaño',
-                icon: 'error'
-              });
-            }
-          },
-          re => {});
-
-          }
-
-        if(this.typeAdjuntos == 'Catálogo PDF'){
-          //console.log('archivo', reader);
-           // return;
-
-                if(this.urlFiles.length+1 > this.nroFotos ){
-                 this._notifyService.Toast.fire({
-                    title: 'Limite de archivo',
-                    text: `Solo puedes seleccionar ${this.nroFotos} PDF`,
-                    icon: 'error'
-                  });
-                  return;
-              }
-              this.urlFiles.push(event.target.result);
-              //console.log(this.urlFiles, 'los datos');
-              //console.log(event.target.result, 'los datos');
-
-        }
-
-      }
-
-
-      }
-    }
-    //console.log(this.urlFiles)
-  }
 
 
   initCitys(){
@@ -383,7 +286,10 @@ setSubCategoryOther(e){
 
   createPublication(forma: NgForm){
 
-    console.log(forma,' el envio de post');
+    console.log(forma.value,' el envio de post');
+
+
+    console.log(this.coordsMap);
 
 if(this.cityTargets.length == 0){
   this._notifyService.Toast.fire({
@@ -415,6 +321,12 @@ if(forma.value.captcha != this._usersService.captcha[2]) {
   return;
 }
 
+  var contactData = {
+    email: this.ngEmail,
+    phone: this.ngPhone,
+    celPhone: this.ngcelPhone,
+  }
+
   var cat = {
     principal: forma.value.Category.base,
     child: (forma.value.subCategory == 'Otra')? this.newCategory: forma.value.subCategory,
@@ -438,11 +350,12 @@ if(forma.value.captcha != this._usersService.captcha[2]) {
     content: forma.value.IncludeDesc,
     notContent: forma.value.notIncludeDesc,
     days: '30',
-    mapUrl: forma.value.mapUrl,
+    // mapUrl: forma.value.mapUrl,
     // dir: forma.value.directionCompany,
     // department: this.ngDepartment,
     // city: this.ngCity,
     type: forma.value.Type,
+    _infoContact: JSON.stringify(contactData),
     _category: JSON.stringify(cat),
     _rangoPrize: JSON.stringify(precio),
     _cityTarget: JSON.stringify(this.cityTargets),
@@ -452,8 +365,8 @@ if(forma.value.captcha != this._usersService.captcha[2]) {
     // _files:
   }
 
-  // console.log(post);
-  // return;
+  console.log(post, 'conformado');
+  return;
   this._globalConfig.spinner = true;
   this._postService.createPublication( post ,this.imagenesSubir )
         .then( (resp) => {
@@ -542,6 +455,175 @@ if(forma.value.captcha != this._usersService.captcha[2]) {
     });
     this.imageName = this.imagenSubir.name;
   }
+
+
+
+
+
+
+
+  // onFileChange(event) {
+
+  //   if (event.target.files && event.target.files[0]) {
+
+  //       var filesAmount = event.target.files.length;
+
+  //       for (let i = 0; i < filesAmount; i++) {
+
+  //               var reader = new FileReader();
+
+  //               reader.onload = (event:any) => {
+
+  //                 console.log(event.target.result);
+
+  //                  this.images.push(event.target.result);
+  //                  this.myForm.patchValue({
+
+  //                     fileSource: this.images
+
+  //                  });
+
+  //               }
+  //               reader.readAsDataURL(event.target.files[i]);
+
+  //       }
+  //   }
+  //   // console.log(this.myForm);
+  //     // console.log(this.images);
+  // }
+
+
+
+  // var reader = new FileReader();
+
+  //                reader.onload = (event:any) => {
+
+  //                  console.log(event.target.result);
+
+  //                   this.images.push(event.target.result);
+
+  //                   this.myForm.patchValue({
+
+  //                      fileSource: this.images
+
+  //                   });
+
+  //                }
+  //                reader.readAsDataURL(event.target.files[i]);
+
+   selectFiles(event){
+//
+    console.log(event.target.files);
+    if(event.target.files){
+
+      for (let index = 0; index < File.length; index++) {
+
+        var reader = new FileReader();
+        var l: File = event.target.files[index];
+        reader.readAsDataURL(l);
+
+        if(this.typeAdjuntos != 'Catálogo PDF'){
+
+          reader.onload = (event:any) => {
+            // return;
+          if ( event.target.result.indexOf('image') < 0 && this.typeAdjuntos != 'Catálogo PDF') {
+
+            // this.imagenSubir = null;
+            this._notifyService.Toast.fire({
+              title: 'Solo imágenes',
+              text: 'El archivo seleccionado no es una imagen',
+              icon: 'error'
+            });
+            return;
+          }
+
+          var image = new Image();
+          image.src = event.target.result;
+
+          var x = new Promise((resolve,reject) => {
+
+            image.onload = function() {
+              //console.log('datos de imagn',image);
+                var k = [image['width'], image['height']];
+                resolve(k);
+            };
+          })
+
+           x.then(r => {
+
+            if(this.urlFiles.length+1 > this.nroFotos ){
+                 this._notifyService.Toast.fire({
+              title: 'Limite de imágenes',
+              text: `Solo puedes seleccionar ${this.nroFotos} imágenes`,
+              icon: 'error'
+            });
+            return;
+            }
+            if(r[0] > 200 && r[1] > 200){
+
+              this.urlFiles.push(event.target.result);
+
+              // this.imagenesSubir.push(fileup);
+
+
+            }else{
+              this._notifyService.Toast.fire({
+                title:'Dimensiones no permitidas',
+                text: 'Solo se permiten imagenes con más de 200px de ancho y alto de tamaño',
+                icon: 'error'
+              });
+            }
+          },
+          re => {});
+
+
+        }
+
+
+        console.log(this.urlFiles);
+        // console.log(this.imagenesSubir);
+        // return;
+      }
+        if(this.typeAdjuntos == 'Catálogo PDF'){
+          reader.onload = ((event:any) => {
+          if ( event.target.result.indexOf('PDF') < 0 && this.typeAdjuntos == 'Catálogo PDF') {
+
+            // this.imagenSubir = null;
+            this._notifyService.Toast.fire({
+              title: 'Solo PDF',
+              text: 'El archivo seleccionado no es una archivo PDF',
+              icon: 'error'
+            });
+            return;
+          }
+
+
+          //console.log('archivo', reader);
+           // return;
+
+                if(this.urlFiles.length+1 > this.nroFotos ){
+                 this._notifyService.Toast.fire({
+                    title: 'Limite de archivo',
+                    text: `Solo puedes seleccionar ${this.nroFotos} PDF`,
+                    icon: 'error'
+                  });
+                  return;
+              }
+              this.urlFiles.push(event.target.result);
+              //console.log(this.urlFiles, 'los datos');
+              //console.log(event.target.result, 'los datos');
+        });
+        }
+
+
+
+      }
+    }
+    //console.log(this.urlFiles)
+  }
+
+
+
 
 }
 

@@ -1,5 +1,5 @@
 import { Router } from "@angular/router";
-import { URL_SERVICIOS } from "./../config/config";
+import { _SERVICIOS } from "./../config/config";
 import { Injectable } from "@angular/core";
 
 import { HttpClient } from "@angular/common/http";
@@ -41,7 +41,7 @@ export class NotifyService {
 
   sendNotifyEmailPOST(data: _NotifyModel) {
     return;
-    let url = URL_SERVICIOS + "/notify";
+    let url = _SERVICIOS + "/notify";
     //console.log(data, "llega data notif");
     return this.http.post(url, data).pipe(
       map((resp: any) => {

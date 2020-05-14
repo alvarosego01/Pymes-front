@@ -1,11 +1,11 @@
 import { Router } from "@angular/router";
-import { URL_SERVICIOS } from "./../config/config";
+import { _SERVICIOS } from "./../config/config";
 import { Injectable } from "@angular/core";
 
 // se importa la clase o el modelo de datos de tipo usuario
 // import { UsuarioModel } from './../models/usuario.model';
 
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 // para poder usar el map
 import { map, catchError } from "rxjs/operators";
@@ -56,12 +56,21 @@ export class UsersService {
 
   login( usuario: _UserModelNatural ){
 
-    let url =  URL_SERVICIOS + '/login';
+    let url =  `${_SERVICIOS}/login`;
 
-    console.log(url);
+    console.log(_SERVICIOS);
+    // const headers = new HttpHeaders()
+    // // .set('content-type','application/json')
+    // .set('Access-Control-Allow-Origin', '*')
+    // .set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
+    // .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    //     // Set
+  // console.log(headers)
+  // return this.http.get<Person[]>(this.baseURL + 'people',{'headers':headers})
+
     // this._globalConfig.spinner = true;
     // una vez logeado hace falta grabar la sesión en el local storage designado.
-    return this.http.post( url, usuario ).pipe(
+    return this.http.post(url, usuario ).pipe(
         map( (resp: any) => {
 
           //console.log('respuesta', resp);
@@ -77,7 +86,7 @@ export class UsersService {
           return true;
         }),
         catchError( err =>{
-
+          console.log(err);
           this._notifyService.Toast.fire({
             title: 'Algo ha salido mal',
             icon: 'error'
@@ -145,7 +154,7 @@ export class UsersService {
     usuarioCompany: _UserModelCompany = null,
     type
   ) {
-    let url = URL_SERVICIOS + "/user";
+    let url = _SERVICIOS + "/user";
 
     let usuario: any;
     if (type == "natural") {
@@ -253,7 +262,7 @@ export class UsersService {
         }
       };
 
-      let url = URL_SERVICIOS + '/upload/' + tipo + '/' + id + '?t=' +token;
+      let url = _SERVICIOS + '/upload/' + tipo + '/' + id + '?t=' +token;
 
       //console.log('la url', url);
       //console.log('formada', formData);
@@ -274,7 +283,7 @@ export class UsersService {
     usuarioCompany: _UserModelCompany = null,
     type){
 
- let url = `${URL_SERVICIOS}/user/${this.usuario._id}/?t=${this.token}`;
+ let url = `${_SERVICIOS}/user/${this.usuario._id}/?t=${this.token}`;
 console.log(url);
     let usuario: any;
     if (type == "natural") {
@@ -347,7 +356,7 @@ console.log(url);
       icon: 'success'
       });
         resolve(l);
-    });
+      });
     });
 
     return x;
@@ -363,5 +372,23 @@ console.log(url);
   }
 
   }
+
+  promiseTimeout(ms, promise){
+
+    // Create a promise that rejects in <ms> milliseconds
+    let timeout = new Promise((resolve, reject) => {
+      let id = setTimeout(() => {
+        clearTimeout(id);
+        reject('Timed out in '+ ms + 'ms.')
+      }, ms)
+    })
+
+    // Returns a race between our timeout and the passed in promise
+    return Promise.race([
+      promise,
+      timeout
+    ])
+  }
+
 
 }

@@ -33,7 +33,7 @@
                     <i class="fa fa-tag" aria-hidden="true"></i>
                     </span>
                 </div>
-                <input ngModel [required] ="this.test == 1" name="Title" type="text" class="form-control" >
+                <input  [required] ="this.test == 1" ngModel name="Title" type="text" class="form-control" >
               </div>
               </div>
             </div>
@@ -55,7 +55,7 @@
                       <i class="fa fa-phone" aria-hidden="true"></i>
                       </span>
                   </div>
-                  <input  ngModel [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngPhone" [required] ="this.test == 1" name="Phone" type="tel" class="form-control" >
+                  <input   [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngPhone" [required] ="this.test == 1"  name="Phone" type="tel" class="form-control" >
                 </div>
             </div>
 
@@ -67,7 +67,7 @@
                     <i class="fas fa-mobile-alt"></i>
                     </span>
                 </div>
-                <input  ngModel [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngcelPhone" [required] ="this.test == 1" name="celPhone" type="tel" class="form-control" >
+                <input   [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngcelPhone" [required] ="this.test == 1"  name="celPhone" type="tel" class="form-control" >
               </div>
           </div>
 
@@ -79,7 +79,7 @@
                     <i class="fas fa-envelope"></i>
                   </span>
               </div>
-              <input  ngModel [required] ="this.test == 1" name="Email" type="email" class="form-control" [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngEmail" >
+              <input   [required] ="this.test == 1"  name="Email" type="email" class="form-control" [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngEmail" >
           </div>
           </div>
 
@@ -92,7 +92,7 @@
               <div class="icheck-success">
 
                 <label for="aceptaTerminosNatural">
-                  <input [(ngModel)]="this.autoDataContact" (click)="activateDataUser($event)" ngModel type="checkbox" id="aceptaTerminosNatural">
+                  <input [(ngModel)]="this.autoDataContact" (click)="activateDataUser($event)"  type="checkbox" id="aceptaTerminosNatural">
                   ¿Deseas editar tus  datos de contacto para esta publicación?
                 </label>
               </div>
@@ -111,7 +111,7 @@
                 <i class="fab fa-whatsapp"></i>
                  </span>
              </div>
-             <input ngModel name="redWhatsapp" type="text" class="form-control" >
+             <input  ngModel name="redWhatsapp" type="text" class="form-control" >
            </div>
            </div>
               <div class="form-group clearfix col-md-12 col-lg-6">
@@ -122,7 +122,7 @@
                 <i class="fab fa-instagram"></i>
                  </span>
              </div>
-             <input ngModel name="redInstagram" type="text" class="form-control" >
+             <input  ngModel name="redInstagram" type="text" class="form-control" >
            </div>
            </div>
 
@@ -134,7 +134,7 @@
              <i class="fab fa-facebook"></i>
               </span>
           </div>
-          <input ngModel name="redFacebook" type="text" class="form-control" >
+          <input  ngModel name="redFacebook" type="text" class="form-control" >
         </div>
         </div>
 
@@ -147,7 +147,7 @@
                 <i class="fas fa-globe"></i>
                  </span>
              </div>
-             <input ngModel name="redWeb" type="text" class="form-control" >
+             <input  ngModel name="redWeb" type="text" class="form-control" >
            </div>
            </div>
 
@@ -169,7 +169,7 @@
 
                       </span>
                     </div>
-                    <select ngModel [required] ="this.test == 1" name="Type" class="form-control">
+                    <select  [required] ="this.test == 1" ngModel name="Type" class="form-control">
                         <option value="" disabled selected></option>
                         <option value="Producto">Productos</option>
                         <option value="Servicio">Servicios</option>
@@ -190,7 +190,7 @@
 
                       </span>
                     </div>
-                    <select ngModel (change)="setSubCategory($event.target.value)" [required] ="this.test == 1" name="Category" class="form-control">
+                    <select  (change)="setSubCategory($event.target.value)" [required] ="this.test == 1" ngModel name="Category" class="form-control">
                         <option value="" disabled selected></option>
                         <option *ngFor="let item of this._postService.categoryPrincipal; let i = index" value="{{ item | json }}">
                           {{ item.base }}
@@ -213,7 +213,7 @@
                       </span>
                     </div>
 
-                    <select (change)="setSubCategoryOther($event.target.value)"  ngModel [required] ="this.test == 1" name="subCategory" class="form-control" [disabled] = "this.subCategory.length == 0">
+                    <select (change)="setSubCategoryOther($event.target.value)"   [required] ="this.test == 1" ngModel name="subCategory" class="form-control" [disabled] = "this.subCategory.length == 0">
                         <!-- <option value="" disabled selected></option> -->
                         <!-- <option value="Sin categoría" selected>Sin sub categoría</option> -->
                         <option *ngFor="let item of this.subCategory"  value="{{item}}">
@@ -238,7 +238,7 @@
                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                  </span>
              </div>
-             <input [(ngModel)]="this.newCategory" name="newCategory" type="text" class="form-control" >
+             <input [(ngModel)]="this.newCategory" ngModel name="newCategory" type="text" class="form-control" >
            </div>
            </div>
 
@@ -259,7 +259,7 @@
 
                       </span>
                     </div>
-                    <select (change)="setCiudades($event.target.value)" [(ngModel)]="this.ngDepartment" [required] ="this.test == 1" name="Department" class="form-control" >
+                    <select (change)="setCiudades($event.target.value)" [(ngModel)]="this.ngDepartment" [required] ="this.test == 1" ngModel name="Department" class="form-control" >
                         <option value="" disabled selected ></option>
                         <option *ngFor="let item of this._globalConfig.departamentos" value="{{item | json}}">
                           {{item.departamento}}
@@ -277,7 +277,7 @@
                          <i class="fa fa-home" aria-hidden="true"></i>
                       </span>
                     </div>
-                    <select  ngModel [(ngModel)]="this.ngCity" name="City" class="form-control" >
+                    <select   [(ngModel)]="this.ngCity" ngModel name="City" class="form-control" >
                         <option value="" disabled selected></option>
                         <option *ngFor="let item of this.ciudades"  value="{{item}}">
                           {{item}}
@@ -330,7 +330,7 @@
 
                 <div class="form-group clearfix col-md-12">
                   <label for="targetPublication">¿A quién va dirigida la publicación?</label>
-                  <textarea ngModel [required] ="this.test == 1" name="targetPublication" class="form-control" rows="3" placeholder="Escribe a quien va dirigido en forma de Hashtag ... por ejemplo: #Hombres #Mujeres #Edades #Ciudades #Estratos #Productos #Moda #Cultura #Salud"></textarea>
+                  <textarea  [required] ="this.test == 1" ngModel name="targetPublication" class="form-control" rows="3" placeholder="Escribe a quien va dirigido en forma de Hashtag ... por ejemplo: #Hombres #Mujeres #Edades #Ciudades #Estratos #Productos #Moda #Cultura #Salud"></textarea>
                 </div>
 
 
@@ -346,13 +346,13 @@
              <div class="row">
               <div class="form-group col-md-12 col-lg-6">
                 <label for="IncludeDesc">¿Qué incluye?</label>
-                <textarea ngModel [required] ="this.test == 1" name="IncludeDesc" class="form-control" rows="3" placeholder="Escribe una descripción"></textarea>
+                <textarea  [required] ="this.test == 1" ngModel name="IncludeDesc" class="form-control" rows="3" placeholder="Escribe una descripción"></textarea>
               </div>
 
 
               <div class="form-group col-md-12 col-lg-6">
                 <label for="notIncludeDesc">¿Qué no incluye?</label>
-                <textarea ngModel [required] ="this.test == 1" name="notIncludeDesc" class="form-control" rows="3" placeholder="Escribe una descripción"></textarea>
+                <textarea  [required] ="this.test == 1" ngModel name="notIncludeDesc" class="form-control" rows="3" placeholder="Escribe una descripción"></textarea>
               </div>
 
              </div>
@@ -394,7 +394,7 @@
 
                 </span>
               </div>
-              <select  [(ngModel)]="typeAdjuntos"  ngModel [required] ="this.test == 1" name="typeAdjuntos" class="form-control" >
+              <select  [(ngModel)]="typeAdjuntos"   [required] ="this.test == 1" ngModel name="typeAdjuntos" class="form-control" >
 
                   <option (click)="clearFiles()" value="3 Fotos" selected >3 Fotos</option>
                   <option (click)="clearFiles()" value="6 Fotos">6 Fotos</option>
@@ -413,7 +413,7 @@
               <div class="input-group">
 
                 <div class="custom-file">
-                  <input multiple (change)="selectFiles($event)" ngModel [required] ="this.test == 1" name="files" type="file" class="custom-file-input" id="exampleInputFile">
+                  <input multiple (change)="selectFiles($event)"  [required] ="this.test == 1" ngModel name="files" type="file" class="custom-file-input" id="exampleInputFile">
                   <label class="custom-file-label" for="exampleInputFile">{{this.typeAdjuntos}}</label>
 
                 </div>
@@ -459,7 +459,7 @@
                       <i class="fas fa-dollar-sign"></i>
                       </span>
                   </div>
-                  <input ngModel [required] ="this.test == 1" name="Min" type="number" class="form-control" >
+                  <input  [required] ="this.test == 1" ngModel name="Min" type="number" class="form-control" >
                 </div>
             </div>
               <div class="form-group clearfix col-md-12 col-lg-6">
@@ -470,7 +470,7 @@
                       <i class="fas fa-dollar-sign"></i>
                       </span>
                   </div>
-                  <input  ngModel  [required] ="this.test == 1" name="Max" type="number" class="form-control" >
+                  <input    [required] ="this.test == 1" ngModel name="Max" type="number" class="form-control" >
                 </div>
             </div>
 
@@ -485,7 +485,7 @@
                       <div class="icheck-success">
 
                           <label for="aceptaTerminosNatural">
-                            <input required ngModel name="Terms" type="checkbox" id="aceptaTerminosNatural1">
+                            <input required  ngModel name="Terms" type="checkbox" id="aceptaTerminosNatural1">
                               Autorizo para usar mi  información en concordancia con lo previsto en esta <a target="_blank" href="../../../assets/dist/documents/Política de Privacidad y Tratamiento de los Datos Personales-min.pdf" class="hiperbutton">Política de Privacidad y tratamiento de datos personales</a>
                           </label>
                         </div>
@@ -512,7 +512,7 @@
                       <i class="fa fa-lock" aria-hidden="true"></i>
                       </span>
                   </div>
-                  <input placeholder=" {{ this._usersService.captcha[0] }} + {{ this._usersService.captcha[1]}}" ngModel [required] ="this.test == 1" name="captcha" class="form-control" type="number">
+                  <input placeholder=" {{ this._usersService.captcha[0] }} + {{ this._usersService.captcha[1]}}"  ngModel [required] ="this.test == 1" ngModel name="captcha" class="form-control" type="number">
                 </div>
             </div>
 
