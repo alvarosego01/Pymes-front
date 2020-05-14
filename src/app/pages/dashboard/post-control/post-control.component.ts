@@ -513,30 +513,33 @@ if(forma.value.captcha != this._usersService.captcha[2]) {
 
    selectFiles(event){
 //
-    console.log(event.target.files);
+    console.log(event.target.files, 'los files');
     if(event.target.files){
 
       for (let index = 0; index < File.length; index++) {
 
-        var reader = new FileReader();
-        var l: File = event.target.files[index];
-        reader.readAsDataURL(l);
+        // var reader = new FileReader();
+        // var l = event.target.files[index];
+        // reader.readAsDataURL(l);
+        // var fileup = event.target.files[index];
+          if(this.typeAdjuntos != 'Catálogo PDF'){
 
-        if(this.typeAdjuntos != 'Catálogo PDF'){
+            var archivo = event.target.files[index];
 
-          reader.onload = (event:any) => {
-            // return;
-          if ( event.target.result.indexOf('image') < 0 && this.typeAdjuntos != 'Catálogo PDF') {
+            if ( archivo.type.indexOf('image') < 0 ) {
 
-            // this.imagenSubir = null;
-            this._notifyService.Toast.fire({
-              title: 'Solo imágenes',
-              text: 'El archivo seleccionado no es una imagen',
-              icon: 'error'
-            });
-            return;
-          }
+              this.imagenSubir = null;
+              this._notifyService.Toast.fire({
+                title: 'Sólo imágenes',
+                text: 'El archivo seleccionado no es una imagen',
+                icon: 'error'
+              });
+              return;
+            }
+        let reader = new FileReader();
+        let urlImagenTemp = reader.readAsDataURL( archivo );
 
+        reader.onload = (event:any) => {
           var image = new Image();
           image.src = event.target.result;
 
@@ -549,76 +552,87 @@ if(forma.value.captcha != this._usersService.captcha[2]) {
             };
           })
 
-           x.then(r => {
+          x.then(r => {
 
-            if(this.urlFiles.length+1 > this.nroFotos ){
-                 this._notifyService.Toast.fire({
-              title: 'Limite de imágenes',
-              text: `Solo puedes seleccionar ${this.nroFotos} imágenes`,
-              icon: 'error'
-            });
-            return;
-            }
-            if(r[0] > 200 && r[1] > 200){
-
-              this.urlFiles.push(event.target.result);
-
-              // this.imagenesSubir.push(fileup);
-
-
-            }else{
-              this._notifyService.Toast.fire({
-                title:'Dimensiones no permitidas',
-                text: 'Solo se permiten imagenes con más de 200px de ancho y alto de tamaño',
-                icon: 'error'
-              });
-            }
-          },
-          re => {});
-
-
-        }
-
-
-        console.log(this.urlFiles);
-        // console.log(this.imagenesSubir);
-        // return;
-      }
-        if(this.typeAdjuntos == 'Catálogo PDF'){
-          reader.onload = ((event:any) => {
-          if ( event.target.result.indexOf('PDF') < 0 && this.typeAdjuntos == 'Catálogo PDF') {
-
-            // this.imagenSubir = null;
-            this._notifyService.Toast.fire({
-              title: 'Solo PDF',
-              text: 'El archivo seleccionado no es una archivo PDF',
-              icon: 'error'
-            });
-            return;
-          }
-
-
-          //console.log('archivo', reader);
-           // return;
-
-                if(this.urlFiles.length+1 > this.nroFotos ){
-                 this._notifyService.Toast.fire({
-                    title: 'Limite de archivo',
-                    text: `Solo puedes seleccionar ${this.nroFotos} PDF`,
+                  if(this.urlFiles.length+1 > this.nroFotos ){
+                       this._notifyService.Toast.fire({
+                    title: 'Limite de imágenes',
+                    text: `Solo puedes seleccionar ${this.nroFotos} imágenes`,
                     icon: 'error'
                   });
                   return;
-              }
-              this.urlFiles.push(event.target.result);
-              //console.log(this.urlFiles, 'los datos');
-              //console.log(event.target.result, 'los datos');
-        });
+                  }
+                  if(r[0] > 200 && r[1] > 200){
+
+                    this.urlFiles.push(event.target.result);
+
+                    // this.imagenesSubir.push(fileup);
+
+
+                  }else{
+                    this._notifyService.Toast.fire({
+                      title:'Dimensiones no permitidas',
+                      text: 'Solo se permiten imagenes con más de 200px de ancho y alto de tamaño',
+                      icon: 'error'
+                    });
+                  }
+                },
+                re => {});
+
+
+                  // this.urlFiles.push(reader.result);
+                  // resolve(reader.result);
+                  // console.log('result,reader', reader.result);
         }
 
 
 
+
+        let imageName = archivo.name;
+        console.log('imagen name', imageName);
+        console.log('imagen ', archivo);
+        console.log('temp ', this.urlFiles);
+        console.log('urlTemp ', urlImagenTemp);
+
+
+        }
+        return;
+      //   if(this.typeAdjuntos == 'Catálogo PDF'){
+      //     reader.onload = ((event:any) => {
+      //     if ( event.target.result.indexOf('PDF') < 0 && this.typeAdjuntos == 'Catálogo PDF') {
+
+      //       // this.imagenSubir = null;
+      //       this._notifyService.Toast.fire({
+      //         title: 'Solo PDF',
+      //         text: 'El archivo seleccionado no es una archivo PDF',
+      //         icon: 'error'
+      //       });
+      //       return;
+      //     }
+
+
+      //     //console.log('archivo', reader);
+      //      // return;
+
+      //           if(this.urlFiles.length+1 > this.nroFotos ){
+      //            this._notifyService.Toast.fire({
+      //               title: 'Limite de archivo',
+      //               text: `Solo puedes seleccionar ${this.nroFotos} PDF`,
+      //               icon: 'error'
+      //             });
+      //             return;
+      //         }
+      //         this.urlFiles.push(event.target.result);
+      //         //console.log(this.urlFiles, 'los datos');
+      //         //console.log(event.target.result, 'los datos');
+      //   });
+      //   }
+
+
+
+      // }
       }
-    }
+      }
     //console.log(this.urlFiles)
   }
 
