@@ -9,4 +9,4 @@ if (window.location.href.indexOf("localhost") != -1){
     urle = 'https://api.mercadopyme.co';
     // let  urle = 'http://167.114.113.140:5150';
     }
-export const _SERVICIOS = 'https://api.mercadopyme.co';
+export const _SERVICIOS = urle;

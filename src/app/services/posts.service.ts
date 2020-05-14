@@ -21,6 +21,8 @@ import { NotifyService } from "src/app/services/service.index";
 import { _PostModel } from "../models/postModel";
 import { UsersService } from "./users.service";
 
+import { EventEmitter } from '@angular/core';
+
 @Injectable({
   providedIn: "root",
 })
@@ -140,12 +142,13 @@ export class PostsService {
       child: ["Otra"],
     },
   ];
-
+  public notificacion = new EventEmitter<any>();
   constructor(
     public http: HttpClient,
     public router: Router,
     public _notifyService: NotifyService,
-    public _usersService: UsersService
+    public _usersService: UsersService,
+      // public notificacion = new EventEmitter<any>();
   ) // public _globalConfig: _globalConfig
   {}
 
@@ -203,15 +206,24 @@ export class PostsService {
         formData.append("files[]", archivo[i], archivo[i].name);
       }
 
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            resolve(xhr.response);
+
+
+      xhr.onreadystatechange = function() {
+
+        if ( xhr.readyState === 4 ) {
+
+          if ( xhr.status === 200 ) {
+            console.log( 'Imagen subida' );
+            resolve( JSON.parse( xhr.response ) );
           } else {
-            reject(xhr.response);
+            console.log( 'Fallo la subida' );
+            reject( xhr.response );
           }
+
         }
       };
+
+
       // this._globalConfig.spinner = false;
       let url = _SERVICIOS + "/post" + "?t=" + token;
 
@@ -224,7 +236,7 @@ export class PostsService {
   }
 
 
- 
+
 
 
 }

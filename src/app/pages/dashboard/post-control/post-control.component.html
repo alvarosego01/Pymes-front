@@ -428,7 +428,7 @@
             <div class="form-group col-12" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
 
               <img data-toggle="tooltip" data-placement="top" title="Eliminar"
-              (click)="deleteSelected(item)" class="imgSelected" *ngFor="let item of urlFiles" [src]="item" alt="">
+              (click)="deleteSelected(i)" class="imgSelected" *ngFor="let item of urlFiles; let i = index" [src]="item" alt="">
 
             </div>
           </div>
