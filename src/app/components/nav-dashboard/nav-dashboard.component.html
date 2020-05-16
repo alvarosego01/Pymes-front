@@ -31,17 +31,17 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-header">Menú de navegación</li>
           <li class="nav-item loginButton">
-            <a (click)="openLoginByAside()" class="navButton nav-link" [ngClass]="{
+            <a (click)="openLoginByAside()" class="navButton nav-link"  data-widget="pushmenu" [ngClass]="{
               'active': this._usersService.loginVisible == true
             }">
-            <i class="fas fa-user-circle"></i>
-            <p>Ingresar</p>
+            <i class="fas fa-user-circle nav-icon"></i>
+            <p>Publicar</p>
 
             </a>
           </li>
           <li class="nav-item registerButton">
-            <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">
-              <i class="fas fa-user-plus"></i>
+            <a class="nav-link" [routerLink]="['/register']" data-widget="pushmenu" routerLinkActive="active">
+              <i class="fas fa-user-plus nav-icon"></i>
             <p>Crea tu cuenta</p>
             </a>
           </li>
@@ -80,14 +80,14 @@
           </li>
  -->
           <li class="nav-item">
-            <a  class="nav-link" [routerLink]="['/dashboard/postControl']" routerLinkActive="active">
+            <a data-widget="pushmenu"  class="nav-link" [routerLink]="['/dashboard/postControl']" routerLinkActive="active">
               <i class="fas nav-icon fa-tags"></i>
               <p>Control de publicaciones</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a (click)="logout()" class="nav-link">
+            <a data-widget="pushmenu" (click)="logout()" class="nav-link">
               <i class="fas fa-sign-out-alt nav-icon"></i>
               <p>Cerrar sesión</p>
             </a>

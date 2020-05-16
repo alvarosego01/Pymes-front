@@ -37,6 +37,8 @@ export class RegisterComponent implements OnInit {
 
   coordsMap:any = {};
   activateMap = false;
+
+  altMapUrl= '';
   // estadosActividad = {
   //   Produccion: false,
   //   Comercialización: false,
@@ -51,7 +53,7 @@ export class RegisterComponent implements OnInit {
     ) {
     this._usuarioService.setCaptcha();
 
-    // console.log(this._globaConfig.departamentos);
+    // //console.log(this._globaConfig.departamentos);
   }
 
   ngOnInit(): void {}
@@ -93,16 +95,16 @@ export class RegisterComponent implements OnInit {
 wrapper.innerHTML= this.mapUrl;
 var div= wrapper.firstChild;
 this.mapElement = div;
-console.log(div);
+//console.log(div);
   }
 
   activateEconomicActivity(){
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    console.log(this.estadosActividad);
+    //console.log(this.estadosActividad);
   }
 
   setCiudades(i){
-    // console.log('Got the selectedVendor as : ', i);
+    // //console.log('Got the selectedVendor as : ', i);
     // return;
     let k = JSON.parse(i);
     k = k.id;
@@ -114,7 +116,7 @@ console.log(div);
 
 
   async captrarLocalizacion(){
-    
+
    let x = this._usuarioService.getLocation();
 
    this._globaConfig.spinner = true;
@@ -122,12 +124,12 @@ console.log(div);
    this._usuarioService.promiseTimeout(5000, x);
     x.then(r => {
 
-      console.log(r);
+      //console.log(r);
       this.coordsMap = r;
       this._globaConfig.spinner = false;
       if(Object.keys(this.coordsMap).length > 0 ){
         this.activateMap = true;
-      // console.log('activado mapa', );
+      // //console.log('activado mapa', );
       }
     });
 
@@ -168,6 +170,9 @@ console.log(div);
       return;
     }
 
+    if(this.altMapUrl != ''){
+      this.coordsMap.mapUrl = this.altMapUrl;
+    }
 
     if(type == 'natural'){
 
@@ -226,6 +231,7 @@ console.log(div);
       let dpdp = JSON.parse(forma.value.Department);
 
 
+
     let usuario = new _UserModelNatural(
 
        forma.value.Email,
@@ -248,7 +254,7 @@ console.log(div);
       economicActivity
       // forma.value.estadosActividad,
       );
-       //   this.spinner = true;
+        //  this.spinner = true;
       //  console.log(usuario);
       //  return;
       this._globaConfig.spinner = true;
@@ -258,9 +264,9 @@ console.log(div);
 //
             this._globaConfig.spinner = false;
 
-            // forma.reset();
+            forma.reset();
         }, ERR => {
-          console.log(ERR);
+          //console.log(ERR);
           this._globaConfig.spinner = false;
         });
 
@@ -367,7 +373,7 @@ if(type == 'company'){
 
   );
 
-  console.log(usuario, 'envio company');
+  //console.log(usuario, 'envio company');
       this._globaConfig.spinner = true;
 //
           this._usuarioService.registroUsuarioPOST( null, usuario ,'company' )
@@ -378,7 +384,7 @@ if(type == 'company'){
 
           },
           ERR => {
-            console.log(ERR);
+            //console.log(ERR);
             this._globaConfig.spinner = false;
           });
 

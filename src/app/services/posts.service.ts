@@ -21,7 +21,7 @@ import { NotifyService } from "src/app/services/service.index";
 import { _PostModel } from "../models/postModel";
 import { UsersService } from "./users.service";
 
-import { EventEmitter } from '@angular/core';
+import { EventEmitter } from "@angular/core";
 
 @Injectable({
   providedIn: "root",
@@ -38,19 +38,26 @@ export class PostsService {
     },
     {
       base: "Belleza",
-      child: ["Maquillaje", "Spas uñas", "Cabello", "Tratamientos", "Cejas", "Otra"],
+      child: [
+        "Maquillaje",
+        "Spas uñas",
+        "Cabello",
+        "Tratamientos",
+        "Cejas",
+        "Otra",
+      ],
     },
     // {
-      // base: "Bricolaje",
-      // child: [],
+    // base: "Bricolaje",
+    // child: [],
     // },
     // {
-      // base: "Bodas",
-      // child: [],
+    // base: "Bodas",
+    // child: [],
     // },
     {
       base: "Deporte",
-      child: ['Otra'],
+      child: ["Otra"],
     },
     // {
     //   base: "Electrónica",
@@ -60,9 +67,17 @@ export class PostsService {
       base: "Educación",
       child: ["Cursos", "Diplomados", "Técnicos", "Talleres", "Otra"],
     },
-      {
+    {
       base: "Hogar",
       child: ["Ropa", "Electrodomesticos", "Aseo", "Otra"],
+    },
+    {
+      base: "Moda",
+      child: ["Vestuario y zapatos", "Otra"],
+    },
+    {
+      base: "Ocio",
+      child: ["Otra"],
     },
     {
       base: "Profesionales",
@@ -73,54 +88,12 @@ export class PostsService {
         "Electricistas",
         "Pintores",
         "Fontaneros",
-        "Otra"
+        "Otra",
       ],
     },
-    {
-      base: "Vehículos",
-      child: ["Venta motos", "Carros", "Repuestos", "Llantas", "CDA", "SOAT", "Otra"],
-    },
-
-    {
-      base: "Tecnología",
-      child: [
-        "Celulares",
-        "Electrodomesticos",
-        "Otra"
-      ],
-    },
-    // {
-    //   base: "Juguetes",
-    //   child: [],
-    // },
-    // {
-    //   base: "Libros",
-    //   child: [],
-    // },
-
-    {
-      base: "Moda",
-      child: ["Vestuario y zapatos", "Otra"],
-    },
-    // {
-    //   base: "Motor",
-    //   child: [],
-    // },
-    {
-      base: "Ocio",
-      child: ["Otra"],
-    },
-    // {
-    //   base: "Perfumeria",
-    //   child: [],
-    // },
     {
       base: "Restaurantes",
       child: ["Otra"],
-    },
-    {
-      base: "Supermercados",
-      child: ["Minimercados", "Fruterías", "Otra"],
     },
     {
       base: "Salud",
@@ -130,9 +103,31 @@ export class PostsService {
         "Psicologos",
         "Odontologos",
         "Bioenergética",
-        "Otra"
+        "Otra",
       ],
     },
+    {
+      base: "Supermercados",
+      child: ["Minimercados", "Fruterías", "Otra"],
+    },
+
+    {
+      base: "Tecnología",
+      child: ["Celulares", "Electrodomesticos", "Otra"],
+    },
+    {
+      base: "Vehículos",
+      child: [
+        "Venta motos",
+        "Carros",
+        "Repuestos",
+        "Llantas",
+        "CDA",
+        "SOAT",
+        "Otra",
+      ],
+    },
+
     {
       base: "Viajes",
       child: ["Otra"],
@@ -147,9 +142,8 @@ export class PostsService {
     public http: HttpClient,
     public router: Router,
     public _notifyService: NotifyService,
-    public _usersService: UsersService,
-      // public notificacion = new EventEmitter<any>();
-  ) // public _globalConfig: _globalConfig
+    public _usersService: UsersService // public _globalConfig: _globalConfig
+  ) // public notificacion = new EventEmitter<any>();
   {}
 
   getMyPublications() {
@@ -158,7 +152,7 @@ export class PostsService {
     // una vez logeado hace falta grabar la sesión en el local storage designado.
     return this.http.get(url).pipe(
       map((resp: any) => {
-        // //console.log('respuesta', resp);
+        // ////console.log('respuesta', resp);
 
         return resp;
       }),
@@ -170,8 +164,8 @@ export class PostsService {
   }
 
   createPublication(post: any, archivo: any) {
-    // console.log(archivo., 'coño pana');
-    // console.log(post.title, 'coño pana');
+    // //console.log(archivo., 'coño pana');
+    // //console.log(post.title, 'coño pana');
 
     return new Promise((resolve, reject) => {
       let formData = new FormData();
@@ -203,40 +197,30 @@ export class PostsService {
 
       // formData.append("img", archivo, archivo.name);
       for (var i = 0; i < archivo.length; ++i) {
+        //console.log(archivo[i].name);
         formData.append("files[]", archivo[i], archivo[i].name);
       }
 
-
-
-      xhr.onreadystatechange = function() {
-
-        if ( xhr.readyState === 4 ) {
-
-          if ( xhr.status === 200 ) {
-            console.log( 'Imagen subida' );
-            resolve( JSON.parse( xhr.response ) );
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            // //console.log( 'Imagen subida' );
+            resolve(JSON.parse(xhr.response));
           } else {
-            console.log( 'Fallo la subida' );
-            reject( xhr.response );
+            // //console.log( 'Fallo la subida' );
+            resolve(JSON.parse(xhr.response));
           }
-
         }
       };
-
 
       // this._globalConfig.spinner = false;
       let url = _SERVICIOS + "/post" + "?t=" + token;
 
-      //console.log('la url', url);
-      //console.log('formada', formData);
+      ////console.log('la url', url);
+      ////console.log('formada', formData);
 
       xhr.open("POST", url, true);
       xhr.send(formData);
     });
   }
-
-
-
-
-
 }

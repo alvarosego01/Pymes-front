@@ -28,6 +28,7 @@ import { NotifyService } from "./notify.service";
 export class UsersService {
 
   loginVisible: Boolean = false;
+  loginMobileVisible: Boolean = false;
 
   usuario: any;
   roleName: string;
@@ -58,14 +59,14 @@ export class UsersService {
 
     let url =  `${_SERVICIOS}/login`;
 
-    console.log(_SERVICIOS);
+    //console.log(_SERVICIOS);
     // const headers = new HttpHeaders()
     // // .set('content-type','application/json')
     // .set('Access-Control-Allow-Origin', '*')
     // .set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
     // .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     //     // Set
-  // console.log(headers)
+  // //console.log(headers)
   // return this.http.get<Person[]>(this.baseURL + 'people',{'headers':headers})
 
     // this._globalConfig.spinner = true;
@@ -73,7 +74,7 @@ export class UsersService {
     return this.http.post(url, usuario ).pipe(
         map( (resp: any) => {
 
-          //console.log('respuesta', resp);
+          ////console.log('respuesta', resp);
 
           this.guardarStorage(resp.message.id_user, resp.message.t, resp.data);
 
@@ -86,7 +87,7 @@ export class UsersService {
           return true;
         }),
         catchError( err =>{
-          console.log(err);
+          //console.log(err);
           this._notifyService.Toast.fire({
             title: 'Algo ha salido mal',
             icon: 'error'
@@ -135,7 +136,7 @@ export class UsersService {
 
 
 
-    // //console.log('cargar storage token: ', this.token);
+    // ////console.log('cargar storage token: ', this.token);
   }
 
   setCaptcha() {
@@ -146,7 +147,7 @@ export class UsersService {
     this.captcha[1] = var2;
     this.captcha[2] = var1 + var2;
 
-    // //console.log(this.captcha);
+    // ////console.log(this.captcha);
   }
 
   registroUsuarioPOST(
@@ -166,7 +167,7 @@ export class UsersService {
 
     return this.http.post(url, usuario).pipe(
       map((resp: any) => {
-        //console.log("respuesta", resp);
+        ////console.log("respuesta", resp);
         // alert("Usuario registrado");
         // swal('Perro registrado', '' , 'success');
         let n = new _NotifyModel(
@@ -177,10 +178,21 @@ export class UsersService {
         // this._notifyService.sendNotifyEmailPOST(n).subscribe((resp) => {
 //
         // });
-        this._notifyService.Toast.fire({
-          title: '¡Usuario registrado!',
-          text: '¡Gracias por unirte a Mercado Pyme!',
-          icon: 'success'
+        // this._notifyService.Toast.fire({
+        //   title: '¡Usuario registrado!',
+        //   text: '¡Gracias por unirte a Mercado Pyme!',
+        //   icon: 'success'
+        // });
+
+        this._notifyService.swalNormal.fire({
+          title: "¡Cuenta creada con exito!",
+          text: "Inicia sesión ahora mismo, y empieza a pautar con nosotros en la red",
+          icon: "success",
+
+          confirmButtonText: 'Aceptar'
+
+        }).then((result) => {
+
         });
 
         return true;
@@ -195,6 +207,7 @@ export class UsersService {
       })
     );
   }
+
 
     /* -------------------------------------
       <- Guardar en Storage ->
@@ -264,8 +277,8 @@ export class UsersService {
 
       let url = _SERVICIOS + '/upload/' + tipo + '/' + id + '?t=' +token;
 
-      //console.log('la url', url);
-      //console.log('formada', formData);
+      ////console.log('la url', url);
+      ////console.log('formada', formData);
 
       xhr.open('PUT', url, true );
       xhr.send( formData );
@@ -284,7 +297,7 @@ export class UsersService {
     type){
 
  let url = `${_SERVICIOS}/user/${this.usuario._id}/?t=${this.token}`;
-console.log(url);
+//console.log(url);
     let usuario: any;
     if (type == "natural") {
       usuario = usuarioNatural;
@@ -295,7 +308,7 @@ console.log(url);
 
     return this.http.put(url, usuario).pipe(
       map((resp: any) => {
-        //console.log("respuesta", resp);
+        ////console.log("respuesta", resp);
         // alert("Usuario registrado");
         // swal('Perro registrado', '' , 'success');
         let n = new _NotifyModel(
@@ -311,7 +324,7 @@ console.log(url);
           // text: '¡Gracias por unirte a Mercado Pyme!',
           icon: 'success'
         });
-        // console.log(resp);
+        // //console.log(resp);
         // return true;
         this.guardarStorage( this.usuario._id , this.token, resp['data'])
       }),
@@ -337,9 +350,9 @@ console.log(url);
     if ("geolocation" in navigator){ //check geolocation available
       //try to get user current location using getCurrentPosition() method
 
-    var x = new Promise((resolve) => {
+    var x = new Promise((resolve, reject) => {
 
-      // console.log('entra al geo');
+      // //console.log('entra al geo');
       navigator.geolocation.getCurrentPosition( position => {
 
         var l ={
@@ -347,7 +360,7 @@ console.log(url);
                   longitude: position.coords.longitude,
                   mapUrl: `https://maps.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}&hl=es;z=14&output=embed`
             }
-              // console.log(position.coords.latitude, position.coords.longitude);
+              // //console.log(position.coords.latitude, position.coords.longitude);
 
 
       this._notifyService.Toast.fire({
@@ -368,7 +381,7 @@ console.log(url);
       text:'El navegador no soporta la geolocalización',
       icon: 'error'
     });
-      // console.log("Browser doesn't support geolocation!");
+      // //console.log("Browser doesn't support geolocation!");
   }
 
   }

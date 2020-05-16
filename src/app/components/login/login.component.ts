@@ -1,11 +1,13 @@
 // importaciones nativas
-import { Component, OnInit } from "@angular/core";
+// import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
-import { UsersService, NotifyService, _globalConfig } from 'src/app/services/service.index';
-import { _UserModelNatural } from 'src/app/models/userModel';
+// import { UsersService, NotifyService, _globalConfig } from 'src/app/services/service.index';
+// import { _UserModelNatural } from 'src/app/models/userModel';
 
 import { HttpClient } from '@angular/common/http';
+import {OnInit, Component} from '@angular/core';
+import {UsersService, NotifyService, _globalConfig} from '../../services/service.index';
 
 
 @Component({
@@ -33,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   loginUser( forma: NgForm ){
 
-    //console.log("ingresando sesion", forma);
+    ////console.log("ingresando sesion", forma);
 
     if( forma.invalid ){
       this._notifyService.Toast.fire({
@@ -54,13 +56,13 @@ export class LoginComponent implements OnInit {
     }
     // despues de que se cargan los datos en el modelo de clase de datos usuario entonces se llama la funcion de login y se pasan los datos por referencia
 
-    //console.log(usuario);
+    ////console.log(usuario);
 
 
     this._usersService.login( usuario )
       .subscribe( resp => {
         this.router.navigate(['/dashboard']);
-        //console.log('FUNCIONA', resp);
+        ////console.log('FUNCIONA', resp);
         this._globalConfig.spinner = false;
       },
       ERR => {
@@ -70,6 +72,6 @@ export class LoginComponent implements OnInit {
       );
   }
 
- 
+
 
 }

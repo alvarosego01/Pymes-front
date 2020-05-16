@@ -20,11 +20,9 @@ export class NavDashboardComponent implements OnInit {
   }
 
   openLoginByAside(){
-    // this._usersService.loginVisible = !this._usersService.loginVisible
-    // document.querySelectorAll('.loginController')[0].click();
-    // document.getElementsByClassName('loginController')[0].click();
-    let element: HTMLElement = document.querySelectorAll(".loginController")[0] as HTMLElement;
-    element.click();
+
+    this._usersService.loginVisible = !this._usersService.loginVisible;
+
   }
 
 

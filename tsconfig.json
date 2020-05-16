@@ -22,5 +22,18 @@
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-  }
+  },
+
+ "include": [
+    "/var/folders/**/*.tsx",
+    "/var/folders/**/*.ts",
+    "./src/**/*.tsx",
+    "./src/**/*.ts"
+],
+
+ "tslint": {
+  "args": ["--project", "${folder}"]
+}
+
+
 }

@@ -94,6 +94,20 @@ a.active
     display: flex
     flex-direction: row
     justify-content: space-between
+    @include responsivo(telefonoTable)
+        flex-direction: column
+        label
+            width: 100%!important
+            display: block
+            margin: 0 auto
+            text-align: center
+    @include responsivo(pcMedio)
+        flex-direction: column
+        label
+            width: 100%!important
+            display: block
+            margin: 0 auto
+            text-align: center
 
 .buttonCustom
     padding: 5px 30px
@@ -435,8 +449,14 @@ form.formDataSend .terms .icheck-success label
 
 .centralRegister
     @include responsivo(telefonoTable)
+        .formButtons
+            button
+                margin: 0 auto
 
     @include responsivo(pcMedio)
+        .formButtons
+            button
+                margin: 0 auto
 
     @include responsivo(general)
         .card
@@ -453,3 +473,7 @@ img.profile-user-img.img-fluid.img-circle
     width: 150px
     height: 150px
     object-fit: cover
+
+
+
+

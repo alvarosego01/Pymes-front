@@ -11,7 +11,7 @@
         </li>
       </ul>
 
-      <div class="logo" *ngIf="this._usersService.token == null">
+      <div class="logo" >
         <img src="../../../assets/dist/img/logoPyme.svg" alt="">
       </div>
 
@@ -49,7 +49,7 @@
           <div class="ico">
             <img src="../../../assets/dist/img/logoUser.svg" alt="">
           </div>
-            Ingresar
+            Publicar
         </a>
       </li>
       <li class="nav-item registerButton">
@@ -78,7 +78,8 @@
     </ul>
 
 
-    <app-login *ngIf="this._usersService.loginVisible == true" (clickOutside)="ocultarLogin($event)"></app-login>
+    <app-login class="loginPc" *ngIf="this._usersService.loginVisible == true" (clickOutside)="ocultarLogin($event)"></app-login>
+
 
   </nav>
   <!-- /.navbar -->

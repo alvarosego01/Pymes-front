@@ -357,30 +357,47 @@
 
              </div>
 
-       <div class="titleOpc">
+             <div class="titleOpc">
 
-                  <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-                    Obten tu geolocalización
-                  </h4>
+              <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                Geolocalización
+              </h4>
 
-                   <div class="formButtons centerCustom">
+
+              <div class="form-group clearfix">
+                <label >Tus clientes sabrán donde está tu tienda física</label>
+
+              </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-md-12 col-lg-2">
+                  <div class="formButtons">
 
                     <button type="button" (click)="captrarLocalizacion()" class="buttonCustom btn btn-success btn-flat">Localizar</button>
 
                   </div>
+                </div>
+                <div  class="col-md-12 col-lg-10"  *ngIf="this.activateMap == true">
 
-                  </div>
-                  <hr>
+  <div [innerHtml]="this.coordsMap.mapUrl | safeUrl" style="width: 100%"></div>
 
-                  <div class="row" *ngIf="this.activateMap == true">
-                    <div class="col-12">
+  <div class="form-group col-12 ">
+    <label for="Identification">Si estas en este momento en un lugar diferente al de tu tienda física y deseas agregar la ubicación, <a class="hiperbutton" target="_blank" href="https://maps.google.com/maps?q={{this.coordsMap.latitude}},{{this.coordsMap.longitude}}&hl=es;z=14">entra a google maps</a>, ubícala y pega aquí el link</label>
+  <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fas fa-map"></i>
+          </span>
+      </div>
+      <input [(ngModel)]="this.altMapUrl" type="text" class="form-control" >
+    </div>
+</div>
 
-      <div [innerHtml]="this.coordsMap.mapUrl | safeUrl" style="width: 100%"></div>
 
 
-
-                    </div>
-                  </div>
+                </div>
+              </div>
 
 
           <div class="row">
@@ -394,12 +411,12 @@
 
                 </span>
               </div>
-              <select  [(ngModel)]="typeAdjuntos"   [required] ="this.test == 1" ngModel name="typeAdjuntos" class="form-control" >
+              <select (change)="clearFiles($event.target.value)" [(ngModel)]="typeAdjuntos"   [required] ="this.test == 1" ngModel name="typeAdjuntos" class="form-control" >
 
-                  <option (click)="clearFiles()" value="3 Fotos" selected >3 Fotos</option>
-                  <option (click)="clearFiles()" value="6 Fotos">6 Fotos</option>
-                  <option (click)="clearFiles()" value="12 Fotos">12 Fotos</option>
-                  <option (click)="clearFiles()" value="Catálogo PDF">Catálogo PDF</option>
+                  <option value="3 Fotos" selected >3 Fotos</option>
+                  <option value="6 Fotos">6 Fotos</option>
+                  <option value="12 Fotos">12 Fotos</option>
+                  <option value="Catálogo PDF">Catálogo PDF</option>
 
                 </select>
 
@@ -542,3 +559,5 @@
         <hr>
       </div>
     </section> -->
+
+

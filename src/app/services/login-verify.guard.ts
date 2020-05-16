@@ -20,11 +20,11 @@ export class LoginVerifyGuard implements CanActivate, CanActivateChild {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
       if( this._usuarioService.estaLogueado() ){
-        // //console.log("Paso el guard");
+        // ////console.log("Paso el guard");
         return true;
 
       }else{
-        // //console.log('Bloqueado por el guard');
+        // ////console.log('Bloqueado por el guard');
         // si falla entonces lleva al login
         this.router.navigate(['/us']);
         return false;
@@ -35,11 +35,11 @@ export class LoginVerifyGuard implements CanActivate, CanActivateChild {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if( this._usuarioService.estaLogueado() ){
-        // //console.log("Paso el guard");
+        // ////console.log("Paso el guard");
         return true;
 
       }else{
-        // //console.log('Bloqueado por el guard');
+        // ////console.log('Bloqueado por el guard');
         // si falla entonces lleva al aboutUs
         this.router.navigate(['/us']);
         return false;

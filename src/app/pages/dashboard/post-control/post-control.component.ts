@@ -1,13 +1,15 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { UsersService } from "src/app/services/users.service";
 import { NgForm, FormGroup, FormControl, Validators } from "@angular/forms";
 import { _PostModel } from "src/app/models/postModel";
+import {PostsService} from '../../../services/posts.service';
 import {
   NotifyService,
   _globalConfig,
   //  PostsService
 } from "src/app/services/service.index";
-import { PostsService } from "src/app/services/posts.service";
+// import { PostsService } from "src/app/services/posts.service";
 
 @Component({
   selector: "app-post-control",
@@ -15,7 +17,7 @@ import { PostsService } from "src/app/services/posts.service";
   styleUrls: ["./post-control.component.sass"],
 })
 export class PostControlComponent implements OnInit {
-  test = 0;
+  test = 1;
 
   imagenSubir: File;
   imagenesSubir = [];
@@ -46,6 +48,8 @@ export class PostControlComponent implements OnInit {
   Min: number;
   Max: number;
 
+  altMapUrl= '';
+
   ngPhone = this._usersService.usuario.phone;
   ngcelPhone = this._usersService.usuario.celPhone;
   // ngDepartment = this._usersService.usuario.department;
@@ -57,13 +61,14 @@ export class PostControlComponent implements OnInit {
     public _usersService: UsersService,
     public _notifyService: NotifyService,
     public _globalConfig: _globalConfig,
-    public _postService: PostsService
+    public _postService: PostsService,
+    public router: Router
   ) {
     this._usersService.setCaptcha();
     // this.datosUsuario = this._usersService.usuario;
-    // //console.log(this.datosUsuario);
+    // ////console.log(this.datosUsuario);
 
-    // //console.log(this._postService.categoryPrincipal);
+    // ////console.log(this._postService.categoryPrincipal);
     this.initCitys();
   }
 
@@ -79,12 +84,12 @@ export class PostControlComponent implements OnInit {
     this._globalConfig.spinner = true;
     this.activateMap = false;
     x.then((r) => {
-      console.log(r);
+      //console.log(r);
       this.coordsMap = r;
       this._globalConfig.spinner = false;
       if (Object.keys(this.coordsMap).length > 0) {
         this.activateMap = true;
-        // console.log('activado mapa', );
+        // //console.log('activado mapa', );
       }
     });
   }
@@ -109,21 +114,24 @@ export class PostControlComponent implements OnInit {
     }
   }
 
-  deleteSelected(i = 0) {
+  deleteSelected(i = 0, type = null) {
     // this.urlFiles.indexOf(i) > -1
       // ? this.urlFiles.splice(this.urlFiles.indexOf(i), 1)
       // : false;
     // this.imagenesSubir.indexOf(i) > -1
       // ? this.imagenesSubir.splice(this.imagenesSubir.indexOf(i), 1)
       // : false;
-      this.urlFiles = this.urlFiles.splice(i, 1);
-      this.imagenesSubir = this.imagenesSubir.splice(i, 1);
+      this.urlFiles.splice(i, 1);
+      this.imagenesSubir.splice(i, 1);
 
-      console.log(i);
+      // delete this.urlFiles[i];
+      // delete this.imagenesSubir[i];
 
-      console.log('al retirar');
-      console.log(this.urlFiles);
-      console.log(this.imagenesSubir);
+      //console.log(i);
+
+      //console.log('al retirar');
+      //console.log(this.urlFiles);
+      //console.log(this.imagenesSubir);
 
 
     this._notifyService.Toast.fire({
@@ -132,7 +140,7 @@ export class PostControlComponent implements OnInit {
       icon: "success",
     });
 
-    if (i == 0) {
+    if (i == 0 && type == 'pdf') {
       this.urlFiles = [];
       this.imagenesSubir = [];
       this._notifyService.Toast.fire({
@@ -149,9 +157,10 @@ export class PostControlComponent implements OnInit {
     return;
   }
 
-  clearFiles() {
+  clearFiles(event) {
     this.urlFiles = [];
     this.imagenesSubir = [];
+    console.log('clear!');
 
     if (this.typeAdjuntos == "3 Fotos") {
       this.nroFotos = 3;
@@ -167,6 +176,8 @@ export class PostControlComponent implements OnInit {
     if (this.typeAdjuntos == "Catálogo PDF") {
       this.nroFotos = 1;
     }
+
+    console.log(this.typeAdjuntos);
   }
 
   initCitys() {
@@ -200,7 +211,7 @@ export class PostControlComponent implements OnInit {
 
   activateEconomicActivity() {
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    //console.log(this.estadosActividad);
+    ////console.log(this.estadosActividad);
   }
 
   setCiudades(i) {
@@ -215,9 +226,9 @@ export class PostControlComponent implements OnInit {
     let k = JSON.parse(i);
     let p = k.base;
     let c = k.child;
-    // console.log(i);
+    // //console.log(i);
     // return;
-    // //console.log(this._postService.categoryPrincipal[i]);
+    // ////console.log(this._postService.categoryPrincipal[i]);
     this.subCategory = c;
 
     if (this.subCategory.length == 0) {
@@ -240,20 +251,29 @@ export class PostControlComponent implements OnInit {
       this.publications = resp.data;
 
       this._globalConfig.spinner = false;
-      // ////console.log(this.listasPerros);
+      // //////console.log(this.listasPerros);
     });
   }
 
   setSubCategoryOther(e) {
-    console.log(e);
+    //console.log(e);
 
     this.newCategory = e == "Otra" ? e : null;
   }
 
   createPublication(forma: NgForm) {
-    console.log(forma.value, " el envio de post");
+    //console.log(forma.value, " el envio de post");
 
-    console.log(this.coordsMap);
+    //console.log(this.coordsMap);
+
+    if(this.imagenesSubir.length == 0){
+          this._notifyService.Toast.fire({
+        title:
+          "Debes seleccionar al menos un archivo",
+        icon: "error",
+      });
+      return;
+    }
 
     if (this.cityTargets.length == 0) {
       this._notifyService.Toast.fire({
@@ -284,6 +304,10 @@ export class PostControlComponent implements OnInit {
         icon: "error",
       });
       return;
+    }
+
+       if(this.altMapUrl != ''){
+      this.coordsMap.mapUrl = this.altMapUrl;
     }
 
     var contactData = {
@@ -317,10 +341,6 @@ export class PostControlComponent implements OnInit {
       content: forma.value.IncludeDesc,
       notContent: forma.value.notIncludeDesc,
       days: "30",
-      // mapUrl: forma.value.mapUrl,
-      // dir: forma.value.directionCompany,
-      // department: this.ngDepartment,
-      // city: this.ngCity,
       type: forma.value.Type,
       _infoContact: JSON.stringify(contactData),
       _category: JSON.stringify(cat),
@@ -332,8 +352,9 @@ export class PostControlComponent implements OnInit {
       // _files:
     };
 
-    console.log(post, "conformado");
+    // //console.log(post, "conformado");
     // return;
+    //console.log('imagenes en total', this.imagenesSubir);
     this._globalConfig.spinner = true;
     this._postService
       .createPublication(post, this.imagenesSubir)
@@ -344,22 +365,32 @@ export class PostControlComponent implements OnInit {
         //   // text: 'El archivo no se pudo enviar',
         //   icon: 'success'
         // });
-        this._notifyService.swalNormal.fire(
-          "Publicación creada con exito",
-          "Gracias por participar y pautar con nosotros, muy pronto estarás a la vista de todos",
-          "success"
-        );
+        this._notifyService.swalNormal.fire({
+
+          title: "¡Publicación creada con exito!",
+          text: "¡Gracias por participar y pautar con nosotros, desde el próximo 1 de junio, en nuestro gran lanzamiento, estarás a la vista de todos!",
+          icon: "success",
+          confirmButtonText: 'Aceptar'
+
+        }).then((result) => {
+          this.router.navigate(['/us']);
+        });
+
+
         // forma.reset();
         this.imageName = "Seleccionar";
         this.imagenSubir = null;
         this.imagenTemp = null;
+        this.imagenesSubir = [];
+        this.urlFiles = [];
         // this._usersService.usuario = resp.User;
-        console.log('por true', resp);
+        //console.log('por true', resp);
         this._postService.notificacion.emit( resp );
       })
       .catch((e) => {
-        console.log('por error',e);
-        ////console.log(e);
+        //console.log('por error',e);
+        //////console.log(e);
+        // var error = JSON.parse(e)
         if (e.status == 201 && e.ok == true) {
           this._globalConfig.spinner = false;
           // this._notifyService.Toast.fire({
@@ -367,15 +398,23 @@ export class PostControlComponent implements OnInit {
           // text: 'El archivo no se pudo enviar',
           // icon: 'success'
           // });
-          this._notifyService.swalNormal.fire(
-            "¡Publicación creada con exito!",
-            "Gracias por participar y pautar con nosotros, muy pronto estarás a la vista de todos",
-            "success"
-          );
+          this._notifyService.swalNormal.fire({
+
+            title: "¡Publicación creada con exito!",
+            text: "¡Gracias por participar y pautar con nosotros, desde el próximo 1 de junio, en nuestro gran lanzamiento, estarás a la vista de todos!",
+            icon: "success",
+            confirmButtonText: 'Aceptar'
+
+          }).then((result) => {
+            this.router.navigate(['/us']);
+          });
+
           // forma.reset();
           this.imageName = "Seleccionar";
           this.imagenTemp = null;
           this.imagenSubir = null;
+          this.imagenesSubir = [];
+        this.urlFiles = [];
         } else {
           this._globalConfig.spinner = false;
           this._notifyService.Toast.fire({
@@ -418,173 +457,146 @@ export class PostControlComponent implements OnInit {
     this.imageName = this.imagenSubir.name;
   }
 
-  // onFileChange(event) {
-
-  //   if (event.target.files && event.target.files[0]) {
-
-  //       var filesAmount = event.target.files.length;
-
-  //       for (let i = 0; i < filesAmount; i++) {
-
-  //               var reader = new FileReader();
-
-  //               reader.onload = (event:any) => {
-
-  //                 console.log(event.target.result);
-
-  //                  this.images.push(event.target.result);
-  //                  this.myForm.patchValue({
-
-  //                     fileSource: this.images
-
-  //                  });
-
-  //               }
-  //               reader.readAsDataURL(event.target.files[i]);
-
-  //       }
-  //   }
-  //   // console.log(this.myForm);
-  //     // console.log(this.images);
-  // }
-
-  // var reader = new FileReader();
-
-  //                reader.onload = (event:any) => {
-
-  //                  console.log(event.target.result);
-
-  //                   this.images.push(event.target.result);
-
-  //                   this.myForm.patchValue({
-
-  //                      fileSource: this.images
-
-  //                   });
-
-  //                }
-  //                reader.readAsDataURL(event.target.files[i]);
-
-  selectFiles(event) {
+  async selectFiles(event) {
     //
-    console.log(event.target.files, "los files");
-    if (event.target.files) {
-      for (let index = 0; index < File.length; index++) {
-        // var reader = new FileReader();
-        // var l = event.target.files[index];
-        // reader.readAsDataURL(l);
-        // var fileup = event.target.files[index];
-        if (this.typeAdjuntos != "Catálogo PDF") {
-          var archivo = event.target.files[index];
-          console.log(archivo, 'set archivo'+ index);
-          if (archivo.type.indexOf("image") < 0) {
-            this.imagenSubir = null;
+    console.log(this.nroFotos);
+    ////console.log(event.target.files);
+    if(event.target.files){
+      //console.log('total', event.target.files);
+      for (let index = 0; index < event.target.files.length; index++) {
+
+        var reader = new FileReader();
+      var promesa = new Promise((resolve, reject) => {
+
+
+        reader.readAsDataURL(event.target.files[index]);
+        var fileup = event.target.files[index];
+        //console.log('imagen nro ', index, fileup);
+
+
+       reader.onload =  ((event:any) => {
+          var image = new Image();
+          image.src = event.target.result;
+
+          if ( event.target.result.indexOf('image') < 0 && this.typeAdjuntos != 'Catálogo PDF') {
+
+            // this.imagenSubir = null;
             this._notifyService.Toast.fire({
-              title: "Sólo imágenes",
-              text: "El archivo seleccionado no es una imagen",
-              icon: "error",
+              title: 'Solo imágenes',
+              text: 'El archivo seleccionado no es una imagen',
+              icon: 'error'
             });
             return;
           }
 
-          if (this.urlFiles.length + 1 > this.nroFotos) {
-            console.log(this.urlFiles.length, 'seleccionados limite' + this.nroFotos);
-            this._notifyService.Toast.fire({
-              title: "Limite de imágenes",
-              text: `Solo puedes seleccionar ${this.nroFotos} imágenes`,
-              icon: "error",
-            });
-            return;
-          }
+          if(this.typeAdjuntos != 'Catálogo PDF'){
 
-          let reader = new FileReader();
-          let urlImagenTemp = reader.readAsDataURL(event.target.files[index]);
-          let fileup = urlImagenTemp;
-           this.imagenesSubir.push(fileup);
-          console.log('EL FILE UP', fileup);
-
-          return;
-          reader.onload = (event: any) => {
-            console.log('event interno', event);
-            var image = new Image();
-            image.src = event.target.result;
-
-            var x = new Promise((resolve, reject) => {
-              image.onload = function () {
-                //console.log('datos de imagn',image);
-                var k = [image["width"], image["height"]];
-                console.log(k, 'tamano imagen' + index);
+          // return;
+          var x = new Promise((resolve,reject) => {
+            // //console.log('entra en promesa', index);
+            image.onload = function() {
+              // //console.log('datos de imagn',image);
+                var k = [image.width, image.height];
                 resolve(k);
-              };
+                //console.log('datos promesa', image);
+                //console.log('Sale de promesa, resuelve', index);
+            };
+          })
+
+          x.then(r => {
+
+            if(this.urlFiles.length+1 > this.nroFotos ){
+                 this._notifyService.Toast.fire({
+              title: 'Limite de imágenes',
+              text: `Solo puedes seleccionar ${this.nroFotos} imágenes`,
+              icon: 'error'
             });
+            return;
+            }
 
-             x.then(
-              (r) => {
-                if (r[0] > 200 && r[1] > 200) {
-                  this.urlFiles.push(event.target.result);
-                  console.log('guardo url,files' + index, this.urlFiles);
+            if(fileup.size/1024 >= 20000){
+               this._notifyService.Toast.fire({
+                title:'Imagen con exceso de tamaño',
+                text: 'No se permiten imagenes con más de 20MB de peso',
+                icon: 'error'
+              });
+               return;
+            }
+            if(r[0] >= 200 && r[1] >= 200 ){
+              this.urlFiles.push(event.target.result);
+              this.imagenesSubir.push(fileup);
+              // //console.log(fileup.size);
+              // //console.log(this.urlFiles, 'urlfiles');
+            }else{
+              this._notifyService.Toast.fire({
+                title:'Dimensiones no permitidas',
+                text: 'Solo se permiten imagenes con más de  200 de ancho y alto',
+                icon: 'error'
+              });
+            }
+          },
+          re => {});
 
-                   // console.log("temporales ", this.urlFiles);
-          console.log("archivos ", this.imagenesSubir);
-                  // console.log('guardo fileup,files' + index, this.imagenesSubir);
-                } else {
-                   this.imagenesSubir.pop();
-                  this._notifyService.Toast.fire({
-                    title: "Dimensiones no permitidas",
-                    text:
-                      "Solo se permiten imagenes con más de 200px de ancho y alto de tamaño",
-                    icon: "error",
+          resolve(true);
+          }
+
+        if(this.typeAdjuntos == 'Catálogo PDF'){
+          ////console.log('archivo', reader);
+           // return;
+
+         if ( event.target.result.indexOf('PDF') < 0 && this.typeAdjuntos == 'Catálogo PDF') {
+
+            // this.imagenSubir = null;
+            this._notifyService.Toast.fire({
+              title: 'Solo PDF',
+              text: 'El archivo seleccionado no es una archivo PDF',
+              icon: 'error'
+            });
+            return;
+          }
+
+          if(fileup.size/1024 >= 150000){
+               this._notifyService.Toast.fire({
+                title:'Archivo con exceso de tamaño',
+                text: 'No se permiten archivos con más de 150MB de peso',
+                icon: 'error'
+              });
+               return;
+            }
+
+
+                if(this.urlFiles.length+1 > this.nroFotos ){
+                 this._notifyService.Toast.fire({
+                    title: 'Limite de archivo',
+                    text: `Solo puedes seleccionar ${this.nroFotos} PDF`,
+                    icon: 'error'
                   });
-                }
-              },
-              (re) => {}
-            );
+                  return;
+              }
+              this.urlFiles.push(event.target.result);
+              this.imagenesSubir.push(fileup);
+              ////console.log(this.urlFiles, 'los datos');
+              ////console.log(event.target.result, 'los datos');
 
-            // this.urlFiles.push(reader.result);
-            // resolve(reader.result);
-            // console.log('result,reader', reader.result);
-          };
-
-          // let imageName = archivo.name;
-          // console.log('imagen name', imageName);
-          // console.log('imagen ', archivo);
-
+          resolve();
         }
-        // return;
-        //   if(this.typeAdjuntos == 'Catálogo PDF'){
-        //     reader.onload = ((event:any) => {
-        //     if ( event.target.result.indexOf('PDF') < 0 && this.typeAdjuntos == 'Catálogo PDF') {
 
-        //       // this.imagenSubir = null;
-        //       this._notifyService.Toast.fire({
-        //         title: 'Solo PDF',
-        //         text: 'El archivo seleccionado no es una archivo PDF',
-        //         icon: 'error'
-        //       });
-        //       return;
-        //     }
+       });
 
-        //     //console.log('archivo', reader);
-        //      // return;
+      });
 
-        //           if(this.urlFiles.length+1 > this.nroFotos ){
-        //            this._notifyService.Toast.fire({
-        //               title: 'Limite de archivo',
-        //               text: `Solo puedes seleccionar ${this.nroFotos} PDF`,
-        //               icon: 'error'
-        //             });
-        //             return;
-        //         }
-        //         this.urlFiles.push(event.target.result);
-        //         //console.log(this.urlFiles, 'los datos');
-        //         //console.log(event.target.result, 'los datos');
-        //   });
-        //   }
+      promesa.then( r => {
 
-        // }
+      });
+
+       // //console.log(this.urlFiles, 'urlfiles');
+
 
       }
+      //console.log(this.imagenesSubir, 'imgsubir finales');
     }
-    //console.log(this.urlFiles)
   }
+
+
+
 }

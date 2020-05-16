@@ -75,16 +75,21 @@
             p,
             a
                 text-align: center
-                font-size: 16px
+                font-size: 14px!important
             a
                 display: flex
                 flex-direction: row!important
                 margin: 0 auto
             // p,a
                 // font-size: 1.25vw!important
-            .copyright,
-            .contact
+            .copyright
                 flex-direction: column
+            .contact
+                flex-direction: row
+                img
+                    width: 25px
+                    padding-right: 10px
+
         @include responsivo(pcMedio)
             padding-left: 2.5%
             padding-right: 2.5%
@@ -98,9 +103,11 @@
                 display: flex
                 flex-direction: row!important
                 margin: 0 auto
-            .copyright,
-            .contact
+            .copyright
                 flex-direction: column
+            .contact
+                flex-direction: row
+
         @include responsivo(general)
             p,a
                 font-size: 1.25vw!important
