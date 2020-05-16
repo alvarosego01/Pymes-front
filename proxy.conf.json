@@ -1,0 +1,9 @@
+{
+
+	"/api/*": {
+		"target": "https://mercadopyme.co/api",
+		"secure": false,
+		"changeOrigin": true
+	}
+
+}
