@@ -143,16 +143,16 @@ OtroActivity: string;
     this.department = this._usersService.usuario.department;
     this.receiveEmail = this._usersService.usuario.receiveEmail;
 
-    // //console.log(this.name);
+    // ////console.log(this.name);
 
-    // //console.log(this._globalConfig.departamentos);
+    // ////console.log(this._globalConfig.departamentos);
 
     if(this._usersService.usuario._mapUrl != null){
-      // //console.log(this._usersService.usuario._mapUrl.mapUrl);
+      // ////console.log(this._usersService.usuario._mapUrl.mapUrl);
       this.coordsMap = this._usersService.usuario._mapUrl;
       this.activateMap = true;
 
-      // //console.log(this._usersService.usuario._mapUrl);
+      // ////console.log(this._usersService.usuario._mapUrl);
     }
 
     var dpPrev = this._globalConfig.departamentos.find( d => d.departamento === this.department );
@@ -165,10 +165,10 @@ OtroActivity: string;
 
     for (var i = 0; i < this._usersService.usuario._naturalEconomicActivity.length; ++i) {
       this.estadosActividad.push(this._usersService.usuario._naturalEconomicActivity[i].typeActivity);
-      //console.log(this._usersService.usuario._naturalEconomicActivity[i].details);
+      ////console.log(this._usersService.usuario._naturalEconomicActivity[i].details);
       switch (this._usersService.usuario._naturalEconomicActivity[i].typeActivity) {
         case "Producción":
-        //console.log('fue produccion');
+        ////console.log('fue produccion');
         this.ProduccionActivity = this._usersService.usuario._naturalEconomicActivity[i].details;
         break;
         case "Comercialización":
@@ -186,7 +186,7 @@ OtroActivity: string;
       }
     }
 
-    //console.log(this.estadosActividad);
+    ////console.log(this.estadosActividad);
 
   }
 
@@ -255,7 +255,7 @@ OtroActivity: string;
               icon: 'success'
             });
 
-            // //console.log(resp['User']);
+            // ////console.log(resp['User']);
             // let r_id = resp._id;
             // let rUser = resp.User;
             this._usersService.guardarStorage( this._usersService.usuario._id , this._usersService.token, resp['User']);
@@ -263,7 +263,7 @@ OtroActivity: string;
           })
           .catch( err => {
 
-            ////console.log(err);
+            //////console.log(err);
 
             this._globalConfig.spinner = false;
             this._notifyService.Toast.fire({
@@ -291,11 +291,11 @@ OtroActivity: string;
 
   activateEconomicActivity(){
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    //console.log(this.estadosActividad);
+    ////console.log(this.estadosActividad);
   }
 
   setCiudades(i){
-    // //console.log('Got the selectedVendor as : ', i);
+    // ////console.log('Got the selectedVendor as : ', i);
     // return;
     let k = JSON.parse(i);
     k = k.id;
@@ -313,12 +313,12 @@ OtroActivity: string;
    this.activateMap = false
     await x.then(r => {
 
-      //console.log(r);
+      ////console.log(r);
       this.coordsMap = r;
       this._globalConfig.spinner = false;
       if(Object.keys(this.coordsMap).length > 0 ){
         this.activateMap = true;
-      // //console.log('activado mapa', );
+      // ////console.log('activado mapa', );
       }
     });
 
@@ -415,7 +415,7 @@ userModifyAccount(forma: NgForm, type){
       );
 
 
-       //console.log(usuario,'conformado');
+       ////console.log(usuario,'conformado');
 
           this._globalConfig.spinner = true;
 //
@@ -424,12 +424,12 @@ userModifyAccount(forma: NgForm, type){
 //
             this._globalConfig.spinner = false;
 
-            // //console.log(resp);
+            // ////console.log(resp);
             // return;
             // forma.reset();
              // this._usersService.guardarStorage( this._usersService.usuario._id , this._usersService.token, resp['User']);
         }, ERR => {
-          //console.log(ERR);
+          ////console.log(ERR);
           this._globalConfig.spinner = false;
         });
 

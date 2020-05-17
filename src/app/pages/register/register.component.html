@@ -146,7 +146,7 @@
                       <!-- Select multiple-->
                       <div class="form-group">
                         <label>¿Cuál es tu sector económico?</label>
-                        <select  multiple="" class="form-control" required name="estadosActividad" [(ngModel)]="estadosActividad">
+                        <select  multiple="" class="form-control" required name="estadosActividad" [(ngModel)]="estadosActividadModel">
 
                           <option *ngFor="let item of this._globaConfig.actividadEconomica" value="{{item}}">
                             {{item}}
@@ -159,7 +159,7 @@
                       <div class="row">
 
 
-                          <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Producción') == true">
+                          <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Producción') == true">
                             <label for="Identification">¿Qué produces?</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -170,7 +170,7 @@
                                 <input  ngModel name="ProducciónActivity" type="text" class="form-control" required >
                               </div>
                             </div>
-                          <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Comercialización') == true">
+                          <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Comercialización') == true">
                             <label for="Identification">¿Qué comercializas?</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -181,7 +181,7 @@
                                 <input  ngModel name="ComercializaciónActivity" type="text" class="form-control" required >
                               </div>
                             </div>
-                          <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Servicios') == true">
+                          <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Servicios') == true">
                             <label for="Identification">¿Cuál servicio?</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -192,7 +192,7 @@
                                 <input  ngModel name="ServiciosActivity" type="text" class="form-control" required >
                               </div>
                           </div>
-                          <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Otro') == true">
+                          <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Otro') == true">
                             <label for="Identification">Describe tu actividad</label>
                           <div class="input-group">
                               <div class="input-group-prepend">
@@ -316,7 +316,7 @@
               <i class="fas fa-map"></i>
               </span>
           </div>
-          <input [(ngModel)]="this.altMapUrl"  type="text" class="form-control" >
+          <input  [(ngModel)]="altMapUrl"  [ngModelOptions]="{standalone: true}" name="altMap" type="text" class="form-control" >
         </div>
     </div>
 
@@ -522,8 +522,8 @@
                 <i class="fas fa-map"></i>
                 </span>
             </div>
-            <input [(ngModel)]="this.altMapUrl"  type="text" class="form-control" >
-          </div>
+            <input [(ngModel)]="altMapUrl"  [ngModelOptions]="{standalone: true}" name="altMap" type="text" class="form-control" >
+        </div>
       </div>
 
 
@@ -567,7 +567,7 @@
                       <!-- Select multiple-->
                       <div class="form-group">
                         <label>¿Cuál es tu sector económico?</label>
-                        <select  multiple class="form-control" required name="estadosActividad" [(ngModel)]="estadosActividad">
+                        <select  multiple class="form-control" required name="estadosActividad" [(ngModel)]="estadosActividadModel">
 
                           <option *ngFor="let item of this._globaConfig.actividadEconomica" value="{{item}}">
                             {{item}}
@@ -580,7 +580,7 @@
                       <div class="row">
 
 
-                          <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Producción') == true">
+                          <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Producción') == true">
                             <label for="Identification">¿Qué produces?</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -591,7 +591,7 @@
                                 <input  ngModel name="ProducciónActivity" type="text" class="form-control" required >
                               </div>
                             </div>
-                          <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Comercialización') == true">
+                          <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Comercialización') == true">
                             <label for="Identification">¿Qué comercializas?</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -602,7 +602,7 @@
                                 <input  ngModel name="ComercializaciónActivity" type="text" class="form-control" required >
                               </div>
                             </div>
-                          <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Servicios') == true">
+                          <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Servicios') == true">
                             <label for="Identification">¿Cuál servicio?</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -613,7 +613,7 @@
                                 <input  ngModel name="ServiciosActivity" type="text" class="form-control" required >
                               </div>
                           </div>
-                          <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Otro') == true">
+                          <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Otro') == true">
                             <label for="Identification">Describe tu actividad</label>
                           <div class="input-group">
                               <div class="input-group-prepend">

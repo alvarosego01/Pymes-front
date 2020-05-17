@@ -229,7 +229,7 @@
 
 
 
-             <div class="row" *ngIf="this.newCategory != null">
+             <div class="row" *ngIf="this.ngNewCategory != null">
                 <div class="form-group clearfix col-md-12 col-lg-12">
                <label for="redWeb">Escribe una nueva categoría</label>
              <div class="input-group">
@@ -238,7 +238,7 @@
                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                  </span>
              </div>
-             <input [(ngModel)]="this.newCategory" ngModel name="newCategory" type="text" class="form-control" >
+             <input [(ngModel)]="this.ngNewCategory" ngModel name="newCategory" type="text" class="form-control" >
            </div>
            </div>
 
@@ -390,10 +390,9 @@
           <i class="fas fa-map"></i>
           </span>
       </div>
-      <input [(ngModel)]="this.altMapUrl" type="text" class="form-control" >
+      <input (keyup)="prueba()" [(ngModel)]="altMapUrl"  [ngModelOptions]="{standalone: true}" name="altMap" type="text" class="form-control" >
     </div>
-</div>
-
+  </div>
 
 
                 </div>
@@ -411,7 +410,7 @@
 
                 </span>
               </div>
-              <select (change)="clearFiles($event.target.value)" [(ngModel)]="typeAdjuntos"   [required] ="this.test == 1" ngModel name="typeAdjuntos" class="form-control" >
+              <select (change)="clearFiles($event.target.value)" [(ngModel)]="ngTypeAdjuntos"   [required] ="this.test == 1" ngModel name="typeAdjuntos" class="form-control" >
 
                   <option value="3 Fotos" selected >3 Fotos</option>
                   <option value="6 Fotos">6 Fotos</option>
@@ -429,9 +428,14 @@
               <label for="files">Selecciona los adjuntos</label>
               <div class="input-group">
 
-                <div class="custom-file">
-                  <input multiple (change)="selectFiles($event)"  [required] ="this.test == 1" ngModel name="files" type="file" class="custom-file-input" id="exampleInputFile">
-                  <label class="custom-file-label" for="exampleInputFile">{{this.typeAdjuntos}}</label>
+                <div class="custom-file" *ngIf="this.ngTypeAdjuntos != 'Catálogo PDF' ">
+                  <input accept="image/*" multiple (change)="selectFiles($event)"  [required] ="this.test == 1" ngModel name="files" type="file" class="custom-file-input" id="exampleInputFile">
+                  <label class="custom-file-label" for="exampleInputFile">Selecciona {{this.ngTypeAdjuntos}}</label>
+
+                </div>
+                <div class="custom-file" *ngIf="this.ngTypeAdjuntos == 'Catálogo PDF' ">
+                  <input accept="application/pdf" (change)="selectFiles($event)"  [required] ="this.test == 1" ngModel name="files" type="file" class="custom-file-input" id="exampleInputFile">
+                  <label class="custom-file-label" for="exampleInputFile">Selecciona un {{this.ngTypeAdjuntos}}</label>
 
                 </div>
 
@@ -441,7 +445,7 @@
 
           </div>
 
-          <div class="row" *ngIf="this.typeAdjuntos != 'Catálogo PDF'">
+          <div class="row" *ngIf="this.ngTypeAdjuntos != 'Catálogo PDF'">
             <div class="form-group col-12" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
 
               <img data-toggle="tooltip" data-placement="top" title="Eliminar"
@@ -450,7 +454,7 @@
             </div>
           </div>
 
-          <div class="row" *ngIf="this.typeAdjuntos == 'Catálogo PDF' && this.urlFiles.length == 1">
+          <div class="row" *ngIf="this.ngTypeAdjuntos == 'Catálogo PDF' && this.urlFiles.length == 1">
             <div class="form-group col-12" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
               <!-- <img (click)="deleteSelected(item)" class="imgSelected" *ngFor="let item of urlFiles" [src]="item" alt=""> -->
 

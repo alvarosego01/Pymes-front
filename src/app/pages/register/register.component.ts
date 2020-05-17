@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   ciudades = [];
   idc: number = 0;
 
-  estadosActividad: any = [];
+  estadosActividadModel: any = [];
   mapUrl: string = '';
   mapElement:any;
 
@@ -37,8 +37,7 @@ export class RegisterComponent implements OnInit {
 
   coordsMap:any = {};
   activateMap = false;
-
-  altMapUrl= '';
+  altMapUrl: string;
   // estadosActividad = {
   //   Produccion: false,
   //   Comercialización: false,
@@ -53,23 +52,34 @@ export class RegisterComponent implements OnInit {
     ) {
     this._usuarioService.setCaptcha();
 
-    // //console.log(this._globaConfig.departamentos);
+
+
+    // ////console.log(this._globaConfig.departamentos);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    if(this._usuarioService.estaLogueado()){
+      this.router.navigate(['/us']);
+    }else{
+
+    }
+
+  }
 
   changeForm(){
     // this.formNatural.reset();
     // this.formCompany.reset();
 
     this.ciudades = [];
-    this.estadosActividad = [];
+    this.estadosActividadModel = [];
     this.mapUrl = ''
     this.mapElement = ''
     this.nrPhones = new Array(1);
     this.idType = '';
     this.companyPhonee = [];
     this.coordsMap = {};
+    this.altMapUrl = '';
     this.activateMap = false;
 
   }
@@ -95,16 +105,16 @@ export class RegisterComponent implements OnInit {
 wrapper.innerHTML= this.mapUrl;
 var div= wrapper.firstChild;
 this.mapElement = div;
-//console.log(div);
+////console.log(div);
   }
 
   activateEconomicActivity(){
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    //console.log(this.estadosActividad);
+    ////console.log(this.estadosActividad);
   }
 
   setCiudades(i){
-    // //console.log('Got the selectedVendor as : ', i);
+    // ////console.log('Got the selectedVendor as : ', i);
     // return;
     let k = JSON.parse(i);
     k = k.id;
@@ -121,16 +131,24 @@ this.mapElement = div;
 
    this._globaConfig.spinner = true;
    this.activateMap = false
-   this._usuarioService.promiseTimeout(5000, x);
+  //  this._usuarioService.promiseTimeout(5000, x);
     x.then(r => {
 
-      //console.log(r);
+      ////console.log(r);
       this.coordsMap = r;
       this._globaConfig.spinner = false;
       if(Object.keys(this.coordsMap).length > 0 ){
         this.activateMap = true;
-      // //console.log('activado mapa', );
+      // ////console.log('activado mapa', );
       }
+    }, err => {
+      this._globaConfig.spinner = false;
+      this._notifyService.Toast.fire({
+        title: 'Lo sentimos',
+        text:'No pudimos encontrar tu localización',
+        icon: 'error'
+      });
+
     });
 
 
@@ -255,7 +273,7 @@ this.mapElement = div;
       // forma.value.estadosActividad,
       );
         //  this.spinner = true;
-      //  console.log(usuario);
+      //  //console.log(usuario);
       //  return;
       this._globaConfig.spinner = true;
 //
@@ -266,7 +284,7 @@ this.mapElement = div;
 
             forma.reset();
         }, ERR => {
-          //console.log(ERR);
+          ////console.log(ERR);
           this._globaConfig.spinner = false;
         });
 
@@ -373,7 +391,7 @@ if(type == 'company'){
 
   );
 
-  //console.log(usuario, 'envio company');
+  ////console.log(usuario, 'envio company');
       this._globaConfig.spinner = true;
 //
           this._usuarioService.registroUsuarioPOST( null, usuario ,'company' )
@@ -384,7 +402,7 @@ if(type == 'company'){
 
           },
           ERR => {
-            //console.log(ERR);
+            ////console.log(ERR);
             this._globaConfig.spinner = false;
           });
 
@@ -392,6 +410,7 @@ if(type == 'company'){
 
 
   }
+
 
 
 

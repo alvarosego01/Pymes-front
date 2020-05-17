@@ -1,6 +1,8 @@
 // export { TokenVerifyGuard } from './token-verify.guard';
 // export { LoginVerifyGuard } from './login-verify.guard';
 
+import { HostListener } from '@angular/core';
+
 
 
 
@@ -13,6 +15,7 @@ export class _globalConfig{
 
     spinner: boolean = false;
 
+    imgFormat = ['PNG', 'png', 'JPG','jpg','JPEG','jpeg'];
 
     //     'Vichada'];
     // Cedula de ciudadania, pasaporte  y /o cedula de extranjeria ....para empresas solo el  Nit (y el contacto de la empresa proporcionaría los de la persona Natural)
@@ -26,6 +29,13 @@ export class _globalConfig{
 
     constructor(){
 
+
     }
+
+
+
+
+
+
 
 }

@@ -152,7 +152,7 @@ export class PostsService {
     // una vez logeado hace falta grabar la sesión en el local storage designado.
     return this.http.get(url).pipe(
       map((resp: any) => {
-        // ////console.log('respuesta', resp);
+        // //////console.log('respuesta', resp);
 
         return resp;
       }),
@@ -164,8 +164,8 @@ export class PostsService {
   }
 
   createPublication(post: any, archivo: any) {
-    // //console.log(archivo., 'coño pana');
-    // //console.log(post.title, 'coño pana');
+    // ////console.log(archivo., 'coño pana');
+    // ////console.log(post.title, 'coño pana');
 
     return new Promise((resolve, reject) => {
       let formData = new FormData();
@@ -197,17 +197,17 @@ export class PostsService {
 
       // formData.append("img", archivo, archivo.name);
       for (var i = 0; i < archivo.length; ++i) {
-        //console.log(archivo[i].name);
+        ////console.log(archivo[i].name);
         formData.append("files[]", archivo[i], archivo[i].name);
       }
 
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
-            // //console.log( 'Imagen subida' );
+            // ////console.log( 'Imagen subida' );
             resolve(JSON.parse(xhr.response));
           } else {
-            // //console.log( 'Fallo la subida' );
+            // ////console.log( 'Fallo la subida' );
             resolve(JSON.parse(xhr.response));
           }
         }
@@ -216,8 +216,8 @@ export class PostsService {
       // this._globalConfig.spinner = false;
       let url = _SERVICIOS + "/post" + "?t=" + token;
 
-      ////console.log('la url', url);
-      ////console.log('formada', formData);
+      //////console.log('la url', url);
+      //////console.log('formada', formData);
 
       xhr.open("POST", url, true);
       xhr.send(formData);

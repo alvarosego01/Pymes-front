@@ -42,16 +42,16 @@ export class NotifyService {
   sendNotifyEmailPOST(data: _NotifyModel) {
     return;
     let url = _SERVICIOS + "/notify";
-    ////console.log(data, "llega data notif");
+    //////console.log(data, "llega data notif");
     return this.http.post(url, data).pipe(
       map((resp: any) => {
-        ////console.log("respuesta notificacion", resp);
+        //////console.log("respuesta notificacion", resp);
         // alert('Usuario registrado');
 
         return true;
       }),
       catchError((err) => {
-        ////console.log("respuesta notificacion", err);
+        //////console.log("respuesta notificacion", err);
         // alert('Error en al registrar');
         // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);

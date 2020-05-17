@@ -15,12 +15,15 @@ export class AppComponent {
   title = 'Mercado Pyme';
 
 
+
   constructor(
     private router: Router,
     public _globaConfig: _globalConfig,
     public _usersService: UsersService
   ) {
     this._globaConfig.spinner = true;
+    // this.currentWindowWidth = window.innerWidth
+  
    }
 
 
@@ -28,6 +31,9 @@ export class AppComponent {
    ngAfterViewInit(): void{
      this._globaConfig.spinner = false
    }
+
+
+
 
 
 }

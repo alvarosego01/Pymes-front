@@ -2,6 +2,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 import { HomeComponent, RegisterComponent, UsComponent } from './pages/pages.index';
+import { LoginVerifyGuard } from './services/login-verify.guard';
+
+// LoginVerifyGuard
 
 
 const appRoutes: Routes = [
@@ -13,9 +16,12 @@ const appRoutes: Routes = [
         // data: { titulo: 'Dashboard' }
     // },
     { path: 'aboutUs', component: UsComponent },
-    { path: 'register', component: RegisterComponent },
+    { path: 'register',
+    component: RegisterComponent,
+    },
     { path: '**', component: UsComponent }
 ];
+
 
 
 export const APP_ROUTES = RouterModule.forRoot( appRoutes, { useHash: true } );

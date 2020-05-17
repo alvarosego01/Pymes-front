@@ -59,14 +59,14 @@ export class UsersService {
 
     let url =  `${_SERVICIOS}/login`;
 
-    //console.log(_SERVICIOS);
+    ////console.log(_SERVICIOS);
     // const headers = new HttpHeaders()
     // // .set('content-type','application/json')
     // .set('Access-Control-Allow-Origin', '*')
     // .set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
     // .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     //     // Set
-  // //console.log(headers)
+  // ////console.log(headers)
   // return this.http.get<Person[]>(this.baseURL + 'people',{'headers':headers})
 
     // this._globalConfig.spinner = true;
@@ -74,7 +74,7 @@ export class UsersService {
     return this.http.post(url, usuario ).pipe(
         map( (resp: any) => {
 
-          ////console.log('respuesta', resp);
+          //////console.log('respuesta', resp);
 
           this.guardarStorage(resp.message.id_user, resp.message.t, resp.data);
 
@@ -87,7 +87,7 @@ export class UsersService {
           return true;
         }),
         catchError( err =>{
-          //console.log(err);
+          ////console.log(err);
           this._notifyService.Toast.fire({
             title: 'Algo ha salido mal',
             icon: 'error'
@@ -136,7 +136,7 @@ export class UsersService {
 
 
 
-    // ////console.log('cargar storage token: ', this.token);
+    // //////console.log('cargar storage token: ', this.token);
   }
 
   setCaptcha() {
@@ -147,7 +147,7 @@ export class UsersService {
     this.captcha[1] = var2;
     this.captcha[2] = var1 + var2;
 
-    // ////console.log(this.captcha);
+    // //////console.log(this.captcha);
   }
 
   registroUsuarioPOST(
@@ -167,7 +167,7 @@ export class UsersService {
 
     return this.http.post(url, usuario).pipe(
       map((resp: any) => {
-        ////console.log("respuesta", resp);
+        //////console.log("respuesta", resp);
         // alert("Usuario registrado");
         // swal('Perro registrado', '' , 'success');
         let n = new _NotifyModel(
@@ -192,8 +192,9 @@ export class UsersService {
           confirmButtonText: 'Aceptar'
 
         }).then((result) => {
-
+          this.router.navigate(['/us']);
         });
+
 
         return true;
       }),
@@ -277,8 +278,8 @@ export class UsersService {
 
       let url = _SERVICIOS + '/upload/' + tipo + '/' + id + '?t=' +token;
 
-      ////console.log('la url', url);
-      ////console.log('formada', formData);
+      //////console.log('la url', url);
+      //////console.log('formada', formData);
 
       xhr.open('PUT', url, true );
       xhr.send( formData );
@@ -297,7 +298,7 @@ export class UsersService {
     type){
 
  let url = `${_SERVICIOS}/user/${this.usuario._id}/?t=${this.token}`;
-//console.log(url);
+////console.log(url);
     let usuario: any;
     if (type == "natural") {
       usuario = usuarioNatural;
@@ -308,7 +309,7 @@ export class UsersService {
 
     return this.http.put(url, usuario).pipe(
       map((resp: any) => {
-        ////console.log("respuesta", resp);
+        //////console.log("respuesta", resp);
         // alert("Usuario registrado");
         // swal('Perro registrado', '' , 'success');
         let n = new _NotifyModel(
@@ -324,7 +325,7 @@ export class UsersService {
           // text: '¡Gracias por unirte a Mercado Pyme!',
           icon: 'success'
         });
-        // //console.log(resp);
+        // ////console.log(resp);
         // return true;
         this.guardarStorage( this.usuario._id , this.token, resp['data'])
       }),
@@ -350,17 +351,19 @@ export class UsersService {
     if ("geolocation" in navigator){ //check geolocation available
       //try to get user current location using getCurrentPosition() method
 
-    var x = new Promise((resolve, reject) => {
+      var x = new Promise((resolve, reject) => {
 
-      // //console.log('entra al geo');
+        // ////console.log('entra al geo');
+        setTimeout(function(){reject('timeout')},10000);
+
       navigator.geolocation.getCurrentPosition( position => {
-
+        console.log('entra');
         var l ={
                   latitude: position.coords.latitude,
                   longitude: position.coords.longitude,
                   mapUrl: `https://maps.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}&hl=es;z=14&output=embed`
             }
-              // //console.log(position.coords.latitude, position.coords.longitude);
+              // ////console.log(position.coords.latitude, position.coords.longitude);
 
 
       this._notifyService.Toast.fire({
@@ -368,8 +371,13 @@ export class UsersService {
       // text:'El navegador no soporta la geolocalización',
       icon: 'success'
       });
-        resolve(l);
+
+
+      resolve(l);
       });
+
+
+
     });
 
     return x;
@@ -381,7 +389,8 @@ export class UsersService {
       text:'El navegador no soporta la geolocalización',
       icon: 'error'
     });
-      // //console.log("Browser doesn't support geolocation!");
+    // reject(false);
+      // ////console.log("Browser doesn't support geolocation!");
   }
 
   }

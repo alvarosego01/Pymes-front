@@ -31,7 +31,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-header">Menú de navegación</li>
           <li class="nav-item loginButton">
-            <a (click)="openLoginByAside()" class="navButton nav-link"  data-widget="pushmenu" [ngClass]="{
+            <a (click)="openLoginByAside()" class="navButton nav-link"  #navlink [ngClass]="{
               'active': this._usersService.loginVisible == true
             }">
             <i class="fas fa-user-circle nav-icon"></i>
@@ -40,14 +40,14 @@
             </a>
           </li>
           <li class="nav-item registerButton">
-            <a class="nav-link" [routerLink]="['/register']" data-widget="pushmenu" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/register']" #navlink routerLinkActive="active">
               <i class="fas fa-user-plus nav-icon"></i>
             <p>Crea tu cuenta</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link navButton " data-widget="pushmenu" href="#" role="button">
+            <a class="nav-link navButton " #navlink href="#" role="button">
               <i class="fas fa-arrow-left nav-icon"></i>
               <p>
                 Cerrar
@@ -79,22 +79,23 @@
             </a>
           </li>
  -->
+ <!-- "this._globalConfig.directiveNavDashboard == true" -->
           <li class="nav-item">
-            <a data-widget="pushmenu"  class="nav-link" [routerLink]="['/dashboard/postControl']" routerLinkActive="active">
+            <a  #navlink class="nav-link" [routerLink]="['/dashboard/postControl']" routerLinkActive="active">
               <i class="fas nav-icon fa-tags"></i>
               <p>Control de publicaciones</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a data-widget="pushmenu" (click)="logout()" class="nav-link">
+            <a #navlink (click)="logout()" class="nav-link">
               <i class="fas fa-sign-out-alt nav-icon"></i>
               <p>Cerrar sesión</p>
             </a>
           </li>
 
           <li class="nav-item burguerResponsiveUser" >
-            <a class="nav-link navButton " data-widget="pushmenu" href="#" role="button">
+            <a class="nav-link navButton " #navlink href="#" role="button">
               <i class="fas fa-arrow-left nav-icon"></i>
               <p>
                 Cerrar

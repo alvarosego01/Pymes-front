@@ -5,6 +5,14 @@
     padding-top: 50px
     padding-bottom: 25px
     // padding: 80px 0
+    padding-left: 5%
+    padding-right: 5%
+    @include responsivo(telefonoTable)
+        padding-left: 2.5%
+        padding-right: 2.5%
+    @include responsivo(pcMedio)
+        padding-left: 2.5%
+        padding-right: 2.5%
     .topFooter
         .container
             .logo
@@ -37,8 +45,8 @@
                 margin: 0 auto
 
     .baseFooter
-        padding-left: 5%
-        padding-right: 5%
+        // padding-left: 5%
+        // padding-right: 5%
         display: flex
         flex-direction: row
         justify-content: space-between
@@ -51,6 +59,12 @@
                 padding-bottom: 0
                 margin-bottom: 0
                 margin-right: 10px
+            @include responsivo(general)
+                br
+                    display: none
+            @include responsivo(resto)
+                br
+                    display: none
         .contact
             display: flex
             flex-direction: row
@@ -68,8 +82,8 @@
                 padding-right: 15px
                 display: block
         @include responsivo(telefonoTable)
-            padding-left: 2.5%
-            padding-right: 2.5%
+            // padding-left: 2.5%
+            // padding-right: 2.5%
             display: flex
             flex-direction: column
             p,
@@ -91,8 +105,8 @@
                     padding-right: 10px
 
         @include responsivo(pcMedio)
-            padding-left: 2.5%
-            padding-right: 2.5%
+            // padding-left: 2.5%
+            // padding-right: 2.5%
             display: flex
             flex-direction: column
             p,

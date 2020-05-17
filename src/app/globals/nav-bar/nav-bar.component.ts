@@ -28,7 +28,7 @@ export class NavBarComponent implements OnInit {
   }
 
   ocultarLogin(e: Event) {
-    // //console.log(e.target['className']);
+    // ////console.log(e.target['className']);
 
 
       if( e.target['className'] != '' &&
