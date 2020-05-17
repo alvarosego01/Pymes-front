@@ -203,6 +203,8 @@ export class PostsService {
 
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
+          try {
+
           if (xhr.status === 200) {
             // ////console.log( 'Imagen subida' );
             resolve(JSON.parse(xhr.response));
@@ -210,6 +212,11 @@ export class PostsService {
             // ////console.log( 'Fallo la subida' );
             resolve(JSON.parse(xhr.response));
           }
+            
+        }
+        catch (e) {
+            console.log(e.status);
+        }
         }
       };
 

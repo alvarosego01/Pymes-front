@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, QueryList, ViewChildren, AfterViewInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { _globalConfig } from 'src/app/services/service.index';
 
@@ -7,9 +7,9 @@ import { _globalConfig } from 'src/app/services/service.index';
   templateUrl: './nav-dashboard.component.html',
   styleUrls: ['./nav-dashboard.component.sass']
 })
-export class NavDashboardComponent implements OnInit {
+export class NavDashboardComponent implements OnInit , AfterViewInit  {
 
-  @ViewChild('navlink') navlink: ElementRef;
+  @ViewChildren('navlink') navlink: QueryList<any>;
 
   directiveNavDashboard:boolean = false;
 
@@ -21,8 +21,17 @@ export class NavDashboardComponent implements OnInit {
 
    }
 
+
+
+
   ngOnInit(): void {
-      this.adjustNavDashboard();
+
+  }
+
+
+  ngAfterViewInit():void {
+    this.adjustNavDashboard(window.innerWidth);
+    // console.log(this.navlink);
   }
 
   logout(){
@@ -40,21 +49,32 @@ export class NavDashboardComponent implements OnInit {
   onResize() {
     // this.currentWindowWidth = window.innerWidth
     // //console.log(this.currentWindowWidth);
-    this.adjustNavDashboard();
+    // console.log('maldita sea', window.innerWidth
+    // );
+    this.adjustNavDashboard(window.innerWidth);
   }
 
-  adjustNavDashboard(){
-      let width = window.innerWidth;
-    // //console.log(width);
+  adjustNavDashboard(width){
+      // let width = window.innerWidth;
+    // console.log(width);
     if(this.navlink != null){
 
       if(width < 1000){
+        var l = this.navlink['_results'];
+        l.forEach(element => {
+          element.nativeElement.setAttribute('data-widget', 'pushmenu');
 
-        this.navlink.nativeElement.setAttribute('data-widget', 'pushmenu');
+          // console.log(element.nativeElement);
+        });
         // this.navlink.nativeElement.text = 'CULO';
-        // //console.log(this.navlink);
+        // console.log(this.navlink);
       }else{
-        this.navlink.nativeElement.removeAttribute('data-widget');
+        var l = this.navlink['_results'];
+        l.forEach(element => {
+          element.nativeElement.removeAttribute('data-widget');
+
+          // console.log(element.nativeElement);
+        });
         // this.navlink.nativeElement.removeAttribute('data-widget');
 
         // //console.log(this.navlink);
@@ -65,5 +85,3 @@ export class NavDashboardComponent implements OnInit {
 
 
 }
-
-
