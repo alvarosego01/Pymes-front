@@ -16,8 +16,8 @@ const dashboardRoutes: Routes = [
         canActivateChild: [LoginVerifyGuard],
         children: [
             // {
-            //     path: 'profile',
-            //     component: ProfileComponent
+                // path: 'profile',
+                // component: ProfileComponent
             // },
             {
                 path: 'postControl',

@@ -49,7 +49,7 @@ export class PostControlComponent implements OnInit {
   Min: number;
   Max: number;
 
-  altMapUrl= '';
+  altMapUrl: string = null;
 
   ngPhone = this._usersService.usuario.phone;
   ngcelPhone = this._usersService.usuario.celPhone;
@@ -66,7 +66,7 @@ export class PostControlComponent implements OnInit {
     public _fileBase64: Filebase64Service,
     public router: Router,
   ) {
-    this._usersService.setCaptcha();
+    // this._usersService.setCaptcha();
     // this.datosUsuario = this._usersService.usuario;
     // //////console.log(this.datosUsuario);
 
@@ -310,15 +310,15 @@ export class PostControlComponent implements OnInit {
       });
       return;
     }
-    if (forma.value.captcha != this._usersService.captcha[2]) {
-      this._notifyService.Toast.fire({
-        title: "Captcha incorrecto",
-        icon: "error",
-      });
-      return;
-    }
+    // if (forma.value.captcha != this._usersService.captcha[2]) {
+    //   this._notifyService.Toast.fire({
+    //     title: "Captcha incorrecto",
+    //     icon: "error",
+    //   });
+    //   return;
+    // }
 
-       if(this.altMapUrl != ''){
+       if( this.altMapUrl != null && this.altMapUrl != ''){
       this.coordsMap.mapUrl = this.altMapUrl;
     }
 

@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
 
   coordsMap:any = {};
   activateMap = false;
-  altMapUrl: string;
+  altMapUrl: string = null;
   // estadosActividad = {
   //   Produccion: false,
   //   Comercialización: false,
@@ -173,13 +173,13 @@ this.mapElement = div;
       });
       return;
     }
-    if(forma.value.captcha != this._usuarioService.captcha[2]) {
-      this._notifyService.Toast.fire({
-        title:'Captcha incorrecto',
-        icon: 'error'
-      });
-      return;
-    }
+    // if(forma.value.captcha != this._usuarioService.captcha[2]) {
+    //   this._notifyService.Toast.fire({
+    //     title:'Captcha incorrecto',
+    //     icon: 'error'
+    //   });
+    //   return;
+    // }
     if(forma.value.Pass != forma.value.CPass){
       this._notifyService.Toast.fire({
         title:'Confirmación de cuenta invalida',
@@ -188,9 +188,13 @@ this.mapElement = div;
       return;
     }
 
-    if(this.altMapUrl != ''){
+    if(this.altMapUrl != null && this.altMapUrl != ''){
+      // console.log('lo pone');
       this.coordsMap.mapUrl = this.altMapUrl;
     }
+
+    // console.log(this.coordsMap);
+    // return;
 
     if(type == 'natural'){
 
