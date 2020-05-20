@@ -17,6 +17,7 @@ import { DASHBOARD_ROUTES } from './dashboard.routes';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { PostManagerComponent } from './admin/post-manager/post-manager.component';
 import { AdminComponent } from './admin/admin.component';
+import { ADMIN_MODULE } from './admin/admin.module';
 
 
 

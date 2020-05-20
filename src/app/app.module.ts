@@ -34,6 +34,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { DASHBOARD_MODULE } from './pages/dashboard/dashboard.module';
 import { PipesModule } from './pipes/pipes.module';
 import { PostsService } from './services/posts.service';
+import { ADMIN_MODULE } from './pages/dashboard/admin/admin.module';
 
 
 
@@ -62,6 +63,7 @@ import { PostsService } from './services/posts.service';
     FormsModule,
     ReactiveFormsModule,
     DASHBOARD_MODULE,
+    ADMIN_MODULE,
     PipesModule
   ],
   providers: [

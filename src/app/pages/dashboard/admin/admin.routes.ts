@@ -7,13 +7,14 @@ import { AdminComponent } from './admin.component';
 import { AdminVerifyGuard } from 'src/app/services/guards/guards.index';
 
 import { PostManagerComponent } from './admin.components.index';
+import { DashboardComponent } from '../dashboard.component';
 
 
 
 
 
 
-const dashboardRoutes: Routes = [
+const adminRoutes: Routes = [
 
     {
         path: 'admin',
@@ -25,6 +26,10 @@ const dashboardRoutes: Routes = [
             {
                 path: 'postManager',
                 component: PostManagerComponent
+            },
+            {
+                path: '**',
+                component: DashboardComponent
             }
 
         ]
@@ -33,4 +38,4 @@ const dashboardRoutes: Routes = [
 ];
 
 
-export const ADMIN_ROUTES = RouterModule.forChild( dashboardRoutes );
+export const ADMIN_ROUTES = RouterModule.forChild( adminRoutes );
