@@ -4,6 +4,8 @@ import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 
 
+
+
 // importaciones de codigo
 // servicios
 import { UsersService, _globalConfig, NotifyService } from "src/app/services/service.index";
@@ -11,6 +13,7 @@ import { UsersService, _globalConfig, NotifyService } from "src/app/services/ser
 import { _UserModelNatural, _UserModelCompany
 
    } from 'src/app/models/models.index';
+import { SocialFloatComponent } from 'src/app/globals/globals.index';
 
 
 @Component({
@@ -48,7 +51,8 @@ export class RegisterComponent implements OnInit {
     public router: Router,
     public _usuarioService: UsersService,
     public _globaConfig: _globalConfig,
-    public _notifyService: NotifyService
+    public _notifyService: NotifyService,
+    // public SocialFloatComponent: SocialFloatComponent
     ) {
     this._usuarioService.setCaptcha();
 

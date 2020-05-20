@@ -34,6 +34,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { DASHBOARD_MODULE } from './pages/dashboard/dashboard.module';
 import { PipesModule } from './pipes/pipes.module';
 import { PostsService } from './services/posts.service';
+import { SocialFloatComponent } from './globals/social-float/social-float.component';
 
 
 
@@ -53,6 +54,7 @@ import { PostsService } from './services/posts.service';
     LoginComponent,
     UsComponent,
     NavDashboardComponent,
+    SocialFloatComponent,
   ],
   imports: [
     BrowserModule,

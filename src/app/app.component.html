@@ -7,14 +7,17 @@
 
 <app-nav-dashboard></app-nav-dashboard>
 
-    <router-outlet>
+    <div id="containGlobal">
 
-        <div class="spinner" id="spinner" *ngIf="this._globaConfig.spinner">
-            <div class="double-bounce1"></div>
-            <div class="double-bounce2"></div>
-          </div>
+        <router-outlet>
 
-    </router-outlet>
+            <div class="spinner" id="spinner" *ngIf="this._globaConfig.spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+
+        </router-outlet>
+    </div>
 
 <app-footer></app-footer>
 
