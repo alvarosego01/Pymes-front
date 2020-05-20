@@ -2,7 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 import { HomeComponent, RegisterComponent, UsComponent } from './pages/pages.index';
-import { LoginVerifyGuard } from './services/login-verify.guard';
+import { LoginVerifyGuard } from './services/guards/login-verify.guard';
 
 // LoginVerifyGuard
 

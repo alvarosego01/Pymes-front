@@ -6,30 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
-// pages
-import { NotifyControlComponent,
-    PostControlComponent,
-    DashboardComponent,
-    HomeComponent,
-    ProfileComponent } from './dashboard.pages.index';
 
-import { DASHBOARD_ROUTES } from './dashboard.routes';
+
 import { PipesModule } from 'src/app/pipes/pipes.module';
-import { PostManagerComponent } from './admin/post-manager/post-manager.component';
-import { AdminComponent } from './admin/admin.component';
-
-
-
+import { ADMIN_ROUTES } from './admin.routes';
 
 @NgModule({
   declarations: [
-    NotifyControlComponent,
-    PostControlComponent,
-    DashboardComponent,
-    ProfileComponent,
-    HomeComponent,
-    PostManagerComponent,
-    AdminComponent
+
   ],
   imports: [
     BrowserModule,
@@ -37,7 +21,7 @@ import { AdminComponent } from './admin/admin.component';
     FormsModule,
     ReactiveFormsModule,
     // [RouterModule.forChild(DASHBOARD_ROUTES)]
-    DASHBOARD_ROUTES,
+    ADMIN_ROUTES,
     PipesModule
   ],
   exports: [RouterModule]
@@ -50,4 +34,4 @@ import { AdminComponent } from './admin/admin.component';
 //   ]
 
 })
-export class DASHBOARD_MODULE { }
+export class ADMIN_MODULE { }

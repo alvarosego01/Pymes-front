@@ -6,26 +6,29 @@ import { _SERVICIOS } from '../config/config';
 })
 export class ImagenPipe implements PipeTransform {
 
-  transform( img: string, tipo: string = 'User'): any {
+  transform( img: string, tipo: string = 'User', folder: string = ''): any {
 
+    // console.log('folder', folder);
     let url = _SERVICIOS + '/img';
 
     if ( !img ) {
-      return url + '/User/xxx';
+      return url + '/User/notFound/404';
     }
 
     if ( img.indexOf('https') >= 0 ) {
       return img;
     }
 
+    img = (folder != '')? `${folder}/${img}` : img;
+
     switch ( tipo ) {
 
       case 'User':
-        url += '/User/' + img;
+        url += `/User/${img}`;
       break;
 
       case 'Post':
-        url += '/Post/' + img;
+        url += `/Post/${img}`;
       break;
 
       // case 'hospital':

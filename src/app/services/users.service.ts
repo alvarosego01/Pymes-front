@@ -71,10 +71,11 @@ export class UsersService {
 
     // this._globalConfig.spinner = true;
     // una vez logeado hace falta grabar la sesión en el local storage designado.
+
     return this.http.post(url, usuario ).pipe(
         map( (resp: any) => {
 
-          //////console.log('respuesta', resp);
+          console.log('modelo valido que se guarda', resp.data);
 
           this.guardarStorage(resp.message.id_user, resp.message.t, resp.data);
 
@@ -109,7 +110,7 @@ export class UsersService {
 
 
 
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("token") && localStorage.getItem("user")) {
       this.token = localStorage.getItem("token");
       this.usuario = JSON.parse(localStorage.getItem("user"));
 
@@ -227,6 +228,24 @@ export class UsersService {
       this.usuario = usuario;
       this.token = token;
 
+
+      switch (this.usuario.role) {
+        case "CLIENTE_ROLE":
+          this.roleName = 'Persona natural';
+          break;
+          case "EMPRESA_ROLE":
+          this.roleName = 'Empresa';
+          break;
+          case "ADMIN_ROLE":
+          this.roleName = 'Administrador';
+          break;
+
+        default:
+          // code...
+          break;
+      }
+
+
     }
 
 
@@ -246,7 +265,7 @@ export class UsersService {
     this.router.navigate(['/']);
   }
 
-  changeFileUser( archivo: File, tipo: string, id: string ) {
+  changeFileUser( archivo: File, tipo: string, file: string,id: string ) {
 
     return new Promise( (resolve, reject ) => {
 
@@ -256,6 +275,8 @@ export class UsersService {
       let token = this.token;
 
       formData.append( 'imagen', archivo, archivo.name );
+      console.log('envia tio', file);
+      formData.append( 'type', file );
 
       xhr.onreadystatechange = function() {
 
@@ -292,6 +313,51 @@ export class UsersService {
   }
 
 
+
+
+
+
+  updateCompanyDataPUT(dataCompany: _UserModelCompany){
+
+ let url = `${_SERVICIOS}/user/${this.usuario._id}/?t=${this.token}`;
+
+ console.log('url', url);
+ console.log('lo que se manda', dataCompany);
+
+    return this.http.put(url, dataCompany).pipe(
+      map((resp: any) => {
+        //////console.log("respuesta", resp);
+        // alert("Usuario registrado");
+        // swal('Perro registrado', '' , 'success');
+        let n = new _NotifyModel(
+          "nAccountCreatedNoVerify",
+          null,
+          resp.data._id
+        );
+        // this._notifyService.sendNotifyEmailPOST(n).subscribe((resp) => {
+//
+        // });
+        this._notifyService.Toast.fire({
+          title: '¡Usuario modificado!',
+          // text: '¡Gracias por unirte a Mercado Pyme!',
+          icon: 'success'
+        });
+        console.log('respuesta guardada',resp['data']);
+        // return true;
+        this.guardarStorage( this.usuario._id , this.token, resp['data'])
+      }),
+      catchError((err) => {
+        console.log( 'el error', err);
+        this._notifyService.Toast.fire({
+          title: 'Algo ha salido mal, intente más tarde',
+          icon: 'error'
+        });
+
+        return throwError(err);
+      })
+    );
+  }
+
   updateUserPUT(
     usuarioNatural: _UserModelNatural = null,
     usuarioCompany: _UserModelCompany = null,
@@ -325,11 +391,12 @@ export class UsersService {
           // text: '¡Gracias por unirte a Mercado Pyme!',
           icon: 'success'
         });
-        // ////console.log(resp);
+        console.log('respuesta guardada',resp['data']);
         // return true;
         this.guardarStorage( this.usuario._id , this.token, resp['data'])
       }),
       catchError((err) => {
+        console.log( 'el error', err);
         this._notifyService.Toast.fire({
           title: 'Algo ha salido mal, intente más tarde',
           icon: 'error'

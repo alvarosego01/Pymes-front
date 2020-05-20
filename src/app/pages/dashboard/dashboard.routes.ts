@@ -2,7 +2,7 @@
 
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent , ProfileComponent, PostControlComponent, HomeComponent} from './dashboard.pages.index';
-import { LoginVerifyGuard } from 'src/app/services/login-verify.guard';
+import { LoginVerifyGuard } from 'src/app/services/guards/login-verify.guard';
 
 
 
@@ -15,10 +15,10 @@ const dashboardRoutes: Routes = [
         canActivate: [LoginVerifyGuard],
         canActivateChild: [LoginVerifyGuard],
         children: [
-            // {
-                // path: 'profile',
-                // component: ProfileComponent
-            // },
+            {
+                path: 'profile',
+                component: ProfileComponent
+            },
             {
                 path: 'postControl',
                 component: PostControlComponent

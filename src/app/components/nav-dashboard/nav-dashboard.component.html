@@ -16,7 +16,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex" *ngIf="this._usersService.token != null">
         <div class="image">
-          <img [src]="this._usersService.usuario.imgProfile | imagen:'User'" class="img-circle elevation-2" alt="User Image">
+          <img [src]="this._usersService.usuario.imgProfile | imagen:'User':this._usersService.usuario._id" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a class="d-block">{{ this._usersService.usuario.name }} {{ this._usersService.usuario.surname }}</a>
@@ -28,10 +28,12 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2 menuNavAside" *ngIf="this._usersService.token == null">
+
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
           <li class="nav-header">Menú de navegación</li>
           <li class="nav-item loginButton">
-            <a (click)="openLoginByAside()" class="navButton nav-link"  #navlink [ngClass]="{
+            <a (click)="openLoginByAside()" class="nav-link"  #navlink [ngClass]="{
               'active': this._usersService.loginVisible == true
             }">
             <i class="fas fa-user-circle nav-icon"></i>
@@ -47,7 +49,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link navButton " #navlink href="#" role="button">
+            <a class="nav-link " #navlink href="#" role="button">
               <i class="fas fa-arrow-left nav-icon"></i>
               <p>
                 Cerrar
@@ -55,32 +57,34 @@
             </a>
           </li>
 
-
-
-
         </ul>
       </nav>
       <nav class="mt-2" *ngIf="this._usersService.token != null">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-header">Panel de usuario</li>
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <!-- <li class="nav-item">
-            <a  class="nav-link" >
-              <i class="fas nav-icon fa-house-user"></i>
-              <p>Panel Géneral</p>
+
+        <ul  *ngIf="this._usersService.usuario.role == 'ADMIN_ROLE'" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+          <li class="nav-header">Panel de Administración</li>
+           <li class="nav-item">
+            <a  class="nav-link" [routerLink]="['/admin/postManager']" routerLinkActive="active">
+              <i class="fas fa-user-tie nav-icon"></i>
+              <p>Gestión de publicaciones</p>
             </a>
           </li>
-        -->
-           <!-- <li class="nav-item"> -->
-            <!-- <a  class="nav-link" [routerLink]="['/dashboard/profile']" routerLinkActive="active"> -->
-              <!-- <i class="fas nav-icon fa-user"></i> -->
-              <!-- <p>Perfil de usuario</p> -->
-            <!-- </a> -->
-          <!-- </li> -->
 
- <!-- "this._globalConfig.directiveNavDashboard == true" -->
-          <li class="nav-item">
+
+        </ul>
+
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+          <li class="nav-header">Panel de usuario</li>
+           <li class="nav-item">
+            <a  class="nav-link" [routerLink]="['/dashboard/profile']" routerLinkActive="active">
+              <i class="fas nav-icon fa-user"></i>
+              <p>Perfil de usuario</p>
+            </a>
+          </li>
+
+          <li *ngIf="this._usersService.usuario.role != 'ADMIN_ROLE'" class="nav-item">
             <a  #navlink class="nav-link" [routerLink]="['/dashboard/postControl']" routerLinkActive="active">
               <i class="fas nav-icon fa-tags"></i>
               <p>Control de publicaciones</p>
@@ -95,7 +99,7 @@
           </li>
 
           <li class="nav-item burguerResponsiveUser" >
-            <a class="nav-link navButton " #navlink href="#" role="button">
+            <a class="nav-link " #navlink href="#" role="button">
               <i class="fas fa-arrow-left nav-icon"></i>
               <p>
                 Cerrar
@@ -103,12 +107,8 @@
             </a>
           </li>
 
-
-
-
-
-
         </ul>
+
       </nav>
       <!-- /.sidebar-menu -->
     </div>
