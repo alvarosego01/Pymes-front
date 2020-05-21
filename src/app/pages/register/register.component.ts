@@ -23,6 +23,10 @@ import { SocialFloatComponent } from 'src/app/globals/globals.index';
 })
 export class RegisterComponent implements OnInit {
 
+
+  registerControlSelect: string = null;
+
+
   ciudades = [];
   idc: number = 0;
 
