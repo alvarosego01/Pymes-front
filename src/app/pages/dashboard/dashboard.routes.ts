@@ -3,6 +3,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent , ProfileComponent, PostControlComponent, HomeComponent} from './dashboard.pages.index';
 import { LoginVerifyGuard } from 'src/app/services/guards/login-verify.guard';
+import { AdminVerifyGuard } from 'src/app/services/guards/guards.index';
 
 
 
@@ -21,6 +22,7 @@ const dashboardRoutes: Routes = [
             },
             {
                 path: 'postControl',
+                // canActivate: [!AdminVerifyGuard],
                 component: PostControlComponent
             },
             {

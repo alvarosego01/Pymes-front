@@ -3,8 +3,8 @@
 
 import { HostListener } from '@angular/core';
 
-
-
+export { PostsService } from './posts.service';
+export { Filebase64Service } from './filebase64.service';
 
 // export {  PostsService } from './posts.service';
 export {  UsersService } from './users.service';

@@ -274,9 +274,7 @@ export class PostControlComponent implements OnInit {
   }
 
   createPublication(forma: NgForm) {
-    ////console.log(forma.value, " el envio de post");
 
-    ////console.log(this.coordsMap);
 
     if(this.imagenesSubir.length == 0){
           this._notifyService.Toast.fire({
@@ -329,7 +327,7 @@ export class PostControlComponent implements OnInit {
     };
 
     var cat = {
-      principal: forma.value.Category.base,
+      principal: JSON.parse(forma.value.Category).base,
       child:
         forma.value.subCategory == "Otra"
           ? this.ngNewCategory

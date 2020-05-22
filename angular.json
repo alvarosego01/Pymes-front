@@ -29,9 +29,13 @@
             ],
             "styles": [
               "src/styles.sass",
-              "src/generals.sass"
+              "src/generals.sass",
+
+
             ],
-            "scripts": []
+            "scripts": [
+
+            ]
           },
           "configurations": {
             "production": {
@@ -96,9 +100,13 @@
             ],
             "styles": [
               "src/styles.sass",
-              "src/generals.sass"
+              "src/generals.sass",
+
+
             ],
-            "scripts": []
+            "scripts": [
+
+            ]
           }
         },
         "lint": {

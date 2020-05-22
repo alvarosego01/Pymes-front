@@ -17,7 +17,7 @@ import {
   _UserModelCompany,
   _NotifyModel,
 } from "../models/models.index";
-import { NotifyService } from "src/app/services/service.index";
+// import { NotifyService } from "src/app/services/service.index";
 import { _PostModel } from "../models/postModel";
 import { UsersService } from "./users.service";
 
@@ -141,10 +141,32 @@ export class PostsService {
   constructor(
     public http: HttpClient,
     public router: Router,
-    public _notifyService: NotifyService,
+    // public _notifyService: NotifyService,
     public _usersService: UsersService // public _globalConfig: _globalConfig
   ) // public notificacion = new EventEmitter<any>();
   {}
+
+
+
+  getAllPublicationsGET() {
+    // return;
+    let url = _SERVICIOS + "/post";
+    //////console.log(data, "llega data notif");
+    return this.http.get(url).pipe(
+      map((resp: any) => {
+        //////console.log("respuesta notificacion", resp);
+        // alert('Usuario registrado');
+
+        return resp;
+      }),
+      catchError((err) => {
+        //////console.log("respuesta notificacion", err);
+        // alert('Error en al registrar');
+        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+        return throwError(err);
+      })
+    );
+  }
 
   getMyPublications() {
     let url = `${_SERVICIOS}/post/publicaciones?t=${this._usersService.token}`;
@@ -212,7 +234,7 @@ export class PostsService {
             // ////console.log( 'Fallo la subida' );
             resolve(JSON.parse(xhr.response));
           }
-            
+
         }
         catch (e) {
             console.log(e.status);
