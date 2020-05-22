@@ -15,9 +15,9 @@
     <div class="sidebar" >
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex" *ngIf="this._usersService.token != null">
-        <div class="image">
+        <!-- <div class="image">
           <img [src]="this._usersService.usuario.imgProfile | imagen:'User'" class="img-circle elevation-2" alt="User Image">
-        </div>
+        </div> -->
         <div class="info">
           <a class="d-block">{{ this._usersService.usuario.name }} {{ this._usersService.usuario.surname }}</a>
         </div>

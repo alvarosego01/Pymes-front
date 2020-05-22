@@ -18,7 +18,7 @@ import { Filebase64Service } from 'src/app/services/filebase64.service';
   styleUrls: ["./post-control.component.sass"],
 })
 export class PostControlComponent implements OnInit {
-  test = 0;
+  test = 1;
 
   imagenSubir: File;
   imagenesSubir = [];
@@ -329,7 +329,7 @@ export class PostControlComponent implements OnInit {
     };
 
     var cat = {
-      principal: forma.value.Category.base,
+      principal: JSON.parse(forma.value.Category).base,
       child:
         forma.value.subCategory == "Otra"
           ? this.ngNewCategory
