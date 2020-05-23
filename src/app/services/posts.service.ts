@@ -22,6 +22,7 @@ import { _PostModel } from "../models/postModel";
 import { UsersService } from "./users.service";
 
 import { EventEmitter } from "@angular/core";
+import { VerifyService } from './verify.service';
 
 @Injectable({
   providedIn: "root",
@@ -141,12 +142,66 @@ export class PostsService {
   constructor(
     public http: HttpClient,
     public router: Router,
+    // public _verifyService: VerifyService,
     // public _notifyService: NotifyService,
     public _usersService: UsersService // public _globalConfig: _globalConfig
   ) // public notificacion = new EventEmitter<any>();
   {}
 
 
+
+
+  deletePublicDELETE(idPublic){
+
+    let url = _SERVICIOS + '/post/' + idPublic;
+    url += '?t=' + this._usersService.token;
+
+    return this.http.delete( url ).pipe(
+      map((resp: any) => {
+        //////console.log("respuesta", resp);
+        // alert("Usuario registrado");
+        // swal('Perro registrado', '' , 'success');
+        // let n = new _NotifyModel(
+        //   "nAccountCreatedNoVerify",
+        //   null,
+        //   resp.data._id
+        // );
+        // // this._notifyService.sendNotifyEmailPOST(n).subscribe((resp) => {
+//
+        // });
+
+        return resp;
+        // this.guardarStorage( this.usuario._id , this.token, resp['data'])
+      }),
+      catchError((err) => {
+        console.log( 'el error', err);
+
+
+        return throwError(err);
+      })
+    );
+  }
+
+  getSinglePostGET(idPublication){
+
+    let url = `${_SERVICIOS}/post/publicacion/${idPublication}`;
+    //////console.log(data, "llega data notif");
+    return this.http.get(url).pipe(
+      map((resp: any) => {
+        //////console.log("respuesta notificacion", resp);
+        // alert('Usuario registrado');
+
+        return resp;
+      }),
+      catchError((err) => {
+        //////console.log("respuesta notificacion", err);
+        // alert('Error en al registrar');
+        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+        return throwError(err);
+      })
+    );
+
+  }
 
   getAllPublicationsGET() {
     // return;

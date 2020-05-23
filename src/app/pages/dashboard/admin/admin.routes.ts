@@ -8,6 +8,7 @@ import { AdminVerifyGuard } from 'src/app/services/guards/guards.index';
 
 import { PostManagerComponent } from './admin.components.index';
 import { DashboardComponent } from '../dashboard.component';
+import { InfoPostComponent } from 'src/app/components/components.index';
 
 
 
@@ -25,8 +26,9 @@ const adminRoutes: Routes = [
 
             {
                 path: 'postManager',
-                component: PostManagerComponent
+                component: PostManagerComponent,
             },
+            { path: 'infoPost/:id', component: InfoPostComponent },
             {
                 path: '**',
                 component: DashboardComponent

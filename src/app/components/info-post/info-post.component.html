@@ -1,1 +1,169 @@
-<p>info-post works!</p>
+
+
+
+
+<div class="containerFull100">
+    <!-- Content Header (Page header) -->
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="card card-solid">
+            <div class="card-body">
+              <div class="row">
+                <div class="fileSide col-md-12 col-lg-6" *ngIf="this.publication._files[0].type != 'PDF' ">
+
+
+                  <div class="col-12">
+                    <img [src]="this.publication._files[0].file | imagen:'Post':this.publication._files[0].folder " class="product-image" alt="Product Image">
+                  </div>
+                  <div class="col-12 product-image-thumbs" >
+                    <div *ngFor="let files of this.publication._files; let i = index" class="product-image-thumb" [ngClass]="{'active': i == 0}" >
+                        <img [src]="files.file | imagen:'Post':files.folder " alt="Product Image">
+                    </div>
+
+                  </div>
+                </div>
+                <div class="infoSide col-md-12 col-lg-6">
+                  <div class="dataHeader">
+
+                    <h5 class="titleSpecial6">
+                      {{ this.publication._category.principal }} - {{ this.publication._category.child }}
+                    </h5>
+                    <small>
+                      {{ this.publication.created_at }}
+                    </small>
+                    <small>
+                      {{ this.ciudades }}
+                    </small>
+
+                    <h3 class="title">
+                      {{ this.publication.title }}
+                    </h3>
+                  </div>
+
+                  <h4 class="titleSpecial6">
+                    Rango de precio
+                  </h4>
+                  <div class="price">
+                    <h5>
+                      {{ this.publication._rangoPrize.min }}
+                    </h5>
+                    <h5>
+                      {{ this.publication._rangoPrize.max }}
+                    </h5>
+                  </div>
+
+                  <h5 class="titleDesc">
+                    Descripción
+                  </h5>
+                  <div class="row desc">
+                    <div class="col-md-12 col-lg-12">
+                      <h6>
+                        Lo que incluye:
+                      </h6>
+                      <p>
+                        {{ this.publication.content }}
+                      </p>
+                      <hr>
+                    </div>
+                    <div class="col-md-12 col-lg-12">
+                      <h6>
+                        Lo que no incluye:
+                      </h6>
+                      <p>
+                        {{ this.publication.notContent }}
+                      </p>
+                      <hr>
+                    </div>
+                  </div>
+
+                  <div class="reactions">
+                    <ul>
+                      <li>
+                        <i class="fas fa-thumbs-up"></i>
+                        <span class="number">
+                          0
+                        </span>
+                      </li>
+                      <li>
+                        <i class="fas fa-thumbs-down"></i>
+                        <span class="number">
+                          0
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="contact">
+                    <div class="formButtons">
+                      <button (click)="openContact(this.publication._infoContact)" type="button" class="buttonCustom btn btn-success btn-flat">Contactar</button>
+                    </div>
+
+                  </div>
+
+                  <div class="userOwner">
+                    <a class="navButton" [routerLink]="['/dashboard']" routerLinkActive="active">
+                      <div class="ico">
+                        <img src="../../../assets/dist/img/logoUser.svg" alt="">
+                      </div>
+                        <span *ngIf="this.publication.user.role != 'EMPRESA_ROLE'">
+                          {{ this.publication.user.name }} {{ this.publication.user.surname }}
+                        </span>
+                        <span *ngIf="this.publication.user.role == 'EMPRESA_ROLE'">
+                          {{ this.publication.user._dataPyme.nameCompany }}
+                        </span>
+                    </a>
+                  </div>
+
+                  <div class="star">
+                    <ul>
+                      <li>
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <i class="fas fa-star-half" aria-hidden="true"></i>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="mt-4 product-share">
+                    <a href="#" class="text-gray">
+                      <i class="fab fa-facebook-square fa-2x"></i>
+                    </a>
+                    <a href="#" class="text-gray">
+                      <i class="fab fa-twitter-square fa-2x"></i>
+                    </a>
+                    <a href="#" class="text-gray">
+                      <i class="fas fa-envelope-square fa-2x"></i>
+                    </a>
+                    <a href="#" class="text-gray">
+                      <i class="fas fa-rss-square fa-2x"></i>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+              <div class="map" *ngIf="this.publication._mapUrl.mapUrl != null">
+                <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                  Geolocalización
+                </h4>
+
+                <div  class="boxMap"  *ngIf="this.activateMap == true">
+
+                  <div *ngIf="this.publication._mapUrl.mapUrl != null" [innerHtml]="this.coordsMap.mapUrl | safeUrl" style="width: 100%"></div>
+
+                  
+
+
+
+
+                </div>
+
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+
+    </section>
+
+
+</div>

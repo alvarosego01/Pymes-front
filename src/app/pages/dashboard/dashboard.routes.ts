@@ -8,6 +8,7 @@ import { AdminVerifyGuard } from 'src/app/services/guards/guards.index';
 
 
 
+
 const dashboardRoutes: Routes = [
 
     {
@@ -23,8 +24,10 @@ const dashboardRoutes: Routes = [
             {
                 path: 'postControl',
                 // canActivate: [!AdminVerifyGuard],
-                component: PostControlComponent
+                component: PostControlComponent,
+
             },
+
             {
                 path: '**',
                 component: PostControlComponent

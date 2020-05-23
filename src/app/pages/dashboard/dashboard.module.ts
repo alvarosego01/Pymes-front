@@ -18,8 +18,7 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 import { PostManagerComponent } from './admin/post-manager/post-manager.component';
 import { AdminComponent } from './admin/admin.component';
 import { ADMIN_MODULE } from './admin/admin.module';
-
-
+ 
 
 
 @NgModule({
@@ -30,7 +29,8 @@ import { ADMIN_MODULE } from './admin/admin.module';
     ProfileComponent,
     HomeComponent,
     PostManagerComponent,
-    AdminComponent
+    AdminComponent,
+
   ],
   imports: [
     BrowserModule,
