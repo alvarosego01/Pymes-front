@@ -18,7 +18,13 @@
         display: none!important
     @include responsivo(pcMedio)
         display: none!important
-
+    li
+        display: flex
+        align-items: center
+        a
+            margin: auto 0
+            i
+                padding-right: 5px
 .logo
     @include responsivo(telefonoTable)
         margin-left: auto!important
@@ -35,8 +41,8 @@ form.form-inline
 
 #navBar
     padding: 0
-    padding-left: 5%
-    padding-right: 5%
+    padding-left: 1.25%
+    padding-right: 1.25%
     position: relative
     @include responsivo(telefonoTable)
         min-height: 80px!important
@@ -47,8 +53,10 @@ form.form-inline
         padding-right: 2.5%
         padding-left: 2.5%
 
+
+
 .menuNav.navbar-nav
-    margin-left: 50px
+    margin-left: 1%
 
 ul.menuRight
     width: fit-content

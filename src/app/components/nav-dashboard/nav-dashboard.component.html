@@ -27,12 +27,29 @@
 
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2 menuNavAside" *ngIf="this._usersService.token == null">
+      <nav class="mt-2 menuNavAside" >
 
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
           <li class="nav-header">Menú de navegación</li>
-          <li class="nav-item loginButton">
+
+          <li class="nav-item registerButton">
+            <a class="nav-link" [routerLink]="['/home']" #navlink routerLinkActive="active">
+            <i class="fas fa-home    nav-icon"></i>
+            <p>Home</p>
+            </a>
+          </li>
+
+          <li class="nav-item registerButton">
+            <a class="nav-link" [routerLink]="['/us']" #navlink routerLinkActive="active">
+            <!-- <i class="fas     nav-icon"></i> -->
+            <i class="fas fa-industry    nav-icon"></i>
+            <p>Nosotros</p>
+            </a>
+          </li>
+
+
+          <li *ngIf="this._usersService.token == null" class="nav-item loginButton">
             <a (click)="openLoginByAside()" class="nav-link"  #navlink [ngClass]="{
               'active': this._usersService.loginVisible == true
             }">
@@ -41,24 +58,19 @@
 
             </a>
           </li>
-          <li class="nav-item registerButton">
+          <li *ngIf="this._usersService.token == null" class="nav-item registerButton">
             <a class="nav-link" [routerLink]="['/register']" #navlink routerLinkActive="active">
               <i class="fas fa-user-plus nav-icon"></i>
             <p>Crea tu cuenta</p>
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link " #navlink href="#" role="button">
-              <i class="fas fa-arrow-left nav-icon"></i>
-              <p>
-                Cerrar
-              </p>
-            </a>
-          </li>
+
 
         </ul>
       </nav>
+
+
       <nav class="mt-2" *ngIf="this._usersService.token != null">
 
         <ul  *ngIf="this._usersService.usuario.role == 'ADMIN_ROLE'" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -98,18 +110,40 @@
             </a>
           </li>
 
-          <li class="nav-item burguerResponsiveUser" >
+
+        </ul>
+
+      </nav>
+
+      <nav class="mt-2 closeDashboard" >
+
+        <ul  class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+          <li class="nav-item">
+            <form class="buscador form-inline ml-3">
+              <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" type="search" placeholder="Busqueda" aria-label="Busqueda">
+                <div class="input-group-append">
+                  <button class="btn btn-navbar" type="submit">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link " #navlink href="#" role="button">
               <i class="fas fa-arrow-left nav-icon"></i>
               <p>
-                Cerrar
+                Cerrar menú
               </p>
             </a>
           </li>
 
         </ul>
-
       </nav>
+
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->

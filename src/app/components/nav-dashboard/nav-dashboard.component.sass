@@ -5,6 +5,13 @@
     height: 35px
     width: 35px
 
+
+.closeDashboard
+    @include responsivo(general)
+        display: none!important
+    @include responsivo(resto)
+        display: none!important
+
 #navDashboard.navRespUser
     @include responsivo(general)
         .burguerResponsiveUser

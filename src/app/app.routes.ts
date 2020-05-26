@@ -9,19 +9,20 @@ import { NoLoginVerifyGuard } from './services/guards/guards.index';
 
 
 const appRoutes: Routes = [
-    // { path: 'home', component: HomeComponent },
+    { path: 'home', component: HomeComponent },
     // {
         // path: 'dashboard',
         // component: DashboardComponent,
         // canActivate: [ VerificaTokenGuard ],
         // data: { titulo: 'Dashboard' }
     // },
-    { path: 'aboutUs', component: UsComponent },
+    { path: 'us', component: UsComponent },
     { path: 'register',
     // canActivate: [NoLoginVerifyGuard],
     component: RegisterComponent,
     },
-    { path: '**', component: UsComponent }
+    { path: '**', component: HomeComponent },
+    { path: '', component: HomeComponent }
 ];
 
 

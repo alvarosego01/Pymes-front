@@ -149,7 +149,98 @@ export class PostsService {
   {}
 
 
+ 
+  // .......................................................
 
+
+  sendReactionPOST(idPublic, type){
+    // http://localhost:5160/post/reaction
+
+    let url = `${_SERVICIOS}/post/reaction/${idPublic}?t=${this._usersService.token}`;
+
+    let reaction = {
+      r: type
+    }
+
+    return this.http.post(url, reaction).pipe(
+      map((resp: any) => {
+
+        return resp;
+      }),
+      catchError((err) => {
+
+        return throwError(err);
+      })
+    );
+
+  }
+
+  setActualRankingGET(idPublic){
+
+    let url = `${_SERVICIOS}/post/ranking/stars/${idPublic}`;
+    //////console.log(data, "llega data notif");
+    return this.http.get(url).pipe(
+      map((resp: any) => {
+        //////console.log("respuesta notificacion", resp);
+        // alert('Usuario registrado');
+
+        return resp;
+      }),
+      catchError((err) => {
+        //////console.log("respuesta notificacion", err);
+        // alert('Error en al registrar');
+        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+        return throwError(err);
+      })
+    );
+
+
+  }
+
+  sendRankingPOST(idPublic, points){
+    // http://localhost:5160/post/reaction
+
+    let url = `${_SERVICIOS}/post/ranking/stars/${idPublic}?t=${this._usersService.token}`;
+
+    let reaction = {
+      points: points
+    }
+
+    return this.http.post(url, reaction).pipe(
+      map((resp: any) => {
+
+        return resp;
+      }),
+      catchError((err) => {
+
+        return throwError(err);
+      })
+    );
+
+  }
+
+
+  setActualReactionsGET(idPublication){
+
+    let url = `${_SERVICIOS}/post/reaction/${idPublication}`;
+    //////console.log(data, "llega data notif");
+    return this.http.get(url).pipe(
+      map((resp: any) => {
+        //////console.log("respuesta notificacion", resp);
+        // alert('Usuario registrado');
+
+        return resp;
+      }),
+      catchError((err) => {
+        //////console.log("respuesta notificacion", err);
+        // alert('Error en al registrar');
+        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+        return throwError(err);
+      })
+    );
+
+
+  }
 
   deletePublicDELETE(idPublic){
 

@@ -40,7 +40,7 @@
                           Categoría
                       </th>
                       <th>
-                          Dirigido a
+                          Dirigido
                       </th>
                       <th>
                           Ciudades
@@ -125,10 +125,16 @@
                       </td>
 
 
-                      <td>
+                      <td *ngIf="item.verify_at != null">
 
                         <span *ngIf="item.status == false" class="badge badge-danger">No aprobado</span>
                         <span *ngIf="item.status == true" class="badge badge-success">Aprobado</span>
+
+                      </td>
+                      <td *ngIf="item.verify_at == null">
+
+                        <span class="badge badge-warning">No revisado</span>
+
 
                       </td>
 
@@ -166,3 +172,4 @@
     </section>
     <!-- /.content -->
   </div>
+

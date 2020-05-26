@@ -1,0 +1,82 @@
+
+
+
+@import "~src/generals"
+
+$verdePyme: #2D907C
+
+.list
+    // display: none
+    padding-top: 50px
+    .card
+        // background-color: red
+        padding: 0
+        .card-header
+            padding: 0
+            position: relative
+            padding-bottom: 0
+            border-bottom: 0
+            &::after
+                display: none
+        .card-body
+            display: flex
+            flex-direction: column
+            padding: 2.5% 5%
+
+            span.catego
+                color: $VerdeOscur
+                border-radius: 0
+                font-weight: bold
+            .date
+                color: grey
+            h4.card-title
+                width: 100%
+                color: $GrisOscur
+                font-size: 18px
+            .price
+                display: flex
+                flex-direction: column
+                width: 100%
+                .noPrice
+                    margin-bottom: 5px
+                    color: grey
+                    display: block
+                    text-decoration: line-through
+                    display: none
+                .cost
+                    display: block
+                    color: $VerdeClar
+                    font-size: 22px
+                    line-height: 26px
+                    font-weight: bold
+            p.card-text
+                margin: 15px 0
+                text-align: justify
+                font-size: 14px
+                line-height: 14px
+                color: $GrisClar
+        .card-footer
+            position: relative
+            padding: 0
+            padding-bottom: 5%
+            background-color: white
+            .centerCustom
+                a
+                    font-size: 14px!important
+                    padding: 2.5px 10px
+
+            .reactions
+                position: absolute
+                bottom: 0
+                right: 15px
+                top: 0
+                ul
+                    list-style: none
+                    display: flex
+                    flex-direction: row
+                    padding: 0
+                    margin: 0
+                    li
+                        margin-left: 5px
+                    // li
+                        // a

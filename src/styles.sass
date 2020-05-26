@@ -3,6 +3,14 @@
 @import './generals'
 
 
+// ajuste para quitar paddings naturales
+
+
+.contentTitleHr
+    display: block!important
+    width: 100%!important
+
+
 body
     overflow-x: hidden!important
 
@@ -32,6 +40,8 @@ h1,h2,h3,h4,h5,h6
 
 .row
     margin-bottom: 15px
+    margin-left: 0
+    margin-right: 0
 
 .titleSpecial
     color: $VerdeOscur
@@ -59,6 +69,12 @@ p.textInfo
     color: $GrisClar
     font-size: 16px
 
+a.hiperButtonWhite
+    color: white
+    &:hover
+        color: white!important
+        background-color: transparent!important
+        border: 0!important
 a.hiperButton
     color: $VerdeOscur!important
     font-size: 18px
@@ -67,7 +83,7 @@ a.navButton
     // font-size: 22px!important
     color: $GrisClar!important
     font-weight: thin
-    font-size: 20px
+    font-size: 16px
     display: flex
     align-items: center
 
@@ -442,13 +458,22 @@ form.formDataSend .terms .icheck-success label
     @include responsivo(resto)
         width: 80%!important
 .containerFull
-    margin: 0 auto
+    margin: 0 auto!important
     max-width: unset!important
     width: 90%!important
 .containerFull100
     margin: 0 auto
     max-width: unset!important
     width: 100%!important
+
+.padd0
+    padding: 0
+.padd5
+    padding-left: 5%
+    padding-right: 5%
+.padd10
+    padding-left: 10%!important
+    padding-right: 10%!important
 
 .centralRegister
     @include responsivo(telefonoTable)

@@ -37,6 +37,7 @@ import { DASHBOARD_MODULE } from './pages/dashboard/dashboard.module';
 import { PipesModule } from './pipes/pipes.module';
 import { PostsService } from './services/posts.service';
 import { ADMIN_MODULE } from './pages/dashboard/admin/admin.module';
+import { NewsletterComponent } from './globals/newsletter/newsletter.component';
 
 
 
@@ -57,6 +58,7 @@ import { ADMIN_MODULE } from './pages/dashboard/admin/admin.module';
     LoginComponent,
     UsComponent,
     NavDashboardComponent,
+    NewsletterComponent,
   ],
   imports: [
     BrowserModule,

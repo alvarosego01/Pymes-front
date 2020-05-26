@@ -7,23 +7,43 @@
 
     <!-- Main content -->
     <section class="content">
+              <div class="row migPan padd5">
 
-        <div class="card card-solid">
-            <div class="card-body">
-              <div class="row">
+              </div>
+              <div class="row padd5 infoGeneralContent">
+                <div class="fileSide col-md-12 col-lg-6" *ngIf="this.publication._files[0].type === 'PDF' " [ngClass]="{'typePDF': this.publication._files[0].type === 'PDF'}">
+
+                  <div class="iconoDownload">
+                    <a  [href]="this.publication._files[0].file | imagen:'Post':this.publication._id" class="hiperButtonWhite">
+                      <i class="fas fa-download    "></i>
+                      Descargar catálogo
+                    </a>
+                  </div>
+
+                </div>
                 <div class="fileSide col-md-12 col-lg-6" *ngIf="this.publication._files[0].type != 'PDF' ">
 
 
-                  <div class="col-12">
-                    <img [src]="this.publication._files[0].file | imagen:'Post':this.publication._files[0].folder " class="product-image" alt="Product Image">
+                  <div class="front col-12">
+                    <img [src]="this.imgActive | imagen:'Post':this.publication._id " class="product-image" alt="Product Image">
                   </div>
-                  <div class="col-12 product-image-thumbs" >
-                    <div *ngFor="let files of this.publication._files; let i = index" class="product-image-thumb" [ngClass]="{'active': i == 0}" >
-                        <img [src]="files.file | imagen:'Post':files.folder " alt="Product Image">
+                  <div class="list col-12 product-image-thumbs" >
+
+                    <a class="arrowIMG" (click)="sliderIMG(-1)" >
+                      <i class="fas fa-arrow-left    "></i>
+                    </a>
+                    <div  *ngFor="let files of this.publication._files.slice(this.imgPaginate, this.imgPaginate + 4)" class="animated fadeIn fast  product-image-thumb" (click)="setActiveIMG( files )" >
+
+                        <img  [src]="files.file | imagen:'Post':files.folder " alt="Product Image">
+
                     </div>
+                    <a class="arrowIMG" (click)="sliderIMG(+1)" >
+                      <i class="fas fa-arrow-right    "></i>
+                    </a>
 
                   </div>
                 </div>
+
                 <div class="infoSide col-md-12 col-lg-6">
                   <div class="dataHeader">
 
@@ -42,9 +62,9 @@
                     </h3>
                   </div>
 
-                  <h4 class="titleSpecial6">
+                  <h5 class="titleSpecial6">
                     Rango de precio
-                  </h4>
+                  </h5>
                   <div class="price">
                     <h5>
                       {{ this.publication._rangoPrize.min }}
@@ -60,7 +80,7 @@
                   <div class="row desc">
                     <div class="col-md-12 col-lg-12">
                       <h6>
-                        Lo que incluye:
+                        Incluye:
                       </h6>
                       <p>
                         {{ this.publication.content }}
@@ -69,7 +89,7 @@
                     </div>
                     <div class="col-md-12 col-lg-12">
                       <h6>
-                        Lo que no incluye:
+                        No incluye:
                       </h6>
                       <p>
                         {{ this.publication.notContent }}
@@ -80,24 +100,32 @@
 
                   <div class="reactions">
                     <ul>
+
+
                       <li>
-                        <i class="fas fa-thumbs-up"></i>
-                        <span class="number">
-                          0
-                        </span>
+                        <a (click)="sendReaction('like')" [ngClass]="{'active': this.reactions.myReaction == 'like'}">
+
+                          <i class="fas fa-thumbs-up"></i>
+                          <span class="number">
+                            {{ this.reactions.like }}
+                          </span>
+                        </a>
                       </li>
                       <li>
+                        <a (click)="sendReaction('dislike')" [ngClass]="{'active': this.reactions.myReaction == 'dislike'}">
+
                         <i class="fas fa-thumbs-down"></i>
                         <span class="number">
-                          0
+                          {{ this.reactions.dislike }}
                         </span>
+                      </a>
                       </li>
                     </ul>
                   </div>
 
                   <div class="contact">
                     <div class="formButtons">
-                      <button (click)="openContact(this.publication._infoContact)" type="button" class="buttonCustom btn btn-success btn-flat">Contactar</button>
+                      <button (click)="openContact()" type="button" class="buttonCustom btn btn-success btn-flat">Contactar</button>
                     </div>
 
                   </div>
@@ -117,51 +145,209 @@
                   </div>
 
                   <div class="star">
-                    <ul>
-                      <li>
-                        <i class="fas fa-star" aria-hidden="true"></i>
-                        <i class="fas fa-star-half" aria-hidden="true"></i>
+                    <ul *ngIf="this.settingStars.myPoint == 0">
+
+                      <li >
+                        <a (click)="sendRanking(1.0)" [ngClass]="{'active': this.settingStars.total >= 1}">
+                           <i class="fas fa-star"></i>
+                        </a>
                       </li>
+                      <li >
+                        <a (click)="sendRanking(2.0)" [ngClass]="{'active': this.settingStars.total >= 1 && this.settingStars.total <= 2 }">
+                           <i class="fas fa-star"></i>
+                        </a>
+                      </li>
+                      <li >
+                        <a (click)="sendRanking(3.0)" [ngClass]="{'active': this.settingStars.total >= 1 && this.settingStars.total <= 3 }" >
+                           <i class="fas fa-star"></i>
+                        </a>
+                      </li>
+                      <li >
+                        <a (click)="sendRanking(4.0)" [ngClass]="{'active': this.settingStars.total >= 1 && this.settingStars.total <= 4 }">
+                           <i class="fas fa-star"></i>
+                        </a>
+                      </li>
+                      <li >
+                        <a (click)="sendRanking(5.0)" [ngClass]="{'active': this.settingStars.total >= 1 && this.settingStars.total <= 5 }">
+                           <i class="fas fa-star"></i>
+                        </a>
+                      </li>
+                      <!-- <li *ngIf="this.settingStars.total > 0">
+                        <small>
+                          Total {{ this.settingStars.total }}
+                        </small>
+                      </li> -->
+
                     </ul>
+                    <ul *ngIf="this.settingStars.myPoint >= 1">
+
+                      <li >
+                        <a (click)="sendRanking(1.0)" [ngClass]="{'active': this.activateStars[0] == true}">
+                           <i class="fas fa-star"></i>
+                        </a>
+                      </li>
+                       <li >
+                        <a (click)="sendRanking(2.0)" [ngClass]="{'active': this.activateStars[1] == true }">
+                           <i class="fas fa-star"></i>
+                        </a>
+                      </li>
+                     <li >
+                        <a (click)="sendRanking(3.0)" [ngClass]="{'active': this.activateStars[2] == true }" >
+                           <i class="fas fa-star"></i>
+                        </a>
+                      </li>
+                      <li >
+                        <a (click)="sendRanking(4.0)" [ngClass]="{'active': this.activateStars[3] == true }">
+                           <i class="fas fa-star"></i>
+                        </a>
+                      </li>
+                      <li >
+                        <a (click)="sendRanking(5.0)" [ngClass]="{'active': this.activateStars[4] == true }">
+                           <i class="fas fa-star"></i>
+                        </a>
+                      </li>
+                      <li *ngIf="this.settingStars.total > 0">
+                        <small>
+                          Total {{ this.settingStars.total }}
+                        </small>
+                      </li>
+
+                    </ul>
+
                   </div>
 
-                  <div class="mt-4 product-share">
+
+
+
+
+
+
+                  <div class="row socialShare">
                     <a href="#" class="text-gray">
-                      <i class="fab fa-facebook-square fa-2x"></i>
+                      <i class="fab fa-whatsapp"></i>
                     </a>
                     <a href="#" class="text-gray">
-                      <i class="fab fa-twitter-square fa-2x"></i>
+                      <i class="fab fa-instagram"></i>
                     </a>
                     <a href="#" class="text-gray">
-                      <i class="fas fa-envelope-square fa-2x"></i>
+                      <i class="fab fa-facebook"></i>
                     </a>
                     <a href="#" class="text-gray">
-                      <i class="fas fa-rss-square fa-2x"></i>
+                      <i class="fas fa-globe"></i>
                     </a>
                   </div>
 
                 </div>
               </div>
-              <div class="map" *ngIf="this.publication._mapUrl.mapUrl != null">
-                <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-                  Geolocalización
+
+              <div *ngIf="this.publication.user.role == 'EMPRESA_ROLE' && this.publication.user._dataPyme.logo != '' " class="row padd5 logoCompany">
+
+
+                <img [src]="this.publication.user._dataPyme.logo | imagen:'User':this.publication.user._id" alt="">
+
+              </div>
+
+              <div class="row padd5 cityTarget">
+
+                <div  class="contentTitleHr">
+
+                  <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                  Trabajamos en
                 </h4>
-
-                <div  class="boxMap"  *ngIf="this.activateMap == true">
-
-                  <div *ngIf="this.publication._mapUrl.mapUrl != null" [innerHtml]="this.coordsMap.mapUrl | safeUrl" style="width: 100%"></div>
-
-                  
-
-
-
+                <hr>
+              </div>
+                <div class="ciudades col-md-12 col-lg-12">
+                  <ul>
+                    <li *ngFor="let cityTarget of this.publication._cityTarget" >
+                      <i class="fas fa-map-marked    "></i>
+                      {{ cityTarget.department }} - {{ cityTarget.city }}
+                    </li>
+                  </ul>
 
                 </div>
 
+
               </div>
-            </div>
-            <!-- /.card-body -->
-          </div>
+              <div class="comentarios padd5">
+                <div class="row" style="margin-bottom: 0;">
+
+                  <div  class="col-md-12 col-lg-6 contentTitleHr">
+
+                    <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                      Opiniones
+                    </h4>
+                    <hr>
+                  </div>
+
+                </div>
+                <div class="col-12 opiniones">
+
+                </div>
+
+                <div class="row">
+
+
+                  <div class="col-md-12 col-lg-6 comenta">
+                    <h5 style="margin-bottom: 15px;" class="titleSpecial6">
+                      Comenta
+                    </h5>
+                    <div *ngIf="this._userService.estaLogueado() == true" class="comentBox">
+                      <form
+                      ngNativeValidate
+                      #f="ngForm"
+                      (ngSubmit)="sendComment( f )">
+                      <div class="row">
+
+                        <div class="form-group col-md-12 col-lg-12">
+                          <!-- <label for="IncludeDesc">¿Qué incluye?</label> -->
+                          <textarea  ngModel name="IncludeDesc" class="form-control" rows="3" ></textarea>
+                        </div>
+                      </div>
+
+                      <div class="row formButtons">
+
+                        <button class="buttonCustom btn btn-success btn-flat" >
+                          Enviar
+                        </button>
+                      </div>
+
+                      </form>
+                    </div>
+                    <div *ngIf="this._userService.estaLogueado() == false" class="noLogeadoComment">
+                      <h5 style="margin-bottom: 15px; text-align: center;" class="titleSpecial6">
+                        ¿Te gustaría hacer un comentario?
+                      </h5>
+
+                      <div class="row formButtons centerCustom">
+
+                        <button class="buttonCustom btn btn-success btn-flat" (click)="goLogin()">
+                          ¡Inicia sesión!
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div class="row">
+
+                <div class="map col-md-12 col-lg-12" *ngIf="this.publication._mapUrl.mapUrl != null">
+                  <!-- <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                    Geolocalización:
+                  </h4> -->
+
+                  <div  class="boxMap"  *ngIf="this.activateMap == true">
+
+                    <div *ngIf="this.map != null" [innerHtml]="this.map | safeUrl" style="width: 100%"></div>
+
+                  </div>
+
+                </div>
+                </div>
+
+
 
     </section>
 

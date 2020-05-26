@@ -1,1 +1,146 @@
-<p>category-lists works!</p>
+<div class="categorySection">
+    <div class="menuProduct">
+      <h6>
+        Filtros
+      </h6>
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        <li class="nav-item  has-treeview menu-open">
+          <a href="#" class="categoryBase nav-link">
+
+            <p>
+              Categoría
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview" style="display: block;">
+
+            <li *ngFor="let item of this._postService.categoryPrincipal, let i = index" class="nav-item">
+              <a (click)="this._searchService.searchByCategory(item.base)" class="nav-link">
+                <p>{{ item.base }}</p>
+              </a>
+            </li>
+
+
+
+          </ul>
+        </li>
+        <li class="nav-item  has-treeview menu-open">
+          <a href="#" class="categoryBase nav-link">
+
+            <p>
+              Ubicación
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview" style="display: block;">
+
+            <li  class="nav-item">
+
+                <form
+                ngNativeValidate
+                #f="ngForm"
+
+                (ngSubmit)="this._searchService.sendSearchByUbicacion( f )"
+                class="formDataSend"
+                class="buscador form-inline">
+                    <div class="input-group input-group-sm">
+                      <input name="ubicacionSearch" class="form-control form-control-navbar" type="search" placeholder="Ciudad" aria-label="Ciudad">
+
+                    </div>
+
+                    <div class="centerCustom">
+                        <button type="submit" style="color: white" class="buttonCustom btn btn-success btn-flat">Buscar</button>
+                      </div>
+
+
+                  </form>
+
+
+            </li>
+
+
+
+          </ul>
+        </li>
+
+
+
+        <li class="nav-item  has-treeview menu-open">
+          <a href="#" class="categoryBase nav-link">
+
+            <p>
+              Relevancia
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview" style="display: block;">
+
+            <li  class="nav-item">
+              <a (click)="this._searchService.searchByPrice('calif')" class="nav-link">
+                <p>Mejor calificación</p>
+              </a>
+            </li>
+            <li  class="nav-item">
+              <a (click)="this._searchService.searchByPrice('low')" class="nav-link">
+                <p>Menor precio</p>
+              </a>
+            </li>
+            <li  class="nav-item">
+              <a (click)="this._searchService.searchByPrice('hight')" class="nav-link">
+                <p>Mayor precio</p>
+              </a>
+            </li>
+
+
+
+          </ul>
+          </li>
+
+          <li class="nav-item  has-treeview menu-open">
+            <a href="#" class="categoryBase nav-link">
+
+              <p>
+                Precio
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: block;">
+
+              <li  class="nav-item">
+
+                  <form
+                  ngNativeValidate
+                  #h="ngForm"
+
+                  (ngSubmit)="this._searchService.sendSearchByUbicacion( h )"
+
+                  class="buscador form-inline precio">
+                      <div class="input-group input-group-sm">
+                        <input name="minimo" class="form-control form-control-navbar" type="search" placeholder="Minimo" aria-label="Minimo">
+                        <input name="maximo" class="form-control form-control-navbar" type="search" placeholder="Máximo" aria-label="Máximo">
+                      </div>
+
+
+                      <div class="centerCustom">
+                          <button type="submit" style="color: white" class="buttonCustom btn btn-success btn-flat">Buscar</button>
+                        </div>
+
+
+                    </form>
+
+
+              </li>
+
+
+
+            </ul>
+          </li>
+
+
+        </ul>
+
+
+    </div>
+  </div>
+

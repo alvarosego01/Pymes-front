@@ -1,1 +1,74 @@
-<p>posts-lists works!</p>
+
+
+
+<div class="list">
+    <div class="row justify-content-between">
+      <div class="card col-md-12 col-lg-3 ">
+        <div class="card-header">
+
+          <img class="card-img-top" src="../../../assets/resourcesWeb/producto.jpg" alt="Card image">
+
+        </div>
+        <div class="card-body">
+            <span class="catego">
+                Indumentaria
+              </span>
+          <small class="date">
+            14/04/2020
+          </small>
+          <h4 class="card-title">
+            Lorem ipsum dolor sit, amet
+          </h4>
+          <div class="price">
+            <small class="noPrice">
+              $100.000
+            </small>
+            <span class="cost">
+              $80.000
+            </span>
+          </div>
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero eveniet tempore doloribus inventore asperiores ullam consectetur aperiam </p>
+
+
+        </div>
+        <div class="card-footer">
+            <div class="centerCustom">
+                <a style="color: white" class="buttonCustom btn btn-success btn-flat">Ingresar</a>
+              </div>
+
+              <div class="reactions">
+                <ul>
+                  <li>
+                    <a (click)="this.sendReaction('like')"
+                    >
+                    <!-- [ngClass]="{'active': this.reactions.myReaction == 'like'}" -->
+
+                      <i class="fas fa-thumbs-up"></i>
+                      <span class="number">
+                        0
+                        <!-- {{ this.reactions.like }} -->
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a (click)="this.sendReaction('dislike')"
+                    >
+                    <!-- [ngClass]="{'active': this.reactions.myReaction == 'dislike'}" -->
+
+                    <i class="fas fa-thumbs-down"></i>
+                    <span class="number">
+                      0
+                      <!-- {{ this.reactions.dislike }} -->
+                    </span>
+                  </a>
+                  </li>
+                </ul>
+              </div>
+
+        </div>
+
+      </div>
+
+      </div>
+
+</div>
