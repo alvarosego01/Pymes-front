@@ -186,17 +186,19 @@
                   </div>
 
 
-                  <div class="row socialShare">
-                    <a href="#" class="text-gray">
+
+
+                  <div *ngIf="( this.publication._socialNet )" class="row socialShare">
+                    <a (click)="goSocial('whatsapp')" *ngIf="( this.publication._socialNet.whatsapp ) && this.publication._socialNet.whatsapp != '' "  class="text-gray">
                       <i class="fab fa-whatsapp"></i>
                     </a>
-                    <a href="#" class="text-gray">
+                    <a (click)="goSocial('instagram')" *ngIf="( this.publication._socialNet.instagram ) && this.publication._socialNet.instagram != '' "  class="text-gray">
                       <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" class="text-gray">
+                    <a (click)="goSocial('facebook')" *ngIf="( this.publication._socialNet.facebook ) && this.publication._socialNet.facebook != '' "  class="text-gray">
                       <i class="fab fa-facebook"></i>
                     </a>
-                    <a href="#" class="text-gray">
+                    <a (click)="goSocial('web')" *ngIf="( this.publication._socialNet.web ) && this.publication._socialNet.web != '' "  class="text-gray">
                       <i class="fas fa-globe"></i>
                     </a>
                   </div>
@@ -371,15 +373,8 @@
 
 
 
-                <div *ngIf="(this._searchService.registros) && this._searchService.registros.length > 0" class="row others padd10">
+                <div class="row others padd10">
 
-                  <div  class="contentTitleHr">
-
-                    <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-                      Productos similares
-                  </h4>
-                  <!-- <hr> -->
-                </div>
 
 
                   <app-posts-lists

@@ -41,6 +41,10 @@
         margin: 0
 
 
+
+app-posts-lists
+    width: 100%
+
 .infoSide
     .dataHeader
         small
@@ -123,8 +127,10 @@
             // display: none
             @include responsivo(telefonoTable)
                 height: auto!important
+                min-height: 250px
             @include responsivo(pcMedio)
                 height: auto!important
+                min-height: 250px
     .list
         display: flex
         justify-content: center
@@ -201,6 +207,11 @@
             transition: $trans
             display: inline-block
             // animation-play-state: paused
+
+    @include responsivo(telefonoTable)
+        height: 300px
+    @include responsivo(pcMedio)
+        height: 300px
 
     &:hover
         background-color: $VerdeClar

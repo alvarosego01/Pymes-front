@@ -52,6 +52,9 @@ export class PostsListsComponent implements OnInit, OnChanges {
     //   // console.log('aaa', this._searchService.registros);
     // }
 
+
+    console.log('constructor');
+
   }
 
   ngOnChanges() {
@@ -143,7 +146,7 @@ export class PostsListsComponent implements OnInit, OnChanges {
         if( resp.data.length > 0  && resp.data[0].length > 0){
           this._searchService.registros = resp.data[0];
           this._searchService.setActualReactions();
-          //console.log(this._searchService.registros);
+          console.log('actualiza', this._searchService.registros);
         }else{
           // this._searchService.registros = [];
         }

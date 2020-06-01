@@ -1,8 +1,20 @@
 
 
 
-<div class="list">
-    <div *ngIf="(this._searchService.registros) && this._searchService.registros.length > 0" class="row listResults">
+
+
+<div class="list" *ngIf="(this._searchService.registros) && this._searchService.registros.length > 0">
+
+  <div *ngIf="(this.type) && this.type=='sugerencia' " class="contentTitleHr">
+
+    <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+      Productos similares
+  </h4>
+  <!-- <hr> -->
+</div>
+
+
+    <div  class="row listResults">
       <div  *ngFor="let item of this._searchService.registros; let i=index" class="card">
 
         <div (click)="goPublication(item._id)" *ngIf="item._files[0].type != 'PDF'" class="card-header">

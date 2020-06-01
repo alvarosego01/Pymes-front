@@ -89,6 +89,9 @@ export class InfoPostComponent implements OnInit {
       this.setPublication(id);
       this.setNewVisit(id);
       this.getComments(id);
+
+
+
     });
 
     this.setTypeVisit();
@@ -103,6 +106,57 @@ export class InfoPostComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+
+  goSocial(type){
+
+
+    // <a _ngcontent-tsf-c29="" href="https://wa.me/573187158098?text=Hola+me+gustar%C3%ADa+contactarlos"><i _ngcontent-tsf-c29="" class="fab fa-whatsapp"></i></a>
+
+    if(type == 'whatsapp' ){
+
+      if(this.publication._socialNet.whatsapp.includes("+") ){
+        var n = this.publication._socialNet.whatsapp.replace("+", "");
+
+
+        window.location.href = `https://wa.me/${n}?text=Hola+me+gustar%C3%ADa+contactarlos`;
+      }
+
+    }
+    if(type == 'instagram' ){
+
+      if(this.publication._socialNet.instagram.includes("instagram.com") ){
+
+        window.location.href =  `${this.publication._socialNet.instagram}`;
+
+      }else{
+
+      window.location.href =  `https://www.instagram.com/${this.publication._socialNet.instagram}`;
+      }
+
+    }
+    if(type == 'facebook' ){
+      // this.publication._socialNet.facebook
+
+      if(this.publication._socialNet.instagram.includes("facebook.com") ){
+
+        window.location.href =  `${this.publication._socialNet.facebook}`;
+
+      }else{
+
+      window.location.href =  `https://www.facebook.com/${this.publication._socialNet.facebook}`;
+      }
+
+
+    }
+    if(type == 'web' ){
+      // this.publication._socialNet.web
+
+      window.location.href =  `${this.publication._socialNet.web}`;
+
+    }
+
+  }
 
   canDeleteComment( comments: any ){
 
@@ -734,7 +788,7 @@ export class InfoPostComponent implements OnInit {
         this.setActualReactions();
         this.setActualRanking();
 
-        // //console.log('existe', resp.data);
+        console.log('existe', this.publication);
         this._globalConfig.spinner = false;
       } else {
         this._notifyService.Toast.fire({
