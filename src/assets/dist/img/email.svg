@@ -1,0 +1,42 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 26 16.25" style="enable-background:new 0 0 26 16.25;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#38C6A4;}
+	.st1{fill:#2D907C;}
+	.st2{fill:#F1F1F1;}
+	.st3{fill:#14152D;}
+	.st4{clip-path:url(#SVGID_2_);fill:none;stroke:#989898;stroke-miterlimit:10;}
+	.st5{clip-path:url(#SVGID_2_);}
+	.st6{clip-path:url(#SVGID_4_);fill:none;stroke:#989898;stroke-miterlimit:10;}
+	.st7{fill:#FFFFFF;}
+	.st8{fill:none;stroke:#797979;stroke-miterlimit:10;}
+	.st9{fill:#009DE2;}
+	.st10{fill:#797979;}
+	.st11{fill:#4D4D4D;}
+	.st12{fill:none;stroke:#989898;stroke-width:0.5;stroke-miterlimit:10;}
+	.st13{fill:none;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st14{fill:none;stroke:#2D907C;stroke-miterlimit:10;}
+	.st15{fill:#989898;}
+	.st16{fill:none;stroke:#989898;stroke-miterlimit:10;}
+	.st17{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+	.st18{fill-rule:evenodd;clip-rule:evenodd;fill:#2D907C;}
+	.st19{fill:none;stroke:#F1F1F1;stroke-miterlimit:10;}
+	.st20{fill-rule:evenodd;clip-rule:evenodd;fill:#38C6A4;}
+</style>
+<g id="Home">
+	<g>
+		<defs>
+			<rect id="SVGID_1_" x="128.2" y="-424.52" width="640" height="270"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_" style="overflow:visible;"/>
+		</clipPath>
+	</g>
+	<g>
+		<path class="st1" d="M13,0H0v16.25h13h13V0H13z M13,1.63h9.11L13,8.1L3.89,1.63H13z M1.63,2.09l5.54,3.74l-5.54,6.04V2.09z     M13,14.63H3.61l4.63-8.07L13,9.78l4.76-3.22l4.63,8.07H13z M24.38,11.86l-5.54-6.04l5.54-3.74V11.86z"/>
+	</g>
+</g>
+
+
+
+
+</svg>

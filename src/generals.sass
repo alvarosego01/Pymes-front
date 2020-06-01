@@ -1,0 +1,39 @@
+
+// responsivo
+$desdeT: 320px
+$hastaT: 767px
+
+$desdeM: $hastaT + 1
+$hastaM: 1000px
+
+$desdeG: $hastaM
+$hastaG: $desdeG + 500
+
+@mixin responsivo($media)
+    @if $media == telefonoTable
+        @media only screen and (min-width: $desdeT) and (max-width: $hastaT)
+            @content
+    @else if $media == pcMedio
+        @media only screen and (min-width: $desdeM) and (max-width: $hastaM)
+            @content
+    @else if $media == general
+        @media only screen and (min-width: $desdeG) and (max-width: $hastaG)
+            @content
+    @else if $media == resto
+        @media only screen and (min-width: $hastaG + 1)
+            @content
+// ------------------------
+// colors
+$verdeMasClar: #95F7E1
+$VerdeClar:#38C6A4
+$VerdeOscur:#2D907C
+$GrisClaroFond:#F1F1F1
+$GrisOscur:#35383B
+$GrisClar:#989898
+$GrisFondo2: #EEEEEE
+
+// others--------
+$trans: all 0.2s ease-in-out
+$boxShadow1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+$boxShadow2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+
