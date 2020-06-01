@@ -1,0 +1,9 @@
+X (15 /05) Nosotros
+x/ (15 /05) Perfil de usuario(pyme) - Modificación de cuenta - Eliminación de cuenta
+X/  (18 /05) Home - -Control de publicaciones(admin) - Gestión - Modificaciones - Eliminación -
+(18 /05) Panel de publicaciones(pyme) - Historial - Modificación - Eliminación
+(19 /05) Estadisticas generales(pyme) - visitas - likes - comentarios - reviews
+(20 /05) Zona Pyme - Contacto
+(21 /05) Perfil de usuario(admin) - configuraciones de gerencia - control de usuarios - gestion - modificaciones - eliminacion
+(22 /05) Incorporación de pasarela de pago - Adición de ventas en Estadisticas generales(pyme) - Adición de ventas en estadisticas generales (admin)
+(23 /05) Control de facturaciones(admin) - Listados de facturaciones(admin) - Blog

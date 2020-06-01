@@ -1,0 +1,624 @@
+
+
+<div class="contenidoProfile">
+
+
+
+        <section class="content padd10"  *ngIf="this.usuarioInfo">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12 col-lg-3">
+
+                <!-- Profile Image -->
+                <div class="animated fadeIn fast card card-primary card-outline card-tabs">
+                  <div class="card-body box-profile">
+                    <div class="text-center">
+                      <img class="profile-user-img img-fluid img-circle" [src]="this.usuarioInfo.imgProfile | imagen:'User':this.usuarioInfo._id " alt="User profile picture">
+                    </div>
+
+                    <h3 class="profile-username text-center">{{this.usuarioInfo.name}} {{this.usuarioInfo.surname}}</h3>
+
+                    <p class="text-muted text-center">{{this.roleName}}</p>
+                    <hr>
+
+                    <ul *ngIf="this.usuarioInfo.statsGeneral" class="list-group list-group-unbordered mb-3">
+                      <li class="list-group-item">
+                        <b><i class="fas fa-shopping-bag    "></i> Publicaciones</b> <a class="float-right">
+                          {{ this.usuarioInfo.statsGeneral.publicaciones }}
+                        </a>
+                      </li>
+                      <li class="list-group-item">
+                        <b><i class="fas fa-thumbs-up"></i> Likes</b> <a class="float-right">
+                          {{ this.usuarioInfo.statsGeneral.likes }}
+                        </a>
+                      </li>
+                      <li class="list-group-item">
+                        <b><i class="fas fa-comment    "></i> Comentarios</b> <a class="float-right">
+                          {{ this.usuarioInfo.statsGeneral.comment }}
+                        </a>
+                      </li>
+                      <li class="list-group-item">
+                        <b><i class="fas fa-eye    "></i> Visitas</b> <a class="float-right">
+                          {{ this.usuarioInfo.statsGeneral.visits }}
+                        </a>
+                      </li>
+                    </ul>
+
+
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <div class="card card-primary animated fadeIn fast">
+
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <strong><i class="fas fa-calendar    "></i> Usuario desde</strong>
+
+                    <p class="text-muted">
+                      {{ this.usuarioInfo.created_at }}
+                    </p>
+
+                    <hr>
+                    <strong><i class="fas fa-check    "></i> Cuenta verificada</strong>
+
+
+                    <hr>
+
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+
+
+              </div>
+              <!-- /.col -->
+              <div class="col-md-12 col-lg-9">
+                <div class="card animated fadeIn fast">
+                  <div class="card-header p-2">
+                    <ul class="nav nav-pills">
+
+                      <li *ngIf="this.usuarioInfo.role == 'ADMIN_ROLE'" class="nav-item"  >
+                        <a  class="nav-link buttonCustom" href="#AdminSettings" data-toggle="tab" [ngClass]="{'active': this.usuarioInfo.role == 'ADMIN_ROLE'}" >Información Administrador</a>
+                      </li>
+
+                      <li *ngIf="this.usuarioInfo.role != 'ADMIN_ROLE'" class="nav-item"  >
+                        <a  class="nav-link buttonCustom" href="#settings" data-toggle="tab" [ngClass]="{'active': this.usuarioInfo.role != 'ADMIN_ROLE'}" >Información de usuario</a>
+                      </li>
+
+                      <li *ngIf="this.usuarioInfo.role == 'EMPRESA_ROLE'" class="nav-item"  >
+                        <a  class="nav-link buttonCustom" href="#infoPyme" data-toggle="tab"  >Información de empresa</a>
+                      </li>
+
+
+
+                    </ul>
+                  </div><!-- /.card-header -->
+
+                  <div class="card-body">
+                    <div class="tab-content">
+
+                      <div [ngClass]="{'active': this.usuarioInfo.role == 'ADMIN_ROLE'}" *ngIf="this.usuarioInfo.role == 'ADMIN_ROLE'" class="tab-pane" id="AdminSettings">
+
+                        <div
+                        class="formDataSend" >
+
+                        <h4 *ngIf="this.usuarioInfo.role == 'CLENTE_ROLE'" style="margin-bottom: 15px;" class="titleSpecial4">
+                                Datos personales
+                        </h4>
+                        <h4 *ngIf="this.usuarioInfo.role == 'EMPRESA_ROLE' " style="margin-bottom: 15px;" class="titleSpecial4">
+                                Datos personales del contacto encargado
+                        </h4>
+                              <hr>
+                                  <div class="row">
+                                 <div class="form-group clearfix col-md-12 col-lg-6">
+                                  <label for="Name"><i class="fa fa-user" aria-hidden="true"></i>  Nombres</label>
+                                <div class="input-group">
+
+
+                                <p class="text-muted">
+
+                                    {{this.name}}
+                                </p>
+
+                              </div>
+                              </div>
+
+                              <div class="form-group clearfix col-md-12 col-lg-6">
+                                <label for="Surname"><i class="fa fa-user" aria-hidden="true"></i>  Apellidos</label>
+                              <div class="input-group">
+
+                              <p class="text-muted">
+
+                                  {{this.surname}}
+                              </p>
+
+                            </div>
+                            </div>
+
+
+                               <div class="form-group clearfix col-md-12 col-lg-6">
+                                <label for="Age"><i class="fa fa-user" aria-hidden="true"></i>  Edad</label>
+                              <div class="input-group">
+
+                                <p class="text-muted">
+
+                                    {{this.year}}
+                                </p>
+
+                              </div>
+                              </div>
+
+                              <div class="form-group clearfix col-md-12 col-lg-6">
+                                <label for="Gender"><i class="fa fa-venus-mars" aria-hidden="true"></i>  Género</label>
+                              <div class="input-group" >
+
+
+                                  <p class="text-muted">
+
+                                    {{this.gender}}
+                                  </p>
+
+
+
+                              </div>
+                              </div>
+
+
+                              </div>
+
+
+
+
+                              <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                                Información de contacto
+                              </h4>
+                              <hr>
+
+                                    <div class="row">
+                                <div class="form-group clearfix col-md-12 col-lg-6">
+                                  <label for="Phone"><i class="fa fa-phone" aria-hidden="true"></i> Teléfono</label>
+                                <div class="input-group">
+
+                                    <p class="text-muted">
+
+                                        {{this.phone}}
+                                    </p>
+
+                                  </div>
+                              </div>
+
+                              <div class="form-group clearfix col-md-12 col-lg-6">
+                                <label for="celPhone"><i class="fas fa-mobile-alt"aria-hidden="true"></i>  Teléfono celular</label>
+                              <div class="input-group">
+
+                                  <p class="text-muted">
+
+                                      {{this.celPhone}}
+                                  </p>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group clearfix col-md-12 col-lg-6">
+                              <label for="Department"><i class="fa fa-home" aria-hidden="true"></i> Departamento</label>
+                            <div class="input-group" >
+
+                                  <p class="text-muted">
+
+                                    {{this.department}}
+                                  </p>
+
+
+
+                              </div>
+                              </div>
+
+                               <div class="form-group clearfix col-md-12 col-lg-6">
+                                <label for="City"><i class="fa fa-home" aria-hidden="true"></i> Ciudad</label>
+                              <div class="input-group" >
+
+                                  <p class="text-muted">
+
+                                    {{this.city}}
+                                  </p>
+
+
+
+                              </div>
+                              </div>
+
+
+                              </div>
+
+
+
+
+
+
+                            </div>
+
+
+                      </div>
+
+
+                       <div [ngClass]="{'active': this.usuarioInfo.role != 'ADMIN_ROLE'}" *ngIf="this.usuarioInfo.role != 'ADMIN_ROLE'" class="tab-pane" id="settings">
+                     <div
+                class="formDataSend" >
+
+                <h4 *ngIf="this.usuarioInfo.role == 'CLIENTE_ROLE'" style="margin-bottom: 15px;" class="titleSpecial4">
+                        Datos personales
+                </h4>
+                <h4 *ngIf="this.usuarioInfo.role == 'EMPRESA_ROLE'" style="margin-bottom: 15px;" class="titleSpecial4">
+                        Datos personales del contacto encargado
+                </h4>
+
+                      <hr>
+                          <div class="row">
+                         <div class="form-group clearfix col-md-12 col-lg-6">
+                          <label for="Name"><i class="fa fa-user" aria-hidden="true"></i>  Nombres</label>
+                        <div class="input-group">
+
+                        <p class="text-muted">
+
+                            {{this.name}}
+                        </p>
+
+                      </div>
+                      </div>
+
+                      <div class="form-group clearfix col-md-12 col-lg-6">
+                        <label for="Surname"><i class="fa fa-user" aria-hidden="true"></i> Apellidos</label>
+                      <div class="input-group">
+
+                      <p class="text-muted">
+
+                          {{this.surname}}
+                      </p>
+
+                    </div>
+                    </div>
+
+
+                       <div class="form-group clearfix col-md-12 col-lg-6">
+                        <label for="Age"><i class="fa fa-user" aria-hidden="true"></i> Edad</label>
+                      <div class="input-group">
+
+                        <p class="text-muted">
+
+                            {{this.year}}
+                        </p>
+
+                      </div>
+                      </div>
+
+                      <div class="form-group clearfix col-md-12 col-lg-6">
+                        <label for="Gender"><i class="fa fa-venus-mars"  aria-hidden="true"></i> Género</label>
+                      <div class="input-group" >
+
+                          <p class="text-muted">
+
+                            {{this.gender}}
+                          </p>
+
+
+
+                      </div>
+                      </div>
+
+
+                      </div>
+
+
+
+                      <div  *ngIf="this.usuarioInfo.role == 'EMPRESA_ROLE'"  class="row">
+
+                        <div class="form-group clearfix col-md-12 col-lg-12">
+                          <label for="positionCompany"><i class="fa fa-user" aria-hidden="true"></i> Cargo actual</label>
+                        <div class="input-group">
+
+                          <p class="text-muted">
+
+                              {{this.ngPositionCompany}}
+                          </p>
+
+                        </div>
+                      </div>
+                      </div>
+
+
+                      <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                        Actividad económica
+                      </h4>
+                      <hr>
+                      <div class="row">
+                        <!-- <div class="form-group clearfix col-md-12 col-lg-12">
+
+                          <div class="form-group">
+                            <label>Sector económico</label>
+
+                            <p class="text-muted">
+
+                             <span *ngFor="let item of this.estadosActividad">
+                              {{ item }}
+                             </span>
+                            </p>
+
+                          </div>
+                        </div> -->
+                        <div class="col-md-12 col-lg-12">
+                          <div class="row">
+
+
+                              <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Producción') == true">
+                                <label for="Identification"><i class="fas fa-users"></i> Produce</label>
+                                <div class="input-group">
+
+                                    <p class="text-muted">
+
+                                       {{this.ProduccionActivity}}
+                                    </p>
+
+                                  </div>
+                                </div>
+                              <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Comercialización') == true">
+                                <label for="Identification"><i class="fas fa-users"></i> Comercializa</label>
+                                <div class="input-group">
+
+                                    <p class="text-muted">
+
+                                       {{this.ComercializacionActivity}}
+                                    </p>
+
+                                  </div>
+                                </div>
+                              <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Servicios') == true">
+                                <label for="Identification"><i class="fas fa-users"></i> Servicio</label>
+                                <div class="input-group">
+
+                                    <p class="text-muted">
+
+                                       {{this.ServiciosActivity}}
+                                    </p>
+
+                                  </div>
+                              </div>
+                              <div class="form-group col-12 " *ngIf="this.estadosActividad.includes('Otro') == true">
+                                <label for="Identification"><i class="fas fa-users"></i> Otras actividades</label>
+                              <div class="input-group">
+
+                                  <p class="text-muted">
+
+                                     {{this.OtroActivity}}
+                                  </p>
+
+                                </div>
+                            </div>
+
+
+                            </div>
+
+                         </div>
+
+
+                      </div>
+
+                      <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                        Información de contacto
+                      </h4>
+                      <hr>
+
+                            <div class="row">
+                        <div class="form-group clearfix col-md-12 col-lg-6">
+                          <label for="Phone"><i class="fa fa-phone" aria-hidden="true"></i> Teléfono</label>
+                        <div class="input-group">
+
+                            <p class="text-muted">
+
+                                {{this.phone}}
+                            </p>
+
+                          </div>
+                      </div>
+
+                      <div class="form-group clearfix col-md-12 col-lg-6">
+                        <label for="celPhone"><i class="fas fa-mobile-alt"></i> Teléfono celular</label>
+                      <div class="input-group">
+
+                          <p class="text-muted">
+
+                              {{this.celPhone}}
+                          </p>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group clearfix col-md-12 col-lg-6">
+                      <label for="Department"><i class="fa fa-home" aria-hidden="true"></i> Departamento</label>
+                    <div class="input-group" >
+
+
+                          <p class="text-muted">
+
+                            {{this.department}}
+                          </p>
+
+
+                      </div>
+                      </div>
+
+                       <div class="form-group clearfix col-md-12 col-lg-6">
+                        <label for="City"><i class="fa fa-home" aria-hidden="true"></i> Ciudad</label>
+                      <div class="input-group" >
+
+
+                          <p class="text-muted">
+
+                            {{this.city}}
+                          </p>
+
+                      </div>
+                      </div>
+
+
+                      </div>
+
+
+                      <div *ngIf="this.coordsMap.mapUrl" class="titleOpc">
+
+                        <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                          Geolocalización
+                        </h4>
+
+
+
+
+                        </div>
+                        <div *ngIf="this.coordsMap.mapUrl" class="row">
+
+                          <div  class="col-md-12 col-lg-12"  *ngIf="this.activateMap == true">
+
+            <div [innerHtml]="this.coordsMap.mapUrl | safeUrl" style="width: 100%"></div>
+
+
+
+
+                          </div>
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+
+
+
+                      </div>
+                      <!-- /.tab-pane -->
+
+                      <div  *ngIf="this.usuarioInfo.role == 'EMPRESA_ROLE'" class="tab-pane" id="infoPyme">
+                        <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                          Logo de la empresa
+                        </h4>
+                        <hr>
+                        <div class="row">
+                          <div class="card-body box-profile">
+                            <div class="text-center">
+                              <img class="logoEmp" [src]="this.usuarioInfo._dataPyme.logo | imagen:'User':this.usuarioInfo._id " alt="User profile picture">
+                            </div>
+
+                        </div>
+                        </div>
+                        <div class="row">
+                          <div class="fileConfig col-12">
+                          <div
+
+
+
+                          class="formDataSend" >
+
+
+                                <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                                  Información de la empresa
+                                </h4>
+                                <hr>
+
+                                    <div class="row">
+                                         <div class="form-group clearfix col-md-12 col-lg-6">
+                                          <label for="nameCompany"><i class="fa fa-industry" aria-hidden="true"></i> Nombre comercial</label>
+                                        <div class="input-group">
+
+                                        <p class="text-muted">
+
+                                           {{this.ngnameCompany}}
+                                        </p>
+
+                                      </div>
+                                      </div>
+
+                                       <div class="form-group clearfix col-md-12 col-lg-6">
+                                        <label for="NIT"><i class="fa fa-address-card" aria-hidden="true"></i> NIT</label>
+                                      <div class="input-group">
+
+                                        <p class="text-muted">
+
+                                           {{this.ngNIT}}
+                                        </p>
+
+                                      </div>
+                                      </div>
+                                      </div>
+
+                                      <div class="row">
+                                       <div class="form-group clearfix col-md-12 col-lg-6">
+                                        <label for="Reasons"><i class="fa fa-briefcase" aria-hidden="true"></i> Razón social</label>
+                                      <div class="input-group">
+
+                                        <p class="text-muted">
+
+                                           {{this.ngReasons}}
+                                        </p>
+
+                                      </div>
+
+
+                                      </div>
+
+                                         <div class="form-group clearfix col-md-12 col-lg-6">
+                                        <label for="directionCompany"><i class="fas fa-map-marker-alt"></i> Dirección de empresa</label>
+                                      <div class="input-group">
+
+                                        <p class="text-muted">
+
+                                           {{this.ngdirectionCompany}}
+                                        </p>
+
+                                      </div>
+                                      </div>
+                                      </div>
+
+                                      <div class="row" *ngIf="this.companyPhonee" >
+                                        <div class="col-md-12 col-lg-12">
+
+                                          <label for="companyPhone"><i class="fa fa-phone" aria-hidden="true"></i> Teléfono(s) de la empresa</label>
+                                        <div class="input-group" *ngFor="let item of this.companyPhonee; let i = index">
+
+                                            <p class="text-muted">
+                                              {{ item.phonesCompany }}
+                                            </p>
+
+                                          </div>
+                                      </div>
+
+
+
+                                      </div>
+
+
+
+                                    </div>
+                        </div>
+                        </div>
+
+                        </div>
+
+
+                    </div>
+                    <!-- /.tab-content -->
+                  </div><!-- /.card-body -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </section>
+
+
+
+      </div>
