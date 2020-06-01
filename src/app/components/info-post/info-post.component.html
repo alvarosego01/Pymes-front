@@ -311,7 +311,9 @@
 
 
                   <div class="col-md-12 col-lg-6 comenta">
-                    <div *ngIf="this._userService.estaLogueado() == true" class="comentBox">
+
+                    <!-- <div *ngIf="this._userService.estaLogueado() == true" class="comentBox"> -->
+                    <div  class="comentBox">
                       <h5 style="margin-bottom: 15px;" class="titleSpecial6">
                         Comenta
                       </h5>
@@ -337,7 +339,7 @@
 
                       </form>
                     </div>
-                    <div *ngIf="this._userService.estaLogueado() == false" class="noLogeadoComment">
+                    <!-- <div *ngIf="this._userService.estaLogueado() == false" class="noLogeadoComment">
                       <h5 style="margin-bottom: 15px; text-align: center;" class="titleSpecial6">
                         ¿Te gustaría hacer un comentario?
                       </h5>
@@ -348,7 +350,7 @@
                           ¡Inicia sesión!
                         </button>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
 

@@ -167,17 +167,17 @@ export class PostsListsComponent implements OnInit, OnChanges {
 
     // //console.log(registro, 'registor');
 
-    if(this._userService.estaLogueado() == false){
-      this._notifyService.Toast.fire({
-        title: 'Debes iniciar sesión o registrarte',
-        text: 'Para poder reaccionar',
-        icon: "error",
-      });
+    // if(this._userService.estaLogueado() == false){
+    //   this._notifyService.Toast.fire({
+    //     title: 'Debes iniciar sesión o registrarte',
+    //     text: 'Para poder reaccionar',
+    //     icon: "error",
+    //   });
 
-      return;
-    }
+    //   return;
+    // }
 
-    if (registro.myReaction != null) {
+    if ( (this._userService.estaLogueado() == true) && registro.myReaction != null) {
       type = null;
       registro.myReaction = null;
     }

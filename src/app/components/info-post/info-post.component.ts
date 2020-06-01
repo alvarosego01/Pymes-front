@@ -293,17 +293,17 @@ export class InfoPostComponent implements OnInit {
 
       // //console.log(registro, 'registor');
 
-      if(this._userService.estaLogueado() == false){
-        this._notifyService.Toast.fire({
-          title: 'Debes iniciar sesión o registrarte',
-          text: 'Para poder reaccionar',
-          icon: "error",
-        });
+      // if(this._userService.estaLogueado() == false){
+      //   this._notifyService.Toast.fire({
+      //     title: 'Debes iniciar sesión o registrarte',
+      //     text: 'Para poder reaccionar',
+      //     icon: "error",
+      //   });
 
-        return;
-      }
+      //   return;
+      // }
 
-      if (registro.myReaction != null) {
+      if ( this._userService.estaLogueado() == true && registro.myReaction != null) {
         type = null;
         registro.myReaction = null;
       }
@@ -464,17 +464,17 @@ export class InfoPostComponent implements OnInit {
 
   sendReaction(type: string ) {
 
-    if(this._userService.estaLogueado() == false){
-      this._notifyService.Toast.fire({
-        title: 'Debes iniciar sesión o registrarte',
-        text: 'Para poder reaccionar',
-        icon: "error",
-      });
+    // if(this._userService.estaLogueado() == false){
+    //   this._notifyService.Toast.fire({
+    //     title: 'Debes iniciar sesión o registrarte',
+    //     text: 'Para poder reaccionar',
+    //     icon: "error",
+    //   });
 
-      return;
-    }
+    //   return;
+    // }
 
-    if (this.reactions.myReaction != null) {
+    if ( this._userService.estaLogueado()== true && this.reactions.myReaction != null) {
       type = null;
       this.reactions.myReaction = null;
     }
@@ -627,22 +627,28 @@ export class InfoPostComponent implements OnInit {
       });
       return;
     }
-    if( this._userService.estaLogueado() == false ){
-      this._notifyService.Toast.fire({
-        title: 'Debes iniciar sesión para poder comentar',
-        // text: '¡Gracias por unirte a Mercado Pyme!',
-        icon: "error",
-      });
-      return;
-    }
+    // if( this._userService.estaLogueado() == false ){
+    //   this._notifyService.Toast.fire({
+    //     title: 'Debes iniciar sesión para poder comentar',
+    //     // text: '¡Gracias por unirte a Mercado Pyme!',
+    //     icon: "error",
+    //   });
+    //   return;
+    // }
 
     let userName = '';
-  if(this._userService.roleName === 'Empresa' ){
+
+  if(this._userService.estaLogueado() == true){
+
+    if(this._userService.roleName === 'Empresa' ){
     userName = this._userService.usuario._dataPyme.nameCompany;
   }else{
     userName = `${this._userService.usuario.name} ${this._userService.usuario.surname}`;
 
   }
+}else{
+  userName = 'Visitante';
+}
 
 
   let l = {

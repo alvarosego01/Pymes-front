@@ -166,7 +166,9 @@ export class PostsService {
   // (registro.index, this.publication._id , type
   sendReactionCommentPOST(index, idPublic, type){
 
-    let url = `${_SERVICIOS}/post/comments/reactions/${idPublic}/${index}?t=${this._usersService.token}`;
+    let url = `${_SERVICIOS}/post/comments/reactions/${idPublic}/${index}`;
+
+    url = (this._usersService.estaLogueado() == true)? `${url}?t=${this._usersService.token}`: url;
 
     //console.log(url);
 
@@ -216,7 +218,14 @@ export class PostsService {
 
   createCommentPOST(idPublication, data){
     // /post/comments
-    let url = `${_SERVICIOS}/post/comments/${idPublication}?t=${this._usersService.token}`;
+    let url = `${_SERVICIOS}/post/comments/${idPublication}`;
+
+
+    // let url = `${_SERVICIOS}/post/comments/reactions/${idPublic}/${index}`;
+
+    url = (this._usersService.estaLogueado() == true)? `${url}?t=${this._usersService.token}`: url;
+
+
     ////////console.log(data, "llega data notif");
     return this.http.post(url, data).pipe(
       map((resp: any) => {
@@ -343,7 +352,11 @@ export class PostsService {
   sendReactionPOST(idPublic, type){
     // http://localhost:5160/post/reaction
 
-    let url = `${_SERVICIOS}/post/reaction/${idPublic}?t=${this._usersService.token}`;
+    let url = `${_SERVICIOS}/post/reaction/${idPublic}`;
+
+    // let url = `${_SERVICIOS}/post/comments/reactions/${idPublic}/${index}`;
+
+    url = (this._usersService.estaLogueado() == true)? `${url}?t=${this._usersService.token}`: url;
 
     let reaction = {
       r: type
