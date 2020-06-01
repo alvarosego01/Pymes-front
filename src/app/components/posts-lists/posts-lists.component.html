@@ -2,62 +2,74 @@
 
 
 <div class="list">
-    <div class="row justify-content-between">
-      <div class="card col-md-12 col-lg-3 ">
-        <div class="card-header">
+    <div *ngIf="(this._searchService.registros) && this._searchService.registros.length > 0" class="row listResults">
+      <div  *ngFor="let item of this._searchService.registros; let i=index" class="card">
 
-          <img class="card-img-top" src="../../../assets/resourcesWeb/producto.jpg" alt="Card image">
+        <div (click)="goPublication(item._id)" *ngIf="item._files[0].type != 'PDF'" class="card-header">
+          <img class="card-img-top" [src]="item._files[0].file | imagen:'Post':item._id " alt="Card image">
+        </div>
+        <div (click)="goPublication(item._id)" *ngIf="item._files[0].type == 'PDF'" class="card-header typePDF">
+
+          <div class="iconoDownload">
+            <a  [routerLink]="['/publication/infoPost', item._id ]" class="hiperButtonWhite">
+              <i class="fas fa-download    "></i>
+              Descargar catálogo
+            </a>
+          </div>
 
         </div>
+
         <div class="card-body">
             <span class="catego">
-                Indumentaria
+                {{ item._category.principal  }}
               </span>
           <small class="date">
-            14/04/2020
+            {{ item.created_at }}
           </small>
           <h4 class="card-title">
-            Lorem ipsum dolor sit, amet
+            {{ item.title }}
           </h4>
           <div class="price">
             <small class="noPrice">
               $100.000
             </small>
             <span class="cost">
-              $80.000
+              ${{ item._rangoPrize.min }} - ${{ item._rangoPrize.max }}
             </span>
           </div>
-          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero eveniet tempore doloribus inventore asperiores ullam consectetur aperiam </p>
+          <p class="card-text">
+            {{ item.content.slice(0,215) + '...' }}
+          </p>
 
 
         </div>
         <div class="card-footer">
             <div class="centerCustom">
-                <a style="color: white" class="buttonCustom btn btn-success btn-flat">Ingresar</a>
+                <a [routerLink]="['/publication/infoPost', item._id ]" style="color: white" class="buttonCustom btn btn-success btn-flat">Ingresar</a>
               </div>
 
               <div class="reactions">
                 <ul>
                   <li>
-                    <a (click)="this.sendReaction('like')"
+                    <a [ngClass]="{'active': item.myReaction == 'like'}" (click)="this.sendReaction(item ,'like')"
                     >
                     <!-- [ngClass]="{'active': this.reactions.myReaction == 'like'}" -->
 
                       <i class="fas fa-thumbs-up"></i>
-                      <span class="number">
-                        0
+                      <span   class="number">
+                        {{ item.like }}
                         <!-- {{ this.reactions.like }} -->
                       </span>
                     </a>
                   </li>
                   <li>
-                    <a (click)="this.sendReaction('dislike')"
+                    <a [ngClass]="{'active': item.myReaction == 'dislike'}" (click)="this.sendReaction(item ,'dislike')"
                     >
                     <!-- [ngClass]="{'active': this.reactions.myReaction == 'dislike'}" -->
 
                     <i class="fas fa-thumbs-down"></i>
-                    <span class="number">
-                      0
+                    <span  class="number">
+                      {{ item.dislike }}
                       <!-- {{ this.reactions.dislike }} -->
                     </span>
                   </a>
@@ -69,6 +81,12 @@
 
       </div>
 
+      </div>
+
+      <div *ngIf=" (this._searchService.registros) && this._searchService.registros.length == 0" class="row listResults">
+        <h2 class="titleSpecial6" style="text-align: center; width: 100%; display: block">
+          Sin resultados
+        </h2>
       </div>
 
 </div>

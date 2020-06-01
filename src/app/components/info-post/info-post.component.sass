@@ -5,7 +5,7 @@
 
 
 
-.content
+.contentGeneral
     .dataHeader
         display: flex
         flex-direction: column
@@ -35,8 +35,9 @@
         // padding-bottom: 50px
     .comentarios
         background-color: $fondoGrisDesign
-        // padding-top: 50px
+        padding-top: 50px
         padding-bottom: 50px
+        // padding: 50px 0
         margin: 0
 
 
@@ -91,7 +92,9 @@
                     width: 25px
                     height: 25px
 
-    .star
+    .star.row
+        width: max-content
+        display: block
         ul
             display: flex
             flex-direction: row
@@ -175,7 +178,8 @@
                 textarea
                     background-color: transparent!important
                     border: 1px solid $grisTitulo
-
+.others
+    background-color: $fondoGrisDesign
 .map
     padding: 0
 
@@ -210,7 +214,67 @@
                 // animation-play-state: running!important
 
 
+// .row
+    // margin-bottom: 0!important
 
+
+
+.comentarios
+    padding-top: 15px
+    padding-bottom: 25px
+    .opiniones
+        .ccomment
+            margin-bottom: 15px
+            border-bottom: 1px solid rgba(0,0,0,0.25)
+            .hd
+                display: flex
+                flex-direction: row
+                img
+                    margin-right: 5px
+                    margin: auto 0
+                    display: block
+                p
+                    margin-bottom: 0
+                    padding-left: 15px
+                    font-size: 14px
+                    display: block
+                    width: 100%
+                    span
+                        color: $GrisClar
+            .msj
+                padding: 15px 0
+                p
+                    display: block
+                    font-size: 14px
+                    margin-bottom: 0
+                    color: $GrisClar
+            .reactions
+                display: flex
+                flex-direction: row
+                justify-content: space-between
+                .op
+                .rct
+                    margin-left: auto
+                    ul
+                        display: flex
+                        flex-direction: row
+                        list-style: none
+                        padding: 0
+                        li
+                            margin-right: 10px
+                            a
+                                font-size: 18px
+                                color: black
+                            a.active
+                                color: $VerdeOscur
+
+.others
+    padding: 75px 0
+    background-color: $GrisFondo2
+    margin-bottom: 0
+    h4
+        text-align: center
+        margin-bottom: 25px!important
 // .animatedhover {
 //   ...
 //   animation-play-state: paused;

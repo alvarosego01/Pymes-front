@@ -28,6 +28,12 @@ import { VerifyService } from './verify.service';
   providedIn: "root",
 })
 export class PostsService {
+
+
+  PDFFILE: string = null;
+  idUserComponent: string = null; // = "this.publication.user._id";
+  notComponent: string = null; // = "this.publication._id
+
   categoryPrincipal = [
     {
       base: "Accesorios",
@@ -148,8 +154,189 @@ export class PostsService {
   ) // public notificacion = new EventEmitter<any>();
   {}
 
+  // '/reactions/:id/:p',mdAutentication.verificaToken,(req,res,next)=>
+  // {
+  //   /////////////////////////////////////////////////////////////////
+  //   likes.idUser = req.usuario._id; // id de quien le dio like/dislike
+  //   likes.reaction = req.body.r; // la reaccion
 
- 
+  //   let index = req.params.p;
+  //   let id = req.params.id;
+
+  // (registro.index, this.publication._id , type
+  sendReactionCommentPOST(index, idPublic, type){
+
+    let url = `${_SERVICIOS}/post/comments/reactions/${idPublic}/${index}?t=${this._usersService.token}`;
+
+    //console.log(url);
+
+    let reaction = {
+      r: type
+    }
+
+    return this.http.post(url, reaction).pipe(
+      map((resp: any) => {
+
+        return resp;
+      }),
+      catchError((err) => {
+
+        return throwError(err);
+      })
+    );
+
+
+  }
+
+  getUserPublicationGET(idUser ,limites){
+
+    // publicacionesUser/5ec5cb9121f1fc03d8067b34
+
+    let url = `${_SERVICIOS}/post/publicacionesUser/${idUser}`;
+    ////////console.log(data, "llega data notif");
+    return this.http.post(url,  limites).pipe(
+      map((resp: any) => {
+        ////////console.log("respuesta notificacion", resp);
+        // alert('Usuario registrado');
+
+        return resp;
+      }),
+      catchError((err) => {
+        ////////console.log("respuesta notificacion", err);
+        // alert('Error en al registrar');
+        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+        return throwError(err);
+      })
+    );
+
+
+  }
+
+
+
+  createCommentPOST(idPublication, data){
+    // /post/comments
+    let url = `${_SERVICIOS}/post/comments/${idPublication}?t=${this._usersService.token}`;
+    ////////console.log(data, "llega data notif");
+    return this.http.post(url, data).pipe(
+      map((resp: any) => {
+        ////////console.log("respuesta notificacion", resp);
+        // alert('Usuario registrado');
+
+        return resp;
+      }),
+      catchError((err) => {
+        ////////console.log("respuesta notificacion", err);
+        // alert('Error en al registrar');
+        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+        return throwError(err);
+      })
+    );
+
+
+  }
+
+  deleteCommentDELETE( ideComment, publicationId ){
+
+    let url = `${_SERVICIOS}/post/comments/${publicationId}/${ideComment}?t=${this._usersService.token}`;
+    ////////console.log(data, "llega data notif");
+
+    //console.log('url', url);
+    return this.http.delete(url).pipe(
+      map((resp: any) => {
+        ////////console.log("respuesta notificacion", resp);
+        // alert('Usuario registrado');
+
+        return resp;
+      }),
+      catchError((err) => {
+        ////////console.log("respuesta notificacion", err);
+        // alert('Error en al registrar');
+        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+        return throwError(err);
+      })
+    );
+
+  }
+
+  getCommentsGET(idUser){
+
+    let url = `${_SERVICIOS}/post/comments/${idUser}`;
+    ////////console.log(data, "llega data notif");
+    return this.http.get(url).pipe(
+      map((resp: any) => {
+        ////////console.log("respuesta notificacion", resp);
+        // alert('Usuario registrado');
+
+        return resp;
+      }),
+      catchError((err) => {
+        ////////console.log("respuesta notificacion", err);
+        // alert('Error en al registrar');
+        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+        return throwError(err);
+      })
+    );
+
+
+  }
+  getStatsGeneralGET(idUser){
+
+    let url = `${_SERVICIOS}/post/stats/${idUser}`;
+    ////////console.log(data, "llega data notif");
+    return this.http.get(url).pipe(
+      map((resp: any) => {
+        ////////console.log("respuesta notificacion", resp);
+        // alert('Usuario registrado');
+
+        return resp;
+      }),
+      catchError((err) => {
+        ////////console.log("respuesta notificacion", err);
+        // alert('Error en al registrar');
+        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+        return throwError(err);
+      })
+    );
+
+
+  }
+
+
+  setNewVisitPUT(id){
+    // /post/view/5ed1087cd1baa3076cf32edd
+    let url = `${_SERVICIOS}/post/view/`;
+
+    //console.log('url', url);
+    // //console.log('lo que se manda', dataCompany);
+
+    let l  ={
+      id: id
+    }
+       return this.http.put( url, l ).pipe(
+         map((resp: any) => {
+           ////////console.log("respuesta", resp);
+           // alert("Usuario registrado");
+           // swal('Perro registrado', '' , 'success');
+           let n = new _NotifyModel(
+             "nAccountCreatedNoVerify",
+             null,
+             resp.data._id
+           );
+           // this._notifyService.sendNotifyEmailPOST(n).subscribe((resp) => {
+      //  //console.log('funciona visita', resp);
+            return resp;
+         }),
+         catchError((err) => {
+
+          // //console.log('error visita', err);
+           return throwError(err);
+         })
+       );
+
+  }
+
+
   // .......................................................
 
 
@@ -178,16 +365,16 @@ export class PostsService {
   setActualRankingGET(idPublic){
 
     let url = `${_SERVICIOS}/post/ranking/stars/${idPublic}`;
-    //////console.log(data, "llega data notif");
+    ////////console.log(data, "llega data notif");
     return this.http.get(url).pipe(
       map((resp: any) => {
-        //////console.log("respuesta notificacion", resp);
+        ////////console.log("respuesta notificacion", resp);
         // alert('Usuario registrado');
 
         return resp;
       }),
       catchError((err) => {
-        //////console.log("respuesta notificacion", err);
+        ////////console.log("respuesta notificacion", err);
         // alert('Error en al registrar');
         // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);
@@ -206,6 +393,9 @@ export class PostsService {
       points: points
     }
 
+    console.log(url);
+    // return;
+
     return this.http.post(url, reaction).pipe(
       map((resp: any) => {
 
@@ -223,16 +413,16 @@ export class PostsService {
   setActualReactionsGET(idPublication){
 
     let url = `${_SERVICIOS}/post/reaction/${idPublication}`;
-    //////console.log(data, "llega data notif");
+    ////////console.log(data, "llega data notif");
     return this.http.get(url).pipe(
       map((resp: any) => {
-        //////console.log("respuesta notificacion", resp);
+        ////////console.log("respuesta notificacion", resp);
         // alert('Usuario registrado');
 
         return resp;
       }),
       catchError((err) => {
-        //////console.log("respuesta notificacion", err);
+        ////////console.log("respuesta notificacion", err);
         // alert('Error en al registrar');
         // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);
@@ -249,7 +439,7 @@ export class PostsService {
 
     return this.http.delete( url ).pipe(
       map((resp: any) => {
-        //////console.log("respuesta", resp);
+        ////////console.log("respuesta", resp);
         // alert("Usuario registrado");
         // swal('Perro registrado', '' , 'success');
         // let n = new _NotifyModel(
@@ -265,7 +455,7 @@ export class PostsService {
         // this.guardarStorage( this.usuario._id , this.token, resp['data'])
       }),
       catchError((err) => {
-        console.log( 'el error', err);
+        //console.log( 'el error', err);
 
 
         return throwError(err);
@@ -276,16 +466,16 @@ export class PostsService {
   getSinglePostGET(idPublication){
 
     let url = `${_SERVICIOS}/post/publicacion/${idPublication}`;
-    //////console.log(data, "llega data notif");
+    ////////console.log(data, "llega data notif");
     return this.http.get(url).pipe(
       map((resp: any) => {
-        //////console.log("respuesta notificacion", resp);
+        ////////console.log("respuesta notificacion", resp);
         // alert('Usuario registrado');
 
         return resp;
       }),
       catchError((err) => {
-        //////console.log("respuesta notificacion", err);
+        ////////console.log("respuesta notificacion", err);
         // alert('Error en al registrar');
         // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);
@@ -297,16 +487,16 @@ export class PostsService {
   getAllPublicationsGET() {
     // return;
     let url = _SERVICIOS + "/post";
-    //////console.log(data, "llega data notif");
+    ////////console.log(data, "llega data notif");
     return this.http.get(url).pipe(
       map((resp: any) => {
-        //////console.log("respuesta notificacion", resp);
+        ////////console.log("respuesta notificacion", resp);
         // alert('Usuario registrado');
 
         return resp;
       }),
       catchError((err) => {
-        //////console.log("respuesta notificacion", err);
+        ////////console.log("respuesta notificacion", err);
         // alert('Error en al registrar');
         // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);
@@ -320,7 +510,7 @@ export class PostsService {
     // una vez logeado hace falta grabar la sesión en el local storage designado.
     return this.http.get(url).pipe(
       map((resp: any) => {
-        // //////console.log('respuesta', resp);
+        // ////////console.log('respuesta', resp);
 
         return resp;
       }),
@@ -332,8 +522,8 @@ export class PostsService {
   }
 
   createPublication(post: any, archivo: any) {
-    // ////console.log(archivo., 'coño pana');
-    // ////console.log(post.title, 'coño pana');
+    // //////console.log(archivo., 'coño pana');
+    // //////console.log(post.title, 'coño pana');
 
     return new Promise((resolve, reject) => {
       let formData = new FormData();
@@ -365,7 +555,7 @@ export class PostsService {
 
       // formData.append("img", archivo, archivo.name);
       for (var i = 0; i < archivo.length; ++i) {
-        ////console.log(archivo[i].name);
+        //////console.log(archivo[i].name);
         formData.append("files[]", archivo[i], archivo[i].name);
       }
 
@@ -374,16 +564,16 @@ export class PostsService {
           try {
 
           if (xhr.status === 200) {
-            // ////console.log( 'Imagen subida' );
+            // //////console.log( 'Imagen subida' );
             resolve(JSON.parse(xhr.response));
           } else {
-            // ////console.log( 'Fallo la subida' );
+            // //////console.log( 'Fallo la subida' );
             resolve(JSON.parse(xhr.response));
           }
 
         }
         catch (e) {
-            console.log(e.status);
+            //console.log(e.status);
         }
         }
       };
@@ -391,8 +581,8 @@ export class PostsService {
       // this._globalConfig.spinner = false;
       let url = _SERVICIOS + "/post" + "?t=" + token;
 
-      //////console.log('la url', url);
-      //////console.log('formada', formData);
+      ////////console.log('la url', url);
+      ////////console.log('formada', formData);
 
       xhr.open("POST", url, true);
       xhr.send(formData);

@@ -28,6 +28,8 @@
               "src/assets"
             ],
             "styles": [
+              "src/star-rating.min.css",
+              "src/we.css",
               "src/styles.sass",
               "src/generals.sass",
 
@@ -99,6 +101,8 @@
               "src/assets"
             ],
             "styles": [
+              "src/star-rating.min.css",
+              "src/we.css",
               "src/styles.sass",
               "src/generals.sass",
 

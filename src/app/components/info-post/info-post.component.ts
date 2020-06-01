@@ -6,9 +6,11 @@ import {
   _globalConfig,
   NotifyService,
   UsersService,
+  SearchService,
 } from "src/app/services/service.index";
 
 import { LocationStrategy } from "@angular/common";
+import { ImagenPipe } from 'src/app/pipes/image-control.pipe';
 
 @Component({
   selector: "app-info-post",
@@ -16,6 +18,15 @@ import { LocationStrategy } from "@angular/common";
   styleUrls: ["./info-post.component.sass"],
 })
 export class InfoPostComponent implements OnInit {
+
+
+
+  lectura: boolean = true;
+
+  pdfSrc: string;
+
+  ratingStars: number;
+
   imgActive: string = "";
 
   publication: any;
@@ -31,6 +42,12 @@ export class InfoPostComponent implements OnInit {
   };
 
   reactions = {
+    like: 0,
+    dislike: 0,
+    myReaction: null,
+  };
+
+  _Comentsreactions = {
     like: 0,
     dislike: 0,
     myReaction: null,
@@ -52,6 +69,7 @@ export class InfoPostComponent implements OnInit {
   points: number = 0;
 
   animacion: string = '';
+  comments: any = [];
 
   imgPaginate: number = 0;
 
@@ -62,24 +80,100 @@ export class InfoPostComponent implements OnInit {
     public _globalConfig: _globalConfig,
     public _notifyService: NotifyService,
     private url: LocationStrategy,
-    public _userService: UsersService
+    public _userService: UsersService,
+    public _searchService: SearchService
   ) {
     activatedRoute.params.subscribe((params) => {
       let id = params["id"];
 
       this.setPublication(id);
+      this.setNewVisit(id);
+      this.getComments(id);
     });
 
     this.setTypeVisit();
+
+
+    if(this._userService.estaLogueado() == true){
+
+      this.lectura = false;
+
+    }
+
   }
 
   ngOnInit(): void {}
+
+  canDeleteComment( comments: any ){
+
+    if(this._userService.estaLogueado() == true){
+
+
+      let idPublic = this.publication._id;
+      let idUser = this._userService.usuario._id;
+
+      // dueño de la publicacion
+      if( this.publication.user._id === idUser ){
+
+        return true;
+      }
+
+      // si es administrador
+      if( this._userService.roleName === 'Administrador' ){
+
+        return true;
+      }
+
+      // dueño del comentario
+      if( comments.idUser === idUser ){
+
+        return true
+      }
+
+
+    }
+    return false
+
+  }
+
+  setNewVisit(id){
+
+
+    // this._globalConfig.spinner = true;
+    this._postService
+      .setNewVisitPUT(id)
+      .subscribe((resp) => {
+        // //console.log(resp);
+
+        if (resp.status == 200 && resp.ok == true) {
+          // this._notifyService.Toast.fire({
+          // //console.log(resp);
+          // this._notifyService.Toast.fire({
+          //   title: resp.message,
+          //   // text: '¡Gracias por unirte a Mercado Pyme!',
+          //   icon: "success",
+          // });
+          // this.setActualRanking();
+          this._globalConfig.spinner = false;
+        } else {
+          // this._notifyService.Toast.fire({
+          // title: resp.message,
+          // text: '¡Gracias por unirte a Mercado Pyme!',
+          // icon: "error",
+          // });
+          this._globalConfig.spinner = false;
+        }
+
+        this._globalConfig.spinner = false;
+      });
+
+  }
 
 
   sliderIMG(n) {
 
     let total_pages = Math.ceil(this.publication._files.length / 4);
-    console.log('total', total_pages);
+    // //console.log('total', total_pages);
     switch (n) {
 
       case -1:
@@ -94,11 +188,116 @@ export class InfoPostComponent implements OnInit {
 
       }
 
-      console.log('pagina', this.imgPaginate);
+      // //console.log('pagina', this.imgPaginate);
     }
 
+
+    deleteComment(ideComment){
+
+      this._globalConfig.spinner = true;
+      // let idPublic = registro._id;
+      //console.log('manda a eliminar');
+      this._postService.deleteCommentDELETE(ideComment, this.publication._id ).subscribe((resp) => {
+        this._globalConfig.spinner = false;
+        if (resp.status == 200 && resp.ok == true) {
+          this._notifyService.Toast.fire({
+            title: resp.message,
+            // text: '¡Gracias por unirte a Mercado Pyme!',
+            icon: "success",
+          });
+          //console.log('manda a eliminar');
+          // this.setActualReactions();
+          // this.setActualReactions(idPublic);
+          // if(this.idUser != null && this.idUser != ''){
+
+            // this.getUserPublication(this.idUser, this.not);
+            this.getComments(this.publication._id);
+
+
+
+
+          // }else{
+
+          // }
+
+          this._globalConfig.spinner = false;
+        } else {
+          this._notifyService.Toast.fire({
+            title: resp.message,
+            // text: '¡Gracias por unirte a Mercado Pyme!',
+            icon: "error",
+          });
+          this._globalConfig.spinner = false;
+        }
+
+        this._globalConfig.spinner = false;
+      });
+
+    }
+
+    sendReactionComment(registro ,type: string ) {
+
+      // //console.log(registro, 'registor');
+
+      if(this._userService.estaLogueado() == false){
+        this._notifyService.Toast.fire({
+          title: 'Debes iniciar sesión o registrarte',
+          text: 'Para poder reaccionar',
+          icon: "error",
+        });
+
+        return;
+      }
+
+      if (registro.myReaction != null) {
+        type = null;
+        registro.myReaction = null;
+      }
+
+
+      this._globalConfig.spinner = true;
+      let idPublic = registro._id;
+      this._postService.sendReactionCommentPOST(registro._id, this.publication._id , type).subscribe((resp) => {
+        this._globalConfig.spinner = false;
+        if (resp.status == 200 && resp.ok == true) {
+          this._notifyService.Toast.fire({
+            title: resp.message,
+            // text: '¡Gracias por unirte a Mercado Pyme!',
+            icon: "success",
+          });
+          // this.setActualReactions();
+          // this.setActualReactions(idPublic);
+          // if(this.idUser != null && this.idUser != ''){
+
+            // this.getUserPublication(this.idUser, this.not);
+            this.getComments(this.publication._id);
+
+
+
+
+          // }else{
+
+          // }
+
+          this._globalConfig.spinner = false;
+        } else {
+          this._notifyService.Toast.fire({
+            title: resp.message,
+            // text: '¡Gracias por unirte a Mercado Pyme!',
+            icon: "error",
+          });
+          this._globalConfig.spinner = false;
+        }
+
+        this._globalConfig.spinner = false;
+      });
+
+    }
+
+
+
   setActiveIMG(files) {
-    // console.log(files);
+    // //console.log(files);
     this.imgActive = files.file;
   }
 
@@ -112,61 +311,13 @@ export class InfoPostComponent implements OnInit {
     this._postService
       .setActualRankingGET(this.publication._id)
       .subscribe((resp) => {
-        // console.log(resp);
-
-        //   "data": [
-        //     {
-        //         "points": 3,
-        //         "idUser": "5ec4020931fe571be453aa32"
-        //     }
-        // ]
-
-        // settingStars = {
-        //   total: 0,
-        //   myPoint: 0
-        // };
+        // //console.log(resp);
 
         if (resp.status == 200 && resp.ok == true) {
-          this.settingStars.total = 0;
-          this.settingStars.myPoint = 0;
-          resp.data.forEach((element) => {
-            if (element.points > 0) {
-              this.settingStars.total += element.points;
-            }
-
-            if (element.idUser === this._userService.usuario._id) {
-              this.settingStars.myPoint = element.points;
-            }
-          });
 
 
-          if(this.settingStars.total > 0){
-            this.settingStars.total = this.settingStars.total/resp.data.length
-          }
-
-            if(this.settingStars.total > 5){
-              this.settingStars.total = 5.0;
-              }
-
-
-          if(this.settingStars.myPoint >= 1){
-            if(this.settingStars.myPoint == 1){
-              this.activateStars = [ true, false, false, false, false ];
-            }
-            if(this.settingStars.myPoint <= 2){
-              this.activateStars = [ true, true, false, false, false ];
-            }
-            if(this.settingStars.myPoint <= 3){
-              this.activateStars = [ true, true, true, false, false ];
-            }
-            if(this.settingStars.myPoint <= 4){
-              this.activateStars = [ true, true, true, true, false ];
-            }
-            if(this.settingStars.myPoint <= 5){
-              this.activateStars = [ true, true, true, true, true ];
-            }
-          }
-          // console.log(this.settingStars.total);
+          this.ratingStars = resp.data.points;
+          // //console.log(this.settingStars.total);
         } else {
           // this._notifyService.Toast.fire({
           // title: resp.message,
@@ -179,22 +330,68 @@ export class InfoPostComponent implements OnInit {
       });
   }
 
-  sendRanking(points) {
+
+
+  openPDF(file){
+
+    // | imagen:'Post':this.publication._id
+    let p = new ImagenPipe().transform(file, 'Post', this.publication._id);
+    this._postService.PDFFILE = p;
+
+    this.pdfSrc = p;
+    // console.log(p);
+
+    // // $('#pdfView').modal('show')
+    // let ht = `
+    // <pdf-viewer src="${this._postService.PDFFILE}"
+    // [render-text]="true"
+
+    // style="display: block; height: 500px">
+    // </pdf-viewer>`;
+
+    // // ht = `<app-pdf-view></app-pdf-view>`;
+
+    // this._notifyService.swalNormal.fire({
+    //   html: ht
+    // });
+
+
+  }
+
+  sendPuntaje(e){
+    // console.log('eventoo', e.rating);
+
+    // console.log('eventoo', r)
+
+    if(this._userService.estaLogueado() == false){
+      this._notifyService.Toast.fire({
+        title: 'Debes iniciar sesión o registrarte',
+        text: 'Para poder reaccionar',
+        icon: "error",
+      });
+
+      return;
+    }
+
+
     this._globalConfig.spinner = true;
     this._postService
-      .sendRankingPOST(this.publication._id, points)
+      .sendRankingPOST(this.publication._id, e.rating)
       .subscribe((resp) => {
-        // console.log(resp);
+        // //console.log(resp);
 
         if (resp.status == 200 && resp.ok == true) {
           // this._notifyService.Toast.fire({
-          console.log(resp);
+          // //console.log(resp);
           this._notifyService.Toast.fire({
             title: resp.message,
             // text: '¡Gracias por unirte a Mercado Pyme!',
             icon: "success",
           });
-          this.setActualRanking();
+          this.ratingStars = resp.data.points;
+          // this.setActualRanking();
+
+          console.log(resp.data);
         } else {
           // this._notifyService.Toast.fire({
           // title: resp.message,
@@ -205,9 +402,24 @@ export class InfoPostComponent implements OnInit {
 
         this._globalConfig.spinner = false;
       });
+      this._globalConfig.spinner = false;
+
+
+
   }
 
   sendReaction(type: string ) {
+
+    if(this._userService.estaLogueado() == false){
+      this._notifyService.Toast.fire({
+        title: 'Debes iniciar sesión o registrarte',
+        text: 'Para poder reaccionar',
+        icon: "error",
+      });
+
+      return;
+    }
+
     if (this.reactions.myReaction != null) {
       type = null;
       this.reactions.myReaction = null;
@@ -241,8 +453,8 @@ export class InfoPostComponent implements OnInit {
     this._postService
       .setActualReactionsGET(this.publication._id)
       .subscribe((resp) => {
-        // console.log(resp);
-
+        // //console.log(resp);
+        //console.log('la respuesta al like', resp);
         if (resp.status == 200 && resp.ok == true) {
           this.reactions.like = 0;
           this.reactions.dislike = 0;
@@ -253,7 +465,7 @@ export class InfoPostComponent implements OnInit {
             if (element.reaction === "dislike") {
               this.reactions.dislike++;
             }
-            if (element.idUser === this._userService.usuario._id) {
+            if ( (this._userService.estaLogueado() == true) && element.idUser === this._userService.usuario._id) {
               this.reactions.myReaction = element.reaction;
             }
           });
@@ -269,10 +481,155 @@ export class InfoPostComponent implements OnInit {
       });
   }
 
-  sendComment(forma: NgForm) {}
+  getComments(id) {
+    this._globalConfig.spinner = true;
+    this._postService
+      .getCommentsGET(id)
+      .subscribe((resp) => {
+        // //console.log(resp);
+        // //console.log('la respuesta al comment', resp);
+        if (resp.status == 200 && resp.ok == true) {
+
+          // 0: {…}
+          // ​​
+          // _id: "5ed3dd6678f6f11e0842d0a3"
+          // ​​
+          // created_at: "31 de mayo de 2020"
+          // ​​
+          // idUser: "5ecb9977ef4988108443eebb"
+          // ​​
+          // index: null
+          // ​​
+          // reactions: (1) […]
+          // ​​​
+          // 0: {…}
+          // ​​​​
+          // _id: "5ed3f386052ac91f7804afb0"
+          // ​​​​
+          // idUser: "5ecb9977ef4988108443eebb"
+          // ​​​​
+          // reaction: "like"
+          // ​​​​
+          // <prototype>: Object { … }
+          // ​​​
+          // length: 1
+          // ​​​
+          // <prototype>: Array []
+          // ​​
+          // text: "aaa"
+          // ​​
+          // userName: "empresa"
+          // ​​
+          // <prototype>: {…
+
+
+          this.comments = resp.data;
+
+          //console.log('LA MIERDA', this.comments);
+
+          this.comments.forEach((element, i) => {
+          this.comments[i].like = 0;
+          this.comments[i].dislike = 0;
+
+          this.comments[i].reactions.forEach((element, ii) => {
+
+
+            if (this.comments[i].reactions[ii].reaction === "like") {
+              this.comments[i].like++;
+            }
+            if (this.comments[i].reactions[ii].reaction === "dislike") {
+              this.comments[i].dislike++;
+            }
+            if ( (this._userService.estaLogueado() == true) && this.comments[i].reactions[ii].idUser === this._userService.usuario._id) {
+              this.comments[i].myReaction = this.comments[i].reactions[ii].reaction;
+            }
+
+          });
+
+          });
+
+          this._globalConfig.spinner = false;
+          //console.log('comentarios', this.comments);
+        } else {
+          // this._notifyService.Toast.fire({
+          // title: resp.message,
+          // text: '¡Gracias por unirte a Mercado Pyme!',
+          // icon: "error",
+          // });
+          this._globalConfig.spinner = false;
+        }
+
+        this._globalConfig.spinner = false;
+      });
+  }
+
+  sendComment(forma: NgForm) {
+
+    if(forma.value.coment == null || forma.value.coment == ''){
+      this._notifyService.Toast.fire({
+        title: 'Debes escribir un mensaje para poder comentar',
+        // text: '¡Gracias por unirte a Mercado Pyme!',
+        icon: "error",
+      });
+      return;
+    }
+    if( this._userService.estaLogueado() == false ){
+      this._notifyService.Toast.fire({
+        title: 'Debes iniciar sesión para poder comentar',
+        // text: '¡Gracias por unirte a Mercado Pyme!',
+        icon: "error",
+      });
+      return;
+    }
+
+    let userName = '';
+  if(this._userService.roleName === 'Empresa' ){
+    userName = this._userService.usuario._dataPyme.nameCompany;
+  }else{
+    userName = `${this._userService.usuario.name} ${this._userService.usuario.surname}`;
+
+  }
+
+
+  let l = {
+    userName: userName,
+    text: forma.value.coment
+  }
+
+
+
+  this._globalConfig.spinner = true;
+  this._postService
+      .createCommentPOST(this.publication._id, l)
+      .subscribe((resp) => {
+        // //console.log(resp);
+
+        if (resp.status == 200 && resp.ok == true) {
+          // this._notifyService.Toast.fire({
+          // //console.log(resp);
+            forma.reset();
+          this._notifyService.Toast.fire({
+            title: resp.message,
+            // text: '¡Gracias por unirte a Mercado Pyme!',
+            icon: "success",
+          });
+          // this.setActualRanking();
+          this.getComments(this.publication._id);
+        } else {
+          // this._notifyService.Toast.fire({
+          // title: resp.message,
+          // text: '¡Gracias por unirte a Mercado Pyme!',
+          // icon: "error",
+          // });
+        }
+
+        this._globalConfig.spinner = false;
+      });
+
+  }
 
   openContact() {
-    // console.log();
+    // //console.log();
 
     let ht = `<div class="container containerFull">
     <h4 style="margin-bottom: 15px;" class="titleSpecial4">
@@ -323,7 +680,7 @@ export class InfoPostComponent implements OnInit {
   }
 
   setTypeVisit() {
-    // console.log(this.url.path());
+    // //console.log(this.url.path());
 
     if (
       this._userService.estaLogueado() == true &&
@@ -333,7 +690,7 @@ export class InfoPostComponent implements OnInit {
     ) {
       this.visit.role = this._userService.roleName;
       this.visit.root = this.url.path();
-      // console.log('visita', this.visit);
+      // //console.log('visita', this.visit);
       //  this.active=0;
     }
   }
@@ -351,10 +708,10 @@ export class InfoPostComponent implements OnInit {
         // });
         this.publication = resp.data;
         this.publication = this.publication[0];
-
+        this.ciudades = '';
         let p = this.publication._cityTarget;
         p.forEach((element) => {
-          console.log(element);
+          // //console.log(element);
           if (p[p.length - 1] === element) {
             this.ciudades += `${element.city}`;
           } else {
@@ -371,10 +728,13 @@ export class InfoPostComponent implements OnInit {
         }
 
         this.imgActive = this.publication._files[0].file;
+
+        console.log(this.imgActive);
+
         this.setActualReactions();
         this.setActualRanking();
 
-        // console.log('existe', resp.data);
+        // //console.log('existe', resp.data);
         this._globalConfig.spinner = false;
       } else {
         this._notifyService.Toast.fire({

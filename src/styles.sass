@@ -3,6 +3,8 @@
 @import './generals'
 
 
+// @import '~css-star-rating/scss/star-rating'
+
 // ajuste para quitar paddings naturales
 
 
@@ -42,6 +44,8 @@ h1,h2,h3,h4,h5,h6
     margin-bottom: 15px
     margin-left: 0
     margin-right: 0
+.noMB
+    margin-bottom: 0
 
 .titleSpecial
     color: $VerdeOscur
@@ -128,6 +132,15 @@ a.active
             margin: 0 auto
             text-align: center
 
+.smallButton
+    padding: 2.5px 5px
+    transition: $trans
+    border: 0!important
+    margin-bottom: 0px
+    font-size: 14px
+    border-radius: 0!important
+    width: fit-content!important
+    display: block
 .buttonCustom
     padding: 5px 30px
     transition: $trans
@@ -472,8 +485,25 @@ form.formDataSend .terms .icheck-success label
     padding-left: 5%
     padding-right: 5%
 .padd10
-    padding-left: 10%!important
-    padding-right: 10%!important
+    // padding-left: 10%!important
+    // padding-right: 10%!important
+    @include responsivo(telefonoTable)
+        padding-left: 2.5%!important
+        padding-right: 2.5%!important
+        padding-top: 25px!important
+        padding-bottom: 25px!important
+    @include responsivo(pcMedio)
+        padding-left: 2.5%!important
+        padding-right: 2.5%!important
+        padding-top: 25px!important
+        padding-bottom: 25px!important
+    @include responsivo(general)
+        padding-left: 5%!important
+        padding-right: 5%!important
+    @include responsivo(resto)
+        padding-left: 10%!important
+        padding-right: 10%!important
+
 
 .centralRegister
     @include responsivo(telefonoTable)

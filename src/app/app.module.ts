@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
- 
+
 
 import { Routes, RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,8 +38,18 @@ import { PipesModule } from './pipes/pipes.module';
 import { PostsService } from './services/posts.service';
 import { ADMIN_MODULE } from './pages/dashboard/admin/admin.module';
 import { NewsletterComponent } from './globals/newsletter/newsletter.component';
+import { ProfileViewComponent } from './pages/profile-view/profile-view.component';
 
 
+
+
+
+
+import { StarRatingModule } from 'angular-star-rating';
+
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { PdfViewComponent } from './components/pdf-view/pdf-view.component';
+import { BreadComponent } from './globals/bread/bread.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +69,11 @@ import { NewsletterComponent } from './globals/newsletter/newsletter.component';
     UsComponent,
     NavDashboardComponent,
     NewsletterComponent,
+    ProfileViewComponent,
+    PdfViewComponent,
+    BreadComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -69,7 +84,9 @@ import { NewsletterComponent } from './globals/newsletter/newsletter.component';
     ReactiveFormsModule,
     DASHBOARD_MODULE,
     ADMIN_MODULE,
-    PipesModule
+    PipesModule,
+    StarRatingModule.forRoot(),
+    PdfViewerModule
   ],
   providers: [
     PostsService,
@@ -79,6 +96,14 @@ import { NewsletterComponent } from './globals/newsletter/newsletter.component';
     _globalConfig,
     NotifyService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
-export class AppModule { }
+
+
+export class AppModule {
+
+  // platformBrowserDynamic().bootstrapModule(AppModule);
+ }
+
+

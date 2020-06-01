@@ -150,7 +150,7 @@ if (verify) {
       }
 
 
-      console.log(this.allPublications);
+      //console.log(this.allPublications);
 
 
    });

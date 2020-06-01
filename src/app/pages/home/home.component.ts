@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class HomeComponent implements OnInit {
 
 
-  
+  pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
   constructor(
     public router: Router,
     public activatedRoute: ActivatedRoute,

@@ -8,7 +8,7 @@ export class ImagenPipe implements PipeTransform {
 
   transform( img: string, tipo: string = 'User', folder: string = ''): any {
 
-    // console.log('folder', folder);
+    // //console.log('folder', folder);
     let url = _SERVICIOS + '/img';
 
     if ( !img ) {
@@ -23,6 +23,11 @@ export class ImagenPipe implements PipeTransform {
 
     switch ( tipo ) {
 
+      case 'pdf':
+        url += `/pdf/${img}`;
+
+      break;
+
       case 'User':
         url += `/User/${img}`;
       break;
@@ -36,7 +41,7 @@ export class ImagenPipe implements PipeTransform {
       // break;
 
       default:
-        //////console.log('tipo de imagen no existe, usuario, medicos, hospitales');
+        ////////console.log('tipo de imagen no existe, usuario, medicos, hospitales');
         url += '/usurios/xxx';
     }
 
