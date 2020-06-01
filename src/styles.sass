@@ -3,15 +3,18 @@
 @import './generals'
 
 
-// @import '~css-star-rating/scss/star-rating'
-
-// ajuste para quitar paddings naturales
 
 
-.contentTitleHr
-    display: block!important
-    width: 100%!important
 
+app-nav-bar
+    position: fixed
+    width: 100%
+    z-index: 9999
+div#containGlobal
+    padding-top: 60px
+
+body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .swal2-container.swal2-top-right
+    top: 80px!important
 
 body
     overflow-x: hidden!important

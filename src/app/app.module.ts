@@ -36,11 +36,15 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { DASHBOARD_MODULE } from './pages/dashboard/dashboard.module';
 import { PipesModule } from './pipes/pipes.module';
 import { PostsService } from './services/posts.service';
+<<<<<<< HEAD
 import { ADMIN_MODULE } from './pages/dashboard/admin/admin.module';
 import { NewsletterComponent } from './globals/newsletter/newsletter.component';
 import { ProfileViewComponent } from './pages/profile-view/profile-view.component';
 
 
+=======
+import { SocialFloatComponent } from './globals/social-float/social-float.component';
+>>>>>>> production
 
 
 
@@ -68,12 +72,7 @@ import { BreadComponent } from './globals/bread/bread.component';
     LoginComponent,
     UsComponent,
     NavDashboardComponent,
-    NewsletterComponent,
-    ProfileViewComponent,
-    PdfViewComponent,
-    BreadComponent,
-
-
+    SocialFloatComponent,
   ],
   imports: [
     BrowserModule,

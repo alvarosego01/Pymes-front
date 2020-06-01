@@ -4,11 +4,7 @@
 //
 var urle = '';
 if (window.location.href.indexOf("localhost") != -1){
-    // production LOCALHOST
-    // urle = 'http://localhost:5150';
-    // DEVELOPER LOCALHOST
     urle = 'http://localhost:5160';
-
 }else{
     // PRODUCCION URL
     // urle = 'https://api.mercadopyme.co';

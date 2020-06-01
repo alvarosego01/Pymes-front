@@ -1,0 +1,48 @@
+
+@import "~src/generals"
+
+#socialFloat
+    // display: none
+    z-index: 9999
+    position: fixed
+    right: 0
+    // top: 15%
+    right: 2.5%
+
+    ul
+        list-style: none
+        padding: 0
+        margin: 0
+        li
+            a
+                width: 50px
+                height: 50px
+                display: block
+                background-color: $GrisOscur
+                border-radius: 100%
+                position: relative
+                i
+                    color: white
+                    position: absolute
+                    font-size: 35px
+                    left: 0
+                    right: 0
+                    top: 0
+                    bottom: 0
+                    // display: block
+                    margin: auto
+                    display: flex
+                    align-content: center
+                    align-items: center
+                    justify-items: center
+                    justify-content: center
+                &:hover
+                    background-color: $VerdeOscur
+    @include responsivo(telefonoTable)
+        bottom: 100px
+    @include responsivo(pcMedio)
+        bottom: 125px
+    @include responsivo(general)
+        top: 150px
+    @include responsivo(resto)
+        top: 225px
