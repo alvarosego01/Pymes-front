@@ -36,23 +36,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { DASHBOARD_MODULE } from './pages/dashboard/dashboard.module';
 import { PipesModule } from './pipes/pipes.module';
 import { PostsService } from './services/posts.service';
-<<<<<<< HEAD
-import { ADMIN_MODULE } from './pages/dashboard/admin/admin.module';
-import { NewsletterComponent } from './globals/newsletter/newsletter.component';
-import { ProfileViewComponent } from './pages/profile-view/profile-view.component';
-
-
-=======
-import { SocialFloatComponent } from './globals/social-float/social-float.component';
->>>>>>> production
-
-
-
-
-import { StarRatingModule } from 'angular-star-rating';
-
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { PdfViewComponent } from './components/pdf-view/pdf-view.component';
 import { BreadComponent } from './globals/bread/bread.component';
 
 @NgModule({
@@ -72,7 +56,7 @@ import { BreadComponent } from './globals/bread/bread.component';
     LoginComponent,
     UsComponent,
     NavDashboardComponent,
-    SocialFloatComponent,
+    // SocialFloatComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,9 +66,9 @@ import { BreadComponent } from './globals/bread/bread.component';
     FormsModule,
     ReactiveFormsModule,
     DASHBOARD_MODULE,
-    ADMIN_MODULE,
+    // ADMIN_MODULE,
     PipesModule,
-    StarRatingModule.forRoot(),
+    // StarRatingModule.forRoot(),
     PdfViewerModule
   ],
   providers: [
