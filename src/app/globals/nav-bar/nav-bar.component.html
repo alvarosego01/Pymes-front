@@ -15,27 +15,46 @@
         <img src="../../../assets/dist/img/logoPyme.svg" alt="">
       </div>
 
-      <!-- SEARCH FORM -->
-      <!-- <form class="buscador form-inline ml-3">
+
+
+    <!-- Left navbar links -->
+    <ul class="menuNav navbar-nav">
+
+      <li class="nav-item">
+             <!-- SEARCH FORM -->
+      <form
+      ngNativeValidate
+      #f="ngForm"
+      (ngSubmit)="searchByText( f )"
+      class="buscador form-inline ml-3">
         <div class="input-group input-group-sm">
-          <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Busqueda">
+          <input name="Busqueda" ngModel class="form-control form-control-navbar" type="search" placeholder="Busqueda" aria-label="Busqueda">
           <div class="input-group-append">
             <button class="btn btn-navbar" type="submit">
               <i class="fas fa-search"></i>
             </button>
           </div>
         </div>
-      </form> -->
+      </form>
+      </li>
 
-    <!-- Left navbar links -->
-<!--     <ul class="menuNav navbar-nav">
+      <li class="nav-item">
 
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link navButton" [routerLink]="['/aboutUs']" routerLinkActive="active" >Nosotros</a>
+        <a class="nav-link navButton" [routerLink]="['/home']" routerLinkActive="active" >
+          <i class="fas fa-home    nav-icon"></i>
+          Home
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link navButton" [routerLink]="['/us']" routerLinkActive="active" >
+          <i class="fas fa-industry    nav-icon"></i>
+          Nosotros
+        </a>
       </li>
 
     </ul>
- -->
+
 
 
     <!-- Right navbar links -->

@@ -2,14 +2,18 @@
 // export { LoginVerifyGuard } from './login-verify.guard';
 
 import { HostListener } from '@angular/core';
+export { VerifyService } from './verify.service';
 
-
-
+export { PostsService } from './posts.service';
+export { Filebase64Service } from './filebase64.service';
 
 // export {  PostsService } from './posts.service';
 export {  UsersService } from './users.service';
 export {  SearchService } from './search.service';
 export { NotifyService } from './notify.service';
+
+
+
 
 export class _globalConfig{
 

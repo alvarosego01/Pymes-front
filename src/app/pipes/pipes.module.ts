@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ImagenPipe } from './image-control.pipe';
 import { SafeUrlPipe } from './safe-url.pipe';
+import { FilesServicePipe } from './files-service.pipe';
 // import { SafeUrlPipe } from './';
 
 
@@ -9,7 +10,8 @@ import { SafeUrlPipe } from './safe-url.pipe';
   imports: [ ],
   declarations: [
     ImagenPipe,
-    SafeUrlPipe
+    SafeUrlPipe,
+    FilesServicePipe
   ],
   exports: [
     ImagenPipe,

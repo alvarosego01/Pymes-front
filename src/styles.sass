@@ -3,6 +3,9 @@
 @import './generals'
 
 
+// @import '~css-star-rating/scss/star-rating'
+
+// ajuste para quitar paddings naturales
 
 
 
@@ -10,11 +13,11 @@ app-nav-bar
     position: fixed
     width: 100%
     z-index: 9999
-div#containGlobal
-    padding-top: 60px
 
-body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .swal2-container.swal2-top-right
-    top: 80px!important
+.contentTitleHr
+    display: block!important
+    width: 100%!important
+
 
 body
     overflow-x: hidden!important
@@ -45,6 +48,10 @@ h1,h2,h3,h4,h5,h6
 
 .row
     margin-bottom: 15px
+    margin-left: 0
+    margin-right: 0
+.noMB
+    margin-bottom: 0
 
 .titleSpecial
     color: $VerdeOscur
@@ -61,6 +68,9 @@ h1,h2,h3,h4,h5,h6
     font-weight: bold
     font-size: 28px
     line-height: 28px
+.titleSpecial6
+    color: $VerdeOscur
+    // font-weight: bold
     // line-height: normal
 .subtitle
     font-size: 22.5px
@@ -69,6 +79,12 @@ p.textInfo
     color: $GrisClar
     font-size: 16px
 
+a.hiperButtonWhite
+    color: white
+    &:hover
+        color: white!important
+        background-color: transparent!important
+        border: 0!important
 a.hiperButton
     color: $VerdeOscur!important
     font-size: 18px
@@ -77,7 +93,7 @@ a.navButton
     // font-size: 22px!important
     color: $GrisClar!important
     font-weight: thin
-    font-size: 20px
+    font-size: 16px
     display: flex
     align-items: center
 
@@ -122,6 +138,15 @@ a.active
             margin: 0 auto
             text-align: center
 
+.smallButton
+    padding: 2.5px 5px
+    transition: $trans
+    border: 0!important
+    margin-bottom: 0px
+    font-size: 14px
+    border-radius: 0!important
+    width: fit-content!important
+    display: block
 .buttonCustom
     padding: 5px 30px
     transition: $trans
@@ -451,6 +476,39 @@ form.formDataSend .terms .icheck-success label
         width: 80%!important
     @include responsivo(resto)
         width: 80%!important
+.containerFull
+    margin: 0 auto!important
+    max-width: unset!important
+    width: 90%!important
+.containerFull100
+    margin: 0 auto
+    max-width: unset!important
+    width: 100%!important
+
+.padd0
+    padding: 0
+.padd5
+    padding-left: 5%
+    padding-right: 5%
+.padd10
+    // padding-left: 10%!important
+    // padding-right: 10%!important
+    @include responsivo(telefonoTable)
+        padding-left: 2.5%!important
+        padding-right: 2.5%!important
+        padding-top: 25px!important
+        padding-bottom: 25px!important
+    @include responsivo(pcMedio)
+        padding-left: 2.5%!important
+        padding-right: 2.5%!important
+        padding-top: 25px!important
+        padding-bottom: 25px!important
+    @include responsivo(general)
+        padding-left: 5%!important
+        padding-right: 5%!important
+    @include responsivo(resto)
+        padding-left: 10%!important
+        padding-right: 10%!important
 
 
 .centralRegister
@@ -483,3 +541,12 @@ img.profile-user-img.img-fluid.img-circle
 
 
 
+
+
+
+.swal2-container.swal2-top-end.swal2-backdrop-show
+    top: 8.5%!important
+    @include responsivo(telefonoTable)
+        top: 22.5%!important
+    @include responsivo(pcMedio)
+        top: 22.5%!important

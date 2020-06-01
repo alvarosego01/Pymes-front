@@ -1,0 +1,63 @@
+@import "~src/generals"
+
+
+
+.categorySection
+    // padding: 50px 0
+    padding-top: 50px
+    *
+        visibility: visible!important
+        opacity: 1!important
+    .categoryBase
+        border-bottom: 1.5px solid rgba(0,0,0,0.4)
+        color: $VerdeClar
+        p,i
+            font-size: 22px
+    .menuProduct
+        // h6
+        ul
+            // padding: 25px 0
+            li
+                padding-left: 10px
+                padding-bottom: 5px
+                a
+                    padding: 0
+                    margin-bottom: 0
+                    p
+                        margin: 0
+                        visibility: visible!important
+                form
+                    margin: 0
+                    .input-group.input-group-sm
+                        width: 100%
+                        display: block
+                    input
+                        width: 100%
+                        background-color: $fondoGrisDesign
+                        border: 0.5px solid $GrisOscur
+                form.precio
+                    .input-group.input-group-sm
+                        display: flex
+                        flex-direction: row
+                        justify-content: space-between
+                        position: relative
+                        input
+                            max-width: 45%
+                            z-index: 999
+                        &::after
+                            content: ""
+                            width: 100%
+                            top: 0
+                            bottom: 0
+                            left: 0
+                            right: 0
+                            position: absolute
+                            border-bottom: 1px solid $GrisOscur
+                            margin: auto 0
+                            height: 1px
+                .centerCustom
+                    margin-top: 15px
+                    width: 100%
+
+    ul.nav.nav-treeview
+        padding: 12.5px 0

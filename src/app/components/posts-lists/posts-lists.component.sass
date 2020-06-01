@@ -1,0 +1,143 @@
+
+
+
+@import "~src/generals"
+
+$verdePyme: #2D907C
+
+.list
+    // display: none
+    padding-top: 0px
+    // background-color: $fondoGrisDesign
+    .contentTitleHr
+        width: 100%
+        display: block
+        h4
+            width: 100%
+            display: block
+            text-align: center
+    .listResults
+        display: grid
+        grid-column-gap: 5px
+        margin-bottom: 0
+        // grid-ga
+        @include responsivo(telefonoTable)
+            grid-template-columns: repeat(1,1fr)!important
+        @include responsivo(pcMedio)
+            grid-template-columns: repeat(2,1fr)!important
+        @include responsivo(general)
+            grid-template-columns: repeat(3,1fr)!important
+        @include responsivo(resto)
+            grid-template-columns: repeat(4,1fr)!important
+    .card
+        // background-color: red
+        padding: 0
+        .card-header.typePDF
+            background-color: $VerdeOscur
+            display: flex
+            justify-content: center
+            align-content: center
+            align-items: center
+            transition: $trans
+            .iconoDownload
+                display: block
+                margin: auto
+                transition: $trans
+                // color: white
+                // font-size: 28px
+                a.hiperButtonWhite
+                    font-size: 22px
+                    transition: $trans
+                    display: inline-block
+            &:hover
+                background-color: $VerdeClar
+        .iconoDownload
+            // display: none
+            a.hiperButtonWhite
+                // display: none
+                font-size: 32px
+                // animation: heartBeat
+                // animation-duration: 1s
+        .card-header
+            padding: 0
+            position: relative
+            padding-bottom: 0
+            border-bottom: 0
+            &::after
+                display: none
+            img
+                height: 100%
+                object-fit: cover
+                object-position: center
+            @include responsivo(telefonoTable)
+                height: 250px!important
+            @include responsivo(pcMedio)
+                height: 250px!important
+            @include responsivo(general)
+                height: 225px!important
+            @include responsivo(resto)
+                height: 225px!important
+        .card-body
+            display: flex
+            flex-direction: column
+            padding: 2.5% 5%
+
+            span.catego
+                color: $VerdeOscur
+                border-radius: 0
+                font-weight: bold
+            .date
+                color: grey
+            h4.card-title
+                width: 100%
+                color: $GrisOscur
+                font-size: 18px
+            .price
+                display: flex
+                flex-direction: column
+                width: 100%
+                .noPrice
+                    margin-bottom: 5px
+                    color: grey
+                    display: block
+                    text-decoration: line-through
+                    display: none
+                .cost
+                    display: block
+                    color: $VerdeClar
+                    font-size: 22px
+                    line-height: 26px
+                    font-weight: bold
+            p.card-text
+                margin: 15px 0
+                text-align: left
+                font-size: 14px
+                line-height: 14px
+                color: $GrisClar
+                // max-height: 80px
+                // overflow-y: auto
+        .card-footer
+            position: relative
+            padding: 0
+            padding-bottom: 5%
+            background-color: white
+            .centerCustom
+                a
+                    font-size: 14px!important
+                    padding: 2.5px 10px
+
+            .reactions
+                position: absolute
+                bottom: 0
+                right: 15px
+                top: 0
+                ul
+                    list-style: none
+                    display: flex
+                    flex-direction: row
+                    padding: 0
+                    margin: 0
+                    li
+                        margin-left: 5px
+                    // li
+                        // a
