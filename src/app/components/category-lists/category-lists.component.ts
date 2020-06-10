@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PostsService } from 'src/app/services/posts.service';
-import { _globalConfig, SearchService, NotifyService } from 'src/app/services/service.index';
+import { GlobalConfigService, SearchService, NotifyService } from 'src/app/services/service.index';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -15,7 +15,7 @@ export class CategoryListsComponent implements OnInit {
     public router: Router,
     public activatedRoute: ActivatedRoute,
     public _postService: PostsService,
-    public _globalConfig: _globalConfig,
+    public GlobalConfigService: GlobalConfigService,
     public _searchService: SearchService,
     public _notifyService: NotifyService
   ) { }
@@ -32,41 +32,41 @@ export class CategoryListsComponent implements OnInit {
       t: orden
     }
 
-    // this._globalConfig.spinner = true;
+    // this.GlobalConfigService.spinner = true;
     this._searchService.searchByOrderPOST(l).subscribe((resp) => {
-      // //console.log(resp);
+      // ////console.log(resp);
 
       if (resp.status == 200 && resp.ok == true) {
         // this._notifyService.Toast.fire({
-        // //console.log(resp);
+        // ////console.log(resp);
         // this._notifyService.Toast.fire({
         //   title: resp.message,
         //   // text: '¡Gracias por unirte a Mercado Pyme!',
         //   icon: "success",
         // });
 
-        // //console.log(resp);
-        // this._globalConfig.spinner = false;
+        // ////console.log(resp);
+        // this.GlobalConfigService.spinner = false;
         // return;
 
         if( resp.data.length > 0  && resp.data.length > 0){
           this._searchService.registros = resp.data;
           this._searchService.setActualReactions();
-          //console.log(this._searchService.registros);
+          ////console.log(this._searchService.registros);
         }else{
           this._searchService.registros = [];
         }
-        this._globalConfig.spinner = false;
+        this.GlobalConfigService.spinner = false;
       } else {
         // this._notifyService.Toast.fire({
         // title: resp.message,
         // text: '¡Gracias por unirte a Mercado Pyme!',
         // icon: "error",
         // });
-        this._globalConfig.spinner = false;
+        this.GlobalConfigService.spinner = false;
       }
 
-      this._globalConfig.spinner = false;
+      this.GlobalConfigService.spinner = false;
 
     });
 
@@ -93,13 +93,13 @@ let l = {
   typeFind: 'city'
 }
 
-this._globalConfig.spinner = true;
+this.GlobalConfigService.spinner = true;
 this._searchService.searchByTextPOST(l).subscribe((resp) => {
-  // //console.log(resp);
+  // ////console.log(resp);
 
   if (resp.status == 200 && resp.ok == true) {
     // this._notifyService.Toast.fire({
-    // //console.log(resp);
+    // ////console.log(resp);
     // this._notifyService.Toast.fire({
     //   title: resp.message,
     //   // text: '¡Gracias por unirte a Mercado Pyme!',
@@ -109,7 +109,7 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
     if( resp.data.length > 0  && resp.data[0].length > 0){
       this._searchService.registros = resp.data[0];
       this._searchService.setActualReactions();
-      //console.log(this._searchService.registros);
+      ////console.log(this._searchService.registros);
     }else{
       this._searchService.registros = [];
     }
@@ -121,7 +121,7 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
     // });
   }
 
-  this._globalConfig.spinner = false;
+  this.GlobalConfigService.spinner = false;
 });
 
   }
@@ -147,14 +147,14 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
     typeFind: 'price'
   }
 
-  this._globalConfig.spinner = true;
+  this.GlobalConfigService.spinner = true;
   this._searchService.searchByCategoryPOST(l).subscribe((resp) => {
-    // //console.log(resp);
+    // ////console.log(resp);
 
 
     if (resp.status == 200 && resp.ok == true) {
       // this._notifyService.Toast.fire({
-      // //console.log(resp);
+      // ////console.log(resp);
       // this._notifyService.Toast.fire({
       //   title: resp.message,
       //   // text: '¡Gracias por unirte a Mercado Pyme!',
@@ -164,7 +164,7 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
       if( resp.data.length > 0  && resp.data[0].length > 0){
         this._searchService.registros = resp.data[0];
         this._searchService.setActualReactions();
-        //console.log(this._searchService.registros);
+        ////console.log(this._searchService.registros);
       }else{
         this._searchService.registros = [];
       }
@@ -174,11 +174,11 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
       // text: '¡Gracias por unirte a Mercado Pyme!',
       // icon: "error",
       // });
-      //console.log(resp,' existe el error');
-      this._globalConfig.spinner = false;
+      ////console.log(resp,' existe el error');
+      this.GlobalConfigService.spinner = false;
     }
 
-    this._globalConfig.spinner = false;
+    this.GlobalConfigService.spinner = false;
   });
 
 
@@ -193,13 +193,13 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
     typeFind: 'category'
   }
 
-  this._globalConfig.spinner = true;
+  this.GlobalConfigService.spinner = true;
   this._searchService.searchByCategoryPOST(l).subscribe((resp) => {
-    // //console.log(resp);
+    // ////console.log(resp);
 
     if (resp.status == 200 && resp.ok == true) {
       // this._notifyService.Toast.fire({
-      // //console.log(resp);
+      // ////console.log(resp);
       // this._notifyService.Toast.fire({
       //   title: resp.message,
       //   // text: '¡Gracias por unirte a Mercado Pyme!',
@@ -209,7 +209,7 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
       if( resp.data.length > 0  && resp.data[0].length > 0){
         this._searchService.registros = resp.data[0];
         this._searchService.setActualReactions();
-        //console.log(this._searchService.registros);
+        ////console.log(this._searchService.registros);
       }else{
         this._searchService.registros = [];
       }
@@ -221,11 +221,57 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
       // });
     }
 
-    this._globalConfig.spinner = false;
+    this.GlobalConfigService.spinner = false;
 
   });
 
 
   }
+
+
+
+  getAll() {
+    this.GlobalConfigService.spinner = true;
+    this._searchService.setFirstLookPOST().subscribe((resp) => {
+      // ////console.log(resp);
+
+
+
+      this._searchService.setParameters({busqueda: 'todo'}, 0, 12);
+
+      if (resp.status == 200 && resp.ok == true) {
+        // this._notifyService.Toast.fire({
+        // ////console.log(resp);
+        // this._notifyService.Toast.fire({
+        //   title: resp.message,
+        //   // text: '¡Gracias por unirte a Mercado Pyme!',
+        //   icon: "success",
+        // });
+        if (resp.data.length > 0 && resp.data[0].length > 0) {
+          this._searchService.registros = resp.data[0];
+          this._searchService.setActualReactions();
+
+
+
+          //console.log('actualiza', this._searchService.registros);
+        } else {
+          //
+        }
+      } else {
+        // this._notifyService.Toast.fire({
+        // title: resp.message,
+        // text: '¡Gracias por unirte a Mercado Pyme!',
+        // icon: "error",
+        // });
+      }
+
+      this.GlobalConfigService.spinner = false;
+    }, error => {
+
+      this.GlobalConfigService.spinner = false;
+    });
+  }
+
+
 
 }

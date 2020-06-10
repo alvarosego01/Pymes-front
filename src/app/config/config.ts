@@ -11,9 +11,13 @@ if (window.location.href.indexOf("localhost") != -1){
 
 }else{
     // PRODUCCION URL
-    // urle = 'https://api.mercadopyme.co';
+    urle = 'https://api.mercadopyme.co';
     // DEVELOPER URL
-     urle = 'https://api-pymes.forgesystem.com';
+    //  urle = 'https://api-pymes.forgesystem.com';
 }
 // urle = 'https://api.mercadopyme.co';
 export const _SERVICIOS = urle;
+
+
+
+export const _NAMEPAGE = 'Mercado Pyme';

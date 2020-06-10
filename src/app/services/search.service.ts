@@ -5,7 +5,7 @@ import { Injectable } from "@angular/core";
 // se importa la clase o el modelo de datos de tipo usuario
 // import { UsuarioModel } from './../models/usuario.model';
 
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 
 // para poder usar el map
 import { map, catchError } from "rxjs/operators";
@@ -27,6 +27,9 @@ import { NgForm } from '@angular/forms';
 
 
 
+// import {HttpParams} from  "@angular/common/http";
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -38,10 +41,77 @@ export class SearchService {
 
   constructor(
     public http: HttpClient,
+    // public HttpParams: HttpParams,
     public router: Router,
     public _userService: UsersService
   ) { }
 
+
+  // pagina: string;
+  // porPagina: string;
+  // params: any = {}
+
+
+    setParameters(params = null, pagina = 0, porPagina = 12){
+
+
+      if( (params == null) || params.busqueda == 'todo'){
+
+        this.router.navigate([], {
+          queryParams: {
+            busqueda: 'todo',
+            pagina: pagina,
+            porPagina: porPagina
+          }
+        });
+
+      }
+
+      if(params.busqueda == 'category'){
+
+        this.router.navigate([], {
+          queryParams: {
+            busqueda: 'category',
+            pagina: pagina,
+            porPagina: porPagina
+          }
+        });
+
+      }
+
+      if(params.busqueda == 'price'){
+
+        this.router.navigate([], {
+          queryParams: {
+            busqueda: 'price',
+            pagina: pagina,
+            porPagina: porPagina
+          }
+        });
+
+      }
+
+      if(params.busqueda == 'order'){
+
+        this.router.navigate([], {
+          queryParams: {
+            busqueda: 'order',
+            pagina: pagina,
+            porPagina: porPagina
+          }
+        });
+
+      }
+
+      // si es flexible entonces
+      if( (params.busqueda == 'flexible') && params.length > 0){
+
+
+
+      }
+
+
+    }
 
   searchByOrderPOST(argumento){
 
@@ -53,7 +123,7 @@ export class SearchService {
         return resp;
       }),
       catchError( err =>{
-        //////console.log(err);
+        ////////console.log(err);
 
         return throwError(err);
       })
@@ -62,18 +132,20 @@ export class SearchService {
   }
 
 
+  searchCore(){
+
+  }
+
+
 
 setActualReactions() {
 
-    //console.log('actualizacio');
-
-
-
+    ////console.log('actualizacio');
     if(this.registros.length > 0){
 
       this.registros.forEach((relement, index) => {
 
-      // //console.log(relement.reactions.length);
+      // ////console.log(relement.reactions.length);
       // return;
 
       this.registros[index].like = 0;
@@ -99,7 +171,7 @@ setActualReactions() {
   }
   // this.registros = r;
 
-  //console.log('con reaction', this.registros);
+  ////console.log('con reaction', this.registros);
 
 }
 
@@ -127,7 +199,7 @@ setActualReactions() {
         return resp;
       }),
       catchError( err =>{
-        //////console.log(err);
+        ////////console.log(err);
 
         return throwError(err);
       })
@@ -146,7 +218,7 @@ setActualReactions() {
           return resp;
         }),
         catchError( err =>{
-          //////console.log(err);
+          ////////console.log(err);
 
           return throwError(err);
         })
@@ -167,7 +239,7 @@ setActualReactions() {
         return resp;
       }),
       catchError( err =>{
-        //////console.log(err);
+        ////////console.log(err);
 
         return throwError(err);
       })
@@ -177,13 +249,11 @@ setActualReactions() {
 
   }
 
-  sendSearchByUbicacionPOST(forma: NgForm){
 
-  }
 
   searchByCategoryPOST(argumento: any){
 
-    //console.log(argumento);
+    ////console.log(argumento);
     let url = `${_SERVICIOS}/find`;
 
 
@@ -193,7 +263,7 @@ setActualReactions() {
         return resp;
       }),
       catchError( err =>{
-        //////console.log(err);
+        ////////console.log(err);
 
         return throwError(err);
       })
@@ -205,18 +275,18 @@ setActualReactions() {
   searchByPricePOST(argumento){
 
 
-    //console.log(argumento);
+    ////console.log(argumento);
     let url = `${_SERVICIOS}/find`;
 
 
     return this.http.post( url, argumento ).pipe(
       map( (resp: any) => {
 
-        // //console.log('respuesta', resp);
+        // ////console.log('respuesta', resp);
         return resp;
       }),
       catchError( err =>{
-        // //console.log(err , 'error desde servicio');
+        // ////console.log(err , 'error desde servicio');
 
         return throwError(err);
       })

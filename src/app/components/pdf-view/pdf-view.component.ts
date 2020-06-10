@@ -30,7 +30,7 @@ export class PdfViewComponent implements OnInit {
 
 
   ocultarClick(e){
-    console.log(e);
+    //console.log(e);
     // this._postService.PDFFILE = null;
     if(
       // e.target['className'] != '' &&

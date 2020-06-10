@@ -25,7 +25,7 @@ const appRoutes: Routes = [
     component: RegisterComponent,
     },
     { path: '**', component: HomeComponent },
-    // { path: '', component: HomeComponent }
+    { path: '', component: HomeComponent }
 ];
 
 

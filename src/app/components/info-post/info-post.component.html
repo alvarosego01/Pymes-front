@@ -1,7 +1,7 @@
 
 
 
-<div id="homeContainer" class="contentGeneral content-wrapper">
+<div *ngIf="(this.publication != undefined)" id="homeContainer" class="contentGeneral content-wrapper">
     <!-- Content Header (Page header) -->
 
     <app-pdf-view  *ngIf="this._postService.PDFFILE != null"  >
@@ -29,13 +29,27 @@
     <!-- Main content -->
     <section >
 
-
-
               <div class="row migPan padd10">
 
               </div>
               <div class="row padd10 infoGeneralContent">
-                <div class="fileSide col-md-12 col-lg-6" *ngIf=" (this.publication._files[0]) && this.publication._files[0].type === 'PDF' " [ngClass]="{'typePDF': (this.publication._files[0]) && this.publication._files[0].type === 'PDF'}">
+                <div class="fileSide col-md-12 col-lg-6"
+                *ngIf="(this.publication != undefined) && (this.publication._files.length > 0) && this.publication._files[0].type === 'PDF' "
+                [ngClass]="{'typePDF': (this.publication._files[0]) && this.publication._files[0].type === 'PDF'}">
+
+
+                  <pdf-viewer
+                  class="pdfList"
+                  [src]="this.publication._files[0].file | imagen:'Post':this.publication._files[0].folder "
+                  [render-text]="false"
+                  [page]="1"
+                  [show-all]="false"
+
+                  [original-size]="false"
+                  [autoresize]="false"
+                  style="display: block;">
+                  </pdf-viewer>
+
 
                   <div class="iconoDownload">
                     <a (click)="this.openPDF(this.publication._files[0].file)"  class="hiperButtonWhite" >
@@ -45,7 +59,7 @@
                   </div>
 
                 </div>
-                <div class="fileSide col-md-12 col-lg-6" *ngIf="(this.publication._files[0]) && this.publication._files[0].type != 'PDF' ">
+                <div class="fileSide col-md-12 col-lg-6" *ngIf="(this.publication != undefined) && (this.publication._files.length > 0) && this.publication._files[0].type != 'PDF' ">
 
 
                   <div class="front col-12">
@@ -56,7 +70,7 @@
                     <a class="arrowIMG" (click)="sliderIMG(-1)" >
                       <i class="fas fa-arrow-left    "></i>
                     </a>
-                    <div  *ngFor="let files of this.publication._files.slice(this.imgPaginate, this.imgPaginate + 4)" class="animated fadeIn fast  product-image-thumb" (click)="setActiveIMG( files )" >
+                    <div  *ngFor="let files of this.publication._files.slice(this.imgPaginate, this.imgPaginate + 4); let i = index" class="animated fadeIn fast  product-image-thumb" (click)="setActiveIMG( files, i )" >
 
                         <img  [src]="files.file | imagen:'Post':files.folder " alt="Product Image">
 
@@ -90,11 +104,13 @@
                     Rango de precio
                   </h5>
                   <div class="price">
+
                     <h5>
-                      ${{ this.publication._rangoPrize.min }}
+                      <!-- {{Value | currency:"COP":"symbol"}} -->
+                      {{ this.publication._rangoPrize.min | numberFormat | currency : 'USD' : 'symbol' : '1.0-0'  }}
                     </h5>
                     <h5>
-                      ${{ this.publication._rangoPrize.max }}
+                      {{ this.publication._rangoPrize.max | numberFormat | currency : 'USD' : 'symbol' : '1.0-0'  }}
                     </h5>
                   </div>
 
@@ -175,7 +191,7 @@
                     [labelText]="this.ratingStars"
                     id="starsSetter"
                     size="medium"
-                    [readOnly]="this.lectura"
+                    [readOnly]="false"
                     [showHalfStars]="true"
                     (starClickChange)="sendPuntaje($event)"
                     [starType]="'svg'"
@@ -248,7 +264,7 @@
                 </div>
                 <div *ngIf="(this.comments) && (this.comments.length > 0)" class="col-md-12 col-lg-6 opiniones">
 
-                  <div *ngFor="let c of this.comments" class="ccomment">
+                  <div *ngFor="let c of this.comments; let i = index;" class="ccomment">
                       <div class="hd">
                         <!-- <img [src]="this._userService.usuario.imgProfile | imagen:'User':this._userService.usuario._id" alt=""> -->
 
@@ -266,7 +282,7 @@
                         </p>
                       </div>
                       <div class="reactions">
-                        <div *ngIf="( this._userService.estaLogueado() == true ) && ( this.canDeleteComment( c ) == true )" class="opc">
+                        <div *ngIf="( this._userService.estaLogueado() == true ) && ( this.canDeleteComment( c, i ) == true )" class="opc">
                           <button  (click)="deleteComment(c._id)" type="button" class="smallButton btn btn-danger btn-sm">
                             <i class="fas fa-trash    "></i>
                             Eliminar
@@ -375,18 +391,20 @@
 
 
 
-                <div class="row others padd10">
+                <!-- <div *ngIf="(this._searchService.registros) && this._searchService.registros.length > 0" class="row others padd10"> -->
 
 
 
                   <app-posts-lists
+                  class="row others padd10"
                   [idUser]="this.publication.user._id"
                   [not]="this.publication._id"
-                  [type]="'sugerencia'" >
+                  [type]="'sugerencia'"
+                  [byCategory]="this.publication._category.principal">
 
                   </app-posts-lists>
 
-                </div>
+                <!-- </div> -->
 
 
 

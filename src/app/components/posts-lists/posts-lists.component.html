@@ -3,33 +3,71 @@
 
 
 
-<div class="list" *ngIf="(this._searchService.registros) && this._searchService.registros.length > 0">
+<div class="list" *ngIf="(this._searchService.registros) && (this._searchService.registros != null) && this._searchService.registros.length > 0">
 
   <div *ngIf="(this.type) && this.type=='sugerencia' " class="contentTitleHr">
 
-    <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+    <h4 style="margin-bottom: 35px;" class="titleSpecial4">
       Productos similares
+  </h4>
+  <!-- <hr> -->
+</div>
+  <div *ngIf="(this.type) && this.type=='othersUser' " class="contentTitleHr">
+
+    <h4 style="margin-bottom: 35px;" class="titleSpecial4">
+      Otras publicaciones del usuario
   </h4>
   <!-- <hr> -->
 </div>
 
 
     <div  class="row listResults">
-      <div  *ngFor="let item of this._searchService.registros; let i=index" class="card">
+      <div  *ngFor="let item of this._searchService.registros; let i=index" class="card rounded">
 
-        <div (click)="goPublication(item._id)" *ngIf="item._files[0].type != 'PDF'" class="card-header">
-          <img class="card-img-top" [src]="item._files[0].file | imagen:'Post':item._id " alt="Card image">
+        <div (click)="goPublication(item._id)" *ngIf="item._files[0].type != 'PDF'" class="pointer card-header">
+          <img class="card-img-top" [src]="item.thumbnail | imagen:'Post':item._id:true " alt="Card image">
         </div>
-        <div (click)="goPublication(item._id)" *ngIf="item._files[0].type == 'PDF'" class="card-header typePDF">
+        <div (click)="goPublication(item._id)" *ngIf="(item._files[0]) && item._files[0].type == 'PDF'" class="pointer card-header">
 
-          <div class="iconoDownload">
+          <!-- <div class="iconoDownload">
             <a  [routerLink]="['/publication/infoPost', item._id ]" class="hiperButtonWhite">
               <i class="fas fa-download    "></i>
               Descargar catálogo
             </a>
-          </div>
+          </div> -->
+
+          <!-- and pdf-viewer tag has max-width or display are set. -->
+
+
+
+
+          <pdf-viewer
+          class="pdfList"
+          [src]="item._files[0].file | imagen:'Post':item._files[0].folder "
+          [render-text]="false"
+          [page]="1"
+          [show-all]="false"
+
+          [original-size]="false"
+          [autoresize]="false"
+          style="display: block;">
+          </pdf-viewer>
+
 
         </div>
+
+
+
+        <!-- <pdf-viewer _ngcontent-xpd-c55="" style="display: block;" _nghost-xpd-c54="" ng-reflect-src="http://localhost:5160/img/Post" ng-reflect-render-text="false" ng-reflect-page="1" ng-reflect-show-all="false" ng-reflect-original-size="false" ng-reflect-autoresize="false">
+
+          <div _ngcontent-xpd-c54="" class="ng2-pdf-viewer-container">
+
+            <div _ngcontent-xpd-c54="" class="pdfViewer removePageBorders">
+
+            <div class="page" style="/*! width: 816px; */ /*! height: 1056px; */" data-page-number="1" data-loaded="true">
+
+            <div style="/*! width: 816px; */ /*! height: 1056px; */" class="canvasWrapper"><canvas moz-opaque="" width="492" height="636" style="/*! width: 820px; */ /*! height: 1060px; */" aria-label="Page 1"></canvas></div></div></div></div></pdf-viewer> -->
+
 
         <div class="card-body">
             <span class="catego">
@@ -46,7 +84,8 @@
               $100.000
             </small>
             <span class="cost">
-              ${{ item._rangoPrize.min }} - ${{ item._rangoPrize.max }}
+
+              {{ item._rangoPrize.min | numberFormat | currency : 'USD' : 'symbol' : '1.0-0'  }} - {{ item._rangoPrize.max | numberFormat | currency : 'USD' : 'symbol' : '1.0-0'  }}
             </span>
           </div>
           <p class="card-text">
@@ -57,7 +96,7 @@
         </div>
         <div class="card-footer">
             <div class="centerCustom">
-                <a [routerLink]="['/publication/infoPost', item._id ]" style="color: white" class="buttonCustom btn btn-success btn-flat">Ingresar</a>
+                <a (click)="goPublication(item._id)" style="color: white" class="buttonCustom btn btn-success btn-flat">Ingresar</a>
               </div>
 
               <div class="reactions">

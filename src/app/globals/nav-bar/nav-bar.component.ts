@@ -2,8 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { recursosWeb } from "src/app/config/recursosWeb";
 import { LoginComponent } from "src/app/components/login/login.component";
 
-import { UsersService, SearchService, _globalConfig } from "src/app/services/service.index";
+import { UsersService, SearchService, GlobalConfigService } from "src/app/services/service.index";
 import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: "app-nav-bar",
@@ -14,20 +17,27 @@ export class NavBarComponent implements OnInit {
   icono: string = "";
 
   constructor(
+    private url: LocationStrategy,
+    public router: Router,
+    public activatedRoute: ActivatedRoute,
     private recursosWeb: recursosWeb,
     public _usersService: UsersService,
     public _searchService: SearchService,
-    public _globalConfig: _globalConfig
+    public GlobalConfigService: GlobalConfigService,
   )
   // public loginComponent: LoginComponent
   {
     this.icono = recursosWeb.getIcons("logoWeb");
+
   }
 
   ngOnInit(): void {}
 
   openLogin() {
     this._usersService.loginVisible = !this._usersService.loginVisible;
+     // Do comparision here.....
+        ///////////////////////////
+        // console.log(this.router.url);
   }
 
 
@@ -43,25 +53,39 @@ export class NavBarComponent implements OnInit {
       typeFind: 'buscador'
     }
 
-    this._globalConfig.spinner = true;
+
+
+    this.GlobalConfigService.spinner = true;
     this._searchService.searchByTextPOST(l).subscribe((resp) => {
-      // //console.log(resp);
+      // ////console.log(resp);
+
+
+
 
       if (resp.status == 200 && resp.ok == true) {
         // this._notifyService.Toast.fire({
-        // //console.log(resp);
+        // ////console.log(resp);
         // this._notifyService.Toast.fire({
         //   title: resp.message,
         //   // text: '¡Gracias por unirte a Mercado Pyme!',
         //   icon: "success",
         // });
 
-        if( resp.data.length > 0  && resp.data[0].length > 0){
+
+        if( resp.data.length > 0  && resp.data[0].length > 0 ){
+
           this._searchService.registros = resp.data[0];
-          //console.log(this._searchService.registros);
+
+          ////console.log(this._searchService.registros);
         }else{
           this._searchService.registros = [];
         }
+
+        // if(!this.url.path().includes("/home") || (this.url.path().length == 1) ){
+        //   this.router.navigate(["/home"]);
+        // }
+
+
       } else {
         // this._notifyService.Toast.fire({
         // title: resp.message,
@@ -70,13 +94,13 @@ export class NavBarComponent implements OnInit {
         // });
       }
 
-      this._globalConfig.spinner = false;
+      this.GlobalConfigService.spinner = false;
     });
 
   }
 
   ocultarLogin(e: Event) {
-    // //////console.log(e.target['className']);
+    // ////////console.log(e.target['className']);
 
 
       if( e.target['className'] != '' &&

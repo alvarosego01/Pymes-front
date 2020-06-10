@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
-import { NotifyService, _globalConfig } from 'src/app/services/service.index';
+import { NotifyService, GlobalConfigService, PostsService } from 'src/app/services/service.index';
 import { NgForm } from '@angular/forms';
 
 import { _UserModelNatural, _UserModelCompany
@@ -15,6 +15,8 @@ import { _UserModelNatural, _UserModelCompany
 })
 export class ProfileComponent implements OnInit {
 
+
+  usuarioInfo: any = [];
 
   imagenSubir: File;
   imagenTemp: any;
@@ -85,10 +87,13 @@ ngdirectionCompany: string;
   constructor(
     public _usersService: UsersService,
     public _notifyService: NotifyService,
-    public _globalConfig: _globalConfig
+    public GlobalConfigService: GlobalConfigService,
+    public _postService: PostsService
   ) {
 
-    //console.log(this._globalConfig.tipoIdentificacion);
+    this.GlobalConfigService.setTitle('Perfil de usuario');
+
+    ////console.log(this.GlobalConfigService.tipoIdentificacion);
 
     this.email = this._usersService.usuario.email;
     this.gender = this._usersService.usuario.gender;
@@ -118,21 +123,21 @@ ngdirectionCompany: string;
     this.companyPhonee = this._usersService.usuario._companyPhones;
     this.nrPhones = this._usersService.usuario._companyPhones.length;
 
-    //console.log(this.companyPhonee);
+    ////console.log(this.companyPhonee);
   }
 
 
-    //console.log('map',this._usersService.usuario._mapUrl);
+    ////console.log('map',this._usersService.usuario._mapUrl);
 
     if(this._usersService.usuario._mapUrl != null){
-      // //////console.log(this._usersService.usuario._mapUrl.mapUrl);
+      // ////////console.log(this._usersService.usuario._mapUrl.mapUrl);
       var l = this._usersService.usuario._mapUrl;
       this.setMapUrl(l);
 
 
     }
 
-    var dpPrev = this._globalConfig.departamentos.find( d => d.departamento === this.department );
+    var dpPrev = this.GlobalConfigService.departamentos.find( d => d.departamento === this.department );
 
     this.ciudades = dpPrev.ciudades;
 
@@ -142,10 +147,10 @@ ngdirectionCompany: string;
 
     for (var i = 0; i < this._usersService.usuario._naturalEconomicActivity.length; ++i) {
       this.estadosActividad.push(this._usersService.usuario._naturalEconomicActivity[i].typeActivity);
-      //////console.log(this._usersService.usuario._naturalEconomicActivity[i].details);
+      ////////console.log(this._usersService.usuario._naturalEconomicActivity[i].details);
       switch (this._usersService.usuario._naturalEconomicActivity[i].typeActivity) {
         case "Producción":
-        //////console.log('fue produccion');
+        ////////console.log('fue produccion');
         this.ProduccionActivity = this._usersService.usuario._naturalEconomicActivity[i].details;
         break;
         case "Comercialización":
@@ -163,7 +168,9 @@ ngdirectionCompany: string;
       }
     }
 
-    //console.log(this._usersService.usuario);
+    ////console.log(this._usersService.usuario);
+    //console.log(this._usersService.usuario._id);
+    this.getStatsGeneral(this._usersService.usuario._id);
 
   }
 
@@ -189,7 +196,13 @@ ngdirectionCompany: string;
 
   ngOnInit(): void {
 
-  }
+    // if((this._usersService.estaLogueado() == true)){
+
+
+
+  // }
+}
+
 
   clearFiles(){
     this.imagenSubir = null;
@@ -242,20 +255,20 @@ ngdirectionCompany: string;
       });
       return;
     }
-    this._globalConfig.spinner = true;
+    this.GlobalConfigService.spinner = true;
 
     this._usersService.changeFileUser( this.imagenSubir, type, file,this._usersService.usuario._id )
           .then( (resp) => {
 
 
-            this._globalConfig.spinner = false;
+            this.GlobalConfigService.spinner = false;
             this._notifyService.Toast.fire({
               title: 'La imagen ha sido cambiada',
               // text: 'El archivo no se pudo enviar',
               icon: 'success'
             });
 
-            // //////console.log(resp['User']);
+            // ////////console.log(resp['User']);
             // let r_id = resp._id;
             // let rUser = resp.User;
             this._usersService.guardarStorage( this._usersService.usuario._id , this._usersService.token, resp['User']);
@@ -263,9 +276,9 @@ ngdirectionCompany: string;
           })
           .catch( err => {
 
-            ////////console.log(err);
+            //////////console.log(err);
 
-            this._globalConfig.spinner = false;
+            this.GlobalConfigService.spinner = false;
             this._notifyService.Toast.fire({
               title: 'Algo salió mal',
               text: 'El archivo no se pudo enviar',
@@ -288,19 +301,53 @@ ngdirectionCompany: string;
 
   activateEconomicActivity(){
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    //////console.log(this.estadosActividad);
+    ////////console.log(this.estadosActividad);
   }
 
   setCiudades(i){
-    // //////console.log('Got the selectedVendor as : ', i);
+    // ////////console.log('Got the selectedVendor as : ', i);
     // return;
     let k = JSON.parse(i);
     k = k.id;
     i = k;
-    let dp = this._globalConfig.departamentos;
+    let dp = this.GlobalConfigService.departamentos;
     this.ciudades = dp[i].ciudades;
     this.department = dp[i].departamento;
   }
+
+
+
+
+  getStatsGeneral(id){
+
+    this.GlobalConfigService.spinner = true;
+    this._postService.getStatsGeneralGET(id).subscribe((resp) => {
+      // ////console.log(resp);
+
+      if (resp.status == 200 && resp.ok == true) {
+
+
+        // this.statsGeneral = resp.data;
+        this.usuarioInfo.statsGeneral  = resp.data
+        // this.setUserInformation();
+        // if(this.usuarioInfo.length > 0){
+        // }
+        this.GlobalConfigService.spinner = false;
+      } else {
+        // this._notifyService.Toast.fire({
+        // title: resp.message,
+        // text: '¡Gracias por unirte a Mercado Pyme!',
+        // icon: "error",
+        // });
+        this.GlobalConfigService.spinner = false;
+      }
+
+      this.GlobalConfigService.spinner = false;
+
+    });
+
+  }
+
 
 
   async captrarLocalizacion(){
@@ -308,20 +355,20 @@ ngdirectionCompany: string;
 
     let x = this._usersService.getLocation();
 
-    this._globalConfig.spinner = true;
+    this.GlobalConfigService.spinner = true;
     this.activateMap = false
    //  this._usuarioService.promiseTimeout(5000, x);
      x.then(r => {
 
-       //////console.log(r);
+       ////////console.log(r);
        this.coordsMap = r;
-       this._globalConfig.spinner = false;
+       this.GlobalConfigService.spinner = false;
        if(Object.keys(this.coordsMap).length > 0 ){
          this.activateMap = true;
-       // //////console.log('activado mapa', );
+       // ////////console.log('activado mapa', );
        }
      }, err => {
-       this._globalConfig.spinner = false;
+       this.GlobalConfigService.spinner = false;
        this._notifyService.Toast.fire({
          title: 'Lo sentimos',
          text:'No pudimos encontrar tu localización',
@@ -372,22 +419,22 @@ userModifyAccount(forma: NgForm, type){
        // forma.value.estadosActividad,
        );
 
-              //////console.log(usuario,'conformado');
+              ////////console.log(usuario,'conformado');
 
-              this._globalConfig.spinner = true;
+              this.GlobalConfigService.spinner = true;
               //
                         this._usersService.updateUserPUT( usuario, null , 'natural' )
                         .subscribe( resp => {
               //
-                          this._globalConfig.spinner = false;
+                          this.GlobalConfigService.spinner = false;
 
-                          // //////console.log(resp);
+                          // ////////console.log(resp);
                           // return;
                           // forma.reset();
                            // this._usersService.guardarStorage( this._usersService.usuario._id , this._usersService.token, resp['User']);
                       }, ERR => {
-                        //////console.log(ERR);
-                        this._globalConfig.spinner = false;
+                        ////////console.log(ERR);
+                        this.GlobalConfigService.spinner = false;
                       });
 
 
@@ -475,22 +522,22 @@ userModifyAccount(forma: NgForm, type){
       );
 
 
-       //////console.log(usuario,'conformado');
+       ////////console.log(usuario,'conformado');
 
-          this._globalConfig.spinner = true;
+          this.GlobalConfigService.spinner = true;
 //
           this._usersService.updateUserPUT( usuario, null , 'natural' )
           .subscribe( resp => {
 //
-            this._globalConfig.spinner = false;
+            this.GlobalConfigService.spinner = false;
 
-            // //////console.log(resp);
+            // ////////console.log(resp);
             // return;
             // forma.reset();
              // this._usersService.guardarStorage( this._usersService.usuario._id , this._usersService.token, resp['User']);
         }, ERR => {
-          //////console.log(ERR);
-          this._globalConfig.spinner = false;
+          ////////console.log(ERR);
+          this.GlobalConfigService.spinner = false;
         });
 
 
@@ -498,7 +545,7 @@ userModifyAccount(forma: NgForm, type){
 }
     if(this._usersService.usuario.role == 'EMPRESA_ROLE'){
 
-      // //console.log('ngPositionCompany', this.ngPositionCompany);
+      // ////console.log('ngPositionCompany', this.ngPositionCompany);
 
 
      let  economicActivity:any[] = [];
@@ -578,22 +625,22 @@ userModifyAccount(forma: NgForm, type){
       );
 
 
-       ////console.log(usuario,'conformado');
+       //////console.log(usuario,'conformado');
 
-          this._globalConfig.spinner = true;
+          this.GlobalConfigService.spinner = true;
 //
           this._usersService.updateUserPUT( null, usuario ,'company' )
           .subscribe( resp => {
 //
-            this._globalConfig.spinner = false;
+            this.GlobalConfigService.spinner = false;
 
-            // //////console.log(resp);
+            // ////////console.log(resp);
             // return;
             // forma.reset();
              // this._usersService.guardarStorage( this._usersService.usuario._id , this._usersService.token, resp['User']);
         }, ERR => {
-          //console.log(ERR);
-          this._globalConfig.spinner = false;
+          ////console.log(ERR);
+          this.GlobalConfigService.spinner = false;
         });
 
 
@@ -696,7 +743,7 @@ userModifyPymeData(forma: NgForm){
 
     }
 
-    // //console.log(cphones);
+    // ////console.log(cphones);
 // return;
 
     let usuario = new _UserModelCompany(
@@ -723,22 +770,22 @@ userModifyPymeData(forma: NgForm){
      );
 
 
-      //  //console.log(usuario,'conformado');
+      //  ////console.log(usuario,'conformado');
 
-       this._globalConfig.spinner = true;
+       this.GlobalConfigService.spinner = true;
        //
                  this._usersService.updateCompanyDataPUT( usuario )
                  .subscribe( resp => {
        //
-                   this._globalConfig.spinner = false;
+                   this.GlobalConfigService.spinner = false;
 
-                   // //////console.log(resp);
+                   // ////////console.log(resp);
                    // return;
                    // forma.reset();
                     // this._usersService.guardarStorage( this._usersService.usuario._id , this._usersService.token, resp['User']);
                }, ERR => {
-                 //console.log(ERR);
-                 this._globalConfig.spinner = false;
+                 ////console.log(ERR);
+                 this.GlobalConfigService.spinner = false;
                });
 
 

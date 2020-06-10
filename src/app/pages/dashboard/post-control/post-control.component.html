@@ -51,7 +51,7 @@
                       <i class="fa fa-phone" aria-hidden="true"></i>
                       </span>
                   </div>
-                  <input   [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngPhone" [required] ="this.test == 1"  name="Phone" type="tel" class="form-control" >
+                  <input  [imask]="this._formsResource.phoneMask()"  [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngPhone" [required] ="this.test == 1"  name="Phone" type="tel" class="form-control" >
                 </div>
             </div>
 
@@ -63,7 +63,7 @@
                     <i class="fas fa-mobile-alt"></i>
                     </span>
                 </div>
-                <input   [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngcelPhone" [required] ="this.test == 1"  name="celPhone" type="tel" class="form-control" >
+                <input  [imask]="this._formsResource.phoneMask()" [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngcelPhone" [required] ="this.test == 1"  name="celPhone" type="tel" class="form-control" >
               </div>
           </div>
 
@@ -87,8 +87,8 @@
             <div class="form-group clearfix">
               <div class="icheck-success">
 
-                <label for="aceptaTerminosNatural">
-                  <input [(ngModel)]="this.autoDataContact" (click)="activateDataUser($event)"  type="checkbox" id="aceptaTerminosNatural">
+                <label for="usarMismosDatos">
+                  <input [(ngModel)]="this.autoDataContact" (click)="activateDataUser($event)"  type="checkbox" id="usarMismosDatos">
                   ¿Deseas editar tus  datos de contacto para esta publicación?
                 </label>
               </div>
@@ -107,7 +107,7 @@
                 <i class="fab fa-whatsapp"></i>
                  </span>
              </div>
-             <input  ngModel name="redWhatsapp" type="text" class="form-control" >
+             <input [imask]="this._formsResource.phoneMask()" ngModel name="redWhatsapp" type="text" class="form-control" >
            </div>
            </div>
               <div class="form-group clearfix col-md-12 col-lg-6">
@@ -118,7 +118,7 @@
                 <i class="fab fa-instagram"></i>
                  </span>
              </div>
-             <input  ngModel name="redInstagram" type="text" class="form-control" >
+             <input  [imask]="this._formsResource.instagramMask()" ngModel name="redInstagram" type="text" class="form-control" >
            </div>
            </div>
 
@@ -130,7 +130,7 @@
              <i class="fab fa-facebook"></i>
               </span>
           </div>
-          <input  ngModel name="redFacebook" type="text" class="form-control" >
+          <input  [imask]="this._formsResource.facebookMask()" ngModel name="redFacebook" type="text" class="form-control" >
         </div>
         </div>
 
@@ -143,7 +143,7 @@
                 <i class="fas fa-globe"></i>
                  </span>
              </div>
-             <input  ngModel name="redWeb" type="text" class="form-control" >
+             <input  ngModel name="redWeb" type="url" class="form-control" >
            </div>
            </div>
 
@@ -255,9 +255,9 @@
 
                       </span>
                     </div>
-                    <select (change)="setCiudades($event.target.value)" [(ngModel)]="this.ngDepartment" [required] ="this.test == 1" ngModel name="Department" class="form-control" >
+                    <select (change)="setCiudades($event.target.value)" [(ngModel)]="this.ngDepartment"  ngModel name="Department" class="form-control" >
                         <option value="" disabled selected ></option>
-                        <option *ngFor="let item of this._globalConfig.departamentos" value="{{item | json}}">
+                        <option *ngFor="let item of this.GlobalConfigService.departamentos" value="{{item | json}}">
                           {{item.departamento}}
                         </option>
 
@@ -326,7 +326,12 @@
 
                 <div class="form-group clearfix col-md-12">
                   <label for="targetPublication">¿A quién va dirigida la publicación?</label>
-                  <textarea  [required] ="this.test == 1" ngModel name="targetPublication" class="form-control" rows="3" placeholder="Escribe a quien va dirigido en forma de Hashtag ... por ejemplo: #Hombres #Mujeres #Edades #Ciudades #Estratos #Productos #Moda #Cultura #Salud"></textarea>
+                  <!-- (keyup)="this._formsResource.tags($event.target.value)" -->
+                  <textarea
+
+
+
+                  [required] ="this.test == 1" ngModel name="targetPublication" class="form-control" rows="3" placeholder="Escribe a quien va dirigido en forma de Hashtag ... por ejemplo: #Hombres #Mujeres #Edades #Ciudades #Estratos #Productos #Moda #Cultura #Salud"></textarea>
                 </div>
 
 
@@ -386,7 +391,7 @@
           <i class="fas fa-map"></i>
           </span>
       </div>
-      <input (keyup)="prueba()" [(ngModel)]="altMapUrl"  [ngModelOptions]="{standalone: true}" name="altMap" type="text" class="form-control" >
+      <input  [(ngModel)]="altMapUrl"  [ngModelOptions]="{standalone: true}" name="altMap" type="text" class="form-control" >
     </div>
   </div>
 
@@ -476,7 +481,7 @@
                       <i class="fas fa-dollar-sign"></i>
                       </span>
                   </div>
-                  <input  [required] ="this.test == 1" ngModel name="Min" type="number" class="form-control" >
+                  <input  [imask]="this._formsResource.moneyMask()"  [required] ="this.test == 1" ngModel name="Min" type="text" class="form-control" >
                 </div>
             </div>
               <div class="form-group clearfix col-md-12 col-lg-6">
@@ -487,7 +492,7 @@
                       <i class="fas fa-dollar-sign"></i>
                       </span>
                   </div>
-                  <input    [required] ="this.test == 1" ngModel name="Max" type="number" class="form-control" >
+                  <input    [imask]="this._formsResource.moneyMask()"  [required] ="this.test == 1" ngModel name="Max" type="text" class="form-control" >
                 </div>
             </div>
 
@@ -501,8 +506,8 @@
 
                       <div class="icheck-success">
 
-                          <label for="aceptaTerminosNatural">
-                            <input required  ngModel name="Terms" type="checkbox" id="aceptaTerminosNatural1">
+                          <label for="aceptarTerminosPublic">
+                            <input required  ngModel name="Terms" type="checkbox" id="aceptarTerminosPublic1">
                               Autorizo para usar mi  información en concordancia con lo previsto en esta <a target="_blank" href="../../../assets/dist/documents/Política de Privacidad y Tratamiento de los Datos Personales-min.pdf" class="hiperbutton">Política de Privacidad y tratamiento de datos personales</a>
                           </label>
                         </div>

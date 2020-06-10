@@ -11,7 +11,7 @@
         </li>
       </ul>
 
-      <div class="logo" >
+      <div [routerLink]="['/home']" #navlink routerLinkActive="active" class="logo pointer" >
         <img src="../../../assets/dist/img/logoPyme.svg" alt="">
       </div>
 
@@ -68,7 +68,7 @@
           <div class="ico">
             <img src="../../../assets/dist/img/logoUser.svg" alt="">
           </div>
-            Publicar
+          Inicia sesión
         </a>
       </li>
       <li class="nav-item registerButton">

@@ -7,6 +7,7 @@ $verdePyme: #2D907C
 
 .list
     // display: none
+    width: 100%
     padding-top: 0px
     // background-color: $fondoGrisDesign
     .contentTitleHr
@@ -33,32 +34,13 @@ $verdePyme: #2D907C
         // background-color: red
         padding: 0
         .card-header.typePDF
+            padding: 0!important
             background-color: $VerdeOscur
-            display: flex
-            justify-content: center
-            align-content: center
-            align-items: center
             transition: $trans
-            .iconoDownload
-                display: block
-                margin: auto
-                transition: $trans
-                // color: white
-                // font-size: 28px
-                a.hiperButtonWhite
-                    font-size: 22px
-                    transition: $trans
-                    display: inline-block
-            &:hover
-                background-color: $VerdeClar
-        .iconoDownload
-            // display: none
-            a.hiperButtonWhite
-                // display: none
-                font-size: 32px
-                // animation: heartBeat
-                // animation-duration: 1s
+            display: block
+
         .card-header
+            border-radius: 75px 75px 0 0
             padding: 0
             position: relative
             padding-bottom: 0
@@ -68,7 +50,7 @@ $verdePyme: #2D907C
             img
                 height: 100%
                 object-fit: cover
-                object-position: center
+                object-position: top
             @include responsivo(telefonoTable)
                 height: 250px!important
             @include responsivo(pcMedio)
@@ -92,6 +74,7 @@ $verdePyme: #2D907C
                 width: 100%
                 color: $GrisOscur
                 font-size: 18px
+                margin-bottom: 10px
             .price
                 display: flex
                 flex-direction: column
@@ -105,8 +88,8 @@ $verdePyme: #2D907C
                 .cost
                     display: block
                     color: $VerdeClar
-                    font-size: 22px
-                    line-height: 26px
+                    font-size: 18px
+                    line-height: 18px
                     font-weight: bold
             p.card-text
                 margin: 15px 0
@@ -121,6 +104,7 @@ $verdePyme: #2D907C
             padding: 0
             padding-bottom: 5%
             background-color: white
+            border-radius: 0 0 75px 75px
             .centerCustom
                 a
                     font-size: 14px!important

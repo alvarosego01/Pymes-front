@@ -6,10 +6,12 @@ import { _PostModel } from "src/app/models/postModel";
 import {PostsService} from '../../../services/posts.service';
 import {
   NotifyService,
-  _globalConfig,
+  GlobalConfigService,
+  FormsResourcesService,
   //  PostsService
 } from "src/app/services/service.index";
 import { Filebase64Service } from 'src/app/services/filebase64.service';
+import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
 // import { PostsService } from "src/app/services/posts.service";
 
 @Component({
@@ -61,16 +63,17 @@ export class PostControlComponent implements OnInit {
   constructor(
     public _usersService: UsersService,
     public _notifyService: NotifyService,
-    public _globalConfig: _globalConfig,
+    public GlobalConfigService: GlobalConfigService,
     public _postService: PostsService,
     public _fileBase64: Filebase64Service,
+    public _formsResource: FormsResourcesService,
     public router: Router,
   ) {
     // this._usersService.setCaptcha();
     // this.datosUsuario = this._usersService.usuario;
-    // //////console.log(this.datosUsuario);
+    // ////////console.log(this.datosUsuario);
 
-    // //////console.log(this._postService.categoryPrincipal);
+    // ////////console.log(this._postService.categoryPrincipal);
     this.initCitys();
   }
 
@@ -83,18 +86,18 @@ export class PostControlComponent implements OnInit {
   async captrarLocalizacion() {
     let x = this._usersService.getLocation();
 
-    this._globalConfig.spinner = true;
+    this.GlobalConfigService.spinner = true;
     this.activateMap = false;
     x.then((r) => {
-      ////console.log(r);
+      //////console.log(r);
       this.coordsMap = r;
-      this._globalConfig.spinner = false;
+      this.GlobalConfigService.spinner = false;
       if (Object.keys(this.coordsMap).length > 0) {
         this.activateMap = true;
-        // ////console.log('activado mapa', );
+        // //////console.log('activado mapa', );
       }
     }, err => {
-      this._globalConfig.spinner = false;
+      this.GlobalConfigService.spinner = false;
       this._notifyService.Toast.fire({
         title: 'Lo sentimos',
         text:'No pudimos encontrar tu localización',
@@ -139,11 +142,11 @@ export class PostControlComponent implements OnInit {
       // delete this.urlFiles[i];
       // delete this.imagenesSubir[i];
 
-      ////console.log(i);
+      //////console.log(i);
 
-      ////console.log('al retirar');
-      ////console.log(this.urlFiles);
-      ////console.log(this.imagenesSubir);
+      //////console.log('al retirar');
+      //////console.log(this.urlFiles);
+      //////console.log(this.imagenesSubir);
 
 
     this._notifyService.Toast.fire({
@@ -172,7 +175,7 @@ export class PostControlComponent implements OnInit {
   clearFiles(event) {
     this.urlFiles = [];
     this.imagenesSubir = [];
-    //console.log('clear!');
+    ////console.log('clear!');
 
     if (this.ngTypeAdjuntos == "3 Fotos") {
       this.nroFotos = 3;
@@ -189,17 +192,17 @@ export class PostControlComponent implements OnInit {
       this.nroFotos = 1;
     }
 
-    //console.log(this.ngTypeAdjuntos);
+    ////console.log(this.ngTypeAdjuntos);
   }
 
   initCitys() {
     for (
       let index = 0;
-      index < this._globalConfig.departamentos.length;
+      index < this.GlobalConfigService.departamentos.length;
       index++
     ) {
-      var element = this._globalConfig.departamentos[index];
-      var cd = this._globalConfig.departamentos[index].ciudades;
+      var element = this.GlobalConfigService.departamentos[index];
+      var cd = this.GlobalConfigService.departamentos[index].ciudades;
       if (element.departamento == this.ngDepartment) {
         // this.citiesTarget = cd;
         this.ciudades = cd;
@@ -223,14 +226,14 @@ export class PostControlComponent implements OnInit {
 
   activateEconomicActivity() {
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    //////console.log(this.estadosActividad);
+    ////////console.log(this.estadosActividad);
   }
 
   setCiudades(i) {
     let k = JSON.parse(i);
     i = k.id;
     // let c =k.ciudades
-    let dp = this._globalConfig.departamentos;
+    let dp = this.GlobalConfigService.departamentos;
     this.ciudades = dp[i].ciudades;
   }
 
@@ -238,9 +241,9 @@ export class PostControlComponent implements OnInit {
     let k = JSON.parse(i);
     let p = k.base;
     let c = k.child;
-    // ////console.log(i);
+    // //////console.log(i);
     // return;
-    // //////console.log(this._postService.categoryPrincipal[i]);
+    // ////////console.log(this._postService.categoryPrincipal[i]);
     this.subCategory = c;
 
     if (this.subCategory.length == 0) {
@@ -251,32 +254,33 @@ export class PostControlComponent implements OnInit {
     // let k = JSON.parse(i);
     // k = k.id;
     // i = k;
-    // let dp = this._globalConfig.departamentos;
+    // let dp = this.GlobalConfigService.departamentos;
     // this.ciudades = dp[i].ciudades;
     //
   }
 
   getMyPublications() {
-    this._globalConfig.spinner = true;
+    this.GlobalConfigService.spinner = true;
 
     this._postService.getMyPublications().subscribe((resp) => {
       this.publications = resp.data;
 
-      this._globalConfig.spinner = false;
-      // ////////console.log(this.listasPerros);
+      this.GlobalConfigService.spinner = false;
+      // //////////console.log(this.listasPerros);
     });
   }
 
   setSubCategoryOther(e) {
-    ////console.log(e);
+    //////console.log(e);
 
     this.ngNewCategory = e == "Otra" ? e : null;
   }
 
   createPublication(forma: NgForm) {
-    ////console.log(forma.value, " el envio de post");
+    // console.log(forma.value, " el envio de post");
+    // return;
 
-    ////console.log(this.coordsMap);
+    //////console.log(this.coordsMap);
 
     if(this.imagenesSubir.length == 0){
           this._notifyService.Toast.fire({
@@ -295,8 +299,12 @@ export class PostControlComponent implements OnInit {
       });
       return;
     }
-
-    if (forma.value.Min > forma.value.Max) {
+     forma.value.Min = new NumberFormatPipe().transform(forma.value.Min);
+     forma.value.Max = new NumberFormatPipe().transform(forma.value.Max);
+    let min = parseInt(forma.value.Min);
+    let max = parseInt(forma.value.Max);
+    if ((min >= max) ||
+        (min == 0 || max == 0)) {
       this._notifyService.Toast.fire({
         title: "Rango de precio incorrecto",
         icon: "error",
@@ -337,8 +345,8 @@ export class PostControlComponent implements OnInit {
     };
 
     var precio = {
-      min: forma.value.Min,
-      max: forma.value.Max,
+      min: min,
+      max: max,
     };
 
     var social = {
@@ -364,14 +372,14 @@ export class PostControlComponent implements OnInit {
       // _files:
     };
 
-    // ////console.log(post, "conformado");
+    // //////console.log(post, "conformado");
     // return;
-    ////console.log('imagenes en total', this.imagenesSubir);
-    this._globalConfig.spinner = true;
+    //////console.log('imagenes en total', this.imagenesSubir);
+    this.GlobalConfigService.spinner = true;
     this._postService
       .createPublication(post, this.imagenesSubir)
       .then((resp) => {
-        this._globalConfig.spinner = false;
+        this.GlobalConfigService.spinner = false;
         // this._notifyService.Toast.fire({
         //   title: 'La publicación ha sido creada con exito',
         //   // text: 'El archivo no se pudo enviar',
@@ -380,7 +388,7 @@ export class PostControlComponent implements OnInit {
         this._notifyService.swalNormal.fire({
 
           title: "¡Publicación creada con exito!",
-          text: "¡Gracias por participar y pautar con nosotros, desde el próximo 1 de junio, en nuestro gran lanzamiento, estarás a la vista de todos!",
+          text: "¡Gracias por participar y pautar con nosotros, con tan solo un click estarás a la vista de todos!",
           icon: "success",
           confirmButtonText: 'Aceptar'
 
@@ -396,15 +404,15 @@ export class PostControlComponent implements OnInit {
         this.imagenesSubir = [];
         this.urlFiles = [];
         // this._usersService.usuario = resp.User;
-        ////console.log('por true', resp);
+        //////console.log('por true', resp);
         this._postService.notificacion.emit( resp );
       })
       .catch((e) => {
-        ////console.log('por error',e);
-        ////////console.log(e);
+        //////console.log('por error',e);
+        //////////console.log(e);
         // var error = JSON.parse(e)
         if (e.status == 201 && e.ok == true) {
-          this._globalConfig.spinner = false;
+          this.GlobalConfigService.spinner = false;
           // this._notifyService.Toast.fire({
           // title: 'La publicación ha sido creada con exito',
           // text: 'El archivo no se pudo enviar',
@@ -413,7 +421,7 @@ export class PostControlComponent implements OnInit {
           this._notifyService.swalNormal.fire({
 
             title: "¡Publicación creada con exito!",
-            text: "¡Gracias por participar y pautar con nosotros, desde el próximo 1 de junio, en nuestro gran lanzamiento, estarás a la vista de todos!",
+            text: "¡Gracias por participar y pautar con nosotros, con tan solo un click estarás a la vista de todos!",
             icon: "success",
             confirmButtonText: 'Aceptar'
 
@@ -428,7 +436,7 @@ export class PostControlComponent implements OnInit {
           this.imagenesSubir = [];
         this.urlFiles = [];
         } else {
-          this._globalConfig.spinner = false;
+          this.GlobalConfigService.spinner = false;
           this._notifyService.Toast.fire({
             title: "Algo ha salido mal",
             text: "Intente más tarde por favor",
@@ -471,10 +479,10 @@ export class PostControlComponent implements OnInit {
 
   async selectFiles(event) {
     //
-    //console.log(this.nroFotos);
-    //////console.log(event.target.files);
+    ////console.log(this.nroFotos);
+    ////////console.log(event.target.files);
     if(event.target.files){
-      ////console.log('total', event.target.files);
+      //////console.log('total', event.target.files);
       for (let index = 0; index < event.target.files.length; index++) {
 
         var reader = new FileReader();
@@ -483,7 +491,7 @@ export class PostControlComponent implements OnInit {
 
         reader.readAsDataURL(event.target.files[index]);
         var fileup = event.target.files[index];
-        ////console.log('imagen nro ', index, fileup);
+        //////console.log('imagen nro ', index, fileup);
 
 
        reader.onload =  ((event:any) => {
@@ -493,7 +501,7 @@ export class PostControlComponent implements OnInit {
 
           var ft = this._fileBase64.getFormatBase64(event.target.result);
 
-          if ( this._globalConfig.imgFormat.indexOf( ft.smallFormat ) < 0 && this.ngTypeAdjuntos != 'Catálogo PDF') {
+          if ( this.GlobalConfigService.imgFormat.indexOf( ft.smallFormat ) < 0 && this.ngTypeAdjuntos != 'Catálogo PDF') {
 
             // this.imagenSubir = null;
             this._notifyService.Toast.fire({
@@ -508,13 +516,13 @@ export class PostControlComponent implements OnInit {
 
           // return;
           var x = new Promise((resolve,reject) => {
-            // ////console.log('entra en promesa', index);
+            // //////console.log('entra en promesa', index);
             image.onload = function() {
-              // ////console.log('datos de imagn',image);
+              // //////console.log('datos de imagn',image);
                 var k = [image.width, image.height];
                 resolve(k);
-                ////console.log('datos promesa', image);
-                ////console.log('Sale de promesa, resuelve', index);
+                //////console.log('datos promesa', image);
+                //////console.log('Sale de promesa, resuelve', index);
             };
           })
 
@@ -540,8 +548,8 @@ export class PostControlComponent implements OnInit {
             if(r[0] >= 200 && r[1] >= 200 ){
               this.urlFiles.push(event.target.result);
               this.imagenesSubir.push(fileup);
-              // ////console.log(fileup.size);
-              // ////console.log(this.urlFiles, 'urlfiles');
+              // //////console.log(fileup.size);
+              // //////console.log(this.urlFiles, 'urlfiles');
             }else{
               this._notifyService.Toast.fire({
                 title:'Dimensiones no permitidas',
@@ -556,7 +564,7 @@ export class PostControlComponent implements OnInit {
           }
 
         if(this.ngTypeAdjuntos == 'Catálogo PDF'){
-          //////console.log('archivo', reader);
+          ////////console.log('archivo', reader);
            // return;
 
          if ( event.target.result.indexOf('PDF') < 0 && this.ngTypeAdjuntos == 'Catálogo PDF') {
@@ -590,8 +598,8 @@ export class PostControlComponent implements OnInit {
               }
               this.urlFiles.push(event.target.result);
               this.imagenesSubir.push(fileup);
-              //////console.log(this.urlFiles, 'los datos');
-              //////console.log(event.target.result, 'los datos');
+              ////////console.log(this.urlFiles, 'los datos');
+              ////////console.log(event.target.result, 'los datos');
 
           resolve();
         }
@@ -604,18 +612,14 @@ export class PostControlComponent implements OnInit {
 
       });
 
-       // ////console.log(this.urlFiles, 'urlfiles');
+       // //////console.log(this.urlFiles, 'urlfiles');
 
 
       }
-      ////console.log(this.imagenesSubir, 'imgsubir finales');
+      //////console.log(this.imagenesSubir, 'imgsubir finales');
     }
   }
 
-
-  prueba(){
-    console.log(this.altMapUrl);
-  }
 
 
 

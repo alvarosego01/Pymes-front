@@ -20,7 +20,7 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="card" *ngIf="this.allPublications.length > 0">
+      <div class="card" *ngIf=" (this.allPublications) && this.allPublications.length > 0">
 
         <div class="card-body p-0">
 
@@ -34,7 +34,7 @@
                         Producto o servicio
                       </th>
                       <th>
-                        Archivos
+                          Propietario
                       </th>
                       <th >
                           Categoría
@@ -70,24 +70,16 @@
                               {{item.created_at}}
                           </small>
                       </td>
-                      <td class="columFiles">
 
-                          <ul *ngIf="item._files[0].type != 'PDF'" class="list-inline">
+                      <td>
 
-                            <li *ngFor="let files of item._files" class="list-inline-item">
+                        <a [routerLink]="['/user', item.user._id]" routerLinkActive="active" class="hiper">
+                            {{ item.user.name }} <br> {{ item.user.surname }} <br>
+                        </a>
+                            <small>
+                                {{ item.user.role | roleTransform }}
+                            </small>
 
-                                  <img alt="Avatar" class="table-avatar" [src]="files.file | imagen:'Post':files.folder ">
-
-                              </li>
-
-                          </ul>
-                          <ul *ngIf="item._files[0].type == 'PDF'" class="list-inline">
-
-                              <a [href]="item._files[0].file | imagen:'Post':item._files[0].folder ">
-                                  PDF
-                              </a>
-
-                          </ul>
                       </td>
 
                       <td>
@@ -99,36 +91,48 @@
                       </td>
 
                       <td >
-                        <ul *ngIf="item._target.length > 0">
+                        <ul *ngIf="(item._target) && item._target.length > 0">
                             <li *ngFor="let t of item._target">
-                                {{t.tag}}
+                                <div [innerHtml]="t.tag | tags">
+
+                                </div>
+
                             </li>
                         </ul>
-                        <small *ngIf="item._target.length == 0">
+                        <small *ngIf="(item._target) && item._target.length == 0">
                             Sin detalles
                         </small>
                       </td>
                       <td >
 
-                        <ul *ngIf="item._cityTarget.length > 0">
+                        <ul *ngIf="(item._cityTarget) && item._cityTarget.length > 0">
                             <li *ngFor="let t of item._cityTarget">
                                 {{ t.department }} - {{ t.city }}
                             </li>
                         </ul>
-                        <small *ngIf="item._cityTarget.length == 0">
+                        <small *ngIf="(item._cityTarget) && item._cityTarget.length == 0">
                             Sin detalles
                         </small>
                       </td>
 
                       <td>
-                          {{ item._rangoPrize.min }} - {{ item._rangoPrize.max }}
+                          {{ item._rangoPrize.min | numberFormat | currency : 'USD' : 'symbol' : '1.0-0' }} - {{ item._rangoPrize.max | numberFormat | currency : 'USD' : 'symbol' : '1.0-0' }}
                       </td>
 
 
-                      <td *ngIf="item.verify_at != null">
 
-                        <span *ngIf="item.status == false" class="badge badge-danger">No aprobado</span>
-                        <span *ngIf="item.status == true" class="badge badge-success">Aprobado</span>
+
+
+                      <td *ngIf="(item.verify_at) &&  item.verify_at != null">
+
+
+                        <span *ngIf="(!item.status)" class="badge badge-danger">No aprobado</span>
+                        <p *ngIf="(!item.status) && (item._adminReasons)" style="text-align: left; margin-top: 10px;">
+                            {{ item._adminReasons.reasons }}
+                        </p>
+
+
+                        <span *ngIf="(item.status)" class="badge badge-success">Aprobado</span>
 
                       </td>
                       <td *ngIf="item.verify_at == null">
@@ -163,7 +167,7 @@
         <!-- /.card-body -->
       </div>
       <!-- existPublications -->
-      <div class="jumbotron" *ngIf="this.allPublications.length == 0">
+      <div class="jumbotron" *ngIf="(this.allPublications) && this.allPublications.length == 0">
         <h1 class="titleSpecial2">Sin resultados</h1>
         <p>No hay publicaciones en este momento</p>
       </div>

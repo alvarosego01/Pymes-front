@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { _globalConfig, UsersService } from './services/service.index';
+import { GlobalConfigService, UsersService } from './services/service.index';
 import { LoginComponent } from './components/login/login.component';
 
 
@@ -18,12 +18,12 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    public _globaConfig: _globalConfig,
+    public _globaConfig: GlobalConfigService,
     public _usersService: UsersService
   ) {
     this._globaConfig.spinner = true;
     // this.currentWindowWidth = window.innerWidth
-  
+
    }
 
 

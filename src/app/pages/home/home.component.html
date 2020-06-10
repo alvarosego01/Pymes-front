@@ -1,9 +1,11 @@
   <!-- Content Wrapper. Contains page content -->
+  <app-social-float></app-social-float>
+
   <div id="homeContainer" class="content-wrapper fullWidth" >
 
 
 
- 
+
     <!-- Content Header (Page header) -->
     <div class="headerBanner">
 
@@ -11,23 +13,26 @@
       <img src="../../../assets/resourcesWeb/Banner.jpg" alt="">
 
       <div class="contenido">
+        <div class="c">
 
-        <h4>
-          UNIDOS POR LO NUESTRO
-        </h4>
-        <h5>
-          Lorem Ipsum is simply dummy text of <br>
-          the printing and typesetting  industry
-        </h5>
-        <div class="centerCustom">
-          <a [routerLink]="['/us']" routerLinkActive="active" class="buttonCustom btn btn-success btn-flat">Conoce más</a>
+          <h4>
+            UNIDOS POR LO NUESTRO
+          </h4>
+          <h5>
+            Hoy el sueño de muchos se hace realidad, bienvenidos<br>
+            a Mercado Pyme, <br>
+            la vitrina virtual de las Pymes
+          </h5>
+          <div class="centerCustom">
+            <a [routerLink]="['/us']" routerLinkActive="active" class="buttonCustom btn btn-success btn-flat">Conoce más</a>
         </div>
 
+      </div>
       </div>
 
 
     </div>
-
+<!--
     <div class="row subHeader">
       <div class="goUs col-md-12 col-lg-5">
 
@@ -47,9 +52,9 @@
         </div>
 
       </div>
-    </div>
+    </div> -->
 
-    <div class="centerContenido container padd10">
+    <div class="centerContenido container padd5">
       <div class="row">
 
         <app-category-lists class="col-md-12 col-lg-2" ></app-category-lists>

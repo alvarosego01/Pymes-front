@@ -21,11 +21,11 @@ export class LoginVerifyGuard implements CanActivate, CanActivateChild, CanDeact
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
       if( this._usuarioService.estaLogueado() ){
-        // //////console.log("Paso el guard");
+        // ////////console.log("Paso el guard");
         return true;
 
       }else{
-        // //////console.log('Bloqueado por el guard');
+        // ////////console.log('Bloqueado por el guard');
         // si falla entonces lleva al login
         this.router.navigate(['/us']);
         return false;
@@ -36,11 +36,11 @@ export class LoginVerifyGuard implements CanActivate, CanActivateChild, CanDeact
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if( this._usuarioService.estaLogueado() ){
-        // //////console.log("Paso el guard");
+        // ////////console.log("Paso el guard");
         return true;
 
       }else{
-        // //////console.log('Bloqueado por el guard');
+        // ////////console.log('Bloqueado por el guard');
         // si falla entonces lleva al aboutUs
         this.router.navigate(['/us']);
         return false;
@@ -55,13 +55,13 @@ export class LoginVerifyGuard implements CanActivate, CanActivateChild, CanDeact
 
 // canDeactivate
       if( this._usuarioService.estaLogueado() ){
-        // //////console.log("Paso el guard");
+        // ////////console.log("Paso el guard");
         // this.router.navigate(['/us']);
         // return this.permissions.canDeactivate(this._usuarioService.token);
         // return true;
         return this.router.parseUrl('/us');
       }else{
-        // //////console.log('Bloqueado por el guard');
+        // ////////console.log('Bloqueado por el guard');
         // return false;
         // si falla entonces lleva al aboutUs
 

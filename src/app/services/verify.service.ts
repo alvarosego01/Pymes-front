@@ -39,28 +39,18 @@ export class VerifyService {
 
 
 
-  verifyPublicationPOST(idPublication, user, elect){
+  verifyPublicationPOST(idPublication, user, elect, reasons = null){
 
 
     let url = `${_SERVICIOS}/verify/${idPublication}/${user}?t=${this._userService.token}`;
 
     let l = {
-      status: (elect == 'Aprobado')? true: false
+      status: (elect == 'Aprobado')? true: false,
+      reasons: (reasons != null)? reasons : null
     }
 
     return this.http.post(url, l).pipe(
       map((resp: any) => {
-        ////////console.log("respuesta", resp);
-        // alert("Usuario registrado");
-        // swal('Perro registrado', '' , 'success');
-        // let n = new _NotifyModel(
-        //   "nAccountCreatedNoVerify",
-        //   null,
-        //   resp.data._id
-        // );
-        // this._notifyService.sendNotifyEmailPOST(n).subscribe((resp) => {
-//
-        // });
 
         return resp;
       }),

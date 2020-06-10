@@ -18,7 +18,11 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 import { PostManagerComponent } from './admin/post-manager/post-manager.component';
 import { AdminComponent } from './admin/admin.component';
 import { ADMIN_MODULE } from './admin/admin.module';
- 
+import { EditPostComponent } from './edit-post/edit-post.component';
+
+
+
+import {IMaskModule} from 'angular-imask';
 
 
 @NgModule({
@@ -30,6 +34,7 @@ import { ADMIN_MODULE } from './admin/admin.module';
     HomeComponent,
     PostManagerComponent,
     AdminComponent,
+    EditPostComponent,
 
   ],
   imports: [
@@ -39,7 +44,8 @@ import { ADMIN_MODULE } from './admin/admin.module';
     ReactiveFormsModule,
     // [RouterModule.forChild(DASHBOARD_ROUTES)]
     DASHBOARD_ROUTES,
-    PipesModule
+    PipesModule,
+    IMaskModule
   ],
   exports: [RouterModule]
   //   providers: [
@@ -47,7 +53,7 @@ import { ADMIN_MODULE } from './admin/admin.module';
     // UsersService,
     // SearchService,
     // NotifyService,
-    // _globalConfig,
+    // GlobalConfigService,
 //   ]
 
 })

@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 
@@ -15,7 +15,7 @@ import {
          UsersService,
          SearchService,
          NotifyService,
-         _globalConfig} from '../app/services/service.index';
+         GlobalConfigService} from '../app/services/service.index';
 
 // componentes
 import { AppComponent } from './app.component';
@@ -50,6 +50,9 @@ import { StarRatingModule } from 'angular-star-rating';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { PdfViewComponent } from './components/pdf-view/pdf-view.component';
 import { BreadComponent } from './globals/bread/bread.component';
+
+import {IMaskModule} from 'angular-imask';
+
 
 @NgModule({
   declarations: [
@@ -87,15 +90,17 @@ import { BreadComponent } from './globals/bread/bread.component';
     ADMIN_MODULE,
     PipesModule,
     StarRatingModule.forRoot(),
-    PdfViewerModule
+    PdfViewerModule,
+    IMaskModule
   ],
   providers: [
     PostsService,
     UsersService,
     SearchService,
     recursosWeb,
-    _globalConfig,
-    NotifyService
+    GlobalConfigService,
+    NotifyService,
+    Title
   ],
   bootstrap: [AppComponent],
 

@@ -112,11 +112,17 @@ a
     transition: $trans!important
     &:hover
         color: $VerdeClar!important
+        cursor: pointer!important
 
 a.navButton.active,
 a.active
     color: $VerdeOscur!important
 
+
+.pointer
+    transition: $trans
+    &:hover
+        cursor: pointer!important
 
 
 .titleOpc
@@ -146,7 +152,12 @@ a.active
     font-size: 14px
     border-radius: 0!important
     width: fit-content!important
-    display: block
+    display: flex
+    flex-direction: row
+    justify-items: center
+    justify-content: center
+    align-items: center
+    align-content: center
 .buttonCustom
     padding: 5px 30px
     transition: $trans
@@ -155,7 +166,12 @@ a.active
     font-size: 18px
     border-radius: 0!important
     width: fit-content!important
-    display: block
+    display: flex
+    flex-direction: row
+    justify-items: center
+    justify-content: center
+    align-items: center
+    align-content: center
 .buttonCustom.btn-success
     background-color: $VerdeOscur
     &:hover
@@ -488,8 +504,21 @@ form.formDataSend .terms .icheck-success label
 .padd0
     padding: 0
 .padd5
-    padding-left: 5%
-    padding-right: 5%
+    padding-left: 5%!important
+    padding-right: 5%!important
+    @include responsivo(telefonoTable)
+        padding-left: 2.5%!important
+        padding-right: 2.5%!important
+        padding-top: 25px!important
+        padding-bottom: 25px!important
+    @include responsivo(pcMedio)
+        padding-left: 2.5%!important
+        padding-right: 2.5%!important
+        padding-top: 25px!important
+        padding-bottom: 25px!important
+    @include responsivo(general)
+        padding-left: 5%!important
+        padding-right: 5%!important
 .padd10
     // padding-left: 10%!important
     // padding-right: 10%!important
@@ -545,8 +574,58 @@ img.profile-user-img.img-fluid.img-circle
 
 
 .swal2-container.swal2-top-end.swal2-backdrop-show
-    top: 8.5%!important
+    top: 8%!important
+    z-index: 9999999999999999
     @include responsivo(telefonoTable)
-        top: 22.5%!important
+        top: 15%!important
     @include responsivo(pcMedio)
-        top: 22.5%!important
+        top: 15%!important
+
+
+
+
+#containGlobal
+    // padding-top: 60px!important
+    @include responsivo(telefonoTable)
+        padding-top: 80px!important
+    @include responsivo(pcMedio)
+        padding-top: 80px!important
+    @include responsivo(general)
+        padding-top: 65px!important
+    @include responsivo(resto)
+        padding-top: 65px!important
+
+
+
+
+// para las listas de pdf
+pdf-viewer.pdfList
+    display: block
+    width: 100%!important
+    height: 100%!important
+    .pdfViewer.removePageBorders,
+    .ng2-pdf-viewer-container,
+    .page,
+    .canvasWrapper,
+    canvas
+        display: block!important
+        width: 100%!important
+        height: 100%!important
+        overflow: hidden!important
+
+
+#id01
+    @include responsivo(telefonoTable)
+        padding-top: 110px!important
+    @include responsivo(pcMedio)
+        padding-top: 110px!important
+    @include responsivo(general)
+        padding-top: 100px!important
+    @include responsivo(resto)
+        padding-top: 100px!important
+
+
+
+.rounded
+    border-radius: 10px!important
+    overflow: hidden

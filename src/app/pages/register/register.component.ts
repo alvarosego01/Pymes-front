@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
 
 // importaciones de codigo
 // servicios
-import { UsersService, _globalConfig, NotifyService } from "src/app/services/service.index";
+import { UsersService, GlobalConfigService, NotifyService, FormsResourcesService } from "src/app/services/service.index";
 
 import { _UserModelNatural, _UserModelCompany
 
@@ -54,15 +54,18 @@ export class RegisterComponent implements OnInit {
   constructor(
     public router: Router,
     public _usuarioService: UsersService,
-    public _globaConfig: _globalConfig,
+    public _globaConfig: GlobalConfigService,
     public _notifyService: NotifyService,
+    public _formService: FormsResourcesService
+
+
     // public SocialFloatComponent: SocialFloatComponent
     ) {
     this._usuarioService.setCaptcha();
 
 
 
-    // ////console.log(this._globaConfig.departamentos);
+    // //////console.log(this._globaConfig.departamentos);
   }
 
   ngOnInit(): void {
@@ -113,16 +116,16 @@ export class RegisterComponent implements OnInit {
 wrapper.innerHTML= this.mapUrl;
 var div= wrapper.firstChild;
 this.mapElement = div;
-////console.log(div);
+//////console.log(div);
   }
 
   activateEconomicActivity(){
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    ////console.log(this.estadosActividad);
+    //////console.log(this.estadosActividad);
   }
 
   setCiudades(i){
-    // ////console.log('Got the selectedVendor as : ', i);
+    // //////console.log('Got the selectedVendor as : ', i);
     // return;
     let k = JSON.parse(i);
     k = k.id;
@@ -142,12 +145,12 @@ this.mapElement = div;
   //  this._usuarioService.promiseTimeout(5000, x);
     x.then(r => {
 
-      ////console.log(r);
+      //////console.log(r);
       this.coordsMap = r;
       this._globaConfig.spinner = false;
       if(Object.keys(this.coordsMap).length > 0 ){
         this.activateMap = true;
-      // ////console.log('activado mapa', );
+      // //////console.log('activado mapa', );
       }
     }, err => {
       this._globaConfig.spinner = false;
@@ -166,6 +169,7 @@ this.mapElement = div;
   userRegister(forma: NgForm, type) {
 
 
+ 
 
     if (forma.invalid ){
       this._notifyService.Toast.fire({
@@ -190,18 +194,18 @@ this.mapElement = div;
     // }
     if(forma.value.Pass != forma.value.CPass){
       this._notifyService.Toast.fire({
-        title:'Confirmación de cuenta invalida',
+        title:'Confirmación de contraseña invalida',
         icon: 'error'
       });
       return;
     }
 
     if(this.altMapUrl != null && this.altMapUrl != ''){
-      // console.log('lo pone');
+      // //console.log('lo pone');
       this.coordsMap.mapUrl = this.altMapUrl;
     }
 
-    // console.log(this.coordsMap);
+    // //console.log(this.coordsMap);
     // return;
 
     if(type == 'natural'){
@@ -285,7 +289,7 @@ this.mapElement = div;
       // forma.value.estadosActividad,
       );
         //  this.spinner = true;
-      //  //console.log(usuario);
+      //  ////console.log(usuario);
       //  return;
       this._globaConfig.spinner = true;
 //
@@ -296,7 +300,7 @@ this.mapElement = div;
 
             forma.reset();
         }, ERR => {
-          ////console.log(ERR);
+          //////console.log(ERR);
           this._globaConfig.spinner = false;
         });
 
@@ -403,7 +407,7 @@ if(type == 'company'){
 
   );
 
-  ////console.log(usuario, 'envio company');
+  //////console.log(usuario, 'envio company');
       this._globaConfig.spinner = true;
 //
           this._usuarioService.registroUsuarioPOST( null, usuario ,'company' )
@@ -414,7 +418,7 @@ if(type == 'company'){
 
           },
           ERR => {
-            ////console.log(ERR);
+            //////console.log(ERR);
             this._globaConfig.spinner = false;
           });
 

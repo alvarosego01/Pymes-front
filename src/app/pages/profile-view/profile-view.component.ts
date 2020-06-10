@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
-import { NotifyService, _globalConfig, PostsService } from 'src/app/services/service.index';
+import { NotifyService, GlobalConfigService, PostsService } from 'src/app/services/service.index';
 import { NgForm } from '@angular/forms';
 
 import { _UserModelNatural, _UserModelCompany
@@ -95,23 +95,22 @@ roleName: string;
     public activatedRoute: ActivatedRoute,
     public _usersService: UsersService,
     public _notifyService: NotifyService,
-    public _globalConfig: _globalConfig,
+    public GlobalConfigService: GlobalConfigService,
     public _postService: PostsService
   ) {
 
-    //console.log('entra profile');
+    ////console.log('entra profile');
 
     // return;
     activatedRoute.params.subscribe((params) => {
       let id = params["id"];
 
 
-      //console.log(id);
+      ////console.log(id);
       // return;
       // this.setPublication(id);
       this.getUserProfile(id);
-      this.getStatsGeneral(id);
-      this.setNewVisit(id);
+
     });
 
 
@@ -128,61 +127,63 @@ roleName: string;
   setNewVisit(id){
 
 
-    // this._globalConfig.spinner = true;
+    // this.GlobalConfigService.spinner = true;
     this._usersService
       .setNewVisitPUT(id)
       .subscribe((resp) => {
-        // //console.log(resp);
+        // ////console.log(resp);
 
         if (resp.status == 200 && resp.ok == true) {
           // this._notifyService.Toast.fire({
-          // //console.log(resp);
+          // ////console.log(resp);
           // this._notifyService.Toast.fire({
           //   title: resp.message,
           //   // text: '¡Gracias por unirte a Mercado Pyme!',
           //   icon: "success",
           // });
           // this.setActualRanking();
-          this._globalConfig.spinner = false;
+          this.GlobalConfigService.spinner = false;
         } else {
           // this._notifyService.Toast.fire({
           // title: resp.message,
           // text: '¡Gracias por unirte a Mercado Pyme!',
           // icon: "error",
           // });
-          this._globalConfig.spinner = false;
+          this.GlobalConfigService.spinner = false;
         }
 
-        this._globalConfig.spinner = false;
+        this.GlobalConfigService.spinner = false;
       });
 
   }
 
   getStatsGeneral(id){
 
-    this._globalConfig.spinner = true;
+    this.GlobalConfigService.spinner = true;
     this._postService.getStatsGeneralGET(id).subscribe((resp) => {
-      // //console.log(resp);
+      // ////console.log(resp);
 
+      console.log('llamado informacion stats');
       if (resp.status == 200 && resp.ok == true) {
 
 
         // this.statsGeneral = resp.data;
         this.usuarioInfo.statsGeneral  = resp.data
+        //console.log(resp.data);
         // this.setUserInformation();
         // if(this.usuarioInfo.length > 0){
         // }
-        this._globalConfig.spinner = false;
+        this.GlobalConfigService.spinner = false;
       } else {
         // this._notifyService.Toast.fire({
         // title: resp.message,
         // text: '¡Gracias por unirte a Mercado Pyme!',
         // icon: "error",
         // });
-        this._globalConfig.spinner = false;
+        this.GlobalConfigService.spinner = false;
       }
 
-      this._globalConfig.spinner = false;
+      this.GlobalConfigService.spinner = false;
 
     });
 
@@ -211,7 +212,7 @@ roleName: string;
   setUserInformation(){
 
 
-    //console.log('informacion de usuario', this.usuarioInfo);
+    ////console.log('informacion de usuario', this.usuarioInfo);
 
     switch (this.usuarioInfo.role) {
       case "CLIENTE_ROLE":
@@ -258,21 +259,21 @@ roleName: string;
     this.companyPhonee = this.usuarioInfo._companyPhones;
     this.nrPhones = this.usuarioInfo._companyPhones.length;
 
-    //console.log(this.companyPhonee);
+    ////console.log(this.companyPhonee);
   }
 
 
-    //console.log('map',this.usuarioInfo._mapUrl);
+    ////console.log('map',this.usuarioInfo._mapUrl);
 
     if(this.usuarioInfo._mapUrl != null){
-      // //////console.log(this.usuarioInfo._mapUrl.mapUrl);
+      // ////////console.log(this.usuarioInfo._mapUrl.mapUrl);
       var l = this.usuarioInfo._mapUrl;
       this.setMapUrl(l);
 
 
     }
 
-    var dpPrev = this._globalConfig.departamentos.find( d => d.departamento === this.department );
+    var dpPrev = this.GlobalConfigService.departamentos.find( d => d.departamento === this.department );
 
     this.ciudades = dpPrev.ciudades;
 
@@ -282,10 +283,10 @@ roleName: string;
 
     for (var i = 0; i < this.usuarioInfo._naturalEconomicActivity.length; ++i) {
       this.estadosActividad.push(this.usuarioInfo._naturalEconomicActivity[i].typeActivity);
-      //////console.log(this.usuarioInfo._naturalEconomicActivity[i].details);
+      ////////console.log(this.usuarioInfo._naturalEconomicActivity[i].details);
       switch (this.usuarioInfo._naturalEconomicActivity[i].typeActivity) {
         case "Producción":
-        //////console.log('fue produccion');
+        ////////console.log('fue produccion');
         this.ProduccionActivity = this.usuarioInfo._naturalEconomicActivity[i].details;
         break;
         case "Comercialización":
@@ -303,7 +304,9 @@ roleName: string;
       }
     }
 
-    //console.log(this.usuarioInfo);
+    ////console.log(this.usuarioInfo);
+
+    this.GlobalConfigService.setTitle(`Perfil de usuario - ${this.usuarioInfo.name} ${this.usuarioInfo.surname}`);
 
   }
 
@@ -311,9 +314,9 @@ roleName: string;
   getUserProfile(idUser: string ){
 
 
-  this._globalConfig.spinner = true;
+  this.GlobalConfigService.spinner = true;
   this._usersService.getUserProfileGET(idUser).subscribe((resp) => {
-    // //console.log(resp);
+    // ////console.log(resp);
 
     if (resp.status == 200 && resp.ok == true) {
 
@@ -321,20 +324,34 @@ roleName: string;
       this.usuarioInfo = resp.data;
 
       this.setUserInformation();
+
+      this.getStatsGeneral(this.usuarioInfo._id);
+      this.setNewVisit(this.usuarioInfo._id);
       // if(this.usuarioInfo.length > 0){
       // }
-      this._globalConfig.spinner = false;
+
+      this.GlobalConfigService.spinner = false;
     } else {
       // this._notifyService.Toast.fire({
       // title: resp.message,
       // text: '¡Gracias por unirte a Mercado Pyme!',
       // icon: "error",
       // });
-      this._globalConfig.spinner = false;
+      this.GlobalConfigService.spinner = false;
     }
 
-    this._globalConfig.spinner = false;
+    this.GlobalConfigService.spinner = false;
 
+  },(error) => {
+    // //console.log('recibe error acá', error);
+    this._notifyService.Toast.fire({
+      title: error.error.message,
+      // text: '¡Gracias por unirte a Mercado Pyme!',
+      icon: "error",
+    });
+
+    this.GlobalConfigService.spinner = false;
+    this.router.navigate(["/home"]);
   });
 
   }

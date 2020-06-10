@@ -23,11 +23,11 @@ export class NoLoginVerifyGuard implements CanActivate, CanActivateChild {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
       if (this._usuarioService.estaLogueado()) {
-        // ////////console.log("Paso el guard");
+        // //////////console.log("Paso el guard");
         this.router.navigate(["/dashboard"]);
        return false;
       } else {
-        // ////////console.log('Bloqueado por el guard');
+        // //////////console.log('Bloqueado por el guard');
         // si falla entonces lleva al login
 
         return true;

@@ -30,7 +30,7 @@ import { ADMIN_ROUTES } from './admin.routes';
     // UsersService,
     // SearchService,
     // NotifyService,
-    // _globalConfig,
+    // GlobalConfigService,
 //   ]
 
 })
