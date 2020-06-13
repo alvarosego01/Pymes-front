@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { SocialFloatComponent } from 'src/app/globals/globals.index';
-import { GlobalConfigService, NotifyService } from 'src/app/services/service.index';
+import { GlobalConfigService, NotifyService, UsersService } from 'src/app/services/service.index';
 
 
 // import { Module } from '';
@@ -15,12 +15,13 @@ import { GlobalConfigService, NotifyService } from 'src/app/services/service.ind
 })
 export class UsComponent implements OnInit {
 
-
+  planes: boolean = false;
 
   constructor(
     // public SocialFloatComponent: SocialFloatComponent
     public _notifyServie: NotifyService,
-    public GlobalConfigService: GlobalConfigService
+    public GlobalConfigService: GlobalConfigService,
+    public _userService: UsersService
   ) {
     this.GlobalConfigService.setTitle('Nosotros');
     this.openVideo();
@@ -43,6 +44,13 @@ export class UsComponent implements OnInit {
       showConfirmButton: false
       // allowOutsideClick: () => {},
     });
+
+  }
+
+
+  openPlanes(){
+
+
 
   }
 

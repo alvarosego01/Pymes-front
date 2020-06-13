@@ -1,4 +1,8 @@
+
 <div class="categorySection">
+
+
+
     <div class="menuProduct">
       <h6>
         Filtros
@@ -14,12 +18,42 @@
             </p>
           </a>
           <ul class="nav nav-treeview" style="display: block;">
-
+<!--
             <li *ngFor="let item of this._postService.categoryPrincipal, let i = index" class="nav-item">
               <a (click)="this.searchByCategory(item.base)" class="nav-link">
                 <p>{{ item.base }}</p>
               </a>
-            </li>
+            </li> -->
+              <li *ngFor="let item of this._postService.categoryPrincipal, let i = index" class="nav-item has-treeview">
+
+                <a (click)="this.searchByCategory(item.base, null)" class="nav-link" [ngClass]="{'active': this._searchService.catState.base == item.base}">
+                  <p>
+                    {{ item.base }}
+                    <i class="right fas fa-angle-left"
+                    [ngStyle]="{
+                      'transform': (this._searchService.catState.base == item.base)? 'rotate(-90deg)': 'rotate(0deg)'
+                    }"
+                    ></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview"
+                [ngStyle]="{
+                  'display': (this._searchService.catState.base != item.base)? 'none': ''
+                }"
+                >
+                <!-- 'display': this._searchService.catState.base != item.base -->
+
+                  <li *ngFor="let child of this._postService.categoryPrincipal[i].child" class="nav-item">
+                    <a (click)="this.searchByCategory(item.base, child)" class="nav-link" [ngClass]="{'active': this._searchService.catState.child == child}">
+
+                      <p> {{ child }} </p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+
+
 
 
 
@@ -97,7 +131,9 @@
           </ul>
           </li>
 
-          <li class="nav-item  has-treeview menu-open">
+          <li
+          *ngIf="(this._searchService.catState) && (this._searchService.catState.base != null) && (this._searchService.catState.child != null)"
+          class="nav-item  has-treeview menu-open">
             <a href="#" class="categoryBase nav-link">
 
               <p>

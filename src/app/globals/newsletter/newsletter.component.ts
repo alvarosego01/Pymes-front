@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-newsletter',
@@ -10,6 +11,11 @@ export class NewsletterComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+
+  cargarNewsLetter(forma: NgForm){
+
   }
 
 }

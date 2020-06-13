@@ -1,1 +1,51 @@
-<p>newsletter works!</p>
+
+
+
+<div id="newsletter">
+
+<div class="text">
+    <div class="c">
+
+
+        <h4>
+            Alerta Pyme
+        </h4>
+    <p>
+        Suscríbete para recibir por e-mail los nuevos <br> productos y servicios
+    </p>
+
+</div>
+</div>
+
+<div class="form">
+
+
+    <form
+    ngNativeValidate
+    #f="ngForm"
+    (ngSubmit)="this.cargarNewsLetter( f )"
+    class="form-inline ml-3">
+
+      <div class="row input-group input-group-sm">
+        <input name="Nombre" ngModel class="form-control form-control-navbar" type="search" placeholder="Nombre completo" aria-label="Nombre">
+      </div>
+      <div class="row input-group input-group-sm">
+        <input name="Email" ngModel class="form-control form-control-navbar" type="search" placeholder="Dirección de email" aria-label="Email">
+      </div>
+      <div class="row input-group input-group-sm">
+        <input name="Ciudad" ngModel class="form-control form-control-navbar" type="search" placeholder="Ciudad" aria-label="Ciudad">
+      </div>
+
+
+      <div class="row formButtons">
+        <button type="submit" class="smallButton btn btn-success btn-flat">Suscribir</button>
+      </div>
+
+    </form>
+
+
+
+
+</div>
+
+</div>

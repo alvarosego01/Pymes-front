@@ -11,6 +11,11 @@ import { NgForm } from '@angular/forms';
 })
 export class CategoryListsComponent implements OnInit {
 
+  // catState = {
+  //   base: null,
+  //   child: null
+  // }
+
   constructor(
     public router: Router,
     public activatedRoute: ActivatedRoute,
@@ -184,27 +189,38 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
 
   }
 
-  searchByCategory(argumento: string){
+  searchByCategory(argumento: string, child:string = null){
 
 
+
+    this._searchService.catState.base = argumento;
+    this._searchService.catState.child = (child != null && child != '')? child : null;
+
+    // console.log(this.catState);
 
   let l = {
     categoryp: argumento,
+    child: (child != null && child != '')? child : null,
     typeFind: 'category'
   }
+
+
+  let params = {
+    busqueda: (child != null && child != '')? 'catSub' : 'categoria',
+    categoria: argumento,
+    subCategoria: (child != null && child != '')? child : null,
+
+  }
+
+
+
+  this._searchService.setParameters(params,0,12);
 
   this.GlobalConfigService.spinner = true;
   this._searchService.searchByCategoryPOST(l).subscribe((resp) => {
     // ////console.log(resp);
 
     if (resp.status == 200 && resp.ok == true) {
-      // this._notifyService.Toast.fire({
-      // ////console.log(resp);
-      // this._notifyService.Toast.fire({
-      //   title: resp.message,
-      //   // text: '¡Gracias por unirte a Mercado Pyme!',
-      //   icon: "success",
-      // });
 
       if( resp.data.length > 0  && resp.data[0].length > 0){
         this._searchService.registros = resp.data[0];

@@ -1,0 +1,97 @@
+
+
+
+
+@import "~src/generals"
+
+
+
+
+
+.buscadorGlobal
+    padding: 25px 0
+    // padding-bottom: 50px
+    *
+        box-sizing: border-box!important
+    @include responsivo(telefonoTable)
+        padding-bottom: 50px
+    @include responsivo(pcMedio)
+        padding-bottom: 50px
+    @include responsivo(general)
+        margin-right: 15px!important
+        // margin-left: 15px!important
+    @include responsivo(resto)
+        margin-right: 15px!important
+        // margin-left: 15px!important
+    h5
+        width: 100%
+        text-align: center
+        font-size: 28px
+        color: white
+        margin-bottom: 15px
+        margin-top: 0
+
+    form
+        width: 100%
+        display: block
+        margin: 0!important
+        .input-group
+            display: flex!important
+            flex-direction: row!important
+            justify-content: center!important
+            align-items: center
+            align-content: center
+            border-radius: 0
+            input
+                width: 60%
+                display: block
+                height: 35px
+                width: auto
+                // max-width: 300px
+                border-radius: 0
+                border: 0!important
+                @include responsivo(telefonoTable)
+                    max-width: 250px
+                @include responsivo(pcMedio)
+                    max-width: 350px
+            .input-group-append
+                border-radius: 0
+                width: fit-content!important
+                display: flex
+                justify-content: center
+                align-content: center
+                align-items: center
+                height: 35px
+                margin: 0
+                button
+                    border-radius: 0
+                    transition: $trans
+                    background-color: $VerdeOscur
+                    height: 35px
+                    color: white
+        &:hover
+            .input-group-append
+                button
+                    background-color: $VerdeClar
+        .input-group.input-group-sm
+            width: 100%
+            display: block
+
+.buscadorGlobal.backGreen
+    background-color: $VerdeOscur
+    .input-group
+        .input-group-append
+            border-radius: 0
+            width: fit-content!important
+            display: flex
+            justify-content: center
+            align-content: center
+            align-items: center
+            height: 35px
+            margin: 0
+            button
+                border-radius: 0
+                transition: $trans
+                background-color: white!important
+                height: 35px
+                color: $VerdeOscur!important

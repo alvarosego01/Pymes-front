@@ -1,0 +1,114 @@
+
+
+@import "~src/generals"
+
+
+
+// GrisOscur
+
+
+#newsletter
+    background-color: $GrisOscur
+    display: flex
+    flex-direction: row
+    justify-content: center
+    justify-items: center
+    padding: 50px 0
+    .text
+        display: flex
+        flex-direction: column
+        padding-right: 15px
+        h4,
+        p
+            color: white
+        h4
+            font-size: 48px
+            line-height: 48px
+            margin-bottom: 10px
+            font-weight: bold
+            margin-top: 0
+        p
+            font-size: 18px
+            line-height: 19px
+            margin-bottom: 0
+        .c
+            margin: auto 0
+            display: block
+            padding-bottom: 5px
+
+
+    .form
+        form
+            display: flex
+            flex-direction: column
+            margin-bottom: 0
+            .input-group
+                margin-bottom: 10px
+                input
+                    height: 35px
+                    border-radius: 0
+                    border: 1px solid white!important
+                    margin-bottom: 0
+                    background-color: $GrisOscur
+                    color: white
+                    width: 275px
+                    font-size: 16px
+                    &::placeholder
+                        font-size: 16px
+                        color: white
+            .formButtons
+                display: block
+                width: 100%
+                margin-bottom: 0
+                button
+                    margin: 0!important
+                    font-size: 16px
+    @include responsivo(telefonoTable)
+        display: flex
+        flex-direction: column
+        // width: 90%!important
+        padding-left: 2.5%
+        padding-right: 2.5%
+        .text
+            padding: 0
+            margin-bottom: 25px
+            h4,p
+                text-align: center
+                br
+                    display: none
+            h4
+                font-size: 36px
+                line-height: 36px
+        form
+            margin: 0!important
+            input
+                width: 225px
+            button
+                display: flex
+                margin: 0 auto!important
+        .formButtons
+            display: flex!important
+            justify-items: center!important
+            justify-content: center!important
+    @include responsivo(pcMedio)
+        display: flex
+        flex-direction: column
+        // width: 90%!important
+        padding-left: 2.5%
+        padding-right: 2.5%
+        .text
+            padding: 0
+            margin-bottom: 25px
+            h4,p
+                text-align: center
+        form
+            margin: 0!important
+            input
+                width: 350px
+            button
+                display: flex
+                margin: 0 auto!important
+        .formButtons
+            display: flex!important
+            justify-items: center!important
+            justify-content: center!important

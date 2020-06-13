@@ -36,6 +36,15 @@ import { NgForm } from '@angular/forms';
 })
 export class SearchService {
 
+
+  homeTitleResults: string = 'Destacado';
+
+  catState = {
+    base: null,
+    child: null
+  }
+
+
   registros: any = [];
   publications: any = [];
 
@@ -55,6 +64,9 @@ export class SearchService {
     setParameters(params = null, pagina = 0, porPagina = 12){
 
 
+      if( (params != null) || params.busqueda != 'todo'){
+        this.homeTitleResults = 'Resultados';
+      }
       if( (params == null) || params.busqueda == 'todo'){
 
         this.router.navigate([], {
@@ -67,11 +79,26 @@ export class SearchService {
 
       }
 
-      if(params.busqueda == 'category'){
+      if(params.busqueda == 'categoria' && params.subCategoria == null){
 
         this.router.navigate([], {
           queryParams: {
-            busqueda: 'category',
+            busqueda: 'categoria',
+            categoria: params.categoria,
+            pagina: pagina,
+            porPagina: porPagina
+          }
+        });
+
+      }
+
+      if(params.busqueda == 'catSub' && params.subCategoria != null){
+
+        this.router.navigate([], {
+          queryParams: {
+            busqueda: 'catSub',
+            categoria: params.categoria,
+            subCategoria: params.subCategoria,
             pagina: pagina,
             porPagina: porPagina
           }

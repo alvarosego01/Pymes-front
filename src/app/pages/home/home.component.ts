@@ -1,6 +1,6 @@
 import { Component, OnInit,  } from '@angular/core';
 import { PostsService } from 'src/app/services/posts.service';
-import { GlobalConfigService, SearchService } from 'src/app/services/service.index';
+import { GlobalConfigService, SearchService, UsersService } from 'src/app/services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,13 +11,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class HomeComponent implements OnInit {
 
 
+
   pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
   constructor(
     public router: Router,
     public activatedRoute: ActivatedRoute,
-    public _postService: PostsService,
     public GlobalConfigService: GlobalConfigService,
-    public _searchService: SearchService
+    public _postService: PostsService,
+    public _searchService: SearchService,
+    public _userService: UsersService
   ) {
 
 
@@ -43,6 +45,12 @@ export class HomeComponent implements OnInit {
 
         this.setFirstLook();
       }else
+      if(params.busqueda == 'category' || params.busqueda == 'catSub'){
+
+
+this.searchByCategory(params.categoria, params.subCategoria);
+
+      }else
 
       if(params.busqueda == 'flexible'){
 
@@ -64,6 +72,68 @@ export class HomeComponent implements OnInit {
 
 
 
+  searchByCategory(argumento: string, child:string = null){
+
+
+
+    let l = {
+      categoryp: argumento,
+      child: (child != null && child != '')? child : null,
+      typeFind: 'category'
+    }
+
+
+    let params = {
+      busqueda: (child != null && child != '')? 'catSub' : 'categoria',
+      categoria: argumento,
+      subCategoria: (child != null && child != '')? child : null,
+
+    }
+
+
+
+    this._searchService.setParameters(params,0,12);
+
+    this.GlobalConfigService.spinner = true;
+    this._searchService.searchByCategoryPOST(l).subscribe((resp) => {
+      // ////console.log(resp);
+
+      if (resp.status == 200 && resp.ok == true) {
+
+        if( resp.data.length > 0  && resp.data[0].length > 0){
+          this._searchService.registros = resp.data[0];
+          this._searchService.setActualReactions();
+          ////console.log(this._searchService.registros);
+        }else{
+          this._searchService.registros = [];
+        }
+      } else {
+        // this._notifyService.Toast.fire({
+        // title: resp.message,
+        // text: '¡Gracias por unirte a Mercado Pyme!',
+        // icon: "error",
+        // });
+      }
+
+      this.GlobalConfigService.spinner = false;
+
+    });
+
+
+    }
+
+
+    isMobile() {
+      const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      if(width <= 1000){
+        return true;
+      }else{
+        return false;
+      }
+      // return width <= 1000;
+    }
+
+
 
   setFirstLook() {
     this.GlobalConfigService.spinner = true;
@@ -72,7 +142,7 @@ export class HomeComponent implements OnInit {
 
 
 
-      this._searchService.setParameters({busqueda: 'todo'}, 0, 12);
+      // this._searchService.setParameters({busqueda: 'todo'}, 0, 12);
 
       if (resp.status == 200 && resp.ok == true) {
         // this._notifyService.Toast.fire({
@@ -83,6 +153,9 @@ export class HomeComponent implements OnInit {
         //   icon: "success",
         // });
         if (resp.data.length > 0 && resp.data[0].length > 0) {
+
+          this._searchService.homeTitleResults = 'Destacado';
+
           this._searchService.registros = resp.data[0];
           this._searchService.setActualReactions();
 

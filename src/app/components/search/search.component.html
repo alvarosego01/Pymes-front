@@ -1,1 +1,30 @@
-<p>search works!</p>
+
+
+
+
+
+
+
+<div class="buscadorGlobal" [ngClass]="{'backGreen': this.backGreen == true}">
+
+    <h5 class="title" *ngIf="this.title == true">
+        Buscar en Mercado Pyme
+    </h5>
+
+    <form
+    ngNativeValidate
+    #f="ngForm"
+    (ngSubmit)="searchByText( f )"
+    class="buscador form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input name="Busqueda" ngModel class="form-control form-control-navbar" type="search" placeholder="Busqueda" aria-label="Busqueda">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+
+</div>

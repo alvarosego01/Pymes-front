@@ -77,9 +77,9 @@
             {{ item.created_at }}
           </small>
           <h4 class="card-title">
-            {{ item.title }}
+            {{ item.title | stringLimit:50 }}
           </h4>
-          <div class="price">
+          <!-- <div class="price">
             <small class="noPrice">
               $100.000
             </small>
@@ -87,9 +87,9 @@
 
               {{ item._rangoPrize.min | numberFormat | currency : 'USD' : 'symbol' : '1.0-0'  }} - {{ item._rangoPrize.max | numberFormat | currency : 'USD' : 'symbol' : '1.0-0'  }}
             </span>
-          </div>
+          </div> -->
           <p class="card-text">
-            {{ item.content.slice(0,215) + '...' }}
+            {{ item.content | stringLimit:215 }}
           </p>
 
 

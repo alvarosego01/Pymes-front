@@ -16,6 +16,8 @@
         padding-right: 2.5%
         padding-left: 2.5%
     .topFooter
+        position: relative
+        // padding-top: 25px
         .container
             .logo
                 display: block
@@ -45,104 +47,108 @@
                 position: absolute
                 display: block
                 margin: 0 auto
+        // &::before
+        //     content: ''
+        //     border-top: 1.5px solid rgba($GrisClar, 0.4)
+        //     width: 75%
+        //     left: 0
+        //     right: 0
+        //     top: 0
+        //     // padding-top:
+        //     // bottom: 0
+        //     position: absolute
+        //     display: block
+        //     margin: 0 auto
+    .centerFooter
+        p
+            text-align: center
+            width: 100%
+            font-size: 22px
+            color: $VerdeOscur
+        .contact
+            .cont
+                display: flex
+                flex-direction: column
+                justify-content: center
+                a
+                    font-size: 18px
+                    display: block
+                    text-align: center
+                    width: 100%
+                    margin-bottom: 5px
+                    img
+                        width: 25px
+        .documents
+            .legales
+                display: flex
+                flex-direction: column
+                justify-content: center
+                a
+                    width: 100%
+                    text-align: center
+                    display: block
+                    margin-bottom: 5px
+                    font-size: 18px
+        .social
+            ul.redes
+                list-style: none
+                display: flex
+                flex-direction: row
+                padding: 0!important
+                justify-content: center
+                li
+                    margin: 0 10px
+                    margin-bottom: 5px
+                    a
+                        // font-size: 18px
+                        i
+                            font-size: 42px
+        @include responsivo(telefonoTable)
+            display: flex
+            flex-direction: column
+            .social,
+            .documents,
+            .contact
+                a
+                    font-size: 14px!important
+                    i
+                        font-size: 28px!important
+        @include responsivo(pcMedio)
+            display: flex
+            flex-direction: column
+            .social,
+            .documents,
+            .contact
+                a
+                    font-size: 14px!important
+                    i
+                        font-size: 28px!important
+
 
     .baseFooter
-        // padding-left: 5%
-        // padding-right: 5%
-        display: flex
-        flex-direction: row
-        justify-content: space-between
+        position: relative
+        margin: 30px auto
+        margin-bottom: 10px
+        padding-bottom: 25px
         .copyright
-            display: flex
-            flex-direction: row
+
             p
-                color: $GrisClar
-                font-size: 20px
-                padding-bottom: 0
-                margin-bottom: 0
-                margin-right: 10px
-                display: flex
-                align-content: center
-                align-items: center
+                text-align: center
+                font-size: 16.5px
             @include responsivo(telefonoTable)
-                text-align: center
-                // justify-content: center
-                margin: 0 auto!important
-                display: block!important
+                p
+                    font-size: 14px!important
             @include responsivo(pcMedio)
-                text-align: center
-                // justify-content: center
-                margin: 0 auto!important
-                display: block!important
-            @include responsivo(general)
+                p
+                    font-size: 14px!important
+        &::after
+            content: ''
+            position: absolute
+            border-bottom: 1.5px solid rgba($GrisClar, 0.4)
+            left: 0
+            right: 0
+            bottom: 0
+            margin: 0 auto
+            display: block
+            width: 75%
 
-                br
-                    display: none
-            @include responsivo(resto)
-
-                br
-                    display: none
-        .contact
-            display: flex
-            flex-direction: row
-        a
-            display: flex
-            flex-direction: row
-            color: $GrisClar
-            font-size: 20px
-            align-items: center
-            margin: 0 10px
-            &:hover
-                color: $VerdeClar
-            img
-                width: 40px
-                padding-right: 15px
-                display: block
-        @include responsivo(telefonoTable)
-            // padding-left: 2.5%
-            // padding-right: 2.5%
-            display: flex
-            flex-direction: column
-            p,
-            a
-                text-align: center
-                font-size: 14px!important
-            a
-                display: flex
-                flex-direction: row!important
-                margin: 0 auto
-                text-align: center
-                justify-content: center
-            // p,a
-                // font-size: 1.25vw!important
-            .copyright
-                flex-direction: column
-            .contact
-                flex-direction: row
-                img
-                    width: 25px
-                    padding-right: 10px
-
-        @include responsivo(pcMedio)
-            // padding-left: 2.5%
-            // padding-right: 2.5%
-            display: flex
-            flex-direction: column
-            p,
-            a
-                text-align: center
-                font-size: 20px
-            a
-                display: flex
-                flex-direction: row!important
-                margin: 0 auto
-                text-align: center
-                justify-content: center
-            .copyright
-                flex-direction: column
-            .contact
-                flex-direction: row
-
-        @include responsivo(general)
-            p,a
-                font-size: 1vw!important

@@ -6,6 +6,7 @@ import { FormResourcePipe } from './form-resource.pipe';
 import { NumberFormatPipe } from './number-format.pipe';
 import { TagsPipe } from './tags.pipe';
 import { RoleTransformPipe } from './role-transform.pipe';
+import { StringLimitPipe } from './string-limit.pipe';
 // import { SafeUrlPipe } from './';
 
 
@@ -19,7 +20,8 @@ import { RoleTransformPipe } from './role-transform.pipe';
     FormResourcePipe,
     NumberFormatPipe,
     TagsPipe,
-    RoleTransformPipe
+    RoleTransformPipe,
+    StringLimitPipe
   ],
   exports: [
     ImagenPipe,
@@ -27,7 +29,8 @@ import { RoleTransformPipe } from './role-transform.pipe';
     FormResourcePipe,
     NumberFormatPipe,
     TagsPipe,
-    RoleTransformPipe
+    RoleTransformPipe,
+    StringLimitPipe
   ]
 })
 export class PipesModule { }

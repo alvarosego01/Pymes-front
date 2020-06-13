@@ -4,7 +4,8 @@
     padding-top: 0!important
     min-height: unset!important
     background-color: white
-    margin-bottom: 25px!important
+    padding-bottom: 0!important
+    margin-bottom: 0!important
     .header
         background-color: $GrisFondo2
         margin-bottom: 0!important
@@ -98,7 +99,7 @@
                         display: unset!important
     .infoPlans
         padding: 60px 0
-        padding-bottom: 25px
+        // padding-bottom: 25px
         background-color: white
         margin-bottom: 0
         .iva
@@ -108,293 +109,6 @@
             width: 100%
             display: bock
             text-align: center
-        .infoData
-            margin: 50px 0
-            display: flex
-            flex-direction: row
-            .container
-                width: 100%!important
-            .row
-                // display: flex
-
-                // flex-direction: row
-                // height: 100%
-                display: flex
-                flex-direction: row
-                @include responsivo(telefonoTable)
-                    flex-direction: column
-                @include responsivo(pcMedio)
-                    flex-direction: row
-            .tarjetaPrecio
-                // height: 100%
-                // display: table-cell
-                // margin-left: 10px
-                // margin-right: 10px
-                width: 22.5%
-                margin: 0 1.25%
-                margin-bottom: 25px
-                @include responsivo(telefonoTable)
-                    width: 100%
-                    margin: 0 auto
-                    margin-bottom: 25px
-                @include responsivo(pcMedio)
-                    width: 50%
-                    padding-left: 2.5%
-                    padding-right: 2.5%
-                    margin: 0 auto
-                    margin-bottom: 25px
-                .card
-                    // height: 100%
-                    margin-bottom: 0
-                    height: 100%
-                    .card-header
-                        h4
-                            width: 100%
-                            text-align: center
-                            font-weight: bold
-                            // @include responsivo(general)
-                                // display: none
-
-                            @include responsivo(resto)
-                                br
-                                    display: none
-
-
-                        h6
-                            width: 100%
-                            text-align: center
-                            // color: $VerdeClar
-                    .card-footer
-                        padding-top: 0!important
-                    .card-body,
-                    .card-footer
-                        background-color: $GrisFondo2
-                        padding: 0
-                        padding-top: 15px
-                        display: flex
-                        // justify-content: center
-
-                        ul
-                            width: 100%
-                            display: grid
-                            list-style: none
-                            padding: 0
-                            margin-bottom: 0
-                            li
-                                display: block
-                                width: 100%
-                                text-align: center
-                                margin-bottom: 10px
-                                // margin-left: 10px
-                                // margin-right: 10px
-                                color: $GrisClar
-                                padding-bottom: 5px
-                                padding-left: 5%
-                                padding-right: 5%
-                                font-size: 17px
-                                // height: 100px
-                                display: flex
-                                align-content: center
-                                align-items: center
-                                flex-direction: row
-                                position: relative
-                                &::after
-                                    content: ''
-                                    position: absolute
-                                    width: 90%
-                                    display: block
-                                    margin: 0 auto
-                                    bottom: 0
-                                    left: 0
-                                    right: 0
-                                    border-bottom: 1px solid white
-
-                                p
-                                    margin-bottom: 0
-                                    text-align: center
-                                    width: 100%
-                                    display: block
-                                    // border-bottom: 1px solid white
-                            @include responsivo(telefonoTable)
-                                li
-                                    p
-                                        font-size: 20px!important
-                                        width: 100%
-                                        display: block
-                                        text-align: center
-                            @include responsivo(pcMedio)
-                                li
-                                    p
-                                        font-size: 20px!important
-                                        width: 100%
-                                        display: block
-                                        text-align: center
-                            li.special
-                                height: unset
-                                // background-color: $GrisClar
-                                // color: white
-                                padding-top: 10px
-                                padding-bottom: 10px
-                                margin-bottom: 0
-                                min-height: 66px!important
-                                display: grid
-                                align-items: center
-                                align-content: center
-                                height: fit-content!important
-                                font-weight: bold
-                                // &::after
-                                    // display: none!important
-                                // justify-content: center
-                            li.price
-                                height: unset
-                                border-bottom: 0
-                                color: $VerdeOscur
-                                font-size: 20px
-                                font-weight: bold
-                                padding-top: 10px
-                                padding-bottom: 10px
-                                margin-bottom: 0
-                                flex-direction: row
-                                text-align: center
-                                justify-content: center
-                                height: fit-content!important
-                                &::after
-                                    display: none!important
-
-
-                &:nth-child(1)
-                    .card-header
-                        background-color: $verdeMasClar
-                        h4
-                            color: $GrisOscur
-                        h6
-                            color: $GrisClar
-                &:nth-child(2)
-                    .card-header
-                        background-color: $verdeMasClar
-                        h4
-                            color: $GrisOscur
-                        h6
-                            color: $GrisClar
-                &:nth-child(3)
-                    .card-header
-                        background-color: $VerdeClar
-                        h4
-                            color: white
-                        h6
-                            color: $GrisOscur
-                    ul
-                        li
-                            &:nth-child(5)
-                                // height: 125px
-                &:nth-child(4)
-                    .card-header
-                        background-color: $VerdeOscur
-                        h4
-                            color: white
-                        h6
-                            color: $GrisOscur
-                    ul
-                        li
-                            &:nth-child(5)
-                                // height: 125px
-    .infoDiscount
-        background-color: $GrisFondo2
-        width: 100%
-        display: flex
-        justify-content: center
-        flex-direction: row
-        position: relative
-        .element
-            margin: 0 40px
-            @include responsivo(telefonoTable)
-                margin: 25px auto!important
-            @include responsivo(pcMedio)
-                margin: 25px auto!important
-            // @include responsivo(general)
-            //     margin: 0 auto!important
-            // @include responsivo(resto)
-            //     margin: 0 auto!important
-        .element.text
-            color: $VerdeOscur
-            font-size: 32px
-            line-height: 32px
-            display: flex
-            align-items: center
-            justify-content: center
-            font-weight: normal
-
-        .element.month
-            background-color: $VerdeClar
-            padding: 0px 25px
-            width: auto
-            position: relative
-            padding-bottom: 12.5px
-            h4
-                color: white
-                font-size: 36px
-                line-height: 36px
-                display: block
-                // font-weight: bold
-                margin-bottom: 0
-                padding-bottom: 0
-            h3
-                margin-bottom: 0
-                padding-bottom: 0
-                display: block
-                color: $GrisOscur
-                font-size: 60px
-                line-height: 50px
-                font-weight: bold
-                text-align: center
-            &::before
-                content: ''
-                border-top: 12.5px solid $VerdeClar
-                position: absolute
-                top: -8px
-                left: 0
-                right: 0
-                display: block
-                margin: 0 auto
-            &::after
-                content: ''
-                border-bottom: 12.5px solid $VerdeClar
-                position: absolute
-                bottom: -8px
-                left: 0
-                right: 0
-                display: block
-                margin: 0 auto
-        @include responsivo(telefonoTable)
-            flex-direction: column
-            padding: 25px 0
-            .element
-                margin-bottom: 25px
-                width: 90%
-                text-align: center
-                display: block
-                br
-                    display: none
-            .element.month
-                margin-left: auto
-                margin-right: auto
-                max-width: 500px
-        @include responsivo(pcMedio)
-            flex-direction: column
-            padding: 25px 0
-            .element
-                margin-bottom: 25px
-                width: 90%
-                text-align: center
-                display: block
-                br
-                    display: none
-            .element.month
-                margin-left: auto
-                margin-right: auto
-                max-width: 500px
-
-
 
 // video de modal
 
@@ -413,3 +127,220 @@
 
 
 
+.notaPrensa
+    background-color: $GrisFondo2
+    padding: 50px 0
+    .notas
+        padding-top: 15px
+        ul
+            padding: 0
+            list-style: none
+            display: flex
+            flex-direction: column
+            justify-content: center
+            justify-items: center
+            margin: 0 auto
+
+            li
+                a
+                    img
+                        height: 150px
+
+
+
+.infoData
+    display: flex!important
+    flex-direction: column!important
+    .datos
+        background-color: $GrisFondo2
+        border-radius: 40px
+        padding: 25px 0
+        width: 80%
+        margin: 0 auto
+        display: block
+        margin-top: 15px
+        margin-bottom: 25px
+        @include responsivo(telefonoTable)
+            width: 100%!important
+        @include responsivo(pcMedio)
+            width: 100%!important
+    ul.list
+        display: flex
+        flex-direction: column
+        list-style: none
+        justify-content: center
+        justify-items: center
+        padding: 0
+        li
+            text-align: center
+            display: block
+            font-size: 18px
+            position: relative
+            margin-bottom: 15px
+            padding-bottom: 15px
+            padding-left: 5%
+            padding-right: 5%
+            &::after
+                content: ''
+                margin: 0 auto
+                left: 0
+                right: 0
+                bottom: 0
+                display: block
+                position: absolute
+                width: 80%
+                border-bottom: 1px solid white
+            p
+                padding: 0
+                margin: 0
+
+
+
+
+
+.costs
+    display: flex
+    flex-direction: row
+    width: 80%
+    justify-content: space-around
+    margin: 0 auto
+    .plan
+        display: flex
+        flex-direction: column
+        padding: 20px 0
+        width: 300px
+        background-color: $VerdeClar
+        border-radius: 40px!important
+        *
+            text-align: center
+            color: white!important
+        h5
+            font-size: 24px
+            font-weight: bold
+        p
+            font-size: 22px
+    @include responsivo(telefonoTable)
+        width: 100%
+        flex-direction: column
+        .plan
+            width: 100%!important
+            margin-bottom: 25px
+    @include responsivo(pcMedio)
+        width: 100%
+        flex-direction: column
+        .plan
+            width: 100%!important
+            margin-bottom: 25px
+
+
+
+
+
+.extraAnuncio
+    background-color: $GrisClar
+    padding: 75px 0
+    display: flex
+    flex-direction: row
+    justify-content: center
+    justify-items: center
+    .text
+        position: relative
+        display: flex
+        h4
+            color: white
+            font-size: 42px
+            line-height: 45px
+            font-weight: bold
+            padding-right: 15px
+            margin: auto 0
+            display: block
+            // margin-top: 0
+            // margin-bottom: 0
+        &::after
+            border-right: 1.5px solid white
+            content: ''
+            height: 100%
+            display: block
+            right: 0
+            top: 0
+            bottom: 0
+            margin: auto 0
+            position: absolute
+    .infoButton
+        padding-left: 15px
+        p
+            color: white
+            font-size: 18px
+            line-height: 19px
+        // .c
+    @include responsivo(telefonoTable)
+        padding-left: 2.5%
+        padding-right: 2.5%
+        flex-direction: column!important
+        .text
+            text-align: center
+            width: 100%
+            padding-bottom: 15px
+            padding-right: 0
+            h4
+                width: 100%
+                text-align: center
+                font-size: 36px
+                line-height: 36px
+            &::after
+                border-bottom: 1.5px solid white
+                top: unset
+                right: 0
+                left: 0
+                bottom: 0
+                margin: 0 auto
+                width: 50%
+                border-right: 0
+        .infoButton
+            padding-top: 15px
+            padding-left: 0
+            p
+                text-align: center
+                font-size: 18px
+                line-height: 18px
+            .formButtons
+                display: flex
+                justify-items: center
+                justify-content: center
+                button
+                    margin: 0 auto
+                    display: block
+
+    @include responsivo(pcMedio)
+        padding-left: 2.5%
+        padding-right: 2.5%
+        flex-direction: column!important
+        .text
+            text-align: center
+            width: 100%
+            padding-bottom: 15px
+            padding-right: 0
+            h4
+                width: 100%
+                text-align: center
+            &::after
+                border-bottom: 1.5px solid white
+                top: unset
+                right: 0
+                left: 0
+                bottom: 0
+                margin: 0 auto
+                width: 50%
+                border-right: 0
+        .infoButton
+            padding-top: 15px
+            padding-left: 0
+            p
+                text-align: center
+            .formButtons
+                display: flex
+                justify-items: center
+                justify-content: center
+                button
+                    margin: 0 auto
+                    display: block

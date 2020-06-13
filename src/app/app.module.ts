@@ -52,6 +52,7 @@ import { PdfViewComponent } from './components/pdf-view/pdf-view.component';
 import { BreadComponent } from './globals/bread/bread.component';
 
 import {IMaskModule} from 'angular-imask';
+import { PlanesComponent } from './components/planes/planes.component';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import {IMaskModule} from 'angular-imask';
     ProfileViewComponent,
     PdfViewComponent,
     BreadComponent,
-    SocialFloatComponent
+    SocialFloatComponent,
+    PlanesComponent
 
 
   ],
