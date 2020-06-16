@@ -3,19 +3,11 @@
 
   <div id="homeContainer" class="content-wrapper fullWidth" >
 
-
-
-
-    <!-- Content Header (Page header) -->
     <div class="headerBanner">
 
       <!-- background-image: url('../../../assets/resourcesWeb/Banner.jpg') -->
       <img
-      *ngIf="this.isMobile() != true"
-      src="../../../assets/resourcesWeb/Banner.jpg" alt="">
-      <img
-      *ngIf="this.isMobile() == true"
-      src="../../../assets/resourcesWeb/Bannermobil.jpg" alt="">
+      [src]="this.setBanner()" alt="">
 
       <div class="contenido">
         <div class="c">
@@ -37,29 +29,7 @@
 
 
     </div>
-<!--
-    <div class="row subHeader">
-      <div class="goUs col-md-12 col-lg-5">
 
-        <div class="contenido">
-          <a [routerLink]="['/us']" routerLinkActive="active">
-            NOSOTROS
-          </a>
-        </div>
-
-      </div>
-      <div class="zonePyme col-md-12 col-lg-7">
-        <img src="../../../assets/resourcesWeb/zonapyme.jpg" alt="">
-        <div class="contenido">
-          <a [routerLink]="['/us']" routerLinkActive="active">
-            ZONA PYME
-          </a>
-        </div>
-
-      </div>
-    </div> -->
-
-    <!-- <div class="searchNav"> -->
   <app-search
   *ngIf="this.isMobile() == true"
   [title]="true"
@@ -79,7 +49,7 @@
             <h5 class="titleSection">
             {{ this._searchService.homeTitleResults }}
             </h5>
-            <app-posts-lists></app-posts-lists>
+            <app-posts-lists (ScrollLista)="this.ScrollLista($event)"></app-posts-lists>
           </div>
 
         </div>
@@ -101,13 +71,13 @@
     <div class="c">
 
       <p>
-        ¡Registrate ahora y empieza a pautar con nosotros <br>
-        a la vista de todos!
+        Crea tu Cuenta, suscribe tu publicación <br>
+        y empieza a pautar con nosotros
       </p>
       <div class="row formButtons">
         <a
         [routerLink]="['/register']"  routerLinkActive="active"
-         class="smallButton btn btn-success btn-flat">Registrarse</a>
+         class="smallButton btn btn-success btn-flat">Crea Tu Cuenta</a>
       </div>
     </div>
 

@@ -8,6 +8,9 @@
 // ajuste para quitar paddings naturales
 
 
+body,
+html
+    scroll-behavior: smooth
 
 app-nav-bar
     position: fixed
@@ -40,10 +43,11 @@ h1,h2,h3,h4,h5,h6
     width: 100%
     display: block
 
-.titleSpecial2.grisOscuro
+.titleSpecial2.grisOscuro,
+.titleSpecial4.grisOscuro,
+.titleSpecial6.grisOscuro
     color: $GrisOscur!important
-.titleSpecial4.grisOscuro
-    color: $GrisOscur!important
+    // color: $GrisOscur!important
 
 
 .row
@@ -172,8 +176,10 @@ a.active
     justify-content: center
     align-items: center
     align-content: center
+.smallButton.btn-success,
 .buttonCustom.btn-success
     background-color: $VerdeOscur
+    color: white
     &:hover
         background-color: $VerdeClar
         color: white!important
@@ -213,10 +219,10 @@ a.active
     padding-bottom: 60px
     padding-top: 60px
     @include responsivo(telefonoTable)
-        padding: 60px 1%!important
+        padding: 60px 0!important
 
     @include responsivo(pcMedio)
-        padding: 60px 1%!important
+        padding: 60px 0!important
 
 
 
@@ -625,6 +631,9 @@ pdf-viewer.pdfList
     @include responsivo(resto)
         padding-top: 100px!important
 
+.w3-modal-content.w3-animate-top.w3-card-4
+    width: 90%!important
+    margin: 0 auto!important
 
 
 .rounded

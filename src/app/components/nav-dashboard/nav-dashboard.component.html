@@ -1,4 +1,7 @@
-<aside  id="navDashboard" class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{
+<aside  id="navDashboard"
+(clickOutside)="this.closeAside($event)"
+[exclude]="'#navBar'"
+class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{
   'navRespPublic': this._usersService.token == null,
   'navRespUser': this._usersService.token != null
 }">
@@ -115,27 +118,6 @@
 
       </nav>
 
-      <nav class="mt-2 closeDashboard" >
-
-        <ul  class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
-          <li class="nav-item">
-
-            <app-search></app-search>
-
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link " #navlink href="#" role="button">
-              <i class="fas fa-arrow-left nav-icon"></i>
-              <p>
-                Cerrar menú
-              </p>
-            </a>
-          </li>
-
-        </ul>
-      </nav>
 
       <!-- /.sidebar-menu -->
     </div>

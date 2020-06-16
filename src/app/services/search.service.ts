@@ -1,4 +1,4 @@
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { _SERVICIOS } from "./../config/config";
 import { Injectable } from "@angular/core";
 
@@ -23,6 +23,7 @@ import { UsersService } from "./users.service";
 
 import { EventEmitter } from "@angular/core";
 import { NgForm } from '@angular/forms';
+import { GlobalConfigService } from './-global-config.service';
 // import { VerifyService } from './verify.service';
 
 
@@ -37,7 +38,7 @@ import { NgForm } from '@angular/forms';
 export class SearchService {
 
 
-  homeTitleResults: string = 'Destacado';
+  homeTitleResults: string = 'Destacados';
 
   catState = {
     base: null,
@@ -46,13 +47,19 @@ export class SearchService {
 
 
   registros: any = [];
+
+  paginator: any = [];
+
   publications: any = [];
 
   constructor(
     public http: HttpClient,
     // public HttpParams: HttpParams,
     public router: Router,
-    public _userService: UsersService
+    // public router: Router,
+    public activatedRoute: ActivatedRoute,
+    public _userService: UsersService,
+    private GlobalConfig: GlobalConfigService
   ) { }
 
 
@@ -61,7 +68,17 @@ export class SearchService {
   // params: any = {}
 
 
-    setParameters(params = null, pagina = 0, porPagina = 12){
+    setParameters(params = null, pagina = 0){
+
+      if( params == null && pagina == 0 ){
+        this.router.navigate([], {
+
+          queryParams: {
+
+
+          }
+        });
+      }
 
 
       if( (params != null) || params.busqueda != 'todo'){
@@ -70,10 +87,25 @@ export class SearchService {
       if( (params == null) || params.busqueda == 'todo'){
 
         this.router.navigate([], {
+
           queryParams: {
             busqueda: 'todo',
             pagina: pagina,
-            porPagina: porPagina
+
+
+          }
+        });
+
+      }
+      if( params.busqueda == 'buscador'){
+
+        this.router.navigate([], {
+
+          queryParams: {
+            busqueda: 'buscador',
+            pagina: pagina,
+
+
           }
         });
 
@@ -82,11 +114,13 @@ export class SearchService {
       if(params.busqueda == 'categoria' && params.subCategoria == null){
 
         this.router.navigate([], {
+
           queryParams: {
             busqueda: 'categoria',
             categoria: params.categoria,
             pagina: pagina,
-            porPagina: porPagina
+
+
           }
         });
 
@@ -95,12 +129,14 @@ export class SearchService {
       if(params.busqueda == 'catSub' && params.subCategoria != null){
 
         this.router.navigate([], {
+
           queryParams: {
             busqueda: 'catSub',
             categoria: params.categoria,
             subCategoria: params.subCategoria,
             pagina: pagina,
-            porPagina: porPagina
+
+
           }
         });
 
@@ -109,10 +145,12 @@ export class SearchService {
       if(params.busqueda == 'price'){
 
         this.router.navigate([], {
+
           queryParams: {
             busqueda: 'price',
             pagina: pagina,
-            porPagina: porPagina
+
+
           }
         });
 
@@ -121,10 +159,12 @@ export class SearchService {
       if(params.busqueda == 'order'){
 
         this.router.navigate([], {
+
           queryParams: {
             busqueda: 'order',
             pagina: pagina,
-            porPagina: porPagina
+
+
           }
         });
 
@@ -150,7 +190,7 @@ export class SearchService {
         return resp;
       }),
       catchError( err =>{
-        ////////console.log(err);
+        ////////// console.log(err);
 
         return throwError(err);
       })
@@ -159,20 +199,16 @@ export class SearchService {
   }
 
 
-  searchCore(){
-
-  }
-
 
 
 setActualReactions() {
 
-    ////console.log('actualizacio');
+    ////// console.log('actualizacio');
     if(this.registros.length > 0){
 
       this.registros.forEach((relement, index) => {
 
-      // ////console.log(relement.reactions.length);
+      // ////// console.log(relement.reactions.length);
       // return;
 
       this.registros[index].like = 0;
@@ -198,7 +234,7 @@ setActualReactions() {
   }
   // this.registros = r;
 
-  ////console.log('con reaction', this.registros);
+  ////// console.log('con reaction', this.registros);
 
 }
 
@@ -211,32 +247,11 @@ setActualReactions() {
   setFirstLookPOST(){
 
     let url = `${_SERVICIOS}/find`;
-    if(this._userService.estaLogueado() == true){
 
-    let argumento = {
-      status: false,
-      city: this._userService.usuario.city,
-      department: this._userService.usuario.department,
-      typeFind: 'first'
-    }
-
-    return this.http.post( url, argumento ).pipe(
-      map( (resp: any) => {
-
-        return resp;
-      }),
-      catchError( err =>{
-        ////////console.log(err);
-
-        return throwError(err);
-      })
-      );
-
-
-    }else{
 
       let agumento = {
-        typeFind: 'all'
+        typeFind: 'all',
+        movil: this.GlobalConfig.isMobile()
       }
 
       return this.http.post( url, agumento ).pipe(
@@ -245,12 +260,12 @@ setActualReactions() {
           return resp;
         }),
         catchError( err =>{
-          ////////console.log(err);
+          ////////// console.log(err);
 
           return throwError(err);
         })
         );
-    }
+
   }
 
 
@@ -266,7 +281,7 @@ setActualReactions() {
         return resp;
       }),
       catchError( err =>{
-        ////////console.log(err);
+        ////////// console.log(err);
 
         return throwError(err);
       })
@@ -280,7 +295,7 @@ setActualReactions() {
 
   searchByCategoryPOST(argumento: any){
 
-    ////console.log(argumento);
+    ////// console.log(argumento);
     let url = `${_SERVICIOS}/find`;
 
 
@@ -290,7 +305,7 @@ setActualReactions() {
         return resp;
       }),
       catchError( err =>{
-        ////////console.log(err);
+        ////////// console.log(err);
 
         return throwError(err);
       })
@@ -302,22 +317,131 @@ setActualReactions() {
   searchByPricePOST(argumento){
 
 
-    ////console.log(argumento);
+    ////// console.log(argumento);
     let url = `${_SERVICIOS}/find`;
 
 
     return this.http.post( url, argumento ).pipe(
       map( (resp: any) => {
 
-        // ////console.log('respuesta', resp);
+        // ////// console.log('respuesta', resp);
         return resp;
       }),
       catchError( err =>{
-        // ////console.log(err , 'error desde servicio');
+        // ////// console.log(err , 'error desde servicio');
 
         return throwError(err);
       })
       );
+
+
+  }
+
+  recallPaginatePOST(argumento: any){
+
+    let url = `${_SERVICIOS}/find`;
+
+
+    return this.http.post( url, argumento ).pipe(
+      map( (resp: any) => {
+
+        // ////// console.log('respuesta', resp);
+        return resp;
+      }),
+      catchError( err =>{
+        // ////// console.log(err , 'error desde servicio');
+
+        return throwError(err);
+      })
+      );
+
+
+
+  }
+
+
+
+
+  getParameters(){
+
+  return new Promise((resolve,reject) => {
+
+    this.activatedRoute.queryParams.subscribe(params => {
+
+        resolve(params);
+
+      });
+
+    })
+  }
+
+  changePaginator(data: any){
+
+
+    console.log('coño es movil? ',this.GlobalConfig.isMobile());
+
+    if(Object.keys(data.params).length == 0 || data.params.busqueda == 'todo'){
+
+      let argumento = {
+        movil: this.GlobalConfig.isMobile(),
+        typeFind: 'all',
+        oldPaginate: this.paginator,
+        changePaginator: data.change
+      }
+
+      return argumento;
+
+    }
+
+    if(Object.keys(data.params).length > 0){
+
+      if(data.params.busqueda == 'buscador'){
+
+        let argumento = {
+          // categoryp: data.params.categoria,
+          // child: null,
+          movil: this.GlobalConfig.isMobile(),
+          typeFind: 'buscador',
+          title: data.title,
+          oldPaginate: this.paginator,
+          changePaginator: data.change
+        }
+        return argumento;
+      }
+
+      if(data.params.busqueda == 'categoria' && data.params.subCategoria == null){
+
+        let argumento = {
+          categoryp: data.params.categoria,
+          child: null,
+          movil: this.GlobalConfig.isMobile(),
+          typeFind: 'category',
+          oldPaginate: this.paginator,
+          changePaginator: data.change
+        }
+        return argumento;
+      }
+
+      if(data.params.busqueda == 'catSub' && data.params.subCategoria != null){
+        let argumento = {
+          categoryp: data.params.categoria,
+          child: (data.params.subCategoria != null && data.params.subCategoria != '')? data.params.subCategoria : null,
+          movil: this.GlobalConfig.isMobile(),
+          typeFind: 'category',
+          oldPaginate: this.paginator,
+          changePaginator: data.change
+        }
+
+
+        return argumento;
+      }
+
+    }
+
+  }
+
+
+  clearParams(){
 
 
   }

@@ -13,10 +13,10 @@
     // padding-bottom: 50px
     *
         box-sizing: border-box!important
-    @include responsivo(telefonoTable)
-        padding-bottom: 50px
-    @include responsivo(pcMedio)
-        padding-bottom: 50px
+    // @include responsivo(telefonoTable)
+        // padding-bottom: 50px
+    // @include responsivo(pcMedio)
+        // padding-bottom: 50px
     @include responsivo(general)
         margin-right: 15px!important
         // margin-left: 15px!important
@@ -38,7 +38,7 @@
         .input-group
             display: flex!important
             flex-direction: row!important
-            justify-content: center!important
+            justify-content: center
             align-items: center
             align-content: center
             border-radius: 0
@@ -78,7 +78,7 @@
             display: block
 
 .buscadorGlobal.backGreen
-    background-color: $VerdeOscur
+    background-color: $VerdeClar
     .input-group
         .input-group-append
             border-radius: 0
@@ -92,6 +92,16 @@
             button
                 border-radius: 0
                 transition: $trans
-                background-color: white!important
+                background-color: $VerdeOscur!important
                 height: 35px
-                color: $VerdeOscur!important
+                color: white!important
+        @include responsivo(telefonoTable)
+            justify-content: flex-end!important
+            padding-right: 3%!important
+        @include responsivo(pcMedio)
+            justify-content: flex-end!important
+            padding-right: 3%!important
+    @include responsivo(telefonoTable)
+        padding: 7.5px 0!important
+    @include responsivo(pcMedio)
+        padding: 7.5px 0!important

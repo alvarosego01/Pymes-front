@@ -3,7 +3,7 @@
 
 
 
-<div class="list" *ngIf="(this._searchService.registros) && (this._searchService.registros != null) && this._searchService.registros.length > 0">
+<div  id="listado" class="list" *ngIf="(this._searchService.registros) && (this._searchService.registros != null) && this._searchService.registros.length > 0">
 
   <div *ngIf="(this.type) && this.type=='sugerencia' " class="contentTitleHr">
 
@@ -29,17 +29,6 @@
         </div>
         <div (click)="goPublication(item._id)" *ngIf="(item._files[0]) && item._files[0].type == 'PDF'" class="pointer card-header">
 
-          <!-- <div class="iconoDownload">
-            <a  [routerLink]="['/publication/infoPost', item._id ]" class="hiperButtonWhite">
-              <i class="fas fa-download    "></i>
-              Descargar catálogo
-            </a>
-          </div> -->
-
-          <!-- and pdf-viewer tag has max-width or display are set. -->
-
-
-
 
           <pdf-viewer
           class="pdfList"
@@ -55,18 +44,6 @@
 
 
         </div>
-
-
-
-        <!-- <pdf-viewer _ngcontent-xpd-c55="" style="display: block;" _nghost-xpd-c54="" ng-reflect-src="http://localhost:5160/img/Post" ng-reflect-render-text="false" ng-reflect-page="1" ng-reflect-show-all="false" ng-reflect-original-size="false" ng-reflect-autoresize="false">
-
-          <div _ngcontent-xpd-c54="" class="ng2-pdf-viewer-container">
-
-            <div _ngcontent-xpd-c54="" class="pdfViewer removePageBorders">
-
-            <div class="page" style="/*! width: 816px; */ /*! height: 1056px; */" data-page-number="1" data-loaded="true">
-
-            <div style="/*! width: 816px; */ /*! height: 1056px; */" class="canvasWrapper"><canvas moz-opaque="" width="492" height="636" style="/*! width: 820px; */ /*! height: 1060px; */" aria-label="Page 1"></canvas></div></div></div></div></pdf-viewer> -->
 
 
         <div class="card-body">
@@ -132,7 +109,13 @@
 
       </div>
 
+
       </div>
+
+
+      <app-paginator
+      *ngIf="(this._searchService.paginator) && this._searchService.paginator.pageCount > 0"
+      ></app-paginator>
 
       <div *ngIf=" (this._searchService.registros) && this._searchService.registros.length == 0" class="row listResults">
         <h2 class="titleSpecial6" style="text-align: center; width: 100%; display: block">

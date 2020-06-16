@@ -16,6 +16,11 @@ export class CategoryListsComponent implements OnInit {
   //   child: null
   // }
 
+
+  // @Output() closePlanes  =  new EventEmitter<boolean>();
+
+  claseHide: string;
+
   constructor(
     public router: Router,
     public activatedRoute: ActivatedRoute,
@@ -26,6 +31,9 @@ export class CategoryListsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.claseOcultar();
+
   }
 
 
@@ -39,25 +47,15 @@ export class CategoryListsComponent implements OnInit {
 
     // this.GlobalConfigService.spinner = true;
     this._searchService.searchByOrderPOST(l).subscribe((resp) => {
-      // ////console.log(resp);
+      // ////// console.log(resp);
 
       if (resp.status == 200 && resp.ok == true) {
         // this._notifyService.Toast.fire({
-        // ////console.log(resp);
-        // this._notifyService.Toast.fire({
-        //   title: resp.message,
-        //   // text: '¡Gracias por unirte a Mercado Pyme!',
-        //   icon: "success",
-        // });
-
-        // ////console.log(resp);
-        // this.GlobalConfigService.spinner = false;
-        // return;
-
         if( resp.data.length > 0  && resp.data.length > 0){
-          this._searchService.registros = resp.data;
+
+this._searchService.registros = resp.data;
           this._searchService.setActualReactions();
-          ////console.log(this._searchService.registros);
+          ////// console.log(this._searchService.registros);
         }else{
           this._searchService.registros = [];
         }
@@ -97,14 +95,14 @@ let l = {
   title: forma.value.city,
   typeFind: 'city'
 }
-
+this._searchService.paginator = [];
 this.GlobalConfigService.spinner = true;
 this._searchService.searchByTextPOST(l).subscribe((resp) => {
-  // ////console.log(resp);
+  // ////// console.log(resp);
 
   if (resp.status == 200 && resp.ok == true) {
     // this._notifyService.Toast.fire({
-    // ////console.log(resp);
+    // ////// console.log(resp);
     // this._notifyService.Toast.fire({
     //   title: resp.message,
     //   // text: '¡Gracias por unirte a Mercado Pyme!',
@@ -112,9 +110,10 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
     // });
 
     if( resp.data.length > 0  && resp.data[0].length > 0){
-      this._searchService.registros = resp.data[0];
+
+this._searchService.registros = resp.data[0];
       this._searchService.setActualReactions();
-      ////console.log(this._searchService.registros);
+      ////// console.log(this._searchService.registros);
     }else{
       this._searchService.registros = [];
     }
@@ -154,12 +153,12 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
 
   this.GlobalConfigService.spinner = true;
   this._searchService.searchByCategoryPOST(l).subscribe((resp) => {
-    // ////console.log(resp);
+    // ////// console.log(resp);
 
 
     if (resp.status == 200 && resp.ok == true) {
       // this._notifyService.Toast.fire({
-      // ////console.log(resp);
+      // ////// console.log(resp);
       // this._notifyService.Toast.fire({
       //   title: resp.message,
       //   // text: '¡Gracias por unirte a Mercado Pyme!',
@@ -167,9 +166,10 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
       // });
 
       if( resp.data.length > 0  && resp.data[0].length > 0){
-        this._searchService.registros = resp.data[0];
+
+this._searchService.registros = resp.data[0];
         this._searchService.setActualReactions();
-        ////console.log(this._searchService.registros);
+        ////// console.log(this._searchService.registros);
       }else{
         this._searchService.registros = [];
       }
@@ -179,7 +179,7 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
       // text: '¡Gracias por unirte a Mercado Pyme!',
       // icon: "error",
       // });
-      ////console.log(resp,' existe el error');
+      ////// console.log(resp,' existe el error');
       this.GlobalConfigService.spinner = false;
     }
 
@@ -189,19 +189,20 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
 
   }
 
-  searchByCategory(argumento: string, child:string = null){
+  async searchByCategory(argumento: string, child:string = null){
 
-
+    console.log('category from category');
 
     this._searchService.catState.base = argumento;
     this._searchService.catState.child = (child != null && child != '')? child : null;
-
-    // console.log(this.catState);
+    this._searchService.paginator = [];
+    // // console.log(this.catState);
 
   let l = {
     categoryp: argumento,
     child: (child != null && child != '')? child : null,
-    typeFind: 'category'
+    typeFind: 'category',
+    movil: this.GlobalConfigService.isMobile()
   }
 
 
@@ -211,22 +212,60 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
     subCategoria: (child != null && child != '')? child : null,
 
   }
+  var parms = null;
+  await this._searchService.getParameters().then(resp => {
+    // // console.log('la respuesta de parametros', resp);
+    parms = resp;
+  });
+
+  var ppp = {
+    params: parms,
+    change: 'new'
+  }
+
+  // console.log('params enviados', ppp);
+
+  var args = this._searchService.changePaginator(ppp);
 
 
+  // console.log('lo que se pide por categoria', l);
 
-  this._searchService.setParameters(params,0,12);
+  this._searchService.setParameters(params, 0);
 
   this.GlobalConfigService.spinner = true;
-  this._searchService.searchByCategoryPOST(l).subscribe((resp) => {
-    // ////console.log(resp);
+  this._searchService.searchByCategoryPOST(args).subscribe((resp) => {
+
+    // // console.log('por categorias', resp.data);
 
     if (resp.status == 200 && resp.ok == true) {
 
-      if( resp.data.length > 0  && resp.data[0].length > 0){
-        this._searchService.registros = resp.data[0];
+      if ((resp.data) &&  resp.data.length > 0 ) {
+
+
+        this._searchService.homeTitleResults = 'Resultados';
+
+
+        this._searchService.registros = resp.data;
+        this._searchService.paginator = resp.paginator || null;
         this._searchService.setActualReactions();
-        ////console.log(this._searchService.registros);
-      }else{
+
+        // console.log('como queda el paginador', this._searchService.paginator);
+
+        if(this.GlobalConfigService.isMobile() == true){
+
+          this.GlobalConfigService.selectorElement('#listado').then(r => {
+
+            this.GlobalConfigService.scrollIt(r);
+
+            console.log('se mueve a', r);
+
+          });
+
+        }
+
+        //// console.log('actualiza', this._searchService.registros);
+      } else {
+        //
         this._searchService.registros = [];
       }
     } else {
@@ -249,29 +288,31 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
   getAll() {
     this.GlobalConfigService.spinner = true;
     this._searchService.setFirstLookPOST().subscribe((resp) => {
-      // ////console.log(resp);
+      // ////// console.log(resp);
 
 
 
-      this._searchService.setParameters({busqueda: 'todo'}, 0, 12);
+      this._searchService.setParameters({busqueda: 'todo'}, 0);
 
       if (resp.status == 200 && resp.ok == true) {
         // this._notifyService.Toast.fire({
-        // ////console.log(resp);
+        // ////// console.log(resp);
         // this._notifyService.Toast.fire({
         //   title: resp.message,
         //   // text: '¡Gracias por unirte a Mercado Pyme!',
         //   icon: "success",
         // });
         if (resp.data.length > 0 && resp.data[0].length > 0) {
-          this._searchService.registros = resp.data[0];
+
+this._searchService.registros = resp.data[0];
           this._searchService.setActualReactions();
 
 
 
-          //console.log('actualiza', this._searchService.registros);
+          //// console.log('actualiza', this._searchService.registros);
         } else {
           //
+          this._searchService.registros = []
         }
       } else {
         // this._notifyService.Toast.fire({
@@ -288,6 +329,38 @@ this._searchService.searchByTextPOST(l).subscribe((resp) => {
     });
   }
 
+
+
+  claseOcultar(){
+
+    if(this.GlobalConfigService.isMobile() == true){
+
+      this.claseHide = 'none';
+
+    }else{
+      this.claseHide = 'block';
+    }
+
+  }
+
+
+
+  goResults(){
+
+    if(this.GlobalConfigService.isMobile() == true){
+
+      this.GlobalConfigService.selectorElement('#listado').then(r => {
+
+        this.GlobalConfigService.scrollIt(r);
+
+        console.log('se mueve a', r);
+
+      });
+
+    }
+
+
+  }
 
 
 }

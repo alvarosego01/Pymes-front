@@ -53,6 +53,7 @@ import { BreadComponent } from './globals/bread/bread.component';
 
 import {IMaskModule} from 'angular-imask';
 import { PlanesComponent } from './components/planes/planes.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { PlanesComponent } from './components/planes/planes.component';
     PdfViewComponent,
     BreadComponent,
     SocialFloatComponent,
-    PlanesComponent
+    PlanesComponent,
+    PaginatorComponent
 
 
   ],

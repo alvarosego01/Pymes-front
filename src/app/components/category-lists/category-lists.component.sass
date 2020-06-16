@@ -65,10 +65,53 @@
 
     ul.nav.nav-treeview
         padding: 12.5px 0
+        height: auto!important
+        li
+            a
+                p
+                    display: block
+                    width: 100%
+                    i
+                        top: 5px
+                        font-size: 16px
+                        // right: 0
+                        // bottom: 0
     ul.nav.nav-treeview.open
         display: block!important
     ul.nav.nav-treeview.close
 
+    .nav-link
+        transition: $trans
+        display: block
+
     .nav-link.active
         background-color: transparent!important
-        color: $VerdeOscur
+        color: $VerdeClar!important
+        // font-weight: bold
+
+
+ul.categoryPrincipal
+    @include responsivo(telefonoTable)
+        display: none
+    @include responsivo(pcMedio)
+        display: none
+
+
+
+#VerResultados
+    position: fixed
+    right: 0
+    bottom: 0
+    left: 0
+    background-color: $VerdeOscur
+    transition: $trans
+    padding: 5px 2.5%
+    z-index: 9999
+    p
+        color: white
+        text-align: center
+        font-size: 16px
+        margin-bottom: 0
+
+    &:hover
+        background-color: $VerdeClar

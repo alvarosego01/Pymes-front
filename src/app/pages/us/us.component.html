@@ -31,7 +31,7 @@
                     </div>
 
                 <div class="row formButtons leftCustom">
-                    <a  [routerLink]="['/register']"  class="buttonCustom btn btn-success btn-flat">Registrate</a>
+                    <a  [routerLink]="['/register']"  class="buttonCustom btn btn-success btn-flat">Crea tu cuenta</a>
                 </div>
 
         </div>
@@ -142,8 +142,8 @@
     <div class="animated fadeInRight fast infoPlans row">
         <div class="container">
             <div class="row">
-                <h1 class="title titleSpecial2 grisOscuro textCompleteCenter">
-                    SUSCRÍBETE
+                <h1 class="title titleSpecial2 textCompleteCenter">
+                    SUSCRIBE TU PUBLICACIÓN
                 </h1>
 
             </div>
@@ -177,7 +177,8 @@
                     <li>
                         <p>
 
-                            Tendrás acceso a planes preferenciales para campañas particulares de Marketing Digital dirigidas a tu marca <a style="font-weight: bold;" class="hiperButton" (click)="this.openPlanes()">(ver planes)</a>
+                            Tendrás acceso a planes preferenciales para campañas particulares de Marketing Digital dirigidas a tu marca <br>
+                            <a style="font-weight: bold;" class="hiperButton" (click)="this.openPlanes()">(ver planes)</a>
                         </p>
                     </li>
 
@@ -228,13 +229,13 @@
           <div class="c">
 
             <p>
-              ¡Registrate ahora y empieza a pautar con nosotros <br>
-              a la vista de todos!
+                Crea tu Cuenta, suscribe tu publicación <br>
+                y empieza a pautar con nosotros
             </p>
             <div class="row formButtons">
               <a
               [routerLink]="['/register']"  routerLinkActive="active"
-               class="smallButton btn btn-success btn-flat">Registrarse</a>
+               class="smallButton btn btn-success btn-flat">Crea Tu Cuenta</a>
             </div>
           </div>
 
@@ -266,3 +267,11 @@
         </div>
 
 </div>
+
+
+<app-planes
+*ngIf="this.planes == true"
+
+[planes]="this.planes"
+(closePlanes)="cerrarModal()"
+></app-planes>

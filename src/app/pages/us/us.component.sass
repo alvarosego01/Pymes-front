@@ -145,6 +145,12 @@
                 a
                     img
                         height: 150px
+                    @include responsivo(telefonoTable)
+                        img
+                            height: 100px
+                    @include responsivo(pcMedio)
+                        img
+                            height: 100px
 
 
 
@@ -210,7 +216,7 @@
         padding: 20px 0
         width: 300px
         background-color: $VerdeClar
-        border-radius: 40px!important
+        border-radius: 25px!important
         *
             text-align: center
             color: white!important

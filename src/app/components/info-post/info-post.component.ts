@@ -141,11 +141,11 @@ export class InfoPostComponent implements OnInit {
         n =  this.publication._socialNet.whatsapp;
       }
 
-      // console.log('prueba uncion', this.publication._socialNet.whatsapp);
-      // console.log('prueba uncion', this.publication._socialNet.whatsapp.startsWith('57'));
+      // // console.log('prueba uncion', this.publication._socialNet.whatsapp);
+      // // console.log('prueba uncion', this.publication._socialNet.whatsapp.startsWith('57'));
       if(!n.startsWith('57')){
 
-        // console.log('no comienza');
+        // // console.log('no comienza');
         // n =  this.publication._socialNet.whatsapp;
 
         n = '57'+ n;
@@ -154,7 +154,7 @@ export class InfoPostComponent implements OnInit {
         n = n;
       }
 
-      // console.log(n);
+      // // console.log(n);
       let t = "¡Hola,+te+encontré+en+Mercado+Pyme!+requiero+más+información";
       // let t = "¡Hola";
       window.open(`https://wa.me/${n}?text=${t}`, '_blank');
@@ -261,12 +261,12 @@ export class InfoPostComponent implements OnInit {
     this._postService
       .setNewVisitPUT(id)
       .subscribe((resp) => {
-        // ////console.log(resp);
+        // ////// console.log(resp);
 
         this.GlobalConfigService.spinner = true;
         if (resp.status == 200 && resp.ok == true) {
           // this._notifyService.Toast.fire({
-          // ////console.log(resp);
+          // ////// console.log(resp);
           // this._notifyService.Toast.fire({
           //   title: resp.message,
           //   // text: '¡Gracias por unirte a Mercado Pyme!',
@@ -291,10 +291,10 @@ export class InfoPostComponent implements OnInit {
 
 
   setActiveIMG(files, index) {
-    // ////console.log(files);
+    // ////// console.log(files);
     this.imgActive = files.file;
     this.idxActiveImg = index;
-    //console.log('seteado', index);
+    //// console.log('seteado', index);
   }
 
 
@@ -302,8 +302,8 @@ export class InfoPostComponent implements OnInit {
 
     let total_pages = Math.ceil(this.publication._files.length / 4);
 
-    //console.log(this.idxActiveImg);
-    // ////console.log('total', total_pages);
+    //// console.log(this.idxActiveImg);
+    // ////// console.log('total', total_pages);
     switch (n) {
 
       case -1:
@@ -311,7 +311,7 @@ export class InfoPostComponent implements OnInit {
         this.imgPaginate = ( (this.imgPaginate > 0)  )? this.imgPaginate = this.imgPaginate - 1: this.imgPaginate;
         if(this.publication._files[this.idxActiveImg -1]){
           this.idxActiveImg = this.idxActiveImg - 1;
-          //console.log('atras', this.publication._files[this.idxActiveImg]);
+          //// console.log('atras', this.publication._files[this.idxActiveImg]);
           this.imgActive = this.publication._files[this.idxActiveImg].file;
         }
         break;
@@ -320,7 +320,7 @@ export class InfoPostComponent implements OnInit {
 
         if(this.publication._files[this.idxActiveImg + 1]){
           this.idxActiveImg = this.idxActiveImg + 1;
-          //console.log('palante', this.publication._files[this.idxActiveImg]);
+          //// console.log('palante', this.publication._files[this.idxActiveImg]);
           this.imgActive = this.publication._files[this.idxActiveImg].file;
         }
 
@@ -334,7 +334,7 @@ export class InfoPostComponent implements OnInit {
 
       }
 
-      // ////console.log('pagina', this.imgPaginate);
+      // ////// console.log('pagina', this.imgPaginate);
     }
 
 
@@ -342,7 +342,7 @@ export class InfoPostComponent implements OnInit {
 
       this.GlobalConfigService.spinner = true;
       // let idPublic = registro._id;
-      ////console.log('manda a eliminar');
+      ////// console.log('manda a eliminar');
       this._postService.deleteCommentDELETE(ideComment, this.publication._id ).subscribe((resp) => {
         this.GlobalConfigService.spinner = false;
         if (resp.status == 200 && resp.ok == true) {
@@ -351,7 +351,7 @@ export class InfoPostComponent implements OnInit {
             // text: '¡Gracias por unirte a Mercado Pyme!',
             icon: "success",
           });
-          ////console.log('manda a eliminar');
+          ////// console.log('manda a eliminar');
           // this.setActualReactions();
           // this.setActualReactions(idPublic);
           // if(this.idUser != null && this.idUser != ''){
@@ -383,7 +383,7 @@ export class InfoPostComponent implements OnInit {
 
     sendReactionComment(registro ,type: string ) {
 
-      // ////console.log(registro, 'registor');
+      // ////// console.log(registro, 'registor');
 
       // if(this._userService.estaLogueado() == false){
       //   this._notifyService.Toast.fire({
@@ -452,13 +452,13 @@ export class InfoPostComponent implements OnInit {
     this._postService
       .setActualRankingGET(this.publication._id)
       .subscribe((resp) => {
-        // ////console.log(resp);
+        // ////// console.log(resp);
 
         if (resp.status == 200 && resp.ok == true) {
 
 
           this.ratingStars = resp.data.points;
-          // ////console.log(this.settingStars.total);
+          // ////// console.log(this.settingStars.total);
         } else {
           // this._notifyService.Toast.fire({
           // title: resp.message,
@@ -480,7 +480,7 @@ export class InfoPostComponent implements OnInit {
     this._postService.PDFFILE = p;
 
     this.pdfSrc = p;
-    // //console.log(p);
+    // //// console.log(p);
 
     // // $('#pdfView').modal('show')
     // let ht = `
@@ -500,9 +500,9 @@ export class InfoPostComponent implements OnInit {
   }
 
   sendPuntaje(e){
-    // //console.log('eventoo', e.rating);
+    // //// console.log('eventoo', e.rating);
 
-    // //console.log('eventoo', r)
+    // //// console.log('eventoo', r)
 
     // if(this._userService.estaLogueado() == false){
     //   this._notifyService.Toast.fire({
@@ -517,11 +517,11 @@ export class InfoPostComponent implements OnInit {
     this._postService
       .sendRankingPOST(this.publication._id, e.rating)
       .subscribe((resp) => {
-        // ////console.log(resp);
+        // ////// console.log(resp);
 
         if (resp.status == 200 && resp.ok == true) {
           // this._notifyService.Toast.fire({
-          // ////console.log(resp);
+          // ////// console.log(resp);
           this._notifyService.Toast.fire({
             title: resp.message,
             // text: '¡Gracias por unirte a Mercado Pyme!',
@@ -530,7 +530,7 @@ export class InfoPostComponent implements OnInit {
           this.ratingStars = resp.data.points;
           // this.setActualRanking();
 
-          //console.log(resp.data);
+          //// console.log(resp.data);
         } else {
           // this._notifyService.Toast.fire({
           // title: resp.message,
@@ -592,8 +592,8 @@ export class InfoPostComponent implements OnInit {
     this._postService
       .setActualReactionsGET(this.publication._id)
       .subscribe((resp) => {
-        // ////console.log(resp);
-        ////console.log('la respuesta al like', resp);
+        // ////// console.log(resp);
+        ////// console.log('la respuesta al like', resp);
         if (resp.status == 200 && resp.ok == true) {
           this.reactions.like = 0;
           this.reactions.dislike = 0;
@@ -625,14 +625,14 @@ export class InfoPostComponent implements OnInit {
     this._postService
       .getCommentsGET(id)
       .subscribe((resp) => {
-        // ////console.log(resp);
-        // ////console.log('la respuesta al comment', resp);
+        // ////// console.log(resp);
+        // ////// console.log('la respuesta al comment', resp);
         if (resp.status == 200 && resp.ok == true) {
 
 
           this.comments = resp.data;
 
-          ////console.log('LA MIERDA', this.comments);
+          ////// console.log('LA MIERDA', this.comments);
 
           this.comments.forEach((element, i) => {
           this.comments[i].like = 0;
@@ -656,7 +656,7 @@ export class InfoPostComponent implements OnInit {
           });
 
           this.GlobalConfigService.spinner = false;
-          ////console.log('comentarios', this.comments);
+          ////// console.log('comentarios', this.comments);
         } else {
           // this._notifyService.Toast.fire({
           // title: resp.message,
@@ -715,11 +715,11 @@ export class InfoPostComponent implements OnInit {
   this._postService
       .createCommentPOST(this.publication._id, l)
       .subscribe((resp) => {
-        // ////console.log(resp);
+        // ////// console.log(resp);
 
         if (resp.status == 200 && resp.ok == true) {
           // this._notifyService.Toast.fire({
-          // ////console.log(resp);
+          // ////// console.log(resp);
             forma.reset();
           this._notifyService.Toast.fire({
             title: resp.message,
@@ -742,7 +742,7 @@ export class InfoPostComponent implements OnInit {
   }
 
   openContact() {
-    // ////console.log();
+    // ////// console.log();
 
     let ht = `<div class="container containerFull">
     <h4 style="margin-bottom: 15px;" class="titleSpecial4">
@@ -793,7 +793,7 @@ export class InfoPostComponent implements OnInit {
   }
 
   setTypeVisit() {
-    // ////console.log(this.url.path());
+    // ////// console.log(this.url.path());
 
     if (
       this._userService.estaLogueado() == true &&
@@ -803,7 +803,7 @@ export class InfoPostComponent implements OnInit {
     ) {
       this.visit.role = this._userService.roleName;
       this.visit.root = this.url.path();
-      // ////console.log('visita', this.visit);
+      // ////// console.log('visita', this.visit);
       //  this.active=0;
     }
   }
@@ -825,7 +825,7 @@ export class InfoPostComponent implements OnInit {
         this.ciudades = '';
         let p = this.publication._cityTarget;
         p.forEach((element) => {
-          // ////console.log(element);
+          // ////// console.log(element);
           if (p[p.length - 1] === element) {
             this.ciudades += `${element.city}`;
           } else {
@@ -843,7 +843,7 @@ export class InfoPostComponent implements OnInit {
 
         this.imgActive = this.publication._files[0].file;
         this.idxActiveImg = 0;
-        //console.log(this.imgActive);
+        //// console.log(this.imgActive);
 
         this.setActualReactions();
         this.setActualRanking();
@@ -851,7 +851,7 @@ export class InfoPostComponent implements OnInit {
         this.setNewVisit(this.publication._id);
         this.getComments(this.publication._id);
 
-        //console.log('existe', this.publication);
+        //// console.log('existe', this.publication);
         this.GlobalConfigService.spinner = false;
       } else {
         this._notifyService.Toast.fire({
@@ -865,7 +865,7 @@ export class InfoPostComponent implements OnInit {
       }
       // return true;
     },(error) => {
-      // //console.log('recibe error acá', error);
+      // //// console.log('recibe error acá', error);
       this._notifyService.Toast.fire({
         title: error.error.message,
         // text: '¡Gracias por unirte a Mercado Pyme!',

@@ -9,6 +9,7 @@ $verdePyme: #2D907C
     .headerBanner
         width: 100%
         position: relative
+        overflow: hidden
         // background-image: url('../../../assets/resourcesWeb/Banner.jpg')
         // backc
         // height: 330px
@@ -51,15 +52,37 @@ $verdePyme: #2D907C
                     // -webkit-text-stroke-color: white
                 @include responsivo(telefonoTable)
                     h4
-                        font-size: 28px
+                        font-size: 5vw
+                        line-height: 5vw
                     h5
-                        font-size: 18px
+                        font-size: 3vw
+                        line-height: 3vw
+                        margin-bottom: 15px
+                        br
+                            display: none
                 @include responsivo(pcMedio)
                     h4
-                        font-size: 36px
+                        font-size: 5vw
+                        line-height: 5vw
                     h5
-                        font-size: 26px
+                        font-size: 3vw
+                        line-height: 3vw
+                        // br
+                            // display: none
             // .centerCustom
+    @include responsivo(telefonoTable)
+        img
+            max-height: 35vw!important
+        .buttonCustom
+            font-size: 2.5vw!important
+            padding: 5px 15px!important
+    @include responsivo(pcMedio)
+        img
+            max-height: 35vw!important
+        .buttonCustom
+            font-size: 2vw!important
+            padding: 5px 15px!important
+
     .subHeader
         margin-bottom: 0
         .goUs,
@@ -121,6 +144,10 @@ $verdePyme: #2D907C
         font-size: 22px
         color: $verdePyme
         margin-bottom: 50px
+        @include responsivo(telefonoTable)
+            text-align: center
+        @include responsivo(pcMedio)
+            text-align: center
 
 
 .centerContenido
