@@ -57,7 +57,7 @@
                 >
                 <!-- 'display': this._searchService.catState.base != item.base -->
 
-                  <li *ngFor="let child of this._postService.categoryPrincipal[i].child" class="nav-item">
+                  <li *ngFor="let child of this._postService.categoryPrincipal[i].child" class="nav-item child">
                     <a (click)="this.searchByCategory(item.base, child)" class="nav-link" [ngClass]="{'active': this._searchService.catState.child == child}">
 
                       <p> {{ child }} </p>
