@@ -52,8 +52,8 @@ class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{
           </li>
 
 
-          <li *ngIf="this._usersService.token == null" class="nav-item loginButton">
-            <a (click)="openLoginByAside()" class="nav-link"  #navlink [ngClass]="{
+          <li (click)="openLoginByAside()" *ngIf="this._usersService.token == null" class="nav-item loginButton">
+            <a  class="nav-link"  #navlink [ngClass]="{
               'active': this._usersService.loginVisible == true
             }">
             <i class="fas fa-user-circle nav-icon"></i>

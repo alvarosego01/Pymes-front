@@ -4,9 +4,15 @@
 
 
     <div class="menuProduct">
-      <h6>
-        Filtros
-      </h6>
+
+
+  <app-search
+  *ngIf="this.GlobalConfigService.isMobile() == false"
+  [title]="false"
+  [backGreen]="false">
+
+  </app-search>
+
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
         <li class="nav-item  has-treeview "

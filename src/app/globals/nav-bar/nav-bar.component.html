@@ -86,7 +86,10 @@
     </ul>
 
 
-    <app-login class="loginPc" *ngIf="this._usersService.loginVisible == true" (clickOutside)="ocultarLogin($event)"></app-login>
+    <app-login class="loginPc" *ngIf="this._usersService.loginVisible == true"
+    (clickOutside)="ocultarLogin($event)"
+    [exclude]="'#navDashboard, #navBar'"
+    ></app-login>
 
 
   </nav>
