@@ -8,6 +8,7 @@ import {
   NotifyService,
   GlobalConfigService,
   FormsResourcesService,
+  CategoryService,
   //  PostsService
 } from "src/app/services/service.index";
 import { Filebase64Service } from 'src/app/services/filebase64.service';
@@ -20,7 +21,7 @@ import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
   styleUrls: ["./post-control.component.sass"],
 })
 export class PostControlComponent implements OnInit {
-  test = 1;
+  test = 0;
 
   imagenSubir: File;
   imagenesSubir = [];
@@ -62,9 +63,10 @@ export class PostControlComponent implements OnInit {
 
 
 // para los contadores de caracteres
-ngIncludeDesc;
-ngnotIncludeDesc;
+ngIncludeDesc: string = '';
+ngnotIncludeDesc: string = '';
 
+categoryList: any = [];
 
   constructor(
     public _usersService: UsersService,
@@ -73,14 +75,16 @@ ngnotIncludeDesc;
     public _postService: PostsService,
     public _fileBase64: Filebase64Service,
     public _formsResource: FormsResourcesService,
+    public _categoryService: CategoryService,
     public router: Router,
   ) {
     // this._usersService.setCaptcha();
     // this.datosUsuario = this._usersService.usuario;
-    // ////////// console.log(this.datosUsuario);
+    // ////////// ////console.log(this.datosUsuario);
 
-    // ////////// console.log(this._postService.categoryPrincipal);
+    // ////////// ////console.log(this._postService.categoryPrincipal);
     this.initCitys();
+    this.getCategory();
   }
 
   ngOnInit(): void {}
@@ -95,12 +99,12 @@ ngnotIncludeDesc;
     this.GlobalConfigService.spinner = true;
     this.activateMap = false;
     x.then((r) => {
-      //////// console.log(r);
+      //////// ////console.log(r);
       this.coordsMap = r;
       this.GlobalConfigService.spinner = false;
       if (Object.keys(this.coordsMap).length > 0) {
         this.activateMap = true;
-        // //////// console.log('activado mapa', );
+        // //////// ////console.log('activado mapa', );
       }
     }, err => {
       this.GlobalConfigService.spinner = false;
@@ -148,11 +152,11 @@ ngnotIncludeDesc;
       // delete this.urlFiles[i];
       // delete this.imagenesSubir[i];
 
-      //////// console.log(i);
+      //////// ////console.log(i);
 
-      //////// console.log('al retirar');
-      //////// console.log(this.urlFiles);
-      //////// console.log(this.imagenesSubir);
+      //////// ////console.log('al retirar');
+      //////// ////console.log(this.urlFiles);
+      //////// ////console.log(this.imagenesSubir);
 
 
     this._notifyService.Toast.fire({
@@ -181,7 +185,7 @@ ngnotIncludeDesc;
   clearFiles(event) {
     this.urlFiles = [];
     this.imagenesSubir = [];
-    ////// console.log('clear!');
+    ////// ////console.log('clear!');
 
     if (this.ngTypeAdjuntos == "3 Fotos") {
       this.nroFotos = 3;
@@ -198,7 +202,7 @@ ngnotIncludeDesc;
       this.nroFotos = 1;
     }
 
-    ////// console.log(this.ngTypeAdjuntos);
+    ////// ////console.log(this.ngTypeAdjuntos);
   }
 
   initCitys() {
@@ -232,7 +236,7 @@ ngnotIncludeDesc;
 
   activateEconomicActivity() {
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    ////////// console.log(this.estadosActividad);
+    ////////// ////console.log(this.estadosActividad);
   }
 
   setCiudades(i) {
@@ -244,12 +248,16 @@ ngnotIncludeDesc;
   }
 
   setSubCategory(i) {
+
+
+
     let k = JSON.parse(i);
-    let p = k.base;
-    let c = k.child;
-    // //////// console.log(i);
+    let p = k._category;
+    let c = k._child;
+    // //console.log('esto', k);
+    // //////// ////console.log(i);
     // return;
-    // ////////// console.log(this._postService.categoryPrincipal[i]);
+    // ////////// ////console.log(this._postService.categoryPrincipal[i]);
     this.subCategory = c;
 
     if (this.subCategory.length == 0) {
@@ -272,21 +280,17 @@ ngnotIncludeDesc;
       this.publications = resp.data;
 
       this.GlobalConfigService.spinner = false;
-      // //////////// console.log(this.listasPerros);
+      // //////////// ////console.log(this.listasPerros);
     });
   }
 
   setSubCategoryOther(e) {
-    //////// console.log(e);
+    //////// ////console.log(e);
 
     this.ngNewCategory = e == "Otra" ? e : null;
   }
 
   createPublication(forma: NgForm) {
-    // // console.log(forma.value, " el envio de post");
-    // return;
-
-    //////// console.log(this.coordsMap);
 
     if(this.imagenesSubir.length == 0){
           this._notifyService.Toast.fire({
@@ -343,12 +347,16 @@ ngnotIncludeDesc;
     };
 
     var cat = {
-      principal: JSON.parse(forma.value.Category).base,
-      child:
-        forma.value.subCategory == "Otra"
-          ? this.ngNewCategory
-          : forma.value.subCategory,
+      _principal: JSON.parse(forma.value.Category)._id,
+      _child: JSON.parse(forma.value.subCategory)._id,
+      child: JSON.parse(forma.value.subCategory).name
     };
+    // //console.log(cat);
+    // return;
+
+    // //console.log(cat);
+
+    // return;
 
     var precio = {
       min: min,
@@ -364,8 +372,8 @@ ngnotIncludeDesc;
     let post = {
       title: forma.value.Title,
       target: forma.value.targetPublication,
-      content: forma.value.ngIncludeDesc,
-      notContent: forma.value.ngnotIncludeDesc,
+      content: this.ngIncludeDesc,
+      notContent: this.ngnotIncludeDesc,
       days: "30",
       type: forma.value.Type,
       _infoContact: JSON.stringify(contactData),
@@ -378,9 +386,13 @@ ngnotIncludeDesc;
       // _files:
     };
 
-    // //////// console.log(post, "conformado");
+
+    // //console.log('elpost', post);
+//
     // return;
-    //////// console.log('imagenes en total', this.imagenesSubir);
+    // //////// ////console.log(post, "conformado");
+    // return;
+    //////// ////console.log('imagenes en total', this.imagenesSubir);
     this.GlobalConfigService.spinner = true;
     this._postService
       .createPublication(post, this.imagenesSubir)
@@ -410,12 +422,12 @@ ngnotIncludeDesc;
         this.imagenesSubir = [];
         this.urlFiles = [];
         // this._usersService.usuario = resp.User;
-        //////// console.log('por true', resp);
+        //////// ////console.log('por true', resp);
         this._postService.notificacion.emit( resp );
       })
       .catch((e) => {
-        //////// console.log('por error',e);
-        //////////// console.log(e);
+        //////// ////console.log('por error',e);
+        //////////// ////console.log(e);
         // var error = JSON.parse(e)
         if (e.status == 201 && e.ok == true) {
           this.GlobalConfigService.spinner = false;
@@ -485,10 +497,10 @@ ngnotIncludeDesc;
 
   async selectFiles(event) {
     //
-    ////// console.log(this.nroFotos);
-    ////////// console.log(event.target.files);
+    ////// ////console.log(this.nroFotos);
+    ////////// ////console.log(event.target.files);
     if(event.target.files){
-      //////// console.log('total', event.target.files);
+      //////// ////console.log('total', event.target.files);
       for (let index = 0; index < event.target.files.length; index++) {
 
         var reader = new FileReader();
@@ -497,7 +509,7 @@ ngnotIncludeDesc;
 
         reader.readAsDataURL(event.target.files[index]);
         var fileup = event.target.files[index];
-        //////// console.log('imagen nro ', index, fileup);
+        //////// ////console.log('imagen nro ', index, fileup);
 
 
        reader.onload =  ((event:any) => {
@@ -522,13 +534,13 @@ ngnotIncludeDesc;
 
           // return;
           var x = new Promise((resolve,reject) => {
-            // //////// console.log('entra en promesa', index);
+            // //////// ////console.log('entra en promesa', index);
             image.onload = function() {
-              // //////// console.log('datos de imagn',image);
+              // //////// ////console.log('datos de imagn',image);
                 var k = [image.width, image.height];
                 resolve(k);
-                //////// console.log('datos promesa', image);
-                //////// console.log('Sale de promesa, resuelve', index);
+                //////// ////console.log('datos promesa', image);
+                //////// ////console.log('Sale de promesa, resuelve', index);
             };
           })
 
@@ -554,8 +566,8 @@ ngnotIncludeDesc;
             if(r[0] >= 200 && r[1] >= 200 ){
               this.urlFiles.push(event.target.result);
               this.imagenesSubir.push(fileup);
-              // //////// console.log(fileup.size);
-              // //////// console.log(this.urlFiles, 'urlfiles');
+              // //////// ////console.log(fileup.size);
+              // //////// ////console.log(this.urlFiles, 'urlfiles');
             }else{
               this._notifyService.Toast.fire({
                 title:'Dimensiones no permitidas',
@@ -570,7 +582,7 @@ ngnotIncludeDesc;
           }
 
         if(this.ngTypeAdjuntos == 'Catálogo PDF'){
-          ////////// console.log('archivo', reader);
+          ////////// ////console.log('archivo', reader);
            // return;
 
          if ( event.target.result.indexOf('PDF') < 0 && this.ngTypeAdjuntos == 'Catálogo PDF') {
@@ -604,8 +616,8 @@ ngnotIncludeDesc;
               }
               this.urlFiles.push(event.target.result);
               this.imagenesSubir.push(fileup);
-              ////////// console.log(this.urlFiles, 'los datos');
-              ////////// console.log(event.target.result, 'los datos');
+              ////////// ////console.log(this.urlFiles, 'los datos');
+              ////////// ////console.log(event.target.result, 'los datos');
 
           resolve();
         }
@@ -618,14 +630,34 @@ ngnotIncludeDesc;
 
       });
 
-       // //////// console.log(this.urlFiles, 'urlfiles');
+       // //////// ////console.log(this.urlFiles, 'urlfiles');
 
 
       }
-      //////// console.log(this.imagenesSubir, 'imgsubir finales');
+      //////// ////console.log(this.imagenesSubir, 'imgsubir finales');
     }
   }
 
+
+
+  getCategory(){
+    this.GlobalConfigService.spinner = true;
+
+    this._categoryService.getCategoryGET().subscribe((resp) => {
+      this.GlobalConfigService.spinner = false;
+
+
+
+
+        this._categoryService.allCategoryList = resp.data;
+        // //console.log('las categorias', this.categoryList)
+
+    }, (err) => {
+
+      console.error(err);
+      this.GlobalConfigService.spinner = false;
+    });
+  }
 
 
 

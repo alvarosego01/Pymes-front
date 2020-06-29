@@ -80,6 +80,12 @@ class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{
 
           <li class="nav-header">Panel de Administración</li>
            <li class="nav-item">
+            <a  class="nav-link" [routerLink]="['/admin/categoryControl']" routerLinkActive="active">
+              <i class="fas fa-user-tie nav-icon"></i>
+              <p>Control de categorias</p>
+            </a>
+          </li>
+           <li class="nav-item">
             <a  class="nav-link" [routerLink]="['/admin/postManager']" routerLinkActive="active">
               <i class="fas fa-user-tie nav-icon"></i>
               <p>Gestión de publicaciones</p>

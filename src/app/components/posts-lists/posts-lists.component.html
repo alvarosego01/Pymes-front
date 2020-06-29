@@ -48,7 +48,7 @@
 
         <div class="card-body">
             <span class="catego">
-                {{ item._category.principal  }}
+                {{ item._category._principal._category  }}
               </span>
           <small class="date">
             {{ item.created_at }}
@@ -66,7 +66,7 @@
             </span>
           </div> -->
           <p class="card-text">
-            {{ item.content | stringLimit:215 }}
+            {{ item.content | stringLimit:215:'desc' }}
           </p>
 
 

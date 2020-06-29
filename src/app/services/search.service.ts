@@ -24,6 +24,7 @@ import { UsersService } from "./users.service";
 import { EventEmitter } from "@angular/core";
 import { NgForm } from '@angular/forms';
 import { GlobalConfigService } from './-global-config.service';
+import { CategoryService } from './category.service';
 // import { VerifyService } from './verify.service';
 
 
@@ -59,7 +60,8 @@ export class SearchService {
     // public router: Router,
     public activatedRoute: ActivatedRoute,
     public _userService: UsersService,
-    private GlobalConfig: GlobalConfigService
+    private GlobalConfig: GlobalConfigService,
+    public _categoryService: CategoryService
   ) { }
 
 
@@ -70,7 +72,7 @@ export class SearchService {
 
     setParameters(params = null, pagina = 0){
 
-      if( params == null && pagina == 0 ){
+      if( params == null  ){
         this.router.navigate([], {
 
           queryParams: {
@@ -90,7 +92,7 @@ export class SearchService {
 
           queryParams: {
             busqueda: 'todo',
-            pagina: pagina,
+            // pagina: pagina,
 
 
           }
@@ -103,7 +105,8 @@ export class SearchService {
 
           queryParams: {
             busqueda: 'buscador',
-            pagina: pagina,
+            title: params.title
+            // pagina: pagina,
 
 
           }
@@ -111,6 +114,25 @@ export class SearchService {
 
       }
 
+
+      if(params.busqueda == 'ubicacion'){
+
+        this.router.navigate([], {
+
+          queryParams: {
+            busqueda: 'ubicacion',
+            city: params.city,
+            // busqueda
+            // categoria
+            categoria: (params.categoria!= null && params.categoria != '')? params.categoria : null,
+            subCategoria: (params.subCategoria!= null && params.subCategoria != '')? params.subCategoria : null
+            // pagina: pagina,
+
+
+          }
+        });
+
+      }
       if(params.busqueda == 'categoria' && params.subCategoria == null){
 
         this.router.navigate([], {
@@ -118,7 +140,7 @@ export class SearchService {
           queryParams: {
             busqueda: 'categoria',
             categoria: params.categoria,
-            pagina: pagina,
+            // pagina: pagina,
 
 
           }
@@ -134,7 +156,7 @@ export class SearchService {
             busqueda: 'catSub',
             categoria: params.categoria,
             subCategoria: params.subCategoria,
-            pagina: pagina,
+            // pagina: pagina,
 
 
           }
@@ -148,7 +170,7 @@ export class SearchService {
 
           queryParams: {
             busqueda: 'price',
-            pagina: pagina,
+            // pagina: pagina,
 
 
           }
@@ -162,7 +184,7 @@ export class SearchService {
 
           queryParams: {
             busqueda: 'order',
-            pagina: pagina,
+            // pagina: pagina,
 
 
           }
@@ -190,7 +212,7 @@ export class SearchService {
         return resp;
       }),
       catchError( err =>{
-        ////////// console.log(err);
+        ////////// ////console.log(err);
 
         return throwError(err);
       })
@@ -203,12 +225,12 @@ export class SearchService {
 
 setActualReactions() {
 
-    ////// console.log('actualizacio');
+    ////// ////console.log('actualizacio');
     if(this.registros.length > 0){
 
       this.registros.forEach((relement, index) => {
 
-      // ////// console.log(relement.reactions.length);
+      // ////// ////console.log(relement.reactions.length);
       // return;
 
       this.registros[index].like = 0;
@@ -234,7 +256,7 @@ setActualReactions() {
   }
   // this.registros = r;
 
-  ////// console.log('con reaction', this.registros);
+  ////// ////console.log('con reaction', this.registros);
 
 }
 
@@ -260,7 +282,7 @@ setActualReactions() {
           return resp;
         }),
         catchError( err =>{
-          ////////// console.log(err);
+          ////////// ////console.log(err);
 
           return throwError(err);
         })
@@ -281,7 +303,7 @@ setActualReactions() {
         return resp;
       }),
       catchError( err =>{
-        ////////// console.log(err);
+        ////////// ////console.log(err);
 
         return throwError(err);
       })
@@ -295,7 +317,7 @@ setActualReactions() {
 
   searchByCategoryPOST(argumento: any){
 
-    ////// console.log(argumento);
+    ////// ////console.log(argumento);
     let url = `${_SERVICIOS}/find`;
 
 
@@ -305,7 +327,7 @@ setActualReactions() {
         return resp;
       }),
       catchError( err =>{
-        ////////// console.log(err);
+        ////////// ////console.log(err);
 
         return throwError(err);
       })
@@ -317,18 +339,18 @@ setActualReactions() {
   searchByPricePOST(argumento){
 
 
-    ////// console.log(argumento);
+    ////// ////console.log(argumento);
     let url = `${_SERVICIOS}/find`;
 
 
     return this.http.post( url, argumento ).pipe(
       map( (resp: any) => {
 
-        // ////// console.log('respuesta', resp);
+        // ////// ////console.log('respuesta', resp);
         return resp;
       }),
       catchError( err =>{
-        // ////// console.log(err , 'error desde servicio');
+        // ////// ////console.log(err , 'error desde servicio');
 
         return throwError(err);
       })
@@ -345,11 +367,11 @@ setActualReactions() {
     return this.http.post( url, argumento ).pipe(
       map( (resp: any) => {
 
-        // ////// console.log('respuesta', resp);
+        // ////// ////console.log('respuesta', resp);
         return resp;
       }),
       catchError( err =>{
-        // ////// console.log(err , 'error desde servicio');
+        // ////// ////console.log(err , 'error desde servicio');
 
         return throwError(err);
       })
@@ -375,10 +397,12 @@ setActualReactions() {
     })
   }
 
-  changePaginator(data: any){
+changePaginator(data: any){
+
+    // //console.log('se llama paginador');
 
 
-    console.log('coño es movil? ',this.GlobalConfig.isMobile());
+    ////console.log('coño es movil? ',this.GlobalConfig.isMobile());
 
     if(Object.keys(data.params).length == 0 || data.params.busqueda == 'todo'){
 
@@ -402,10 +426,12 @@ setActualReactions() {
           // child: null,
           movil: this.GlobalConfig.isMobile(),
           typeFind: 'buscador',
-          title: data.title,
+          title: data.params.title,
           oldPaginate: this.paginator,
           changePaginator: data.change
         }
+
+        //console.log('caso buscador', argumento);
         return argumento;
       }
 
@@ -417,8 +443,16 @@ setActualReactions() {
           movil: this.GlobalConfig.isMobile(),
           typeFind: 'category',
           oldPaginate: this.paginator,
-          changePaginator: data.change
+          changePaginator: data.change,
+          idPadre: (data.idPadre == null || data.idPadre == undefined)? this.transformCatId(data.params.categoria, null).principal: data.idPadre,
+          idChild: null
         }
+
+        //console.log('caso categoria', argumento);
+
+
+
+
         return argumento;
       }
 
@@ -428,6 +462,24 @@ setActualReactions() {
           child: (data.params.subCategoria != null && data.params.subCategoria != '')? data.params.subCategoria : null,
           movil: this.GlobalConfig.isMobile(),
           typeFind: 'category',
+          oldPaginate: this.paginator,
+          changePaginator: data.change,
+          idPadre: (data.idPadre == null || data.idPadre == undefined)? this.transformCatId(data.params.categoria, null).principal: data.idPadre,
+          idChild: (data.idChild == null || data.idChild == undefined)? this.transformCatId(data.params.categoria, data.params.subCategoria).child: data.idChild,
+
+        }
+
+        //console.log('caso sub', argumento);
+        return argumento;
+      }
+
+      if(data.params.busqueda == 'ubicacion'){
+        let argumento = {
+          categoryp: (data.params.categoria != null && data.params.categoria != '')? data.params.categoria: null,
+          child: (data.params.subCategoria != null && data.params.subCategoria != '')? data.params.subCategoria : null,
+          movil: this.GlobalConfig.isMobile(),
+          typeFind: 'ubicacion',
+          city: data.params.city,
           oldPaginate: this.paginator,
           changePaginator: data.change
         }
@@ -441,7 +493,72 @@ setActualReactions() {
   }
 
 
+
   clearParams(){
+
+
+  }
+
+
+
+
+
+  transformCatId(principal: string, child:string = null){
+
+
+    // //console.log('entra en transform');
+    var l = this._categoryService.allCategoryList;
+
+    // //console.log('la l', l);
+
+    var c = null;
+
+    l.forEach((e,i) => {
+
+      if(e._category == principal){
+        c = e;
+      }
+
+    });
+
+    if(child == null){
+
+      var k ={
+      principal: c._id,
+      child: null
+    }
+    return k;
+  }else{
+
+    var x = null
+
+    c._child.forEach((e, i) => {
+
+      if(e.name == child){
+        //console.log('son iguales', e.name);
+        //console.log('iguales', child);
+        x = e._id;
+      }
+
+    });
+        var k = {
+          principal: c._id,
+          child: x
+        }
+        return k;
+
+  }
+
+
+    // _category: "culos"
+// ​​
+// _child: (2) […]
+// ​​​
+// 0: {…}
+// ​​​​
+// _id: "5eec8b23f0899a2488d1185c"
+// ​​​​
+// name: "rrr"
 
 
   }

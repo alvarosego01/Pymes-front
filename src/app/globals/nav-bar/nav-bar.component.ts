@@ -37,14 +37,14 @@ export class NavBarComponent implements OnInit {
     this._usersService.loginVisible = !this._usersService.loginVisible;
      // Do comparision here.....
         ///////////////////////////
-        // // console.log(this.router.url);
+        // // ////console.log(this.router.url);
   }
 
 
 
 
   ocultarLogin(e: Event) {
-    // ////////// console.log(e.target['className']);
+    // ////////// ////console.log(e.target['className']);
 
 
       if( e.target['className'] != '' &&

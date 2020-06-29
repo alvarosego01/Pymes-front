@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { GlobalConfigService, SearchService } from 'src/app/services/service.index';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -15,7 +16,8 @@ export class SearchComponent implements OnInit {
   constructor(
 
     public GlobalConfigService: GlobalConfigService,
-    public _searchService: SearchService
+    public _searchService: SearchService,
+    public router: Router,
 
   ) { }
 
@@ -32,18 +34,25 @@ async searchByText(forma: NgForm){
 
         return;
     }
+    //console.log('los datos del buscador', forma.value.Busqueda);
+    // this.router.navigate(["/home"]);
+
     this._searchService.paginator = [];
 
 
   let params = {
     busqueda: 'buscador',
-
+    title: forma.value.Busqueda
   }
-  var parms = null;
-  await this._searchService.getParameters().then(resp => {
-    // // console.log('la respuesta de parametros', resp);
-    parms = resp;
-  });
+
+  this._searchService.setParameters(params, 0);
+
+
+  var parms = params;
+  // await this._searchService.getParameters().then(resp => {
+    // ////console.log('la respuesta de parametros', resp);
+    // parms = resp;
+  // });
 
   var ppp = {
     params: parms,
@@ -51,31 +60,30 @@ async searchByText(forma: NgForm){
     title: forma.value.Busqueda
   }
 
-  // console.log('params enviados', ppp);
+  // ////console.log('params enviados', ppp);
 
   var args = this._searchService.changePaginator(ppp);
 
 
-  console.log('args por texto', args);
+  ////console.log('args por texto', args);
 
 
-  this._searchService.setParameters(params, 0);
 
     this.GlobalConfigService.spinner = true;
     this._searchService.searchByTextPOST(args).subscribe((resp) => {
-      // ////// console.log(resp);
+      // ////// ////console.log(resp);
       if (resp.status == 200 && resp.ok == true) {
 
         if ((resp.data) &&  resp.data.length > 0 ) {
 
-          console.log('la respuesta de la busqueda', resp);
+          ////console.log('la respuesta de la busqueda', resp);
 
           this._searchService.homeTitleResults = 'Resultados';
           this._searchService.registros = resp.data;
           this._searchService.paginator = resp.paginator || null;
           this._searchService.setActualReactions();
 
-          ////// console.log(this._searchService.registros);
+          ////// ////console.log(this._searchService.registros);
         }else{
           this._searchService.registros = [];
         }

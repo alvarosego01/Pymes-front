@@ -1,6 +1,8 @@
 // export { TokenVerifyGuard } from './token-verify.guard';
 // export { LoginVerifyGuard } from './login-verify.guard';
 
+export { CategoryService } from './category.service';
+
 export { FormsResourcesService } from './forms-resources.service';
 
 // export { FormResourcesService } from './form-resources.service';
@@ -22,3 +24,5 @@ export { NotifyService } from './notify.service';
 
 // GlobalConfigService
 // FormResourcesService
+
+// CategoryService

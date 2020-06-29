@@ -17,7 +17,7 @@ $verdePyme: #2D907C
             width: 100%
             // height: 350px
             height: 100%
-            max-height: 280px
+            // max-height: 280px
             object-fit: cover
             object-position: center
         .contenido
@@ -72,16 +72,26 @@ $verdePyme: #2D907C
             // .centerCustom
     @include responsivo(telefonoTable)
         img
-            max-height: 35vw!important
+            max-height: 30vw!important
         .buttonCustom
             font-size: 2.5vw!important
             padding: 5px 15px!important
     @include responsivo(pcMedio)
         img
-            max-height: 35vw!important
+            max-height: 30vw!important
         .buttonCustom
             font-size: 2vw!important
             padding: 5px 15px!important
+    @include responsivo(general)
+        img
+            // object-position:
+            object-fit: unset!important
+            max-height: 22.5vw!important
+    @include responsivo(resto)
+        img
+            // object-position:
+            object-fit: unset!important
+            max-height: 22.5vw!important
 
     .subHeader
         margin-bottom: 0
@@ -144,6 +154,7 @@ $verdePyme: #2D907C
         font-size: 22px
         color: $verdePyme
         margin-bottom: 50px
+        margin-top: 0
         @include responsivo(telefonoTable)
             text-align: center
         @include responsivo(pcMedio)
@@ -154,9 +165,11 @@ $verdePyme: #2D907C
     padding: 50px 0
     width: 100%!important
     background-color: $fondoGrisDesign
-    // .categorySection
-
-    // .resultList
+    padding-left: 2.5%
+    padding-right: 2.5%
+    .categorySection,
+    .resultList
+        padding: 0
 
 
 

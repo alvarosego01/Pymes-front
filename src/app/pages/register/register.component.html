@@ -24,14 +24,14 @@
         <!-- <label for="TypeId">Tipo de documento</label> -->
       <div class="input-group" >
 
-          <select (change)="changeForm()"  [(ngModel)]="this.registerControlSelect" name="TypeId" class="form-control">
+          <select (change)="changeForm()"  [(ngModel)]="this.registerControlSelect"  name="TypeId" class="form-control">
 
               <!-- <option value="" disabled selected></option>+ -->
               <option  value="Persona natural">
-                Persona natural
+                Seleccionar: Persona natural
               </option>
               <option  value="Empresa">
-                Empresa
+                Seleccionar: Empresa
               </option>
 
 
@@ -56,6 +56,9 @@
 
         <div *ngIf="this.registerControlSelect == 'Persona natural'" class="animated fadeIn fast tab-pane active show" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
 
+          <h5 class="advertencia">
+            Por favor tenga en cuenta que los datos con <span class="colorRed">(*)</span> son obligatorios
+          </h5>
 
             <form
             ngNativeValidate
@@ -70,7 +73,7 @@
                   <hr>
                       <div class="row">
                      <div class="form-group clearfix col-md-12 col-lg-3">
-                      <label for="Name">Nombres</label>
+                      <label for="Name">Nombres <span class="colorRed">(*)</span></label>
                     <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
@@ -79,45 +82,58 @@
                     </div>
                     <input
 
-                 
-                    ngModel name="Name" type="text" class="form-control" required >
+
+                    ngModel  name="Name" type="text" class="form-control" required >
+
+
+
+
+                    <!-- <div *ngIf="f.value.invalid && (f.value.dirty || f.value.touched)" class="alert alert-danger">
+
+                    <small *ngIf="expression" >
+                      Campo obligatorio
+                    </small>
+
+                    </div> -->
+
+
                   </div>
                   </div>
 
                   <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="Surname">Apellidos</label>
+                    <label for="Surname">Apellidos <span class="colorRed">(*)</span></label>
                   <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="fa fa-user" aria-hidden="true"></i>
                       </span>
                   </div>
-                  <input  ngModel name="Surname" type="text" class="form-control" required >
+                  <input  ngModel  name="Surname" type="text" class="form-control" required >
                 </div>
                 </div>
 
 
                    <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="Age">Edad</label>
+                    <label for="Age">Edad <span class="colorRed">(*)</span></label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <input  ngModel name="Age" type="number" class="form-control" required>
+                    <input  ngModel  name="Age" type="number" class="form-control" required>
                   </div>
                   </div>
 
                   <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="Gender">Género</label>
+                    <label for="Gender">Género <span class="colorRed">(*)</span></label>
                   <div class="input-group" >
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             <i class="fa fa-venus-mars" aria-hidden="true"></i>
                         </span>
                       </div>
-                      <select  ngModel name="Gender" class="form-control" required>
+                      <select  ngModel  name="Gender" class="form-control" required>
                           <option value="" disabled selected></option>
                           <option value="Femenino">Femenino</option>
                           <option value="Masculino">Masculino</option>
@@ -133,7 +149,7 @@
                   <div class="row">
 
                     <div class="form-group clearfix col-md-12 col-lg-6">
-                      <label for="TypeId">Tipo de documento</label>
+                      <label for="TypeId">Tipo de documento <span class="colorRed">(*)</span></label>
                     <div class="input-group" >
                       <div class="input-group-prepend">
                           <span class="input-group-text">
@@ -141,7 +157,7 @@
                             <i class="fas fa-id-badge"></i>
                           </span>
                         </div>
-                        <select  ngModel name="TypeId" class="form-control" required>
+                        <select  ngModel  name="TypeId" class="form-control" required>
                             <option value="" disabled selected></option>
                             <option *ngFor="let item of this._globaConfig.tipoIdentificacion" (click)="permitId(item)"  value="{{item}}">
                               {{item}}
@@ -154,14 +170,14 @@
 
 
                     <div class="form-group clearfix col-md-12 col-lg-6">
-                      <label for="Identification">Número de identificación</label>
+                      <label for="Identification">Número de identificación <span class="colorRed">(*)</span></label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
                             <i class="fas fa-id-card"></i>
                             </span>
                         </div>
-                        <input  ngModel name="Identification"  type="text" class="form-control" required >
+                        <input  ngModel  name="Identification"  type="text" class="form-control" required >
                       </div>
                   </div>
 
@@ -171,12 +187,29 @@
                     Actividad económica
                   </h4>
                   <hr>
+
+                  <div class="row">
+
+                    <div class="form-group col-12 " >
+                      <label for="negocioName">¿Cuál es el nombre de tu negocio? <span class="colorRed">(*)</span></label>
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="fas fa-users"></i>
+                              </span>
+                          </div>
+                          <input  ngModel  name="negocioName" type="text" class="form-control" required >
+                        </div>
+                      </div>
+
+                  </div>
+
                   <div class="row">
                     <div class="form-group clearfix col-md-12 col-lg-4">
                       <!-- Select multiple-->
                       <div class="form-group">
-                        <label>¿Cuál es tu sector económico?</label>
-                        <select  multiple="" class="form-control" required name="estadosActividad" [(ngModel)]="estadosActividadModel">
+                        <label>¿Cuál es tu sector económico? <span class="colorRed">(*)</span></label>
+                        <select  multiple="" class="form-control" required  name="estadosActividad" [(ngModel)]="estadosActividadModel">
 
                           <option *ngFor="let item of this._globaConfig.actividadEconomica" value="{{item}}">
                             {{item}}
@@ -197,7 +230,7 @@
                                     <i class="fas fa-users"></i>
                                     </span>
                                 </div>
-                                <input  ngModel name="ProducciónActivity" type="text" class="form-control" required >
+                                <input  ngModel  name="ProducciónActivity" type="text" class="form-control" required >
                               </div>
                             </div>
                           <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Comercialización') == true">
@@ -208,7 +241,7 @@
                                     <i class="fas fa-users"></i>
                                     </span>
                                 </div>
-                                <input  ngModel name="ComercializaciónActivity" type="text" class="form-control" required >
+                                <input  ngModel  name="ComercializaciónActivity" type="text" class="form-control" required >
                               </div>
                             </div>
                           <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Servicios') == true">
@@ -219,7 +252,7 @@
                                     <i class="fas fa-users"></i>
                                     </span>
                                 </div>
-                                <input  ngModel name="ServiciosActivity" type="text" class="form-control" required >
+                                <input  ngModel  name="ServiciosActivity" type="text" class="form-control" required >
                               </div>
                           </div>
                           <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Otro') == true">
@@ -230,7 +263,7 @@
                                   <i class="fas fa-users"></i>
                                   </span>
                               </div>
-                              <input  ngModel name="OtroActivity" type="text" class="form-control" required >
+                              <input  ngModel  name="OtroActivity" type="text" class="form-control" required >
                             </div>
                         </div>
 
@@ -248,17 +281,17 @@
                   <hr>
                         <div class="row">
                     <div class="form-group clearfix col-md-12 col-lg-3">
-                      <label for="Phone">Teléfono</label>
+                      <label for="Phone">Teléfono fijo <span class="colorRed">(*)</span> </label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input  ngModel name="Phone" type="tel"
+                        <input  ngModel  name="Phone" type="tel"
                         [imask]="this._formService.phoneMask()"
 
-                        class="form-control" required >
+                        class="form-control"  >
                       </div>
                   </div>
 
@@ -270,12 +303,12 @@
                           <i class="fas fa-mobile-alt"></i>
                           </span>
                       </div>
-                      <input  ngModel name="celPhone" type="tel" [imask]="this._formService.phoneMask()" class="form-control" required >
+                      <input  ngModel  name="celPhone" type="tel" [imask]="this._formService.phoneMask()" class="form-control" >
                     </div>
                 </div>
 
                 <div class="form-group clearfix col-md-12 col-lg-3">
-                  <label for="Department">Departamento</label>
+                  <label for="Department">Departamento <span class="colorRed">(*)</span></label>
                 <div class="input-group" >
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -283,7 +316,7 @@
 
                         </span>
                       </div>
-                      <select (change)="setCiudades($event.target.value)" ngModel name="Department" class="form-control" required >
+                      <select (change)="setCiudades($event.target.value)" ngModel  name="Department" class="form-control" required >
                           <option value="" disabled selected ></option>
                           <option *ngFor="let item of this._globaConfig.departamentos;"   value="{{item | json}}">
                             {{item.departamento}}
@@ -294,7 +327,7 @@
                   </div>
 
                    <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="City">Ciudad</label>
+                    <label for="City">Ciudad <span class="colorRed">(*)</span></label>
                   <div class="input-group" >
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -302,21 +335,21 @@
 
                         </span>
                       </div>
-                      <select  ngModel name="City" class="form-control" required>
+                      <select  ngModel  name="City" class="form-control" required>
                           <option value="" disabled selected></option>
                           <option *ngFor="let item of this.ciudades"  value="{{item}}">
                             {{item}}
                           </option>
 
                         </select>
-                        <!-- <input  ngModel name="City" type="text" class="form-control" required > -->
+                        <!-- <input  ngModel  name="City" type="text" class="form-control" required > -->
                   </div>
                   </div>
 
 
                   </div>
 
-                   <div class="titleOpc">
+                   <div class="titleOpc geo">
 
                   <h4 style="margin-bottom: 15px;" class="titleSpecial4">
                     Geolocalización
@@ -324,80 +357,93 @@
 
 
                   <div class="form-group clearfix">
-                    <label >Tus clientes sabrán donde está tu tienda física</label>
+                    <label >Tus clientes querrán saber dónde está tu tienda física</label>
 
                   </div>
                   </div>
                   <hr>
 
                   <div class="row">
-                    <div class="col-md-12 col-lg-2">
+                    <div class="col-md-12 col-lg-2 localizarArea">
                       <div class="formButtons">
 
                         <button type="button" (click)="captrarLocalizacion()" class="buttonCustom btn btn-success btn-flat">Localizar</button>
 
                       </div>
                     </div>
-                    <div  class="col-md-12 col-lg-10"  *ngIf="this.activateMap == true">
-
-      <div [innerHtml]="this.coordsMap.mapUrl | safeUrl" style="width: 100%"></div>
+                    <div  class="col-md-12 col-lg-10">
 
       <div class="form-group col-12 ">
-        <label for="Identification">Si estas en este momento en un lugar diferente al de tu tienda física y deseas agregar la ubicación, <a class="hiperbutton" target="_blank" href="https://maps.google.com/maps?q={{this.coordsMap.latitude}},{{this.coordsMap.longitude}}&hl=es;z=14">entra a google maps</a>, ubícala y pega aquí el link</label>
+        <label for="Identification">Si estas en este momento en un lugar diferente al de tu tienda física y deseas agregar la ubicación, <a class="hiperbutton" target="_blank" href="https://maps.google.com/maps?q={{this.coordsMap.latitude}},{{this.coordsMap.longitude}}&hl=es;z=14">entra a google maps haciendo click AQUÍ</a>, ubícala y pega aquí el link</label>
       <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text">
               <i class="fas fa-map"></i>
               </span>
           </div>
-          <input  [(ngModel)]="altMapUrl"  [ngModelOptions]="{standalone: true}" name="altMap" type="text" class="form-control" >
+          <input  [(ngModel)]="altMapUrl"  [ngModelOptions]="{standalone: true}"  name="altMap" type="text" class="form-control" >
         </div>
     </div>
-
 
 
                     </div>
                   </div>
 
+                  <div class="row" *ngIf="this.activateMap == true">
+                    <div class="col-12">
 
+      <div [innerHtml]="this.coordsMap.mapUrl | safeUrl" style="width: 100%"></div>
+                    </div>
+                  </div>
 
-                  <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-                    Datos de cuenta
-                </h4>
+                  <hr>
+
+                  <div class="titleOpc geo">
+
+                    <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                      Datos de cuenta
+                  </h4>
+
+                    <div class="form-group clearfix">
+                      <label >Estos serán los datos para ingresar a Mercado Pyme</label>
+
+                    </div>
+                    </div>
+
                 <hr>
                   <div class="row">
                      <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="Email">Email</label>
+                      <label for="Email">Email <span class="colorRed">(*)</span></label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
                               <i class="fas fa-envelope"></i>
                             </span>
                         </div>
-                        <input  ngModel name="Email" type="email" class="form-control" required>
+                        <input  ngModel  name="Email" type="email" class="form-control" required>
                     </div>
                     </div>
 
                     <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="Pass">Contraseña</label>
+                      <label for="Pass">Contraseña <span class="colorRed">(*)</span></label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input  ngModel name="Pass" type="password" class="form-control" required>
+                        <input  ngModel  name="Pass" type="password" class="form-control" required>
                     </div>
                     </div>
                      <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="CPass">Confirma contraseña</label>
+                      <label for="CPass">Confirma contraseña <span class="colorRed">(*)</span></label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input  ngModel name="CPass" type="password" class="form-control" required>
+                        <input  ngModel  name="CPass" type="password" class="form-control" required>
                       </div>
                   </div>
 
@@ -413,8 +459,8 @@
                             <div class="icheck-success">
 
                                 <label for="aceptaTerminosNatural">
-                                  <input required ngModel name="Terms" type="checkbox" id="aceptaTerminosNatural1">
-                                    Autorizo para usar mi  información en concordancia con lo previsto en esta <a target="_blank" href="../../../assets/dist/documents/Política de Privacidad y Tratamiento de los Datos Personales-min.pdf" class="hiperbutton">Política de Privacidad y tratamiento de datos personales</a>
+                                  <input required ngModel  name="Terms" type="checkbox" id="aceptaTerminosNatural1">
+                                    Autorizo para usar mi  información en concordancia con lo previsto en esta <a target="_blank" href="../../../assets/dist/documents/Política de Privacidad y Tratamiento de los Datos Personales-min.pdf" class="hiperbutton">Política de Privacidad y tratamiento de datos personales <span class="colorRed">(*)</span></a>
                                 </label>
                               </div>
 
@@ -435,7 +481,7 @@
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input placeholder=" {{ this._usuarioService.captcha[0] }} + {{ this._usuarioService.captcha[1]}}" ngModel name="captcha" class="form-control" required  type="number">
+                        <input placeholder=" {{ this._usuarioService.captcha[0] }} + {{ this._usuarioService.captcha[1]}}" ngModel  name="captcha" class="form-control" required  type="number">
                       </div>
                   </div>
 
@@ -468,7 +514,7 @@
             <hr>
                 <div class="row">
                      <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="nameCompany">Nombre comercial</label>
+                      <label for="nameCompany">Nombre comercial <span class="colorRed">(*)</span></label>
                     <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
@@ -476,12 +522,12 @@
 
                         </span>
                     </div>
-                    <input ngModel  name="nameCompany" type="text" class="form-control" required >
+                    <input ngModel   name="nameCompany" type="text" class="form-control" required >
                   </div>
                   </div>
 
                    <div class="form-group clearfix col-md-12 col-lg-4">
-                    <label for="NIT">NIT</label>
+                    <label for="NIT">NIT <span class="colorRed">(*)</span></label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -489,12 +535,12 @@
 
                         </span>
                     </div>
-                    <input ngModel  name="NIT" type="text" class="form-control" required>
+                    <input ngModel   name="NIT" type="text" class="form-control" required>
                   </div>
                   </div>
 
                    <div class="form-group clearfix col-md-12 col-lg-4">
-                    <label for="Reasons">Razón social</label>
+                    <label for="Reasons">Razón social <span class="colorRed">(*)</span></label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -502,7 +548,7 @@
 
                         </span>
                     </div>
-                    <input ngModel  name="Reasons" type="text" class="form-control" required >
+                    <input ngModel   name="Reasons" type="text" class="form-control" required >
                   </div>
 
 
@@ -511,7 +557,7 @@
 
                   <div class="row">
                      <div class="form-group clearfix col-12">
-                    <label for="directionCompany">Dirección de empresa</label>
+                    <label for="directionCompany">Dirección de empresa <span class="colorRed">(*)</span></label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -519,7 +565,7 @@
 
                         </span>
                     </div>
-                    <input ngModel  name="directionCompany" type="text" class="form-control" required >
+                    <input ngModel   name="directionCompany" type="text" class="form-control" required >
                   </div>
                   </div>
                   </div>
@@ -531,7 +577,7 @@
 
 
                     <div class="form-group clearfix">
-                      <label >Tus clientes sabrán donde está tu tienda física</label>
+                      <label >Tus clientes querrán saber dónde está tu tienda física</label>
 
                     </div>
                     </div>
@@ -556,7 +602,7 @@
                 <i class="fas fa-map"></i>
                 </span>
             </div>
-            <input [(ngModel)]="altMapUrl"  [ngModelOptions]="{standalone: true}" name="altMap" type="text" class="form-control" >
+            <input [(ngModel)]="altMapUrl"  [ngModelOptions]="{standalone: true}"  name="altMap" type="text" class="form-control" >
         </div>
       </div>
 
@@ -579,15 +625,15 @@
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input  [(ngModel)]="this.companyPhonee[i]" [name]="'companyPhone' + i" type="tel" [imask]="this._formService.phoneMask()" class="form-control" required >
+                        <input  [(ngModel)]="this.companyPhonee[i]" [name]="'companyPhone' + i" type="tel" [imask]="this._formService.phoneMask()" class="form-control"  >
                       </div>
                   </div>
                   </div>
                   </div>
 
                   <div class="formButtons centerCustom col-md-12 col-lg-2" style="flex-direction: column;">
-                    <button style="width: 100%; min-width: 110px" type="button" (click)="addPhone()" class="buttonCustom btn btn-success btn-flat">+Teléf</button>
-                    <button style="width: 100%; min-width: 110px" type="button" (click)="addPhone('delete')" class="buttonCustom btn btn-danger btn-flat">-Teléf</button>
+                    <button style="width: 100%; min-width: 150px" type="button" (click)="addPhone()" class="buttonCustom btn btn-success btn-flat">+Teléf</button>
+                    <button style="width: 100%; min-width: 150px" type="button" (click)="addPhone('delete')" class="buttonCustom btn btn-danger btn-flat">-Teléf</button>
                   </div>
 
                   </div>
@@ -600,8 +646,8 @@
                     <div class="form-group clearfix col-md-12 col-lg-4">
                       <!-- Select multiple-->
                       <div class="form-group">
-                        <label>¿Cuál es tu sector económico?</label>
-                        <select  multiple class="form-control" required name="estadosActividad" [(ngModel)]="estadosActividadModel">
+                        <label>¿Cuál es tu sector económico? </label>
+                        <select  multiple class="form-control" required  name="estadosActividad" [(ngModel)]="estadosActividadModel">
 
                           <option *ngFor="let item of this._globaConfig.actividadEconomica" value="{{item}}">
                             {{item}}
@@ -622,7 +668,7 @@
                                     <i class="fas fa-users"></i>
                                     </span>
                                 </div>
-                                <input  ngModel name="ProducciónActivity" type="text" class="form-control" required >
+                                <input  ngModel  name="ProducciónActivity" type="text" class="form-control" required >
                               </div>
                             </div>
                           <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Comercialización') == true">
@@ -633,7 +679,7 @@
                                     <i class="fas fa-users"></i>
                                     </span>
                                 </div>
-                                <input  ngModel name="ComercializaciónActivity" type="text" class="form-control" required >
+                                <input  ngModel  name="ComercializaciónActivity" type="text" class="form-control" required >
                               </div>
                             </div>
                           <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Servicios') == true">
@@ -644,7 +690,7 @@
                                     <i class="fas fa-users"></i>
                                     </span>
                                 </div>
-                                <input  ngModel name="ServiciosActivity" type="text" class="form-control" required >
+                                <input  ngModel  name="ServiciosActivity" type="text" class="form-control" required >
                               </div>
                           </div>
                           <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Otro') == true">
@@ -655,7 +701,7 @@
                                   <i class="fas fa-users"></i>
                                   </span>
                               </div>
-                              <input  ngModel name="OtroActivity" type="text" class="form-control" required >
+                              <input  ngModel  name="OtroActivity" type="text" class="form-control" required >
                             </div>
                         </div>
 
@@ -674,51 +720,51 @@
                   <hr>
                       <div class="row">
                      <div class="form-group clearfix col-md-12 col-lg-3">
-                      <label for="Name">Nombres</label>
+                      <label for="Name">Nombres <span class="colorRed">(*)</span></label>
                     <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <input  ngModel name="Name" type="text" class="form-control" required >
+                    <input  ngModel  name="Name" type="text" class="form-control" required >
                   </div>
                   </div>
 
                   <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="Surname">Apellidos</label>
+                    <label for="Surname">Apellidos <span class="colorRed">(*)</span></label>
                   <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="fa fa-user" aria-hidden="true"></i>
                       </span>
                   </div>
-                  <input  ngModel name="Surname" type="text" class="form-control" required >
+                  <input  ngModel  name="Surname" type="text" class="form-control" required >
                 </div>
                 </div>
 
 
                    <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="Age">Edad</label>
+                    <label for="Age">Edad <span class="colorRed">(*)</span></label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <input  ngModel name="Age" type="number" class="form-control" required>
+                    <input  ngModel  name="Age" type="number" class="form-control" required >
                   </div>
                   </div>
 
                   <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="Gender">Género</label>
+                    <label for="Gender">Género <span class="colorRed">(*)</span></label>
                   <div class="input-group" >
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             <i class="fa fa-venus-mars" aria-hidden="true"></i>
                         </span>
                       </div>
-                      <select  ngModel name="Gender" class="form-control" required>
+                      <select  ngModel  name="Gender" class="form-control" required>
                           <option value="" disabled selected></option>
                           <option value="Femenino">Femenino</option>
                           <option value="Masculino">Masculino</option>
@@ -734,7 +780,7 @@
                   <div class="row">
 
                     <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="TypeId">Tipo de documento</label>
+                      <label for="TypeId">Tipo de documento <span class="colorRed">(*)</span></label>
                     <div class="input-group" >
                       <div class="input-group-prepend">
                           <span class="input-group-text">
@@ -742,7 +788,7 @@
                             <i class="fas fa-id-badge"></i>
                           </span>
                         </div>
-                        <select  ngModel name="TypeId" class="form-control" required>
+                        <select  ngModel  name="TypeId" class="form-control" required>
                             <option value="" disabled selected></option>
                             <option *ngFor="let item of this._globaConfig.tipoIdentificacion" (click)="permitId(item)"  value="{{item}}">
                               {{item}}
@@ -755,27 +801,27 @@
 
 
                     <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="Identification">Número de identificación</label>
+                      <label for="Identification">Número de identificación <span class="colorRed">(*)</span></label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
                             <i class="fas fa-id-card"></i>
                             </span>
                         </div>
-                        <input  ngModel name="Identification"  type="text" class="form-control" required >
+                        <input  ngModel  name="Identification"  type="text" class="form-control" required >
                       </div>
                   </div>
 
 
                   <div class="form-group clearfix col-md-12 col-lg-4">
-                    <label for="positionCompany">Cargo actual</label>
+                    <label for="positionCompany">Cargo actual <span class="colorRed">(*)</span></label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <input  ngModel name="positionCompany" type="text" class="form-control" required>
+                    <input  ngModel  name="positionCompany" type="text" class="form-control" required>
                   </div>
                   </div>
 
@@ -787,14 +833,14 @@
                   <hr>
                         <div class="row">
                     <div class="form-group clearfix col-md-12 col-lg-3">
-                      <label for="Phone">Teléfono</label>
+                      <label for="Phone">Teléfono fijo <span class="colorRed">(*)</span></label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input  ngModel name="Phone" type="tel" [imask]="this._formService.phoneMask()" class="form-control" required >
+                        <input  ngModel  name="Phone" type="tel" [imask]="this._formService.phoneMask()" class="form-control" required>
                       </div>
                   </div>
 
@@ -806,12 +852,12 @@
                           <i class="fas fa-mobile-alt"></i>
                           </span>
                       </div>
-                      <input  ngModel name="celPhone" type="tel" [imask]="this._formService.phoneMask()" class="form-control" required >
+                      <input  ngModel  name="celPhone" type="tel" [imask]="this._formService.phoneMask()" class="form-control" >
                     </div>
                 </div>
 
                 <div class="form-group clearfix col-md-12 col-lg-3">
-                  <label for="Department">Departamento</label>
+                  <label for="Department">Departamento <span class="colorRed">(*)</span></label>
                 <div class="input-group" >
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -819,7 +865,7 @@
 
                         </span>
                       </div>
-                      <select (change)="setCiudades($event.target.value)" ngModel name="Department" class="form-control" required >
+                      <select (change)="setCiudades($event.target.value)" ngModel  name="Department" class="form-control" required >
                         <option value="" disabled selected ></option>
                         <option *ngFor="let item of this._globaConfig.departamentos;"   value="{{item | json}}">
                           {{item.departamento}}
@@ -830,7 +876,7 @@
                   </div>
 
                    <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="City">Ciudad</label>
+                    <label for="City">Ciudad <span class="colorRed">(*)</span></label>
                   <div class="input-group" >
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -838,58 +884,65 @@
 
                         </span>
                       </div>
-                      <select  ngModel name="City" class="form-control" required >
+                      <select  ngModel  name="City" class="form-control" required >
                           <option value="" disabled selected></option>
                           <option *ngFor="let item of ciudades"  value="{{item}}">
                             {{item}}
                           </option>
 
                         </select>
-                        <!-- <input  ngModel name="City" type="text" class="form-control" required > -->
+                        <!-- <input  ngModel  name="City" type="text" class="form-control" required > -->
                   </div>
                   </div>
 
 
                   </div>
 
+                  <div class="titleOpc geo">
 
-                  <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-                    Datos de cuenta
-                </h4>
+                    <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                      Datos de cuenta
+                  </h4>
+
+                    <div class="form-group clearfix">
+                      <label >Estos serán los datos para ingresar a Mercado Pyme</label>
+
+                    </div>
+                    </div>
                 <hr>
                   <div class="row">
                      <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="Email">Email</label>
+                      <label for="Email">Email <span class="colorRed">(*)</span></label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
                               <i class="fas fa-envelope"></i>
                             </span>
                         </div>
-                        <input  ngModel name="Email" type="email" class="form-control" required>
+                        <input  ngModel  name="Email" type="email" class="form-control" required>
                     </div>
                     </div>
 
                     <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="Pass">Contraseña</label>
+                      <label for="Pass">Contraseña <span class="colorRed">(*)</span></label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input  ngModel name="Pass" type="password" class="form-control" required>
+                        <input  ngModel  name="Pass" type="password" class="form-control" required>
                     </div>
                     </div>
                      <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="CPass">Confirma contraseña</label>
+                      <label for="CPass">Confirma contraseña <span class="colorRed">(*)</span></label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input  ngModel name="CPass" type="password" class="form-control" required>
+                        <input  ngModel  name="CPass" type="password" class="form-control" required>
                       </div>
                   </div>
 
@@ -902,7 +955,7 @@
                           <div class="icheck-success">
 
                             <label for="aceptaTerminosNatural">
-                              <input required ngModel name="Terms" type="checkbox" id="aceptaTerminosNatural">
+                              <input required ngModel  name="Terms" type="checkbox" id="aceptaTerminosNatural">
                               Autorizo para mi  información y doy fe que tengo la facultad de autorizarlo en nombre de la empresa que represento en concordancia con lo previsto en esta <a target="_blank" href="../../../assets/dist/documents/Política de Privacidad y Tratamiento de los Datos Personales-min.pdf" class="hiperbutton">Política de Privacidad y tratamiento de datos personales</a>
                             </label>
                           </div>
@@ -924,7 +977,7 @@
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input placeholder=" {{ this._usuarioService.captcha[0] }} + {{ this._usuarioService.captcha[1]}}" ngModel name="captcha" class="form-control" required  type="number">
+                        <input placeholder=" {{ this._usuarioService.captcha[0] }} + {{ this._usuarioService.captcha[1]}}" ngModel  name="captcha" class="form-control" required  type="number">
                       </div>
                   </div>
 

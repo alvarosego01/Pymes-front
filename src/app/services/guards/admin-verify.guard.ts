@@ -13,6 +13,8 @@ import { UsersService } from "../users.service";
 @Injectable({
   providedIn: "root",
 })
+
+
 export class AdminVerifyGuard implements CanActivate, CanActivateChild {
   constructor(
     public _usuarioService: UsersService,
@@ -29,17 +31,17 @@ export class AdminVerifyGuard implements CanActivate, CanActivateChild {
     | UrlTree {
 
     if (this._usuarioService.estaLogueado()) {
-      // //////////// console.log("Paso el guard");
+      // //////////// ////console.log("Paso el guard");
 
       if (this._usuarioService.roleName == "Administrador") {
-        ////// console.log('es admin');
+        ////// ////console.log('es admin');
         return true;
       } else {
         this.router.navigate(["/dashboard"]);
         return false;
       }
     } else {
-      // //////////// console.log('Bloqueado por el guard');
+      // //////////// ////console.log('Bloqueado por el guard');
       // si falla entonces lleva al login
       this.router.navigate(["/us"]);
       return false;

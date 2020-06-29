@@ -143,7 +143,7 @@
                 <i class="fas fa-globe"></i>
                  </span>
              </div>
-             <input  ngModel name="redWeb" type="url" class="form-control" >
+             <input  ngModel name="redWeb" type="text" class="form-control" >
            </div>
            </div>
 
@@ -186,16 +186,17 @@
 
                       </span>
                     </div>
-                    <select  (change)="setSubCategory($event.target.value)" [required] ="this.test == 1" ngModel name="Category" class="form-control">
+                    <select *ngIf="(this._categoryService.allCategoryList)"  (change)="setSubCategory($event.target.value)" [required] ="this.test == 1" ngModel name="Category" class="form-control">
                         <option value="" disabled selected></option>
-                        <option *ngFor="let item of this._postService.categoryPrincipal; let i = index" value="{{ item | json }}">
-                          {{ item.base }}
+                        <option *ngFor="let item of this._categoryService.allCategoryList; let i = index" value="{{ item | json }}">
+                          {{ item._category }}
                         </option>
 
 
                       </select>
                 </div>
                 </div>
+                ​
 
 
 
@@ -209,11 +210,11 @@
                       </span>
                     </div>
 
-                    <select (change)="setSubCategoryOther($event.target.value)"   [required] ="this.test == 1" ngModel name="subCategory" class="form-control" [disabled] = "this.subCategory.length == 0">
+                    <select *ngIf="(this._categoryService.allCategoryList)"  [required] ="this.test == 1" ngModel name="subCategory" class="form-control" [disabled] = "this.subCategory.length == 0">
                         <!-- <option value="" disabled selected></option> -->
                         <!-- <option value="Sin categoría" selected>Sin sub categoría</option> -->
-                        <option *ngFor="let item of this.subCategory"  value="{{item}}">
-                          {{item}}
+                        <option *ngFor="let item of this.subCategory"  value="{{ item | json }}">
+                          {{ item.name }}
                         </option>
 
                       </select>
@@ -224,21 +225,6 @@
           </div>
 
 
-
-             <div class="row" *ngIf="this.ngNewCategory != null">
-                <div class="form-group clearfix col-md-12 col-lg-12">
-               <label for="redWeb">Escribe una nueva categoría</label>
-             <div class="input-group">
-             <div class="input-group-prepend">
-               <span class="input-group-text">
-                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                 </span>
-             </div>
-             <input [(ngModel)]="this.ngNewCategory" ngModel name="newCategory" type="text" class="form-control" >
-           </div>
-           </div>
-
-             </div>
 
 
              <h4 style="margin-bottom: 15px;" class="titleSpecial4">
@@ -350,7 +336,7 @@
                 <textarea  [(ngModel)]="ngIncludeDesc"
                 [ngModelOptions]="{standalone: true}"
                 [maxlength]="350"
-                [required] ="this.test == 1" ngModel name="IncludeDesc" class="form-control" rows="3" placeholder="En este espacio puedes explicar los detalles que incluye tu producto o servicio"></textarea>
+                [required] ="this.test == 1"  name="IncludeDesc" class="form-control" rows="3" placeholder="En este espacio puedes explicar los detalles que incluye tu producto o servicio"></textarea>
                 <small
                 *ngIf="(this.ngIncludeDesc) && this.ngIncludeDesc != ''"
                 >{{ this.ngIncludeDesc.length }}/350</small>
@@ -362,7 +348,7 @@
                 <textarea  [(ngModel)]="ngnotIncludeDesc"
                 [ngModelOptions]="{standalone: true}"
                 [maxlength]="350"
-                [required] ="this.test == 1" ngModel name="notIncludeDesc" class="form-control" rows="3" placeholder="En este espacio puedes explicar los detalles que no estan presentes en tu producto o servicio"></textarea>
+                [required] ="this.test == 1"  name="notIncludeDesc" class="form-control" rows="3" placeholder="En este espacio puedes explicar los detalles que no estan presentes en tu producto o servicio"></textarea>
                 <small
                 *ngIf="(this.ngnotIncludeDesc) && this.ngnotIncludeDesc != ''"
                 >{{ this.ngnotIncludeDesc.length }}/350</small>

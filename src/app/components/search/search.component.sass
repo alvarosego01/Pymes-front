@@ -4,10 +4,6 @@
 
 @import "~src/generals"
 
-
-
-
-
 .buscadorGlobal
     padding: 25px 0
     // padding-bottom: 50px
@@ -48,12 +44,12 @@
                 height: 35px
                 width: auto
                 // max-width: 300px
-                border-radius: 0
+                border-radius: .2rem 0 0 .2rem!important
                 border: 0!important
                 @include responsivo(telefonoTable)
-                    max-width: 250px
+                    max-width: 100%
                 @include responsivo(pcMedio)
-                    max-width: 350px
+                    max-width: 100%
             .input-group-append
                 border-radius: 0
                 width: fit-content!important
@@ -64,11 +60,12 @@
                 height: 35px
                 margin: 0
                 button
-                    border-radius: 0
+                    border-radius: 0 .2rem .2rem 0!important
                     transition: $trans
                     background-color: $VerdeOscur
                     height: 35px
                     color: white
+
         &:hover
             .input-group-append
                 button
@@ -76,6 +73,10 @@
         .input-group.input-group-sm
             width: 100%
             display: block
+            @include responsivo(telefonoTable)
+                padding: 0 3.8%!important
+            @include responsivo(pcMedio)
+                padding: 0 3.8%!important
 
 .buscadorGlobal.backGreen
     background-color: $VerdeClar

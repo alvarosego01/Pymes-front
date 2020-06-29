@@ -19,6 +19,7 @@ export class _UserModelNatural {
     public termsCondition?: string,
     public role?: string,
        public typeActivity?: any[],
+       public negocioName?: string,
       //  public details?: any[],
     public receiveEmail?: string,
     public preference?: string,

@@ -10,11 +10,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { ADMIN_ROUTES } from './admin.routes';
+import { ControlCategoryComponent } from './control-category/control-category.component';
 
 @NgModule({
   declarations: [
 
-  ],
+  ControlCategoryComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

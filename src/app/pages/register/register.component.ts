@@ -1,6 +1,8 @@
 // importaciones nativas
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
+// {} from '@angular/forms';
+
 import { Router } from "@angular/router";
 
 
@@ -10,7 +12,7 @@ import { Router } from "@angular/router";
 // servicios
 import { UsersService, GlobalConfigService, NotifyService, FormsResourcesService } from "src/app/services/service.index";
 
-import { _UserModelNatural, _UserModelCompany
+import { _UserModelNatural, _UserModelCompany, _NotifyModel
 
    } from 'src/app/models/models.index';
 import { SocialFloatComponent } from 'src/app/globals/globals.index';
@@ -56,16 +58,17 @@ export class RegisterComponent implements OnInit {
     public _usuarioService: UsersService,
     public _globaConfig: GlobalConfigService,
     public _notifyService: NotifyService,
-    public _formService: FormsResourcesService
+    public _formService: FormsResourcesService,
+    // public formControlName: FormControlName
 
 
     // public SocialFloatComponent: SocialFloatComponent
     ) {
     this._usuarioService.setCaptcha();
 
+      this.welcomeMessage();
 
-
-    // //////// console.log(this._globaConfig.departamentos);
+    // //////// ////console.log(this._globaConfig.departamentos);
   }
 
   ngOnInit(): void {
@@ -116,16 +119,16 @@ export class RegisterComponent implements OnInit {
 wrapper.innerHTML= this.mapUrl;
 var div= wrapper.firstChild;
 this.mapElement = div;
-//////// console.log(div);
+//////// ////console.log(div);
   }
 
   activateEconomicActivity(){
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    //////// console.log(this.estadosActividad);
+    //////// ////console.log(this.estadosActividad);
   }
 
   setCiudades(i){
-    // //////// console.log('Got the selectedVendor as : ', i);
+    // //////// ////console.log('Got the selectedVendor as : ', i);
     // return;
     let k = JSON.parse(i);
     k = k.id;
@@ -145,12 +148,12 @@ this.mapElement = div;
   //  this._usuarioService.promiseTimeout(5000, x);
     x.then(r => {
 
-      //////// console.log(r);
+      //////// ////console.log(r);
       this.coordsMap = r;
       this._globaConfig.spinner = false;
       if(Object.keys(this.coordsMap).length > 0 ){
         this.activateMap = true;
-      // //////// console.log('activado mapa', );
+      // //////// ////console.log('activado mapa', );
       }
     }, err => {
       this._globaConfig.spinner = false;
@@ -194,18 +197,18 @@ this.mapElement = div;
     // }
     if(forma.value.Pass != forma.value.CPass){
       this._notifyService.Toast.fire({
-        title:'Confirmación de contraseña invalida',
+        title:'Validación de contraseña incorrecta',
         icon: 'error'
       });
       return;
     }
 
     if(this.altMapUrl != null && this.altMapUrl != ''){
-      // //// console.log('lo pone');
+      // //// ////console.log('lo pone');
       this.coordsMap.mapUrl = this.altMapUrl;
     }
 
-    // //// console.log(this.coordsMap);
+    // //// ////console.log(this.coordsMap);
     // return;
 
     if(type == 'natural'){
@@ -285,11 +288,12 @@ this.mapElement = div;
       '',
       forma.value.Terms,
       'CLIENTE_ROLE',
-      economicActivity
+      economicActivity,
+      forma.value.negocioName
       // forma.value.estadosActividad,
       );
         //  this.spinner = true;
-      //  ////// console.log(usuario);
+      //  ////// ////console.log(usuario);
       //  return;
       this._globaConfig.spinner = true;
 //
@@ -298,11 +302,33 @@ this.mapElement = div;
 //
             this._globaConfig.spinner = false;
 
+            // let n = new _NotifyModel(
+            //   "nAccountCreatedNoVerify",
+            //   null,
+            //   resp.data._id
+            // );
+
+            this._notifyService.swalNormal.fire({
+              title: "¡Cuenta creada con exito!",
+              text: "Ahora vamos a suscribir tus publicaciones",
+              icon: "success",
+
+              confirmButtonText: 'Aceptar'
+
+            }).then( (result) => {
+              this._usuarioService.guardarStorage(resp.data.user.id_user, resp.data.t, resp.data.user);
+              this.router.navigate(['/dashboard/postControl']);
+            });
+
             forma.reset();
         }, ERR => {
-          //////// console.log(ERR);
+          //////// ////console.log(ERR);
           this._globaConfig.spinner = false;
         });
+
+
+
+
 
 
 }
@@ -407,23 +433,46 @@ if(type == 'company'){
 
   );
 
-  //////// console.log(usuario, 'envio company');
+  //////// ////console.log(usuario, 'envio company');
       this._globaConfig.spinner = true;
 //
           this._usuarioService.registroUsuarioPOST( null, usuario ,'company' )
           .subscribe( resp => {
 //
-            this._globaConfig.spinner = false;
-            forma.reset();
+  this._notifyService.swalNormal.fire({
+              title: "¡Cuenta creada con exito!",
+              text: "Ahora vamos a suscribir tus publicaciones",
+              icon: "success",
 
+              confirmButtonText: 'Aceptar'
+
+            }).then( (result) => {
+              this._usuarioService.guardarStorage(resp.data.user.id_user, resp.data.t, resp.data.user);
+              this.router.navigate(['/dashboard/postControl']);
+            });
+
+            forma.reset();
           },
           ERR => {
-            //////// console.log(ERR);
+            //////// ////console.log(ERR);
             this._globaConfig.spinner = false;
           });
 
 }
 
+
+  }
+
+
+
+
+
+  welcomeMessage(){
+
+    this._notifyService.swalNormal.fire({
+      title: '¡Te damos la bienvenida al registro de Mercado Pyme!',
+      text: 'Llena los datos de nuestro formulario'
+    })
 
   }
 

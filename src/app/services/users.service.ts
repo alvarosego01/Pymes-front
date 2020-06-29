@@ -61,15 +61,15 @@ export class UsersService {
     // /post/view/5ed1087cd1baa3076cf32edd
     let url = `${_SERVICIOS}/user/view/`;
 
-    ////// console.log('url', url);
-    // ////// console.log('lo que se manda', dataCompany);
+    ////// ////console.log('url', url);
+    // ////// ////console.log('lo que se manda', dataCompany);
 
     let l  ={
       id: id
     }
        return this.http.put( url, l ).pipe(
          map((resp: any) => {
-           //////////// console.log("respuesta", resp);
+           //////////// ////console.log("respuesta", resp);
            // alert("Usuario registrado");
            // swal('Perro registrado', '' , 'success');
            let n = new _NotifyModel(
@@ -78,12 +78,12 @@ export class UsersService {
              resp.data._id
            );
            // this._notifyService.sendNotifyEmailPOST(n).subscribe((resp) => {
-      //  ////// console.log('funciona visita', resp);
+      //  ////// ////console.log('funciona visita', resp);
             return resp;
          }),
          catchError((err) => {
 
-          // ////// console.log('error visita', err);
+          // ////// ////console.log('error visita', err);
            return throwError(err);
          })
        );
@@ -95,16 +95,16 @@ export class UsersService {
   getUserProfileGET(idUser){
 
     let url = `${_SERVICIOS}/user/profile/${idUser}`;
-    //////////// console.log(data, "llega data notif");
+    //////////// ////console.log(data, "llega data notif");
     return this.http.get(url).pipe(
       map((resp: any) => {
-        //////////// console.log("respuesta notificacion", resp);
+        //////////// ////console.log("respuesta notificacion", resp);
         // alert('Usuario registrado');
 
         return resp;
       }),
       catchError((err) => {
-        //////////// console.log("respuesta notificacion", err);
+        //////////// ////console.log("respuesta notificacion", err);
         // alert('Error en al registrar');
         // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);
@@ -121,7 +121,7 @@ export class UsersService {
     return this.http.post(url, usuario ).pipe(
         map( (resp: any) => {
 
-          ////// console.log('modelo valido que se guarda', resp.data);
+          ////// ////console.log('modelo valido que se guarda', resp.data);
 
           this.guardarStorage(resp.message.id_user, resp.message.t, resp.data);
 
@@ -134,7 +134,7 @@ export class UsersService {
           return resp;
         }),
         catchError( err =>{
-          ////////// console.log(err);
+          ////////// ////console.log(err);
           // this._notifyService.Toast.fire({
           //   title: 'Algo ha salido mal',
           //   icon: 'error'
@@ -183,7 +183,7 @@ export class UsersService {
 
 
 
-    // //////////// console.log('cargar storage token: ', this.token);
+    // //////////// ////console.log('cargar storage token: ', this.token);
   }
 
   setCaptcha() {
@@ -194,7 +194,7 @@ export class UsersService {
     this.captcha[1] = var2;
     this.captcha[2] = var1 + var2;
 
-    // //////////// console.log(this.captcha);
+    // //////////// ////console.log(this.captcha);
   }
 
   registroUsuarioPOST(
@@ -214,36 +214,11 @@ export class UsersService {
 
     return this.http.post(url, usuario).pipe(
       map((resp: any) => {
-        //////////// console.log("respuesta", resp);
+        //////////// ////console.log("respuesta", resp);
         // alert("Usuario registrado");
         // swal('Perro registrado', '' , 'success');
-        let n = new _NotifyModel(
-          "nAccountCreatedNoVerify",
-          null,
-          resp.data._id
-        );
-        // this._notifyService.sendNotifyEmailPOST(n).subscribe((resp) => {
-//
-        // });
-        // this._notifyService.Toast.fire({
-        //   title: '¡Usuario registrado!',
-        //   text: '¡Gracias por unirte a Mercado Pyme!',
-        //   icon: 'success'
-        // });
 
-        this._notifyService.swalNormal.fire({
-          title: "¡Cuenta creada con exito!",
-          text: "Inicia sesión ahora mismo, y empieza a pautar con nosotros en la red",
-          icon: "success",
-
-          confirmButtonText: 'Aceptar'
-
-        }).then((result) => {
-          this.router.navigate(['/us']);
-        });
-
-
-        return true;
+        return resp;
       }),
       catchError((err) => {
         this._notifyService.Toast.fire({
@@ -323,7 +298,7 @@ export class UsersService {
       let token = this.token;
 
       formData.append( 'imagen', archivo, archivo.name );
-      ////// console.log('envia tio', file);
+      ////// ////console.log('envia tio', file);
       formData.append( 'type', file );
 
       xhr.onreadystatechange = function() {
@@ -347,8 +322,8 @@ export class UsersService {
 
       let url = _SERVICIOS + '/upload/' + tipo + '/' + id + '?t=' +token;
 
-      //////////// console.log('la url', url);
-      //////////// console.log('formada', formData);
+      //////////// ////console.log('la url', url);
+      //////////// ////console.log('formada', formData);
 
       xhr.open('PUT', url, true );
       xhr.send( formData );
@@ -369,12 +344,12 @@ export class UsersService {
 
  let url = `${_SERVICIOS}/user/${this.usuario._id}/?t=${this.token}`;
 
- ////// console.log('url', url);
- ////// console.log('lo que se manda', dataCompany);
+ ////// ////console.log('url', url);
+ ////// ////console.log('lo que se manda', dataCompany);
 
     return this.http.put(url, dataCompany).pipe(
       map((resp: any) => {
-        //////////// console.log("respuesta", resp);
+        //////////// ////console.log("respuesta", resp);
         // alert("Usuario registrado");
         // swal('Perro registrado', '' , 'success');
         let n = new _NotifyModel(
@@ -390,12 +365,12 @@ export class UsersService {
           // text: '¡Gracias por unirte a Mercado Pyme!',
           icon: 'success'
         });
-        ////// console.log('respuesta guardada',resp['data']);
+        ////// ////console.log('respuesta guardada',resp['data']);
         // return true;
         this.guardarStorage( this.usuario._id , this.token, resp['data'])
       }),
       catchError((err) => {
-        ////// console.log( 'el error', err);
+        ////// ////console.log( 'el error', err);
         this._notifyService.Toast.fire({
           title: 'Algo ha salido mal, intente más tarde',
           icon: 'error'
@@ -412,7 +387,7 @@ export class UsersService {
     type){
 
  let url = `${_SERVICIOS}/user/${this.usuario._id}/?t=${this.token}`;
-////////// console.log(url);
+////////// ////console.log(url);
     let usuario: any;
     if (type == "natural") {
       usuario = usuarioNatural;
@@ -423,7 +398,7 @@ export class UsersService {
 
     return this.http.put(url, usuario).pipe(
       map((resp: any) => {
-        //////////// console.log("respuesta", resp);
+        //////////// ////console.log("respuesta", resp);
         // alert("Usuario registrado");
         // swal('Perro registrado', '' , 'success');
         let n = new _NotifyModel(
@@ -439,12 +414,12 @@ export class UsersService {
           // text: '¡Gracias por unirte a Mercado Pyme!',
           icon: 'success'
         });
-        ////// console.log('respuesta guardada',resp['data']);
+        ////// ////console.log('respuesta guardada',resp['data']);
         // return true;
         this.guardarStorage( this.usuario._id , this.token, resp['data'])
       }),
       catchError((err) => {
-        ////// console.log( 'el error', err);
+        ////// ////console.log( 'el error', err);
         this._notifyService.Toast.fire({
           title: 'Algo ha salido mal, intente más tarde',
           icon: 'error'
@@ -468,17 +443,17 @@ export class UsersService {
 
       var x = new Promise((resolve, reject) => {
 
-        // ////////// console.log('entra al geo');
+        // ////////// ////console.log('entra al geo');
         setTimeout(function(){reject('timeout')},10000);
 
       navigator.geolocation.getCurrentPosition( position => {
-        ////// console.log('entra');
+        ////// ////console.log('entra');
         var l ={
                   latitude: position.coords.latitude,
                   longitude: position.coords.longitude,
                   mapUrl: `https://maps.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}&hl=es;z=14&output=embed`
             }
-              // ////////// console.log(position.coords.latitude, position.coords.longitude);
+              // ////////// ////console.log(position.coords.latitude, position.coords.longitude);
 
 
       this._notifyService.Toast.fire({
@@ -505,7 +480,7 @@ export class UsersService {
       icon: 'error'
     });
     // reject(false);
-      // ////////// console.log("Browser doesn't support geolocation!");
+      // ////////// ////console.log("Browser doesn't support geolocation!");
   }
 
   }

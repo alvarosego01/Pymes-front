@@ -8,7 +8,7 @@
       <!-- background-image: url('../../../assets/resourcesWeb/Banner.jpg') -->
       <img
       [src]="this.setBanner()" alt="">
-
+<!--
       <div class="contenido">
         <div class="c">
 
@@ -25,7 +25,7 @@
         </div>
 
       </div>
-      </div>
+      </div> -->
 
 
     </div>
@@ -38,18 +38,20 @@
   </app-search>
 <!-- </div> -->
 
-    <div class="centerContenido container padd5">
+    <div class="centerContenido container">
       <div class="row">
 
-        <app-category-lists class="col-md-12 col-lg-2" ></app-category-lists>
+        <app-category-lists class="col-md-12 col-lg-3" ></app-category-lists>
 
-        <div class="resultList col-md-12 col-lg-10">
+        <div class="resultList col-md-12 col-lg-9">
 
           <div class="productList">
             <h5 class="titleSection">
             {{ this._searchService.homeTitleResults }}
             </h5>
-            <app-posts-lists (ScrollLista)="this.ScrollLista($event)"></app-posts-lists>
+            <!-- (ScrollLista)="this.ScrollLista($event)" -->
+            <app-posts-lists
+            ></app-posts-lists>
           </div>
 
         </div>

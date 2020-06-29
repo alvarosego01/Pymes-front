@@ -13,7 +13,7 @@
 
   </app-search>
 
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <ul *ngIf="(this.listaCategory)" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
         <li class="nav-item  has-treeview "
         [ngClass]="{'menu-open': this.GlobalConfigService.isMobile() == false}"
@@ -37,30 +37,32 @@
                 <p>{{ item.base }}</p>
               </a>
             </li> -->
-              <li *ngFor="let item of this._postService.categoryPrincipal, let i = index" class="nav-item has-treeview">
+              <li *ngFor="let item of this.listaCategory._category, let i = index" class="nav-item has-treeview">
 
-                <a (click)="this.searchByCategory(item.base, null)" class="nav-link" [ngClass]="{'active': this._searchService.catState.base == item.base}">
+                <a (click)="this.searchByCategory(item.name, null, item._id, null)" class="nav-link" [ngClass]="{'active': this._searchService.catState.base == item.name}">
                   <p>
-                    {{ item.base }}
+                    {{ item.name }}
                     <i class="right fas fa-angle-left"
                     [ngStyle]="{
-                      'transform': (this._searchService.catState.base == item.base)? 'rotate(-90deg)': 'rotate(0deg)'
+                      'transform': (this._searchService.catState.base == item.name)? 'rotate(-90deg)': 'rotate(0deg)'
                     }"
                     ></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview"
 
+                <!-- {{ this._searchService.catState.base }} -->
+                <ul class="nav nav-treeview"
+                style="display: block"
                 [ngStyle]="{
-                  'display': (this._searchService.catState.base != item.base)? 'none': ''
+                  'display': (this._searchService.catState.base != item.name)? 'none': 'block!important;'
                 }"
                 >
-                <!-- 'display': this._searchService.catState.base != item.base -->
+                <!-- 'display': this._searchService.catState.base != item.name -->
 
-                  <li *ngFor="let child of this._postService.categoryPrincipal[i].child" class="nav-item child">
-                    <a (click)="this.searchByCategory(item.base, child)" class="nav-link" [ngClass]="{'active': this._searchService.catState.child == child}">
+                  <li *ngFor="let child of item.childs" class="nav-item child">
+                    <a (click)="this.searchByCategory(item.name, child.name, item._id, child._id)" class="nav-link" [ngClass]="{'active': this._searchService.catState.child == child.name}">
 
-                      <p> {{ child }} </p>
+                      <p> {{ child.name }} </p>
                     </a>
                   </li>
 
@@ -103,7 +105,7 @@
                     </div>
 
                     <div class="centerCustom">
-                        <button type="submit" style="color: white" class="buttonCustom btn btn-success btn-flat">Buscar</button>
+                        <button type="submit" style="color: white" class="smallButton btn btn-success btn-flat">Buscar</button>
                       </div>
 
 
@@ -205,7 +207,7 @@
               <li  class="nav-item">
 
                 <div class="centerCustom">
-                  <button (click)="this.getAll()" type="button" style="color: white" class="buttonCustom btn btn-success btn-flat">Ver todo</button>
+                  <button (click)="this.getAll()" type="button" style="color: white" class="smallButton btn btn-success btn-flat">Ver todo</button>
                 </div>
 
               </li>

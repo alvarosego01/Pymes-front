@@ -86,7 +86,7 @@
                   <div class="dataHeader">
 
                     <h5 class="titleSpecial6">
-                      {{ this.publication._category.principal }} - {{ this.publication._category.child }}
+                      {{ this.publication._category._principal._category }} - {{ this.publication._category.child }}
                     </h5>
                     <small>
                       {{ this.publication.created_at }}
@@ -123,7 +123,7 @@
                         Incluye:
                       </h6>
                       <p>
-                        {{ this.publication.content }}
+                        {{ this.publication.content | stringLimit:99999 }}
                       </p>
                       <hr>
                     </div>
@@ -132,7 +132,7 @@
                         No incluye:
                       </h6>
                       <p>
-                        {{ this.publication.notContent }}
+                        {{ this.publication.notContent | stringLimit:99999 }}
                       </p>
                       <hr>
                     </div>
@@ -393,21 +393,17 @@
 
                 <!-- <div *ngIf="(this._searchService.registros) && this._searchService.registros.length > 0" class="row others padd10"> -->
 
-
-
+                  <!-- {{ this.publication._category._principal._category }} -->
                   <app-posts-lists
                   class="row others padd10"
                   [idUser]="this.publication.user._id"
                   [not]="this.publication._id"
                   [type]="'sugerencia'"
-                  [byCategory]="this.publication._category.principal">
+                  [byCategory]="this.publication._category._principal._id">
 
                   </app-posts-lists>
 
                 <!-- </div> -->
-
-
-
     </section>
 
 

@@ -21,6 +21,9 @@
         // h6
         ul
             // padding: 25px 0
+            width: 100%
+            display: block
+            box-sizing: border-box
             li
                 padding-left: 10px
                 padding-bottom: 5px
@@ -84,11 +87,23 @@
                 p
                     display: block
                     width: 100%
+                    white-space: normal!important
+                    padding-right: 25px!important
                     i
-                        top: 5px
-                        font-size: 16px
+                        top: 0px
+                        right: 5px
+
+                        font-size: 12px
                         // right: 0
                         // bottom: 0
+                    @include responsivo(telefonoTable)
+
+                    @include responsivo(pcMedio)
+
+                    @include responsivo(general)
+                        font-size: 0.80vw
+                    @include responsivo(resto)
+                        font-size: 0.80vw
 
     ul.nav.nav-treeview.open
         display: block!important
