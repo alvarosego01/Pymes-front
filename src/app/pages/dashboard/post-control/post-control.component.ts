@@ -21,15 +21,18 @@ import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
   styleUrls: ["./post-control.component.sass"],
 })
 export class PostControlComponent implements OnInit {
-  test = 0;
+
+  enviado: boolean = false;
+
+  test = 1;
 
   imagenSubir: File;
   imagenesSubir = [];
   imagenTemp: any;
   imageName: string = "Seleccionar";
 
-  ngTypeAdjuntos = "3 Fotos";
-  nroFotos: number = 3;
+  ngTypeAdjuntos = null;
+  nroFotos: number = 10;
   urlFiles = [];
 
   estadosActividad: any = [];
@@ -47,7 +50,13 @@ export class PostControlComponent implements OnInit {
   coordsMap: any = {};
   activateMap = false;
 
-  subCategory = [];
+  // Category1: any;
+  // Category2: any;
+  // Category3: any;
+
+  subCategory1 = [];
+  subCategory2 = [];
+  subCategory3 = [];
 
   Min: number;
   Max: number;
@@ -57,7 +66,7 @@ export class PostControlComponent implements OnInit {
   ngPhone = this._usersService.usuario.phone;
   ngcelPhone = this._usersService.usuario.celPhone;
   // ngDepartment = this._usersService.usuario.department;
-  ngCity = this._usersService.usuario.city;
+  ngCity = null;
   ngEmail = this._usersService.usuario.email;
   ngDepartment = "";
 
@@ -67,6 +76,17 @@ ngIncludeDesc: string = '';
 ngnotIncludeDesc: string = '';
 
 categoryList: any = [];
+
+
+
+redes: string = 'url';
+
+
+
+// --------------------
+categoryError: boolean = null;
+citysError: boolean = false;
+filesError: boolean = false;
 
   constructor(
     public _usersService: UsersService,
@@ -83,8 +103,8 @@ categoryList: any = [];
     // ////////// ////console.log(this.datosUsuario);
 
     // ////////// ////console.log(this._postService.categoryPrincipal);
-    this.initCitys();
     this.getCategory();
+    this.initCitys();
   }
 
   ngOnInit(): void {}
@@ -120,7 +140,10 @@ categoryList: any = [];
   }
 
   addCityTarget() {
-    if (this.ngCity != "") {
+
+    console.log(this.ngDepartment);
+
+    if (this.ngDepartment != null && this.ngCity != null) {
       var l = {
         department: JSON.parse(this.ngDepartment).departamento,
         city: this.ngCity,
@@ -128,13 +151,18 @@ categoryList: any = [];
 
       this.cityTargets.push(l);
       // this.ngDepartment =
-      this.ngCity = "";
+      this.ngDepartment = null;
+      this.ngCity = null;
+      // this.citysError = false;
     } else {
       this._notifyService.Toast.fire({
         title: "Debes seleccionar una ciudad",
         // text: 'El archivo seleccionado no es una imagen',
         icon: "error",
       });
+
+
+      // this.citysError = true;
       return;
     }
   }
@@ -185,24 +213,18 @@ categoryList: any = [];
   clearFiles(event) {
     this.urlFiles = [];
     this.imagenesSubir = [];
-    ////// ////console.log('clear!');
 
-    if (this.ngTypeAdjuntos == "3 Fotos") {
-      this.nroFotos = 3;
+
+    if (this.ngTypeAdjuntos == "Fotos") {
+      this.nroFotos = 10;
     }
 
-    if (this.ngTypeAdjuntos == "6 Fotos") {
-      this.nroFotos = 6;
-    }
-    if (this.ngTypeAdjuntos == "12 Fotos") {
-      this.nroFotos = 12;
-    }
 
     if (this.ngTypeAdjuntos == "Catálogo PDF") {
       this.nroFotos = 1;
     }
 
-    ////// ////console.log(this.ngTypeAdjuntos);
+
   }
 
   initCitys() {
@@ -227,7 +249,7 @@ categoryList: any = [];
       this.ngPhone = this._usersService.usuario.phone;
       this.ngcelPhone = this._usersService.usuario.celPhone;
       this.ngDepartment = this._usersService.usuario.department;
-      this.ngCity = this._usersService.usuario.city;
+      this.ngCity = null;
       this.ngEmail = this._usersService.usuario.email;
 
       this.initCitys();
@@ -247,30 +269,43 @@ categoryList: any = [];
     this.ciudades = dp[i].ciudades;
   }
 
-  setSubCategory(i) {
+  setSubCategory(i, nro) {
+
 
 
 
     let k = JSON.parse(i);
+
+    console.log('la mierda esta', k );
+
     let p = k._category;
     let c = k._child;
-    // //console.log('esto', k);
-    // //////// ////console.log(i);
-    // return;
-    // ////////// ////console.log(this._postService.categoryPrincipal[i]);
-    this.subCategory = c;
 
-    if (this.subCategory.length == 0) {
-      this.subCategory = ["Sin sub categoría"];
+    if(nro == 1){
+
+
+      this.subCategory1 = c;
+
+      if (this.subCategory1.length == 0) {
+        this.subCategory1 = ["Sin sub categoría"];
+      }
+    }
+    if(nro == 2){
+      this.subCategory2 = c;
+
+      if (this.subCategory2.length == 0) {
+        this.subCategory2 = ["Sin sub categoría"];
+      }
+    }
+    if(nro == 3){
+      this.subCategory3 = c;
+
+      if (this.subCategory3.length == 0) {
+        this.subCategory3 = ["Sin sub categoría"];
+      }
     }
 
-    // return;
-    // let k = JSON.parse(i);
-    // k = k.id;
-    // i = k;
-    // let dp = this.GlobalConfigService.departamentos;
-    // this.ciudades = dp[i].ciudades;
-    //
+
   }
 
   getMyPublications() {
@@ -292,6 +327,39 @@ categoryList: any = [];
 
   createPublication(forma: NgForm) {
 
+    console.log(this._formsResource.checkUrl(forma.value.redInstagram));
+
+    if( (forma.value.redInstagram) &&
+    forma.value.redInstagram != '' &&
+    this.redes == 'url' &&
+     !this._formsResource.checkUrl(forma.value.redInstagram)
+     ){
+
+          this._notifyService.Toast.fire({
+        title:
+          "Url de instagram invalido",
+        icon: "error",
+      });
+
+      return;
+    }
+
+    if( (forma.value.redFacebook) &&
+    forma.value.redFacebook != ''  &&
+    this.redes == 'url' &&
+    !this._formsResource.checkUrl(forma.value.redFacebook)
+    ){
+
+          this._notifyService.Toast.fire({
+        title:
+          "Url de facebook invalido",
+        icon: "error",
+      });
+
+      return;
+    }
+
+
     if(this.imagenesSubir.length == 0){
           this._notifyService.Toast.fire({
         title:
@@ -307,20 +375,23 @@ categoryList: any = [];
           "Debes seleccionar al menos una ciudad en donde estará tu servicio",
         icon: "error",
       });
+      this.citysError = true;
       return;
+    }else{
+      this.citysError = false;
     }
-     forma.value.Min = new NumberFormatPipe().transform(forma.value.Min);
-     forma.value.Max = new NumberFormatPipe().transform(forma.value.Max);
-    let min = parseInt(forma.value.Min);
-    let max = parseInt(forma.value.Max);
-    if ((min >= max) ||
-        (min == 0 || max == 0)) {
-      this._notifyService.Toast.fire({
-        title: "Rango de precio incorrecto",
-        icon: "error",
-      });
-      return;
-    }
+    //  forma.value.Min = new NumberFormatPipe().transform(forma.value.Min);
+    //  forma.value.Max = new NumberFormatPipe().transform(forma.value.Max);
+    // let min = parseInt(forma.value.Min);
+    // let max = parseInt(forma.value.Max);
+    // if ((min >= max) ||
+    //     (min == 0 || max == 0)) {
+    //   this._notifyService.Toast.fire({
+    //     title: "Rango de precio incorrecto",
+    //     icon: "error",
+    //   });
+    //   return;
+    // }
     if (forma.invalid) {
       this._notifyService.Toast.fire({
         title: "Datos invalidos",
@@ -346,22 +417,60 @@ categoryList: any = [];
       celPhone: this.ngcelPhone,
     };
 
-    var cat = {
-      _principal: JSON.parse(forma.value.Category)._id,
-      _child: JSON.parse(forma.value.subCategory)._id,
-      child: JSON.parse(forma.value.subCategory).name
-    };
-    // //console.log(cat);
-    // return;
 
-    // //console.log(cat);
+    console.log('forma.value.Category1', forma.value.Category1);
+console.log('forma.value.subCategory1Form', forma.value.subCategory1Form);
 
-    // return;
+    var catGroup = [
+      {
+        _principal: ( (forma.value.Category1) && JSON.parse(forma.value.Category1)._id != '')? JSON.parse(forma.value.Category1)._id : null,
+        _child: ( (forma.value.subCategory1Form) && JSON.parse(forma.value.subCategory1Form)._id != '')? JSON.parse(forma.value.subCategory1Form)._id : null,
+        child: ( (forma.value.subCategory1Form) && JSON.parse(forma.value.subCategory1Form).name != '')? JSON.parse(forma.value.subCategory1Form).name : null
+      },
+      {
+        _principal: ( (forma.value.Category2) && JSON.parse(forma.value.Category2)._id != '')? JSON.parse(forma.value.Category2)._id : null,
+        _child: ( (forma.value.subCategory2Form) && JSON.parse(forma.value.subCategory2Form)._id != '')? JSON.parse(forma.value.subCategory2Form)._id : null,
+        child: ( (forma.value.subCategory2Form) && JSON.parse(forma.value.subCategory2Form).name != '')? JSON.parse(forma.value.subCategory2Form).name : null
+      },
+      {
+        _principal: ( (forma.value.Category3) && JSON.parse(forma.value.Category3)._id != '')? JSON.parse(forma.value.Category3)._id : null,
+        _child: ( (forma.value.subCategory3Form) && JSON.parse(forma.value.subCategory3Form)._id != '')? JSON.parse(forma.value.subCategory3Form)._id : null,
+        child: ( (forma.value.subCategory3Form) && JSON.parse(forma.value.subCategory3Form).name != '')? JSON.parse(forma.value.subCategory3Form).name : null
+      }
+      // //console.log(cat);
+    ];
 
-    var precio = {
-      min: min,
-      max: max,
-    };
+    console.log('group cat', catGroup);
+
+    this.categoryError = true;
+
+    catGroup.forEach((el, idx) => {
+
+
+      console.log('el elemento', el);
+
+      if(el._principal != null){
+        if(el._child != null){
+
+          this.categoryError = false;
+        }else{
+
+          this.categoryError = true;
+        }
+      }
+
+    });
+
+    if(this.categoryError == true){
+      this._notifyService.Toast.fire({
+    title:
+      "Debes seleccionar al menos un conjunto de categorias",
+    icon: "error",
+      });
+      return;
+    }
+//
+
 
     var social = {
       facebook: forma.value.redFacebook,
@@ -369,26 +478,28 @@ categoryList: any = [];
       instagram: forma.value.redInstagram,
       web: forma.value.redWeb,
     };
+
+
     let post = {
       title: forma.value.Title,
-      target: forma.value.targetPublication,
+      // target: forma.value.targetPublication,
       content: this.ngIncludeDesc,
       notContent: this.ngnotIncludeDesc,
       days: "30",
       type: forma.value.Type,
       _infoContact: JSON.stringify(contactData),
-      _category: JSON.stringify(cat),
-      _rangoPrize: JSON.stringify(precio),
+      _category: JSON.stringify(catGroup),
       _cityTarget: JSON.stringify(this.cityTargets),
       _socialNet: JSON.stringify(social),
+      // _rangoPrize: JSON.stringify(precio),
       _mapUrl: JSON.stringify(this.coordsMap),
       // _target: JSON.stringify(this.);
       // _files:
     };
 
 
-    // //console.log('elpost', post);
-//
+    console.log('elpost', post);
+
     // return;
     // //////// ////console.log(post, "conformado");
     // return;
@@ -415,52 +526,31 @@ categoryList: any = [];
         });
 
 
-        // forma.reset();
-        this.imageName = "Seleccionar";
-        this.imagenSubir = null;
-        this.imagenTemp = null;
-        this.imagenesSubir = [];
-        this.urlFiles = [];
+        // // forma.reset();
+        // this.imageName = "Seleccionar";
+        // this.imagenSubir = null;
+        // this.imagenTemp = null;
+        // this.imagenesSubir = [];
+        // this.urlFiles = [];
+
+        // this.categoryError = null;
+        // this.citysError = false;
+        // this.filesError = false;
+
+
         // this._usersService.usuario = resp.User;
         //////// ////console.log('por true', resp);
-        this._postService.notificacion.emit( resp );
+        // this._postService.notificacion.emit( resp );
       })
       .catch((e) => {
-        //////// ////console.log('por error',e);
-        //////////// ////console.log(e);
-        // var error = JSON.parse(e)
-        if (e.status == 201 && e.ok == true) {
-          this.GlobalConfigService.spinner = false;
-          // this._notifyService.Toast.fire({
-          // title: 'La publicación ha sido creada con exito',
-          // text: 'El archivo no se pudo enviar',
-          // icon: 'success'
-          // });
-          this._notifyService.swalNormal.fire({
 
-            title: "¡Publicación creada con exito!",
-            text: "¡Gracias por participar y pautar con nosotros, con tan solo un click estarás a la vista de todos!",
-            icon: "success",
-            confirmButtonText: 'Aceptar'
-
-          }).then((result) => {
-            this.router.navigate(['/us']);
-          });
-
-          // forma.reset();
-          this.imageName = "Seleccionar";
-          this.imagenTemp = null;
-          this.imagenSubir = null;
-          this.imagenesSubir = [];
-        this.urlFiles = [];
-        } else {
           this.GlobalConfigService.spinner = false;
           this._notifyService.Toast.fire({
             title: "Algo ha salido mal",
             text: "Intente más tarde por favor",
             icon: "error",
           });
-        }
+
       });
   }
 
@@ -639,8 +729,8 @@ categoryList: any = [];
   }
 
 
-
   getCategory(){
+
     this.GlobalConfigService.spinner = true;
 
     this._categoryService.getCategoryGET().subscribe((resp) => {
@@ -657,6 +747,33 @@ categoryList: any = [];
       console.error(err);
       this.GlobalConfigService.spinner = false;
     });
+  }
+
+
+
+  changeTypeRedes(type: string){
+
+    this.redes = (type != '')? type : 'url';
+
+
+  }
+
+
+
+
+  alEnviar(){
+
+
+    // categoryError: boolean = false;
+    // citysError: boolean = false;
+    // filesError: boolean = false;
+
+    this.enviado = true;
+
+
+
+
+
   }
 
 

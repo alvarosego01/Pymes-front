@@ -24,7 +24,7 @@
         <!-- <label for="TypeId">Tipo de documento</label> -->
       <div class="input-group" >
 
-          <select (change)="changeForm()"  [(ngModel)]="this.registerControlSelect"  name="TypeId" class="form-control">
+          <select (change)="changeForm()"  [(ngModel)]="this.registerControlSelect"  name="TypeId" #TypeId="ngModel" class="form-control">
 
               <!-- <option value="" disabled selected></option>+ -->
               <option  value="Persona natural">
@@ -67,6 +67,11 @@
             (ngSubmit)="userRegister( f , 'natural')"
             class="formDataSend" action="">
 
+            <div>
+
+
+            </div>
+
             <h4 style="margin-bottom: 15px;" class="titleSpecial4">
                     Datos personales
                   </h4>
@@ -80,24 +85,18 @@
                         <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <input
-
-
-                    ngModel  name="Name" type="text" class="form-control" required >
-
-
-
-
-                    <!-- <div *ngIf="f.value.invalid && (f.value.dirty || f.value.touched)" class="alert alert-danger">
-
-                    <small *ngIf="expression" >
-                      Campo obligatorio
-                    </small>
-
-                    </div> -->
+                    <input ngModel  name="Name" #Name="ngModel" type="text" class="form-control" required >
 
 
                   </div>
+
+                  <div class="errorSpace" *ngIf="( this.enviado == true && Name.invalid ) || (Name.invalid && (Name.dirty || Name.touched))" >
+                  <small *ngIf="Name.errors.required">
+                    Este campo es obligatorio
+                  </small>
+
+                </div>
+
                   </div>
 
                   <div class="form-group clearfix col-md-12 col-lg-3">
@@ -108,8 +107,17 @@
                       <i class="fa fa-user" aria-hidden="true"></i>
                       </span>
                   </div>
-                  <input  ngModel  name="Surname" type="text" class="form-control" required >
+                  <input  ngModel  name="Surname" #Surname="ngModel" type="text" class="form-control" required >
                 </div>
+
+                <div class="errorSpace" *ngIf="( this.enviado == true && Surname.invalid  ) || (Surname.invalid && (Surname.dirty || Surname.touched))" >
+                  <small *ngIf="Surname.errors.required">
+                    Este campo es obligatorio
+                  </small>
+
+                </div>
+
+
                 </div>
 
 
@@ -121,8 +129,21 @@
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <input  ngModel  name="Age" type="number" class="form-control" required>
+                    <input  ngModel  name="Age" #Age="ngModel" type="number" class="form-control" required>
                   </div>
+
+                  <div class="errorSpace" *ngIf="( this.enviado == true && Age.invalid ) || (Age.invalid && (Age.dirty || Age.touched))" >
+                    <small *ngIf="Age.errors.required">
+                      Este campo es obligatorio
+                    </small>
+                    <!-- <div *ngIf="Name.errors.minlength">
+                      Name cannot be more than 30 characters long.
+                    </div>
+                    <div *ngIf="Name.errors.minlength">
+                      Name must be at least 2 characters long.
+                    </div> -->
+                  </div>
+
                   </div>
 
                   <div class="form-group clearfix col-md-12 col-lg-3">
@@ -133,7 +154,7 @@
                             <i class="fa fa-venus-mars" aria-hidden="true"></i>
                         </span>
                       </div>
-                      <select  ngModel  name="Gender" class="form-control" required>
+                      <select  ngModel   name="Gender" #Gender="ngModel" class="form-control" required>
                           <option value="" disabled selected></option>
                           <option value="Femenino">Femenino</option>
                           <option value="Masculino">Masculino</option>
@@ -141,6 +162,19 @@
 
                         </select>
                   </div>
+
+                  <div class="errorSpace" *ngIf="( this.enviado == true && Gender.invalid ) || (Gender.invalid && (Gender.dirty || Gender.touched))" >
+                    <small *ngIf="Gender.errors.required">
+                      Este campo es obligatorio
+                    </small>
+                    <!-- <div *ngIf="Name.errors.minlength">
+                      Name cannot be more than 30 characters long.
+                    </div>
+                    <div *ngIf="Name.errors.minlength">
+                      Name must be at least 2 characters long.
+                    </div> -->
+                  </div>
+
                   </div>
 
 
@@ -157,7 +191,7 @@
                             <i class="fas fa-id-badge"></i>
                           </span>
                         </div>
-                        <select  ngModel  name="TypeId" class="form-control" required>
+                        <select  ngModel   name="TypeId" #TypeId="ngModel" class="form-control" required>
                             <option value="" disabled selected></option>
                             <option *ngFor="let item of this._globaConfig.tipoIdentificacion" (click)="permitId(item)"  value="{{item}}">
                               {{item}}
@@ -166,6 +200,19 @@
 
                           </select>
                     </div>
+
+                    <div class="errorSpace" *ngIf="( this.enviado == true && TypeId.invalid ) || (TypeId.invalid && (TypeId.dirty || TypeId.touched))" >
+                      <small *ngIf="TypeId.errors.required">
+                        Este campo es obligatorio
+                      </small>
+                      <!-- <div *ngIf="Name.errors.minlength">
+                        Name cannot be more than 30 characters long.
+                      </div>
+                      <div *ngIf="Name.errors.minlength">
+                        Name must be at least 2 characters long.
+                      </div> -->
+                    </div>
+
                     </div>
 
 
@@ -177,10 +224,22 @@
                             <i class="fas fa-id-card"></i>
                             </span>
                         </div>
-                        <input  ngModel  name="Identification"  type="text" class="form-control" required >
+                        <input  ngModel   name="Identification" #Identification="ngModel"  type="text" class="form-control" required >
                       </div>
+
+                      <div class="errorSpace" *ngIf="( this.enviado == true && Identification.invalid ) || (Identification.invalid && (Identification.dirty || Identification.touched))" >
+                    <small *ngIf="Identification.errors.required">
+                      Este campo es obligatorio
+                    </small>
+                    <!-- <div *ngIf="Name.errors.minlength">
+                      Name cannot be more than 30 characters long.
+                    </div>
+                    <div *ngIf="Name.errors.minlength">
+                      Name must be at least 2 characters long.
+                    </div> -->
                   </div>
 
+                </div>
                   </div>
 
                   <h4 style="margin-bottom: 15px;" class="titleSpecial4">
@@ -198,18 +257,33 @@
                               <i class="fas fa-users"></i>
                               </span>
                           </div>
-                          <input  ngModel  name="negocioName" type="text" class="form-control" required >
+                          <input  ngModel   name="negocioName" #negocioName="ngModel" type="text" class="form-control" required >
                         </div>
+
+
+                      <div class="errorSpace" *ngIf="( this.enviado == true && negocioName.invalid ) || (negocioName.invalid && (negocioName.dirty || negocioName.touched))" >
+                        <small *ngIf="negocioName.errors.required">
+                          Este campo es obligatorio
+                        </small>
+                        <!-- <div *ngIf="Name.errors.minlength">
+                          Name cannot be more than 30 characters long.
+                        </div>
+                        <div *ngIf="Name.errors.minlength">
+                          Name must be at least 2 characters long.
+                        </div> -->
                       </div>
 
+
+
+                    </div>
                   </div>
 
                   <div class="row">
                     <div class="form-group clearfix col-md-12 col-lg-4">
                       <!-- Select multiple-->
                       <div class="form-group">
-                        <label>¿Cuál es tu sector económico? <span class="colorRed">(*)</span></label>
-                        <select  multiple="" class="form-control" required  name="estadosActividad" [(ngModel)]="estadosActividadModel">
+                        <label>¿Cuál es tu sector económico?  <span class="colorRed">(*)</span></label>
+                        <select  multiple class="form-control" required  name="estadosActividad" #estadosActividad="ngModel" [(ngModel)]="estadosActividadModel">
 
                           <option *ngFor="let item of this._globaConfig.actividadEconomica" value="{{item}}">
                             {{item}}
@@ -217,6 +291,19 @@
 
                         </select>
                       </div>
+
+                      <div class="errorSpace" *ngIf="( this.enviado == true && estadosActividad.invalid ) || (estadosActividad.invalid && (estadosActividad.dirty || estadosActividad.touched))" >
+                        <small *ngIf="estadosActividad.errors.required">
+                          Este campo es obligatorio
+                        </small>
+                        <!-- <div *ngIf="Name.errors.minlength">
+                          Name cannot be more than 30 characters long.
+                        </div>
+                        <div *ngIf="Name.errors.minlength">
+                          Name must be at least 2 characters long.
+                        </div> -->
+                      </div>
+
                     </div>
                     <div class="col-md-12 col-lg-8">
                       <div class="row">
@@ -230,8 +317,11 @@
                                     <i class="fas fa-users"></i>
                                     </span>
                                 </div>
-                                <input  ngModel  name="ProducciónActivity" type="text" class="form-control" required >
+                                <input  ngModel  name="ProducciónActivity" #ProducciónActivity="ngModel"  type="text" class="form-control" required >
                               </div>
+
+
+
                             </div>
                           <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Comercialización') == true">
                             <label for="Identification">¿Qué comercializas?</label>
@@ -241,8 +331,10 @@
                                     <i class="fas fa-users"></i>
                                     </span>
                                 </div>
-                                <input  ngModel  name="ComercializaciónActivity" type="text" class="form-control" required >
+                                <input  ngModel  name="ComercializaciónActivity" #ComercializaciónActivity="ngModel"  type="text" class="form-control" required >
                               </div>
+
+
                             </div>
                           <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Servicios') == true">
                             <label for="Identification">¿Cuál servicio?</label>
@@ -252,8 +344,11 @@
                                     <i class="fas fa-users"></i>
                                     </span>
                                 </div>
-                                <input  ngModel  name="ServiciosActivity" type="text" class="form-control" required >
+                                <input  ngModel  name="ServiciosActivity" #ServiciosActivity="ngModel"  type="text" class="form-control" required >
                               </div>
+
+
+
                           </div>
                           <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Otro') == true">
                             <label for="Identification">Describe tu actividad</label>
@@ -263,8 +358,10 @@
                                   <i class="fas fa-users"></i>
                                   </span>
                               </div>
-                              <input  ngModel  name="OtroActivity" type="text" class="form-control" required >
+                              <input  ngModel  name="OtroActivity" #OtroActivity="ngModel"  type="text" class="form-control" required >
                             </div>
+
+
                         </div>
 
 
@@ -288,11 +385,24 @@
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input  ngModel  name="Phone" type="tel"
+                        <input required  ngModel  name="Phone" #Phone="ngModel" type="tel"
                         [imask]="this._formService.phoneMask()"
 
                         class="form-control"  >
                       </div>
+
+                      <div class="errorSpace" *ngIf="( this.enviado == true && Phone.invalid ) || (Phone.invalid && (Phone.dirty || Phone.touched))" >
+                        <small *ngIf="Phone.errors.required">
+                          Este campo es obligatorio
+                        </small>
+                        <!-- <div *ngIf="Name.errors.minlength">
+                          Name cannot be more than 30 characters long.
+                        </div>
+                        <div *ngIf="Name.errors.minlength">
+                          Name must be at least 2 characters long.
+                        </div> -->
+                      </div>
+
                   </div>
 
                   <div class="form-group clearfix col-md-12 col-lg-3">
@@ -303,8 +413,9 @@
                           <i class="fas fa-mobile-alt"></i>
                           </span>
                       </div>
-                      <input  ngModel  name="celPhone" type="tel" [imask]="this._formService.phoneMask()" class="form-control" >
+                      <input  ngModel  name="celPhone" #celPhone="ngModel" type="tel" [imask]="this._formService.phoneMask()" class="form-control" >
                     </div>
+
                 </div>
 
                 <div class="form-group clearfix col-md-12 col-lg-3">
@@ -316,7 +427,7 @@
 
                         </span>
                       </div>
-                      <select (change)="setCiudades($event.target.value)" ngModel  name="Department" class="form-control" required >
+                      <select (change)="setCiudades($event.target.value)" ngModel  name="Department" #Department="ngModel" class="form-control" required >
                           <option value="" disabled selected ></option>
                           <option *ngFor="let item of this._globaConfig.departamentos;"   value="{{item | json}}">
                             {{item.departamento}}
@@ -324,6 +435,19 @@
 
                         </select>
                   </div>
+
+                  <div class="errorSpace" *ngIf="( this.enviado == true && Department.invalid ) || (Department.invalid && (Department.dirty || Department.touched))" >
+                    <small *ngIf="Department.errors.required">
+                      Este campo es obligatorio
+                    </small>
+                    <!-- <div *ngIf="Name.errors.minlength">
+                      Name cannot be more than 30 characters long.
+                    </div>
+                    <div *ngIf="Name.errors.minlength">
+                      Name must be at least 2 characters long.
+                    </div> -->
+                  </div>
+
                   </div>
 
                    <div class="form-group clearfix col-md-12 col-lg-3">
@@ -335,15 +459,28 @@
 
                         </span>
                       </div>
-                      <select  ngModel  name="City" class="form-control" required>
+                      <select  ngModel  name="City" #City="ngModel" class="form-control" required>
                           <option value="" disabled selected></option>
                           <option *ngFor="let item of this.ciudades"  value="{{item}}">
                             {{item}}
                           </option>
 
                         </select>
-                        <!-- <input  ngModel  name="City" type="text" class="form-control" required > -->
+                        <!-- <input  ngModel  name="City" #City="ngModel" type="text" class="form-control" required > -->
                   </div>
+
+                  <div class="errorSpace" *ngIf="( this.enviado == true && City.invalid ) || (City.invalid && (City.dirty || City.touched))" >
+                    <small *ngIf="City.errors.required">
+                      Este campo es obligatorio
+                    </small>
+                    <!-- <div *ngIf="Name.errors.minlength">
+                      Name cannot be more than 30 characters long.
+                    </div>
+                    <div *ngIf="Name.errors.minlength">
+                      Name must be at least 2 characters long.
+                    </div> -->
+                  </div>
+
                   </div>
 
 
@@ -381,7 +518,7 @@
               <i class="fas fa-map"></i>
               </span>
           </div>
-          <input  [(ngModel)]="altMapUrl"  [ngModelOptions]="{standalone: true}"  name="altMap" type="text" class="form-control" >
+          <input  [(ngModel)]="altMapUrl"  [ngModelOptions]="{standalone: true}"  name="altMap" #altMap="ngModel" type="text" class="form-control" >
         </div>
     </div>
 
@@ -420,8 +557,16 @@
                               <i class="fas fa-envelope"></i>
                             </span>
                         </div>
-                        <input  ngModel  name="Email" type="email" class="form-control" required>
+                        <input  ngModel  name="Email" #Email="ngModel" type="email" class="form-control" required>
                     </div>
+
+                    <div class="errorSpace" *ngIf="( this.enviado == true && Email.invalid ) || (Email.invalid && (Email.dirty || Email.touched))" >
+                      <small *ngIf="Email.errors.required">
+                        Este campo es obligatorio
+                      </small>
+
+                    </div>
+
                     </div>
 
                     <div class="form-group clearfix col-md-12 col-lg-4">
@@ -432,8 +577,21 @@
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input  ngModel  name="Pass" type="password" class="form-control" required>
+                        <input  ngModel  name="Pass" #Pass="ngModel" type="password" class="form-control" required>
                     </div>
+
+                    <div class="errorSpace" *ngIf="( this.enviado == true && Pass.invalid ) || (Pass.invalid && (Pass.dirty || Pass.touched))" >
+                      <small *ngIf="Pass.errors.required">
+                        Este campo es obligatorio
+                      </small>
+                      <!-- <div *ngIf="Name.errors.minlength">
+                        Name cannot be more than 30 characters long.
+                      </div>
+                      <div *ngIf="Name.errors.minlength">
+                        Name must be at least 2 characters long.
+                      </div> -->
+                    </div>
+
                     </div>
                      <div class="form-group clearfix col-md-12 col-lg-4">
                       <label for="CPass">Confirma contraseña <span class="colorRed">(*)</span></label>
@@ -443,8 +601,21 @@
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input  ngModel  name="CPass" type="password" class="form-control" required>
+                        <input  ngModel  name="CPass" #CPass="ngModel" type="password" class="form-control" required>
                       </div>
+
+                      <div class="errorSpace" *ngIf="( this.enviado == true && CPass.invalid ) || (CPass.invalid && (CPass.dirty || CPass.touched))" >
+                        <small *ngIf="CPass.errors.required">
+                          Este campo es obligatorio
+                        </small>
+                        <!-- <div *ngIf="Name.errors.minlength">
+                          Name cannot be more than 30 characters long.
+                        </div>
+                        <div *ngIf="Name.errors.minlength">
+                          Name must be at least 2 characters long.
+                        </div> -->
+                      </div>
+
                   </div>
 
                   </div>
@@ -459,12 +630,25 @@
                             <div class="icheck-success">
 
                                 <label for="aceptaTerminosNatural">
-                                  <input required ngModel  name="Terms" type="checkbox" id="aceptaTerminosNatural1">
+                                  <input required ngModel  name="Terms" #Terms="ngModel" type="checkbox" id="aceptaTerminosNatural1">
                                     Autorizo para usar mi  información en concordancia con lo previsto en esta <a target="_blank" href="../../../assets/dist/documents/Política de Privacidad y Tratamiento de los Datos Personales-min.pdf" class="hiperbutton">Política de Privacidad y tratamiento de datos personales <span class="colorRed">(*)</span></a>
                                 </label>
                               </div>
 
                         </div>
+
+                        <div class="errorSpace" *ngIf="( this.enviado == true && Terms.invalid ) || (Terms.invalid && (Terms.dirty || Terms.touched))" >
+                          <small *ngIf="Terms.errors.required">
+                            Este campo es obligatorio
+                          </small>
+                          <!-- <div *ngIf="Name.errors.minlength">
+                            Name cannot be more than 30 characters long.
+                          </div>
+                          <div *ngIf="Name.errors.minlength">
+                            Name must be at least 2 characters long.
+                          </div> -->
+                        </div>
+
                       </div>
                   </div>
 
@@ -481,7 +665,7 @@
                             <i class="fa fa-lock" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input placeholder=" {{ this._usuarioService.captcha[0] }} + {{ this._usuarioService.captcha[1]}}" ngModel  name="captcha" class="form-control" required  type="number">
+                        <input placeholder=" {{ this._usuarioService.captcha[0] }} + {{ this._usuarioService.captcha[1]}}" ngModel  name="captcha" #captcha="ngModel" class="form-control" required  type="number">
                       </div>
                   </div>
 
@@ -490,7 +674,9 @@
 
 
                   <div class="row formButtons centerCustom">
-                    <button type="submit" class="buttonCustom btn btn-success btn-flat">Enviar</button>
+                    <button (click)="alEnviar()"
+                    (click)="alEnviar()"
+                    type="submit" class="buttonCustom btn btn-success btn-flat">Enviar</button>
                   </div>
 
             </form>
@@ -501,501 +687,759 @@
         <div *ngIf="this.registerControlSelect == 'Empresa'" class="animated fadeIn fast tab-pane active show" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
 
 
-            <form
-            ngNativeValidate
-            #l="ngForm"
+          <!-- ACÁ VA EL FORM -->
+          <form
+          ngNativeValidate
+          #l="ngForm"
 
-            (ngSubmit)="userRegister( l, 'company' )"
-            class="formDataSend" action="">
+          (ngSubmit)="userRegister( l, 'company' )"
+          class="formDataSend" action="">
 
-            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-              Información de la empresa
-            </h4>
-            <hr>
+          <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+            Información de la empresa
+          </h4>
+          <hr>
+              <div class="row">
+                   <div class="form-group clearfix col-md-12 col-lg-4">
+                    <label for="nameCompany">Nombre comercial <span class="colorRed">(*)</span></label>
+                  <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fa fa-industry" aria-hidden="true"></i>
+
+                      </span>
+                  </div>
+                  <input ngModel   name="nameCompany" #nameCompany="ngModel" type="text" class="form-control" required >
+                </div>
+
+                <div class="errorSpace" *ngIf="( this.enviado == true && nameCompany.invalid ) || (nameCompany.invalid && (nameCompany.dirty || nameCompany.touched))" >
+                  <small *ngIf="nameCompany.errors.required">
+                    Este campo es obligatorio
+                  </small>
+
+                </div>
+
+
+                </div>
+
+                 <div class="form-group clearfix col-md-12 col-lg-4">
+                  <label for="NIT">NIT <span class="colorRed">(*)</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+                          <i class="fa fa-address-card" aria-hidden="true"></i>
+
+                      </span>
+                  </div>
+                  <input ngModel   name="NIT" #NIT="ngModel" type="text" class="form-control" required>
+                </div>
+
+                <div class="errorSpace" *ngIf="( this.enviado == true && NIT.invalid ) || (NIT.invalid && (NIT.dirty || NIT.touched))" >
+                  <small *ngIf="NIT.errors.required">
+                    Este campo es obligatorio
+                  </small>
+
+                </div>
+
+
+
+                </div>
+
+                 <div class="form-group clearfix col-md-12 col-lg-4">
+                  <label for="Reasons">Razón social <span class="colorRed">(*)</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+                          <i class="fa fa-briefcase" aria-hidden="true"></i>
+
+                      </span>
+                  </div>
+                  <input ngModel   name="Reasons" #Reasons="ngModel" type="text" class="form-control" required >
+                </div>
+
+                <div class="errorSpace" *ngIf="( this.enviado == true && Reasons.invalid ) || (Reasons.invalid && (Reasons.dirty || Reasons.touched))" >
+                  <small *ngIf="Reasons.errors.required">
+                    Este campo es obligatorio
+                  </small>
+
+                </div>
+
+
+                </div>
+                </div>
+
+
                 <div class="row">
-                     <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="nameCompany">Nombre comercial <span class="colorRed">(*)</span></label>
-                    <div class="input-group">
+
+
+                <div class="form-group clearfix col-md-12 col-lg-4">
+                  <label for="PhoneFijoEmpresa">Teléfono fijo <span class="colorRed">(*)</span></label>
+                <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="fa fa-industry" aria-hidden="true"></i>
-
+                        <i class="fa fa-phone" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <input ngModel   name="nameCompany" type="text" class="form-control" required >
-                  </div>
+                    <input  ngModel  name="PhoneFijoEmpresa" #PhoneFijoEmpresa="ngModel" type="tel" [imask]="this._formService.phoneMask()" class="form-control" required>
                   </div>
 
-                   <div class="form-group clearfix col-md-12 col-lg-4">
-                    <label for="NIT">NIT <span class="colorRed">(*)</span></label>
-                  <div class="input-group">
+                  <div class="errorSpace" *ngIf="( this.enviado == true && PhoneFijoEmpresa.invalid ) || (PhoneFijoEmpresa.invalid && (PhoneFijoEmpresa.dirty || PhoneFijoEmpresa.touched))" >
+                    <small *ngIf="PhoneFijoEmpresa.errors.required">
+                      Este campo es obligatorio
+                    </small>
+                    <!-- <div *ngIf="Name.errors.minlength">
+                      Name cannot be more than 30 characters long.
+                    </div>
+                    <div *ngIf="Name.errors.minlength">
+                      Name must be at least 2 characters long.
+                    </div> -->
+                  </div>
+
+
+              </div>
+
+                <div class="form-group clearfix col-md-12 col-lg-4">
+                  <label for="PhoneCelular1">Teléfono celular 1 </label>
+                <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">
-                            <i class="fa fa-address-card" aria-hidden="true"></i>
-
+                      <span class="input-group-text">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <input ngModel   name="NIT" type="text" class="form-control" required>
-                  </div>
+                    <input  ngModel  name="PhoneCelular1" type="tel" [imask]="this._formService.phoneMask()" class="form-control" >
                   </div>
 
-                   <div class="form-group clearfix col-md-12 col-lg-4">
-                    <label for="Reasons">Razón social <span class="colorRed">(*)</span></label>
-                  <div class="input-group">
+
+
+              </div>
+
+                <div class="form-group clearfix col-md-12 col-lg-4">
+                  <label for="PhoneCelular2">Teléfono celular 2 </label>
+                <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">
-                            <i class="fa fa-briefcase" aria-hidden="true"></i>
-
+                      <span class="input-group-text">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <input ngModel   name="Reasons" type="text" class="form-control" required >
+                    <input  ngModel  name="PhoneCelular2"  type="tel" [imask]="this._formService.phoneMask()" class="form-control" >
                   </div>
+              </div>
 
 
+
+                </div>
+
+
+                <div class="row">
+                   <div class="form-group clearfix col-12">
+                  <label for="directionCompany">Dirección de empresa <span class="colorRed">(*)</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="fas fa-map-marker-alt"></i>
+
+                      </span>
                   </div>
-                  </div>
+                  <input ngModel   name="directionCompany" #directionCompany="ngModel" type="text" class="form-control" required >
+                </div>
 
-                  <div class="row">
-                     <div class="form-group clearfix col-12">
-                    <label for="directionCompany">Dirección de empresa <span class="colorRed">(*)</span></label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="fas fa-map-marker-alt"></i>
+                <div class="errorSpace" *ngIf="( this.enviado == true && directionCompany.invalid ) || (directionCompany.invalid && (directionCompany.dirty || directionCompany.touched))" >
+                  <small *ngIf="directionCompany.errors.required">
+                    Este campo es obligatorio
+                  </small>
 
-                        </span>
-                    </div>
-                    <input ngModel   name="directionCompany" type="text" class="form-control" required >
-                  </div>
-                  </div>
-                  </div>
-                  <div class="titleOpc">
+                </div>
 
-                    <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-                      Geolocalización
-                    </h4>
+                </div>
+                </div>
 
-
-                    <div class="form-group clearfix">
-                      <label >Tus clientes querrán saber dónde está tu tienda física</label>
-
-                    </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-md-12 col-lg-2">
-                        <div class="formButtons">
-
-                          <button type="button" (click)="captrarLocalizacion()" class="buttonCustom btn btn-success btn-flat">Localizar</button>
-
-                        </div>
-                      </div>
-                      <div  class="col-md-12 col-lg-10"  *ngIf="this.activateMap == true">
-
-        <div [innerHtml]="this.coordsMap.mapUrl | safeUrl" style="width: 100%"></div>
-
-        <div class="form-group col-12 ">
-          <label for="Identification">Si estas en este momento en un lugar diferente al de tu tienda física y deseas agregar la ubicación, <a class="hiperbutton" target="_blank" href="https://maps.google.com/maps?q={{this.coordsMap.latitude}},{{this.coordsMap.longitude}}&hl=es;z=14">entra a google maps</a>, ubícala y pega aquí el link</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <i class="fas fa-map"></i>
-                </span>
-            </div>
-            <input [(ngModel)]="altMapUrl"  [ngModelOptions]="{standalone: true}"  name="altMap" type="text" class="form-control" >
-        </div>
-      </div>
-
-
-
-                      </div>
-                    </div>
-
-
-                  <div class="row">
-                    <div class="col-md-12 col-lg-10">
-                      <div class="row">
-
-
-                    <div class="form-group clearfix col-12">
-                      <label for="companyPhone">Teléfono(s) de la empresa</label>
-                    <div class="input-group" *ngFor="let item of this.nrPhones; let i = index">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="fa fa-phone" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input  [(ngModel)]="this.companyPhonee[i]" [name]="'companyPhone' + i" type="tel" [imask]="this._formService.phoneMask()" class="form-control"  >
-                      </div>
-                  </div>
-                  </div>
-                  </div>
-
-                  <div class="formButtons centerCustom col-md-12 col-lg-2" style="flex-direction: column;">
-                    <button style="width: 100%; min-width: 150px" type="button" (click)="addPhone()" class="buttonCustom btn btn-success btn-flat">+Teléf</button>
-                    <button style="width: 100%; min-width: 150px" type="button" (click)="addPhone('delete')" class="buttonCustom btn btn-danger btn-flat">-Teléf</button>
-                  </div>
-
-                  </div>
+                <div class="titleOpc geo">
 
                   <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-                    Actividad económica
+                    Geolocalización
                   </h4>
+
+
+                  <div class="form-group clearfix">
+                    <label >Tus clientes querrán saber dónde está tu tienda física</label>
+
+                  </div>
+                  </div>
                   <hr>
+
                   <div class="row">
-                    <div class="form-group clearfix col-md-12 col-lg-4">
-                      <!-- Select multiple-->
-                      <div class="form-group">
-                        <label>¿Cuál es tu sector económico? </label>
-                        <select  multiple class="form-control" required  name="estadosActividad" [(ngModel)]="estadosActividadModel">
+                    <div class="col-md-12 col-lg-2 localizarArea">
+                      <div class="formButtons">
 
-                          <option *ngFor="let item of this._globaConfig.actividadEconomica" value="{{item}}">
-                            {{item}}
-                          </option>
+                        <button type="button" (click)="captrarLocalizacion()" class="buttonCustom btn btn-success btn-flat">Localizar</button>
 
-                        </select>
                       </div>
                     </div>
-                    <div class="col-md-12 col-lg-8">
-                      <div class="row">
+                    <div  class="col-md-12 col-lg-10">
+
+      <div class="form-group col-12 ">
+        <label for="Identification">Si estas en este momento en un lugar diferente al de tu tienda física y deseas agregar la ubicación, <a class="hiperbutton" target="_blank" href="https://maps.google.com/maps?q={{this.coordsMap.latitude}},{{this.coordsMap.longitude}}&hl=es;z=14">entra a google maps haciendo click AQUÍ</a>, ubícala y pega aquí el link</label>
+      <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-map"></i>
+              </span>
+          </div>
+          <input  [(ngModel)]="altMapUrl"  [ngModelOptions]="{standalone: true}"  name="altMap" #altMap="ngModel" type="text" class="form-control" >
+        </div>
+    </div>
 
 
-                          <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Producción') == true">
-                            <label for="Identification">¿Qué produces?</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text">
-                                    <i class="fas fa-users"></i>
-                                    </span>
-                                </div>
-                                <input  ngModel  name="ProducciónActivity" type="text" class="form-control" required >
-                              </div>
-                            </div>
-                          <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Comercialización') == true">
-                            <label for="Identification">¿Qué comercializas?</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text">
-                                    <i class="fas fa-users"></i>
-                                    </span>
-                                </div>
-                                <input  ngModel  name="ComercializaciónActivity" type="text" class="form-control" required >
-                              </div>
-                            </div>
-                          <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Servicios') == true">
-                            <label for="Identification">¿Cuál servicio?</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text">
-                                    <i class="fas fa-users"></i>
-                                    </span>
-                                </div>
-                                <input  ngModel  name="ServiciosActivity" type="text" class="form-control" required >
-                              </div>
-                          </div>
-                          <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Otro') == true">
-                            <label for="Identification">Describe tu actividad</label>
+                    </div>
+                  </div>
+
+                  <div class="row" *ngIf="this.activateMap == true">
+                    <div class="col-12">
+
+      <div [innerHtml]="this.coordsMap.mapUrl | safeUrl" style="width: 100%"></div>
+                    </div>
+                  </div>
+
+                  <hr>
+
+
+                <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                  Actividad económica
+                </h4>
+                <hr>
+                <div class="row">
+                  <div class="form-group clearfix col-md-12 col-lg-4">
+                    <!-- Select multiple-->
+                    <div class="form-group">
+                      <label>¿Cuál es tu sector económico?  <span class="colorRed">(*)</span></label>
+                      <select  multiple class="form-control" required  name="estadosActividad" #estadosActividad="ngModel" [(ngModel)]="estadosActividadModel">
+
+                        <option *ngFor="let item of this._globaConfig.actividadEconomica" value="{{item}}">
+                          {{item}}
+                        </option>
+
+                      </select>
+                    </div>
+
+                    <div class="errorSpace" *ngIf="( this.enviado == true && estadosActividad.invalid ) || (estadosActividad.invalid && (estadosActividad.dirty || estadosActividad.touched))" >
+                      <small *ngIf="estadosActividad.errors.required">
+                        Este campo es obligatorio
+                      </small>
+                      <!-- <div *ngIf="Name.errors.minlength">
+                        Name cannot be more than 30 characters long.
+                      </div>
+                      <div *ngIf="Name.errors.minlength">
+                        Name must be at least 2 characters long.
+                      </div> -->
+                    </div>
+
+                  </div>
+                  <div class="col-md-12 col-lg-8">
+                    <div class="row">
+
+
+                        <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Producción') == true">
+                          <label for="Identification">¿Qué produces?</label>
                           <div class="input-group">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">
                                   <i class="fas fa-users"></i>
                                   </span>
                               </div>
-                              <input  ngModel  name="OtroActivity" type="text" class="form-control" required >
+                              <input  ngModel  name="ProducciónActivity" #ProducciónActivity="ngModel" type="text" class="form-control" required >
+                            </div>
+                          </div>
+                        <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Comercialización') == true">
+                          <label for="Identification">¿Qué comercializas?</label>
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="fas fa-users"></i>
+                                  </span>
+                              </div>
+                              <input  ngModel  name="ComercializaciónActivity" #ComercializaciónActivity="ngModel" type="text" class="form-control" required >
+                            </div>
+                          </div>
+                        <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Servicios') == true">
+                          <label for="Identification">¿Cuál servicio?</label>
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="fas fa-users"></i>
+                                  </span>
+                              </div>
+                              <input  ngModel  name="ServiciosActivity" #ServiciosActivity="ngModel" type="text" class="form-control" required >
                             </div>
                         </div>
+                        <div class="form-group col-12 " *ngIf="this.estadosActividadModel.includes('Otro') == true">
+                          <label for="Identification">Describe tu actividad</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="fas fa-users"></i>
+                                </span>
+                            </div>
+                            <input  ngModel  name="OtroActivity" #OtroActivity="ngModel" type="text" class="form-control" required >
+                          </div>
+                      </div>
 
 
-                        </div>
+                      </div>
 
-                     </div>
-
-
-                  </div>
+                   </div>
 
 
-                  <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-                    Datos personales del contacto encargado
-                  </h4>
-                  <hr>
-                      <div class="row">
-                     <div class="form-group clearfix col-md-12 col-lg-3">
-                      <label for="Name">Nombres <span class="colorRed">(*)</span></label>
-                    <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <input  ngModel  name="Name" type="text" class="form-control" required >
-                  </div>
-                  </div>
+                </div>
 
-                  <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="Surname">Apellidos <span class="colorRed">(*)</span></label>
+
+                <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                  Datos personales del contacto encargado
+                </h4>
+                <hr>
+                    <div class="row">
+                   <div class="form-group clearfix col-md-12 col-lg-3">
+                    <label for="Name">Nombres <span class="colorRed">(*)</span></label>
                   <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="fa fa-user" aria-hidden="true"></i>
                       </span>
                   </div>
-                  <input  ngModel  name="Surname" type="text" class="form-control" required >
-                </div>
+                  <input  ngModel  name="Name" #Name="ngModel" type="text" class="form-control" required >
                 </div>
 
 
-                   <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="Age">Edad <span class="colorRed">(*)</span></label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </span>
+                <div class="errorSpace" *ngIf="( this.enviado == true && Name.invalid ) || (Name.invalid && (Name.dirty || Name.touched))" >
+                  <small *ngIf="Name.errors.required">
+                    Este campo es obligatorio
+                  </small>
+
+                </div>
+
+                </div>
+
+                <div class="form-group clearfix col-md-12 col-lg-3">
+                  <label for="Surname">Apellidos <span class="colorRed">(*)</span></label>
+                <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <input  ngModel  name="Surname" #Surname="ngModel" type="text" class="form-control" required >
+              </div>
+
+
+              <div class="errorSpace" *ngIf="( this.enviado == true && Surname.invalid ) || (Surname.invalid && (Surname.dirty || Surname.touched))" >
+                <small *ngIf="Surname.errors.required">
+                  Este campo es obligatorio
+                </small>
+                <!-- <div *ngIf="Name.errors.minlength">
+                  Name cannot be more than 30 characters long.
+                </div>
+                <div *ngIf="Name.errors.minlength">
+                  Name must be at least 2 characters long.
+                </div> -->
+              </div>
+
+              </div>
+
+
+                 <div class="form-group clearfix col-md-12 col-lg-3">
+                  <label for="Age">Edad <span class="colorRed">(*)</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                      </span>
+                  </div>
+                  <input  ngModel  name="Age" #Age="ngModel" type="number" class="form-control" required >
+                </div>
+
+                <div class="errorSpace" *ngIf="( this.enviado == true && Age.invalid ) || (Age.invalid && (Age.dirty || Age.touched))" >
+                  <small *ngIf="Age.errors.required">
+                    Este campo es obligatorio
+                  </small>
+
+                </div>
+
+                </div>
+
+
+                <div class="form-group clearfix col-md-12 col-lg-3">
+                  <label for="Gender">Género <span class="colorRed">(*)</span></label>
+                <div class="input-group" >
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+                          <i class="fa fa-venus-mars" aria-hidden="true"></i>
+                      </span>
                     </div>
-                    <input  ngModel  name="Age" type="number" class="form-control" required >
-                  </div>
-                  </div>
+                    <select  ngModel  name="Gender" #Gender="ngModel" class="form-control" required>
+                        <option value="" disabled selected></option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="No especificar">No especificar</option>
 
-                  <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="Gender">Género <span class="colorRed">(*)</span></label>
+                      </select>
+                </div>
+
+                <div class="errorSpace" *ngIf="( this.enviado == true && Gender.invalid ) || (Gender.invalid && (Gender.dirty || Gender.touched))" >
+                  <small *ngIf="Gender.errors.required">
+                    Este campo es obligatorio
+                  </small>
+
+                </div>
+
+
+
+                </div>
+                </div>
+
+
+
+                <div class="row">
+
+                  <div class="form-group clearfix col-md-12 col-lg-4">
+                    <label for="TypeId">Tipo de documento <span class="colorRed">(*)</span></label>
                   <div class="input-group" >
                     <div class="input-group-prepend">
                         <span class="input-group-text">
-                            <i class="fa fa-venus-mars" aria-hidden="true"></i>
+
+                          <i class="fas fa-id-badge"></i>
                         </span>
                       </div>
-                      <select  ngModel  name="Gender" class="form-control" required>
+                      <select  ngModel  name="TypeId" #TypeId="ngModel" class="form-control" required>
                           <option value="" disabled selected></option>
-                          <option value="Femenino">Femenino</option>
-                          <option value="Masculino">Masculino</option>
-                          <option value="No especificar">No especificar</option>
+                          <option *ngFor="let item of this._globaConfig.tipoIdentificacion" (click)="permitId(item)"  value="{{item}}">
+                            {{item}}
+                          </option>
+
 
                         </select>
                   </div>
-                  </div>
 
 
-                  </div>
 
-                  <div class="row">
+                <div class="errorSpace" *ngIf="( this.enviado == true && TypeId.invalid ) || (TypeId.invalid && (TypeId.dirty || TypeId.touched))" >
+                  <small *ngIf="TypeId.errors.required">
+                    Este campo es obligatorio
+                  </small>
 
-                    <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="TypeId">Tipo de documento <span class="colorRed">(*)</span></label>
-                    <div class="input-group" >
-                      <div class="input-group-prepend">
-                          <span class="input-group-text">
-
-                            <i class="fas fa-id-badge"></i>
-                          </span>
-                        </div>
-                        <select  ngModel  name="TypeId" class="form-control" required>
-                            <option value="" disabled selected></option>
-                            <option *ngFor="let item of this._globaConfig.tipoIdentificacion" (click)="permitId(item)"  value="{{item}}">
-                              {{item}}
-                            </option>
+                </div>
 
 
-                          </select>
-                    </div>
-                    </div>
 
-
-                    <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="Identification">Número de identificación <span class="colorRed">(*)</span></label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="fas fa-id-card"></i>
-                            </span>
-                        </div>
-                        <input  ngModel  name="Identification"  type="text" class="form-control" required >
-                      </div>
                   </div>
 
 
                   <div class="form-group clearfix col-md-12 col-lg-4">
-                    <label for="positionCompany">Cargo actual <span class="colorRed">(*)</span></label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <input  ngModel  name="positionCompany" type="text" class="form-control" required>
-                  </div>
-                  </div>
-
-                  </div>
-
-                  <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-                    Información de contacto del encargado
-                  </h4>
-                  <hr>
-                        <div class="row">
-                    <div class="form-group clearfix col-md-12 col-lg-3">
-                      <label for="Phone">Teléfono fijo <span class="colorRed">(*)</span></label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="fa fa-phone" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input  ngModel  name="Phone" type="tel" [imask]="this._formService.phoneMask()" class="form-control" required>
-                      </div>
-                  </div>
-
-                  <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="celPhone">Teléfono celular</label>
+                    <label for="Identification">Número de identificación <span class="colorRed">(*)</span></label>
                   <div class="input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text">
-                          <i class="fas fa-mobile-alt"></i>
+                          <i class="fas fa-id-card"></i>
                           </span>
                       </div>
-                      <input  ngModel  name="celPhone" type="tel" [imask]="this._formService.phoneMask()" class="form-control" >
+                      <input  ngModel  name="Identification" #Identification="ngModel"  type="text" class="form-control" required >
                     </div>
+
+                    <div class="errorSpace" *ngIf="( this.enviado == true && Identification.invalid ) || (Identification.invalid && (Identification.dirty || Identification.touched))" >
+                      <small *ngIf="Identification.errors.required">
+                        Este campo es obligatorio
+                      </small>
+                      <!-- <div *ngIf="Name.errors.minlength">
+                        Name cannot be more than 30 characters long.
+                      </div>
+                      <div *ngIf="Name.errors.minlength">
+                        Name must be at least 2 characters long.
+                      </div> -->
+                    </div>
+
+
+                </div>
+
+
+                <div class="form-group clearfix col-md-12 col-lg-4">
+                  <label for="positionCompany">Cargo actual <span class="colorRed">(*)</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                      </span>
+                  </div>
+                  <input  ngModel  name="positionCompany" #positionCompany="ngModel" type="text" class="form-control" required>
+                </div>
+
+                <div class="errorSpace" *ngIf="( this.enviado == true && positionCompany.invalid ) || (positionCompany.invalid && (positionCompany.dirty || positionCompany.touched))" >
+                  <small *ngIf="positionCompany.errors.required">
+                    Este campo es obligatorio
+                  </small>
+
+                </div>
+
+
+                </div>
+
+                </div>
+
+                <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                  Información de contacto del encargado
+                </h4>
+                <hr>
+                      <div class="row">
+                  <div class="form-group clearfix col-md-12 col-lg-3">
+                    <label for="Phone">Teléfono fijo <span class="colorRed">(*)</span></label>
+                  <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-phone" aria-hidden="true"></i>
+                          </span>
+                      </div>
+                      <input  ngModel  name="Phone" #Phone="ngModel" type="tel" [imask]="this._formService.phoneMask()" class="form-control" required>
+                    </div>
+
+                    <div class="errorSpace" *ngIf="( this.enviado == true && Phone.invalid ) || (Phone.invalid && (Phone.dirty || Phone.touched))" >
+                      <small *ngIf="Phone.errors.required">
+                        Este campo es obligatorio
+                      </small>
+                      <!-- <div *ngIf="Name.errors.minlength">
+                        Name cannot be more than 30 characters long.
+                      </div>
+                      <div *ngIf="Name.errors.minlength">
+                        Name must be at least 2 characters long.
+                      </div> -->
+                    </div>
+
                 </div>
 
                 <div class="form-group clearfix col-md-12 col-lg-3">
-                  <label for="Department">Departamento <span class="colorRed">(*)</span></label>
-                <div class="input-group" >
+                  <label for="celPhone">Teléfono celular</label>
+                <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">
-                           <i class="fa fa-home" aria-hidden="true"></i>
-
+                      <span class="input-group-text">
+                        <i class="fas fa-mobile-alt"></i>
                         </span>
-                      </div>
-                      <select (change)="setCiudades($event.target.value)" ngModel  name="Department" class="form-control" required >
-                        <option value="" disabled selected ></option>
-                        <option *ngFor="let item of this._globaConfig.departamentos;"   value="{{item | json}}">
-                          {{item.departamento}}
+                    </div>
+                    <input  ngModel  name="celPhone" #celPhone="ngModel" type="tel" [imask]="this._formService.phoneMask()" class="form-control" >
+                  </div>
+              </div>
+
+              <div class="form-group clearfix col-md-12 col-lg-3">
+                <label for="Department">Departamento <span class="colorRed">(*)</span></label>
+              <div class="input-group" >
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+                         <i class="fa fa-home" aria-hidden="true"></i>
+
+                      </span>
+                    </div>
+                    <select (change)="setCiudades($event.target.value)" ngModel  name="Department" #Department="ngModel" class="form-control" required >
+                      <option value="" disabled selected ></option>
+                      <option *ngFor="let item of this._globaConfig.departamentos;"   value="{{item | json}}">
+                        {{item.departamento}}
+                      </option>
+
+                    </select>
+                </div>
+
+                <div class="errorSpace" *ngIf="( this.enviado == true && Department.invalid ) || (Department.invalid && (Department.dirty || Department.touched))" >
+                  <small *ngIf="Department.errors.required">
+                    Este campo es obligatorio
+                  </small>
+
+                </div>
+
+
+                </div>
+
+                 <div class="form-group clearfix col-md-12 col-lg-3">
+                  <label for="City">Ciudad <span class="colorRed">(*)</span></label>
+                <div class="input-group" >
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+                         <i class="fa fa-home" aria-hidden="true"></i>
+
+                      </span>
+                    </div>
+                    <select  ngModel  name="City" #City="ngModel" class="form-control" required >
+                        <option value="" disabled selected></option>
+                        <option *ngFor="let item of ciudades"  value="{{item}}">
+                          {{item}}
                         </option>
 
                       </select>
-                  </div>
-                  </div>
+                      <!-- <input  ngModel  name="City" #City="ngModel" type="text" class="form-control" required > -->
+                </div>
 
-                   <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="City">Ciudad <span class="colorRed">(*)</span></label>
-                  <div class="input-group" >
-                    <div class="input-group-prepend">
+                <div class="errorSpace" *ngIf="( this.enviado == true && City.invalid ) || (City.invalid && (City.dirty || City.touched))" >
+                  <small *ngIf="City.errors.required">
+                    Este campo es obligatorio
+                  </small>
+
+                </div>
+
+
+                </div>
+
+
+                </div>
+
+                <div class="titleOpc geo">
+
+                  <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                    Datos de cuenta
+                </h4>
+
+                  <div class="form-group clearfix">
+                    <label >Estos serán los datos para ingresar a Mercado Pyme</label>
+
+                  </div>
+                  </div>
+              <hr>
+                <div class="row">
+                   <div class="form-group clearfix col-md-12 col-lg-4">
+                    <label for="Email">Email <span class="colorRed">(*)</span></label>
+                  <div class="input-group">
+                      <div class="input-group-prepend">
                         <span class="input-group-text">
-                           <i class="fa fa-home" aria-hidden="true"></i>
-
-                        </span>
+                            <i class="fas fa-envelope"></i>
+                          </span>
                       </div>
-                      <select  ngModel  name="City" class="form-control" required >
-                          <option value="" disabled selected></option>
-                          <option *ngFor="let item of ciudades"  value="{{item}}">
-                            {{item}}
-                          </option>
-
-                        </select>
-                        <!-- <input  ngModel  name="City" type="text" class="form-control" required > -->
-                  </div>
+                      <input  ngModel  name="Email" #Email="ngModel" type="email" class="form-control" required>
                   </div>
 
 
+                <div class="errorSpace" *ngIf="( this.enviado == true && Email.invalid ) || (Email.invalid && (Email.dirty || Email.touched))" >
+                  <small *ngIf="Email.errors.required">
+                    Este campo es obligatorio
+                  </small>
+
+                </div>
+
+
                   </div>
 
-                  <div class="titleOpc geo">
-
-                    <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-                      Datos de cuenta
-                  </h4>
-
-                    <div class="form-group clearfix">
-                      <label >Estos serán los datos para ingresar a Mercado Pyme</label>
-
-                    </div>
-                    </div>
-                <hr>
-                  <div class="row">
-                     <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="Email">Email <span class="colorRed">(*)</span></label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                              <i class="fas fa-envelope"></i>
-                            </span>
-                        </div>
-                        <input  ngModel  name="Email" type="email" class="form-control" required>
-                    </div>
-                    </div>
-
-                    <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="Pass">Contraseña <span class="colorRed">(*)</span></label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input  ngModel  name="Pass" type="password" class="form-control" required>
-                    </div>
-                    </div>
-                     <div class="form-group clearfix col-md-12 col-lg-4">
-                      <label for="CPass">Confirma contraseña <span class="colorRed">(*)</span></label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <input  ngModel  name="CPass" type="password" class="form-control" required>
+                  <div class="form-group clearfix col-md-12 col-lg-4">
+                    <label for="Pass">Contraseña <span class="colorRed">(*)</span></label>
+                  <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-lock" aria-hidden="true"></i>
+                          </span>
                       </div>
+                      <input  ngModel  name="Pass" #Pass="ngModel" type="password" class="form-control" required>
                   </div>
 
+                  <div class="errorSpace" *ngIf="( this.enviado == true && Pass.invalid ) || (Pass.invalid && (Pass.dirty || Pass.touched))" >
+                    <small *ngIf="Pass.errors.required">
+                      Este campo es obligatorio
+                    </small>
+                    <!-- <div *ngIf="Name.errors.minlength">
+                      Name cannot be more than 30 characters long.
+                    </div>
+                    <div *ngIf="Name.errors.minlength">
+                      Name must be at least 2 characters long.
+                    </div> -->
                   </div>
 
-                  <div class="row terms">
-                    <div class="col-12">
-                        <!-- checkbox -->
-                        <div class="form-group clearfix">
-                          <div class="icheck-success">
 
-                            <label for="aceptaTerminosNatural">
-                              <input required ngModel  name="Terms" type="checkbox" id="aceptaTerminosNatural">
-                              Autorizo para mi  información y doy fe que tengo la facultad de autorizarlo en nombre de la empresa que represento en concordancia con lo previsto en esta <a target="_blank" href="../../../assets/dist/documents/Política de Privacidad y Tratamiento de los Datos Personales-min.pdf" class="hiperbutton">Política de Privacidad y tratamiento de datos personales</a>
-                            </label>
-                          </div>
-
-                        </div>
+                  </div>
+                   <div class="form-group clearfix col-md-12 col-lg-4">
+                    <label for="CPass">Confirma contraseña <span class="colorRed">(*)</span></label>
+                  <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-lock" aria-hidden="true"></i>
+                          </span>
                       </div>
-                  </div>
+                      <input  ngModel  name="CPass" #CPass="ngModel" type="password" class="form-control" required>
+                    </div>
 
-                  <!-- <div class="row captcha">
+                    <div class="errorSpace" *ngIf="( this.enviado == true && CPass.invalid ) || (CPass.invalid && (CPass.dirty || CPass.touched))" >
+                      <small *ngIf="CPass.errors.required">
+                        Este campo es obligatorio
+                      </small>
+                      <!-- <div *ngIf="Name.errors.minlength">
+                        Name cannot be more than 30 characters long.
+                      </div>
+                      <div *ngIf="Name.errors.minlength">
+                        Name must be at least 2 characters long.
+                      </div> -->
+                    </div>
 
-                    <div data-toggle="tooltip" data-placement="left" title="Completa el código de seguridad para continuar" class="form-group clearfix">
 
-                    <div class="input-group">
-                        <small>
-                          Completa el código de seguridad para continuar
+                </div>
+
+                </div>
+
+                <div class="row terms">
+                  <div class="col-12">
+                      <!-- checkbox -->
+                      <div class="form-group clearfix">
+                        <div class="icheck-success">
+
+                          <label for="aceptaTerminosNatural">
+                            <input required ngModel  name="Terms" #Terms="ngModel" type="checkbox" id="aceptaTerminosNatural">
+                            Autorizo para mi  información y doy fe que tengo la facultad de autorizarlo en nombre de la empresa que represento en concordancia con lo previsto en esta <a target="_blank" href="../../../assets/dist/documents/Política de Privacidad y Tratamiento de los Datos Personales-min.pdf" class="hiperbutton">Política de Privacidad y tratamiento de datos personales</a>
+                          </label>
+                        </div>
+
+                      </div>
+
+                      <div class="errorSpace" *ngIf="( this.enviado == true && Terms.invalid ) || (Terms.invalid && (Terms.dirty || Terms.touched))" >
+                        <small *ngIf="Terms.errors.required">
+                          Este campo es obligatorio
                         </small>
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
-                            </span>
+                        <!-- <div *ngIf="Name.errors.minlength">
+                          Name cannot be more than 30 characters long.
                         </div>
-                        <input placeholder=" {{ this._usuarioService.captcha[0] }} + {{ this._usuarioService.captcha[1]}}" ngModel  name="captcha" class="form-control" required  type="number">
+                        <div *ngIf="Name.errors.minlength">
+                          Name must be at least 2 characters long.
+                        </div> -->
                       </div>
-                  </div>
 
-                </div> -->
+                    </div>
+                </div>
+
+                <!-- <div class="row captcha">
+
+                  <div data-toggle="tooltip" data-placement="left" title="Completa el código de seguridad para continuar" class="form-group clearfix">
+
+                  <div class="input-group">
+                      <small>
+                        Completa el código de seguridad para continuar
+                      </small>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-lock" aria-hidden="true"></i>
+                          </span>
+                      </div>
+                      <input placeholder=" {{ this._usuarioService.captcha[0] }} + {{ this._usuarioService.captcha[1]}}" ngModel  name="captcha" #captcha="ngModel" class="form-control" required  type="number">
+                    </div>
+                </div>
+
+              </div> -->
 
 
-                  <div class="row formButtons centerCustom">
-                    <button type="submit" class="buttonCustom btn btn-success btn-flat">Enviar</button>
-                  </div>
+                <div class="row formButtons centerCustom">
+                  <button
+                  (click)="alEnviar()"
+                  type="submit" class="buttonCustom btn btn-success btn-flat">Enviar</button>
+                </div>
 
-            </form>
+          </form>
+
 
         </div>
 
       </div>
     </div>
     <!-- /.card -->
+
+
   </div>
+
+
 
 
 

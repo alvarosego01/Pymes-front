@@ -1,12 +1,11 @@
 // importaciones nativas
 import { Component, OnInit } from "@angular/core";
-import { NgForm } from "@angular/forms";
+import { NgForm, FormsModule } from "@angular/forms";
 // {} from '@angular/forms';
 
 import { Router } from "@angular/router";
 
-
-
+// FormsModule
 
 // importaciones de codigo
 // servicios
@@ -15,7 +14,7 @@ import { UsersService, GlobalConfigService, NotifyService, FormsResourcesService
 import { _UserModelNatural, _UserModelCompany, _NotifyModel
 
    } from 'src/app/models/models.index';
-import { SocialFloatComponent } from 'src/app/globals/globals.index';
+   import { SocialFloatComponent } from 'src/app/globals/globals.index';
 
 
 @Component({
@@ -24,6 +23,7 @@ import { SocialFloatComponent } from 'src/app/globals/globals.index';
   styleUrls: ["./register.component.sass"],
 })
 export class RegisterComponent implements OnInit {
+  enviado: boolean = false;
 
 
   registerControlSelect: string = null;
@@ -89,12 +89,14 @@ export class RegisterComponent implements OnInit {
     this.estadosActividadModel = [];
     this.mapUrl = ''
     this.mapElement = ''
-    this.nrPhones = new Array(1);
+    this.nrPhones = new Array(1, 2 ,3);
     this.idType = '';
     this.companyPhonee = [];
     this.coordsMap = {};
     this.altMapUrl = '';
     this.activateMap = false;
+
+    this.enviado = false;
 
   }
 
@@ -293,8 +295,10 @@ this.mapElement = div;
       // forma.value.estadosActividad,
       );
         //  this.spinner = true;
-      //  ////// ////console.log(usuario);
+       console.log(usuario);
       //  return;
+
+
       this._globaConfig.spinner = true;
 //
           this._usuarioService.registroUsuarioPOST( usuario, null ,'natural' )
@@ -322,7 +326,7 @@ this.mapElement = div;
 
             forma.reset();
         }, ERR => {
-          //////// ////console.log(ERR);
+          console.log(ERR);
           this._globaConfig.spinner = false;
         });
 
@@ -386,15 +390,25 @@ if(type == 'company'){
 
   }
 
-  var cphones = [];
-  for (let index = 0; index < this.companyPhonee.length; index++) {
-    // var element = this.companyPhonee[index];
-    var ccc = {
-      phonesCompany: this.companyPhonee[index]
-    }
-    cphones.push(ccc);
+  var cphones = [
 
-  }
+    {
+      phonesCompany: (forma.value.PhoneFijoEmpresa != null && forma.value.PhoneFijoEmpresa != '')? forma.value.PhoneFijoEmpresa: null,
+      typePhone: 'fijo'
+    },
+    {
+      phonesCompany: (forma.value.PhoneCelular1 != null && forma.value.PhoneCelular1 != '')? forma.value.PhoneCelular1: null,
+      typePhone: 'celular1'
+    },
+    {
+      phonesCompany: (forma.value.PhoneCelular2 != null && forma.value.PhoneCelular2 != '')? forma.value.PhoneCelular2: null,
+      typePhone: 'celular2'
+    }
+
+  ];
+
+
+
 
 
   var datapyme = {
@@ -438,7 +452,8 @@ if(type == 'company'){
 //
           this._usuarioService.registroUsuarioPOST( null, usuario ,'company' )
           .subscribe( resp => {
-//
+            //
+            this._globaConfig.spinner = false;
   this._notifyService.swalNormal.fire({
               title: "¡Cuenta creada con exito!",
               text: "Ahora vamos a suscribir tus publicaciones",
@@ -479,5 +494,12 @@ if(type == 'company'){
 
 
 
+
+  alEnviar(){
+
+
+    this.enviado = true;
+
+  }
 
 }

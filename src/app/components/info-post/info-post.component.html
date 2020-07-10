@@ -85,9 +85,23 @@
                 <div class="infoSide col-md-12 col-lg-6">
                   <div class="dataHeader">
 
-                    <h5 class="titleSpecial6">
+                    <!-- <h5 class="titleSpecial6">
                       {{ this.publication._category._principal._category }} - {{ this.publication._category.child }}
-                    </h5>
+                    </h5> -->
+
+                    <ul *ngIf="(this.publication._category.length > 0)">
+                      <li *ngFor="let cate of this.publication._category"
+                      [ngStyle]="{'display': ((cate._principal == null) || (cate._child == null))? 'none': '' }"
+                      >
+                        <!-- *ngIf="(cate._principal != null) && (cate._child != null)" -->
+                        <h5 class="titleSpecial6"
+                        *ngIf="(cate._principal != null) && (cate._child != null)"
+                        >
+                              {{ cate._principal._category }} - {{ cate.child }}
+                        </h5>
+                      </li>
+                  </ul>
+
                     <small>
                       {{ this.publication.created_at }}
                     </small>
@@ -100,19 +114,7 @@
                     </h3>
                   </div>
 
-                  <h5 class="titleSpecial6">
-                    Rango de precio
-                  </h5>
-                  <div class="price">
 
-                    <h5>
-                      <!-- {{Value | currency:"COP":"symbol"}} -->
-                      {{ this.publication._rangoPrize.min | numberFormat | currency : 'USD' : 'symbol' : '1.0-0'  }}
-                    </h5>
-                    <h5>
-                      {{ this.publication._rangoPrize.max | numberFormat | currency : 'USD' : 'symbol' : '1.0-0'  }}
-                    </h5>
-                  </div>
 
                   <h5 class="titleDesc">
                     Descripción
@@ -399,7 +401,7 @@
                   [idUser]="this.publication.user._id"
                   [not]="this.publication._id"
                   [type]="'sugerencia'"
-                  [byCategory]="this.publication._category._principal._id">
+                  [byCategory]="this.publication._category[0]._principal._id">
 
                   </app-posts-lists>
 

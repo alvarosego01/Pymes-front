@@ -121,6 +121,8 @@ export class UsersService {
     return this.http.post(url, usuario ).pipe(
         map( (resp: any) => {
 
+
+          console.log('la respuesta', resp);
           ////// ////console.log('modelo valido que se guarda', resp.data);
 
           this.guardarStorage(resp.message.id_user, resp.message.t, resp.data);

@@ -37,17 +37,13 @@
                           Propietario
                       </th>
                       <th >
-                          Categoría
+                          Categorías
                       </th>
-                      <th>
-                          Dirigido
-                      </th>
+
                       <th>
                           Ciudades
                       </th>
-                      <th >
-                          R.Precio
-                      </th>
+
                       <th>
                           Estado
                       </th>
@@ -83,26 +79,16 @@
                       </td>
 
                       <td>
-                        <ul>
-                            <li>
-                                {{ item._category._principal._category }} - {{ item._category.child }}
+                        <ul *ngIf="(item._category.length > 0)">
+                            <li *ngFor="let cate of item._category">
+                                <small *ngIf="(cate._principal != null) && (cate._child != null)">
+                                    {{ cate._principal._category }} - {{ cate.child }}
+                                </small>
                             </li>
                         </ul>
                       </td>
 
-                      <td >
-                        <ul *ngIf="(item._target) && item._target.length > 0">
-                            <li *ngFor="let t of item._target">
-                                <div [innerHtml]="t.tag | tags">
 
-                                </div>
-
-                            </li>
-                        </ul>
-                        <small *ngIf="(item._target) && item._target.length == 0">
-                            Sin detalles
-                        </small>
-                      </td>
                       <td >
 
                         <ul *ngIf="(item._cityTarget) && item._cityTarget.length > 0">
@@ -113,10 +99,6 @@
                         <small *ngIf="(item._cityTarget) && item._cityTarget.length == 0">
                             Sin detalles
                         </small>
-                      </td>
-
-                      <td>
-                          {{ item._rangoPrize.min | numberFormat | currency : 'USD' : 'symbol' : '1.0-0' }} - {{ item._rangoPrize.max | numberFormat | currency : 'USD' : 'symbol' : '1.0-0' }}
                       </td>
 
 

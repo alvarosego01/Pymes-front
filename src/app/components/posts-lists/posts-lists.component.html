@@ -48,7 +48,7 @@
 
         <div class="card-body">
             <span class="catego">
-                {{ item._category._principal._category  }}
+                {{ item._category[0]._principal._category }}
               </span>
           <small class="date">
             {{ item.created_at }}

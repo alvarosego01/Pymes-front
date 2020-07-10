@@ -672,7 +672,8 @@ export class PostsService {
 
 
       var l = {
-        _category: data._category//id de categoria
+        _category: data._category,//id de categoria
+        nro: data.nro
       }
 
     let url = `${_SERVICIOS}/post/categoryChange/${data._idPost}/${data.type}?t=${this._usersService.token}`;
