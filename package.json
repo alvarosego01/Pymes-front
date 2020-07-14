@@ -26,7 +26,9 @@
     "ekko-lightbox": "^5.3.0",
     "ng-click-outside": "^6.0.0",
     "ng2-pdf-viewer": "^6.3.0",
+    "ngx-sortablejs": "^3.1.4",
     "rxjs": "~6.5.4",
+    "sortablejs": "^1.10.2",
     "sweetalert2": "^9.10.12",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -39,6 +41,7 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
+    "@types/sortablejs": "^1.10.4",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",

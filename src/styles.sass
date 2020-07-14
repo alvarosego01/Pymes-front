@@ -634,6 +634,23 @@ pdf-viewer.pdfList
     @include responsivo(resto)
         padding-top: 100px!important
 
+#id01.withForm
+    .w3-modal-content.w3-animate-top.w3-card-4
+        width: 65%!important
+        margin-bottom: 2.5%!important
+        @include responsivo(telefonoTable)
+            width: 90%!important
+        @include responsivo(pcMedio)
+            width: 80%!important
+        @include responsivo(general)
+            width: 75%!important
+        @include responsivo(resto)
+            width: 65%!important
+        header
+            margin-bottom: 2.5%!important
+            // marbo
+        // width
+
 .w3-modal-content.w3-animate-top.w3-card-4
     width: 90%!important
     margin: 0 auto!important
@@ -650,7 +667,70 @@ pdf-viewer.pdfList
 
 .colorRed
     color: salmon!important
+    font-weight: normal!important
 
 div.errorSpace
     small
         color: salmon
+
+
+#floatButton
+    position: fixed
+    right: 0
+    button
+        font-size: 24px
+        transition: $trans
+        display: inline-block
+        &:hover
+            font-size: 28px
+
+#floatButton.bottom
+    bottom: 0
+
+
+
+.block
+    display: block
+.none
+    display: none
+
+
+
+
+ul#listImgs
+    display: flex
+    flex-flow: wrap
+    list-style: none
+    li
+        position: relative
+        padding: 0
+        margin: 15px!important
+        button
+            top: 0
+            right: 0
+            display: block
+            position: absolute
+            background-color: transparent
+            padding: 5px 10px
+            border: none
+            z-index: 10
+            i
+                color: red!important
+                font-size: 18px
+        img
+            margin: 0!important
+    li.deleted
+        position: relative
+        &::after
+            content: ''
+            background-color: rgba(salmon, 0.25)
+            width: 100%
+            height: 100%
+            position: absolute
+            margin: auto
+            display: block
+            z-index: 0
+            top: 0
+            left: 0
+            right: 0
+            bottom: 0

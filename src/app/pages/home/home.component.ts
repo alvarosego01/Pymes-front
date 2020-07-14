@@ -39,12 +39,12 @@ export class HomeComponent implements OnInit {
 
     // this.activatedRoute.children.findIndex()
 
-    ////console.log('se vuelve a llamar home');
+    ////////console.log('se vuelve a llamar home');
    }
 
 
   cargarBibliotecaCategorias(){
-    //console.log('se buscan las categorias');
+    //////console.log('se buscan las categorias');
 
     return  new Promise((resolve, reject) => {
       this._categoryService.getCategoryGET().subscribe( response => {
@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
 
         resolve(response.data);
 
-        // //console.log('base de categorias', this._categoryService.allCategoryList);
+        // //////console.log('base de categorias', this._categoryService.allCategoryList);
 
       }, err => {
 
@@ -79,12 +79,12 @@ export class HomeComponent implements OnInit {
 
 
 
-      // // ////console.log('los parametros', params);
-      // ////console.log('params url', params);
-      //console.log('los malditos parametros', this.params);
+      // // ////////console.log('los parametros', params);
+      // ////////console.log('params url', params);
+      //////console.log('los malditos parametros', this.params);
       if(Object.keys(this.params).length == 0){
 
-        //console.log('no hay parametros');
+        //////console.log('no hay parametros');
         this.setFirstLook();
         // this._searchService.setParameters();
 
@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit {
 
       if(this.params.busqueda == 'todo' ){
 
-        //console.log('caso todo');
+        //////console.log('caso todo');
         this.setFirstLook();
       }else
       if((this.params.busqueda == 'categoria' || this.params.busqueda == 'catSub')
@@ -116,7 +116,7 @@ export class HomeComponent implements OnInit {
 
 
 
-        // ////console.log(params);
+        // ////////console.log(params);
 
 
 
@@ -130,7 +130,7 @@ export class HomeComponent implements OnInit {
 
  async searchByCategory(argumento: string, child:string = null){
 
-    ////console.log('category from home');
+    ////////console.log('category from home');
 
     let l = {
       categoryp: argumento,
@@ -147,11 +147,11 @@ export class HomeComponent implements OnInit {
 
     let pars = null;
     await this._searchService.getParameters().then(resp => {
-      // // ////console.log('la respuesta de parametros', resp);
+      // // ////////console.log('la respuesta de parametros', resp);
       pars = resp;
     });
 
-    ////console.log('que coñoe s pars', pars);
+    ////////console.log('que coñoe s pars', pars);
 
 
     var ppp = {
@@ -167,7 +167,7 @@ export class HomeComponent implements OnInit {
 
     this.GlobalConfigService.spinner = true;
     this._searchService.searchByCategoryPOST(args).subscribe((resp) => {
-      // ////// ////console.log(resp);
+      // ////// ////////console.log(resp);
 
       if (resp.status == 200 && resp.ok == true) {
 
@@ -188,7 +188,7 @@ this._searchService.registros = resp.data;
 
               this.GlobalConfigService.scrollIt(r);
 
-              ////console.log('se mueve a', r);
+              ////////console.log('se mueve a', r);
 
             });
 
@@ -199,7 +199,7 @@ this._searchService.registros = resp.data;
 
         }else{
 
-          ////console.log('no recibbi nada');
+          ////////console.log('no recibbi nada');
 
           this._searchService.registros = [];
           this._searchService.paginator = [];
@@ -251,11 +251,11 @@ this._searchService.registros = resp.data;
 
   setFirstLook() {
 
-    //console.log('llama first');
+    //////console.log('llama first');
     this.GlobalConfigService.spinner = true;
     this._searchService.setFirstLookPOST().subscribe((resp) => {
-      // ////// ////console.log(resp);
-      // ////console.log('los resultadotes', resp);
+      // ////// ////////console.log(resp);
+      // ////////console.log('los resultadotes', resp);
       // this._searchService.setParameters({busqueda: 'todo'}, 0, 12);
       if (resp.status == 200 && resp.ok == true) {
 

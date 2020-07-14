@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   loginUser( forma: NgForm ){
 
-    ////////// ////console.log("ingresando sesion", forma);
+    ////////// ////////console.log("ingresando sesion", forma);
 
     if( forma.invalid ){
       this._notifyService.Toast.fire({
@@ -56,13 +56,13 @@ export class LoginComponent implements OnInit {
     }
     // despues de que se cargan los datos en el modelo de clase de datos usuario entonces se llama la funcion de login y se pasan los datos por referencia
 
-    ////////// ////console.log(usuario);
+    ////////// ////////console.log(usuario);
 
 
     this._usersService.login( usuario )
       .subscribe( resp => {
         this.router.navigate(['/dashboard']);
-        ////////// ////console.log('FUNCIONA', resp);
+        ////////// ////////console.log('FUNCIONA', resp);
         this.GlobalConfigService.spinner = false;
 
         this._notifyService.Toast.fire({
@@ -71,11 +71,11 @@ export class LoginComponent implements OnInit {
         });
 
 
-        // //// ////console.log(resp);
+        // //// ////////console.log(resp);
       },
       ERR => {
         var resp = ERR;
-        // //// ////console.log(resp.error);
+        // //// ////////console.log(resp.error);
           this._notifyService.Toast.fire({
             title: resp.error.message,
             icon: 'error'

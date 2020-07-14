@@ -55,6 +55,11 @@ import {IMaskModule} from 'angular-imask';
 import { PlanesComponent } from './components/planes/planes.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { PostEditionComponent } from './pages/dashboard/dashboard.pages.index';
+
+
+// import { SortablejsModule } from 'angular-sortablejs';
+import { SortablejsModule } from 'ngx-sortablejs';
 
 
 @NgModule({
@@ -77,6 +82,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     NewsletterComponent,
     ProfileViewComponent,
     PdfViewComponent,
+    PostEditionComponent,
     BreadComponent,
     SocialFloatComponent,
     PlanesComponent,
@@ -97,7 +103,11 @@ import { LoadingComponent } from './components/loading/loading.component';
     PipesModule,
     StarRatingModule.forRoot(),
     PdfViewerModule,
-    IMaskModule
+    IMaskModule,
+    SortablejsModule.forRoot({
+      animation: 150,
+      swapThreshold: 1
+    })
   ],
   providers: [
     PostsService,

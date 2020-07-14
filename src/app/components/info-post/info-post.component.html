@@ -1,6 +1,7 @@
 
 
 
+
 <div *ngIf="(this.publication != undefined)" id="homeContainer" class="contentGeneral content-wrapper">
     <!-- Content Header (Page header) -->
 
@@ -9,20 +10,34 @@
     </app-pdf-view>
 
 
-    <!-- <pdf-viewer
-    [src]="'http://localhost:5160/img/Post/5ed439e2ac3e470f205a73df/5ed439e2ac3e470f205a73df-img0-861.pdf'"
-    [render-text]="true"
-    [fit-to-page]="true"
-    style="display: block;">
-    </pdf-viewer> -->
+    <!-- maldita sea -->
+    <app-post-edition
+    *ngIf="this.editOpen == true"
+    [Edit]="this.editOpen"
+    [publicacion]="this.publication"
+    (closeEdit)="cerrarModal()"
+    >
+    </app-post-edition>
 
-    <!-- <pdf-viewer
-    [src]="'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf'"
-    [render-text]="true"
-    [fit-to-page]="true"
-    style="display: block;">
-    </pdf-viewer>
- -->
+
+
+
+<div
+*ngIf="this.canEdit == true"
+class="floatButton bottom" id="floatButton">
+
+
+
+  <div class="formButtons">
+    <button (click)="openEdit()" type="button" class="buttonCustom btn btn-warning btn-flat">
+      <i class="fas fa-pencil-alt    "></i>
+      Editar publicación</button>
+  </div>
+
+
+
+</div>
+
 
 
 
@@ -82,7 +97,33 @@
                   </div>
                 </div>
 
+
+
                 <div class="infoSide col-md-12 col-lg-6">
+
+                  <div
+                  style="overflow: initial!important; z-index: 0;"
+                  *ngIf="(this._userService.estaLogueado() == true) && (this._userService.roleName == 'Administrador')" class="ribbon-wrapper ribbon-lg">
+                    <div
+                    *ngIf="(this.publication.status == true)"
+                    class="ribbon bg-success">
+                    <h5
+                    style="margin: 0!important">
+
+                      Aprobada
+                    </h5>
+                    </div>
+                    <div
+                    *ngIf="(this.publication.status == false)"
+                    class="ribbon bg-danger">
+                    <h5
+                    style="margin: 0!important">
+
+                      No aprobada
+                    </h5>
+                    </div>
+                  </div>
+
                   <div class="dataHeader">
 
                     <!-- <h5 class="titleSpecial6">

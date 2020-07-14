@@ -11,18 +11,21 @@ import { NotifyControlComponent,
     PostControlComponent,
     DashboardComponent,
     HomeComponent,
-    ProfileComponent } from './dashboard.pages.index';
+    ProfileComponent,
+    PostEditionComponent
+  } from './dashboard.pages.index';
 
 import { DASHBOARD_ROUTES } from './dashboard.routes';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { PostManagerComponent } from './admin/post-manager/post-manager.component';
 import { AdminComponent } from './admin/admin.component';
 import { ADMIN_MODULE } from './admin/admin.module';
-import { EditPostComponent } from './edit-post/edit-post.component';
+
 
 
 
 import {IMaskModule} from 'angular-imask';
+// import { PostEditionComponent } from './post-control/post-edition/post-edition.component';
 
 
 @NgModule({
@@ -34,7 +37,7 @@ import {IMaskModule} from 'angular-imask';
     HomeComponent,
     PostManagerComponent,
     AdminComponent,
-    EditPostComponent,
+
 
   ],
   imports: [

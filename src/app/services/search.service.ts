@@ -212,7 +212,7 @@ export class SearchService {
         return resp;
       }),
       catchError( err =>{
-        ////////// ////console.log(err);
+        ////////// ////////console.log(err);
 
         return throwError(err);
       })
@@ -225,12 +225,12 @@ export class SearchService {
 
 setActualReactions() {
 
-    ////// ////console.log('actualizacio');
+    ////// ////////console.log('actualizacio');
     if(this.registros.length > 0){
 
       this.registros.forEach((relement, index) => {
 
-      // ////// ////console.log(relement.reactions.length);
+      // ////// ////////console.log(relement.reactions.length);
       // return;
 
       this.registros[index].like = 0;
@@ -256,7 +256,7 @@ setActualReactions() {
   }
   // this.registros = r;
 
-  ////// ////console.log('con reaction', this.registros);
+  ////// ////////console.log('con reaction', this.registros);
 
 }
 
@@ -282,7 +282,7 @@ setActualReactions() {
           return resp;
         }),
         catchError( err =>{
-          ////////// ////console.log(err);
+          ////////// ////////console.log(err);
 
           return throwError(err);
         })
@@ -303,7 +303,7 @@ setActualReactions() {
         return resp;
       }),
       catchError( err =>{
-        ////////// ////console.log(err);
+        ////////// ////////console.log(err);
 
         return throwError(err);
       })
@@ -317,7 +317,7 @@ setActualReactions() {
 
   searchByCategoryPOST(argumento: any){
 
-    ////// ////console.log(argumento);
+    ////// ////////console.log(argumento);
     let url = `${_SERVICIOS}/find`;
 
 
@@ -327,7 +327,7 @@ setActualReactions() {
         return resp;
       }),
       catchError( err =>{
-        ////////// ////console.log(err);
+        ////////// ////////console.log(err);
 
         return throwError(err);
       })
@@ -339,18 +339,18 @@ setActualReactions() {
   searchByPricePOST(argumento){
 
 
-    ////// ////console.log(argumento);
+    ////// ////////console.log(argumento);
     let url = `${_SERVICIOS}/find`;
 
 
     return this.http.post( url, argumento ).pipe(
       map( (resp: any) => {
 
-        // ////// ////console.log('respuesta', resp);
+        // ////// ////////console.log('respuesta', resp);
         return resp;
       }),
       catchError( err =>{
-        // ////// ////console.log(err , 'error desde servicio');
+        // ////// ////////console.log(err , 'error desde servicio');
 
         return throwError(err);
       })
@@ -367,11 +367,11 @@ setActualReactions() {
     return this.http.post( url, argumento ).pipe(
       map( (resp: any) => {
 
-        // ////// ////console.log('respuesta', resp);
+        // ////// ////////console.log('respuesta', resp);
         return resp;
       }),
       catchError( err =>{
-        // ////// ////console.log(err , 'error desde servicio');
+        // ////// ////////console.log(err , 'error desde servicio');
 
         return throwError(err);
       })
@@ -399,10 +399,10 @@ setActualReactions() {
 
 changePaginator(data: any){
 
-    // //console.log('se llama paginador');
+    // //////console.log('se llama paginador');
 
 
-    ////console.log('coño es movil? ',this.GlobalConfig.isMobile());
+    ////////console.log('coño es movil? ',this.GlobalConfig.isMobile());
 
     if(Object.keys(data.params).length == 0 || data.params.busqueda == 'todo'){
 
@@ -431,7 +431,7 @@ changePaginator(data: any){
           changePaginator: data.change
         }
 
-        //console.log('caso buscador', argumento);
+        //////console.log('caso buscador', argumento);
         return argumento;
       }
 
@@ -448,7 +448,7 @@ changePaginator(data: any){
           idChild: null
         }
 
-        //console.log('caso categoria', argumento);
+        //////console.log('caso categoria', argumento);
 
 
 
@@ -469,7 +469,7 @@ changePaginator(data: any){
 
         }
 
-        //console.log('caso sub', argumento);
+        //////console.log('caso sub', argumento);
         return argumento;
       }
 
@@ -506,10 +506,10 @@ changePaginator(data: any){
   transformCatId(principal: string, child:string = null){
 
 
-    // //console.log('entra en transform');
+    // //////console.log('entra en transform');
     var l = this._categoryService.allCategoryList;
 
-    // //console.log('la l', l);
+    // //////console.log('la l', l);
 
     var c = null;
 
@@ -535,8 +535,8 @@ changePaginator(data: any){
     c._child.forEach((e, i) => {
 
       if(e.name == child){
-        //console.log('son iguales', e.name);
-        //console.log('iguales', child);
+        //////console.log('son iguales', e.name);
+        //////console.log('iguales', child);
         x = e._id;
       }
 

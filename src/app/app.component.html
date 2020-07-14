@@ -18,6 +18,19 @@
                 <div class="double-bounce2"></div>
             </div>
 
+
+
+            <!-- (complete)="completeLoading()" -->
+                    <app-loading
+                    *ngIf="this._globaConfig.porcentaje > 0"
+                    [porcentaje]="this._globaConfig.porcentaje"
+                    >
+
+                    </app-loading>
+
+
+
+
         </router-outlet>
     </div>
 
