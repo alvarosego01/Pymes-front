@@ -3,7 +3,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { NotifyService, GlobalConfigService, PostsService } from 'src/app/services/service.index';
 import { NgForm } from '@angular/forms';
 
-import { _UserModelNatural, _UserModelCompany
+import { _UserModelNatural, _UserModelCompany, _NotifyModel
 
    } from 'src/app/models/models.index';
 
@@ -93,7 +93,7 @@ ngdirectionCompany: string;
 
     this.GlobalConfigService.setTitle('Perfil de usuario');
 
-    ////// ////////console.log(this.GlobalConfigService.tipoIdentificacion);
+    ////// ////////////console.log(this.GlobalConfigService.tipoIdentificacion);
 
     this.email = this._usersService.usuario.email;
     this.gender = this._usersService.usuario.gender;
@@ -123,14 +123,14 @@ ngdirectionCompany: string;
     this.companyPhonee = this._usersService.usuario._companyPhones;
     this.nrPhones = this._usersService.usuario._companyPhones.length;
 
-    ////// ////////console.log(this.companyPhonee);
+    ////// ////////////console.log(this.companyPhonee);
   }
 
 
-    ////// ////////console.log('map',this._usersService.usuario._mapUrl);
+    ////// ////////////console.log('map',this._usersService.usuario._mapUrl);
 
     if(this._usersService.usuario._mapUrl != null){
-      // ////////// ////////console.log(this._usersService.usuario._mapUrl.mapUrl);
+      // ////////// ////////////console.log(this._usersService.usuario._mapUrl.mapUrl);
       var l = this._usersService.usuario._mapUrl;
       this.setMapUrl(l);
 
@@ -147,10 +147,10 @@ ngdirectionCompany: string;
 
     for (var i = 0; i < this._usersService.usuario._naturalEconomicActivity.length; ++i) {
       this.estadosActividad.push(this._usersService.usuario._naturalEconomicActivity[i].typeActivity);
-      ////////// ////////console.log(this._usersService.usuario._naturalEconomicActivity[i].details);
+      ////////// ////////////console.log(this._usersService.usuario._naturalEconomicActivity[i].details);
       switch (this._usersService.usuario._naturalEconomicActivity[i].typeActivity) {
         case "Producción":
-        ////////// ////////console.log('fue produccion');
+        ////////// ////////////console.log('fue produccion');
         this.ProduccionActivity = this._usersService.usuario._naturalEconomicActivity[i].details;
         break;
         case "Comercialización":
@@ -168,8 +168,8 @@ ngdirectionCompany: string;
       }
     }
 
-    ////// ////////console.log(this._usersService.usuario);
-    //// ////////console.log(this._usersService.usuario._id);
+    ////// ////////////console.log(this._usersService.usuario);
+    //// ////////////console.log(this._usersService.usuario._id);
     this.getStatsGeneral(this._usersService.usuario._id);
 
   }
@@ -268,7 +268,7 @@ ngdirectionCompany: string;
               icon: 'success'
             });
 
-            // ////////// ////////console.log(resp['User']);
+            // ////////// ////////////console.log(resp['User']);
             // let r_id = resp._id;
             // let rUser = resp.User;
             this._usersService.guardarStorage( this._usersService.usuario._id , this._usersService.token, resp['User']);
@@ -276,7 +276,7 @@ ngdirectionCompany: string;
           })
           .catch( err => {
 
-            //////////// ////////console.log(err);
+            //////////// ////////////console.log(err);
 
             this.GlobalConfigService.spinner = false;
             this._notifyService.Toast.fire({
@@ -301,11 +301,11 @@ ngdirectionCompany: string;
 
   activateEconomicActivity(){
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    ////////// ////////console.log(this.estadosActividad);
+    ////////// ////////////console.log(this.estadosActividad);
   }
 
   setCiudades(i){
-    // ////////// ////////console.log('Got the selectedVendor as : ', i);
+    // ////////// ////////////console.log('Got the selectedVendor as : ', i);
     // return;
     let k = JSON.parse(i);
     k = k.id;
@@ -322,7 +322,7 @@ ngdirectionCompany: string;
 
     this.GlobalConfigService.spinner = true;
     this._postService.getStatsGeneralGET(id).subscribe((resp) => {
-      // ////// ////////console.log(resp);
+      // ////// ////////////console.log(resp);
 
       if (resp.status == 200 && resp.ok == true) {
 
@@ -360,13 +360,21 @@ ngdirectionCompany: string;
    //  this._usuarioService.promiseTimeout(5000, x);
      x.then(r => {
 
-       ////////// ////////console.log(r);
+       ////////// ////////////console.log(r);
        this.coordsMap = r;
        this.GlobalConfigService.spinner = false;
        if(Object.keys(this.coordsMap).length > 0 ){
          this.activateMap = true;
-       // ////////// ////////console.log('activado mapa', );
+       // ////////// ////////////console.log('activado mapa', );
        }
+
+       this._notifyService.Toast.fire({
+        title: '¡Localización almacenada!',
+        // text:'El navegador no soporta la geolocalización',
+        icon: 'success'
+        });
+
+
      }, err => {
        this.GlobalConfigService.spinner = false;
        this._notifyService.Toast.fire({
@@ -419,7 +427,7 @@ userModifyAccount(forma: NgForm, type){
        // forma.value.estadosActividad,
        );
 
-              ////////// ////////console.log(usuario,'conformado');
+              ////////// ////////////console.log(usuario,'conformado');
 
               this.GlobalConfigService.spinner = true;
               //
@@ -428,12 +436,18 @@ userModifyAccount(forma: NgForm, type){
               //
                           this.GlobalConfigService.spinner = false;
 
-                          // ////////// ////////console.log(resp);
-                          // return;
-                          // forma.reset();
-                           // this._usersService.guardarStorage( this._usersService.usuario._id , this._usersService.token, resp['User']);
+                          this._notifyService.Toast.fire({
+                            title: '¡Usuario modificado!',
+                            // text: '¡Gracias por unirte a Mercado Pyme!',
+                            icon: 'success'
+                          });
+
                       }, ERR => {
-                        ////////// ////////console.log(ERR);
+                        ////////// ////////////console.log(ERR);
+                        this._notifyService.Toast.fire({
+                          title: 'Algo ha salido mal, intente más tarde',
+                          icon: 'error'
+                        });
                         this.GlobalConfigService.spinner = false;
                       });
 
@@ -522,7 +536,7 @@ userModifyAccount(forma: NgForm, type){
       );
 
 
-       ////////// ////////console.log(usuario,'conformado');
+       ////////// ////////////console.log(usuario,'conformado');
 
           this.GlobalConfigService.spinner = true;
 //
@@ -531,12 +545,19 @@ userModifyAccount(forma: NgForm, type){
 //
             this.GlobalConfigService.spinner = false;
 
-            // ////////// ////////console.log(resp);
-            // return;
-            // forma.reset();
-             // this._usersService.guardarStorage( this._usersService.usuario._id , this._usersService.token, resp['User']);
+            this._notifyService.Toast.fire({
+              title: '¡Usuario modificado!',
+              // text: '¡Gracias por unirte a Mercado Pyme!',
+              icon: 'success'
+            });
+
+
         }, ERR => {
-          ////////// ////////console.log(ERR);
+          ////////// ////////////console.log(ERR);
+          this._notifyService.Toast.fire({
+            title: 'Algo ha salido mal, intente más tarde',
+            icon: 'error'
+          });
           this.GlobalConfigService.spinner = false;
         });
 
@@ -545,7 +566,7 @@ userModifyAccount(forma: NgForm, type){
 }
     if(this._usersService.usuario.role == 'EMPRESA_ROLE'){
 
-      // ////// ////////console.log('ngPositionCompany', this.ngPositionCompany);
+      // ////// ////////////console.log('ngPositionCompany', this.ngPositionCompany);
 
 
      let  economicActivity:any[] = [];
@@ -625,8 +646,6 @@ userModifyAccount(forma: NgForm, type){
       );
 
 
-       //////// ////////console.log(usuario,'conformado');
-
           this.GlobalConfigService.spinner = true;
 //
           this._usersService.updateUserPUT( null, usuario ,'company' )
@@ -634,12 +653,19 @@ userModifyAccount(forma: NgForm, type){
 //
             this.GlobalConfigService.spinner = false;
 
-            // ////////// ////////console.log(resp);
-            // return;
-            // forma.reset();
-             // this._usersService.guardarStorage( this._usersService.usuario._id , this._usersService.token, resp['User']);
+            this._notifyService.Toast.fire({
+              title: '¡Usuario modificado!',
+              // text: '¡Gracias por unirte a Mercado Pyme!',
+              icon: 'success'
+            });
+
+
         }, ERR => {
-          ////// ////////console.log(ERR);
+          ////// ////////////console.log(ERR);
+          this._notifyService.Toast.fire({
+            title: 'Algo ha salido mal, intente más tarde',
+            icon: 'error'
+          });
           this.GlobalConfigService.spinner = false;
         });
 
@@ -651,30 +677,66 @@ userModifyAccount(forma: NgForm, type){
 }
 
 
-newEmailRequest(p: NgForm){
+newEmailRequest(forma: NgForm){
+
+  if ( forma.value.Email == '' || forma.value.Email == null ){
+    this._notifyService.Toast.fire({
+      title:'Debes escribir un nuevo email',
+      icon: 'error'
+    });
+    return;
+  }
 
   this._notifyService.swalNormal.fire({
-    title: "Correo eléctronico cambiado",
-    text: "Debes confirmarlo accediendo a la bandeja bandeja de entrada de tu nuevo correo",
+    title: "Cambio de email",
+    text: "Debes confirmarlo accediendo a la bandeja bandeja de entrada de tu nuevo email",
     icon: "info",
-
     confirmButtonText: 'Aceptar'
 
   }).then((result) => {
     // this.router.navigate(['/us']);
 
-    this._notifyService.Toast.fire({
-      title: 'Confirmación enviada',
-      icon: 'success'
-    });
+    this.newEmail(forma.value.Email);
 
+  });
+
+}
+
+newEmail(email){
+
+  this.GlobalConfigService.spinner = true;
+  let token = this._usersService.token;
+  let id = this._usersService.usuario._id;
+
+
+
+  let l = {
+    type: 'nAccountChangeEmailRequest',
+    newEmail: email,
+    idUser: id
+  }
+
+  this._notifyService.sendNotifyEmailPOST(l, token).subscribe((resp: any) => {
+    //console.log('email enviado', resp);
+    // return;
+    this._notifyService.Toast.fire({
+      title: resp.message,
+      icon: 'success'
+    })
+
+    this.GlobalConfigService.spinner = false;
+  }, err => {
+    //console.log('email error', err);
+    this._notifyService.Toast.fire({
+      title: err.error.message || 'La solicitud no pudo ser enviada, intente más tarde',
+      icon: 'error'
+    })
+    this.GlobalConfigService.spinner = false;
   });
 
 
 
-
 }
-
 
 newPassRequest(){
 
@@ -682,16 +744,17 @@ newPassRequest(){
           title: "¿Necesitas cambiar de contraseña?",
           text: "Te enviaremos los pasos a través de correo eléctronico ",
           icon: "info",
-
           confirmButtonText: 'Enviar'
+
 
         }).then((result) => {
           // this.router.navigate(['/us']);
 
-          this._notifyService.Toast.fire({
-            title: 'Correo enviado',
-            icon: 'success'
-          });
+          this.recoveryPassword();
+          // this._notifyService.Toast.fire({
+          //   title: 'Correo enviado',
+          //   icon: 'success'
+          // });
 
         });
 
@@ -743,7 +806,7 @@ userModifyPymeData(forma: NgForm){
 
     }
 
-    // ////// ////////console.log(cphones);
+    // ////// ////////////console.log(cphones);
 // return;
 
     let usuario = new _UserModelCompany(
@@ -770,7 +833,6 @@ userModifyPymeData(forma: NgForm){
      );
 
 
-      //  ////// ////////console.log(usuario,'conformado');
 
        this.GlobalConfigService.spinner = true;
        //
@@ -779,12 +841,17 @@ userModifyPymeData(forma: NgForm){
        //
                    this.GlobalConfigService.spinner = false;
 
-                   // ////////// ////////console.log(resp);
-                   // return;
-                   // forma.reset();
-                    // this._usersService.guardarStorage( this._usersService.usuario._id , this._usersService.token, resp['User']);
+                       this._notifyService.Toast.fire({
+                        title: '¡Usuario modificado!',
+                        // text: '¡Gracias por unirte a Mercado Pyme!',
+                        icon: 'success'
+                      });
                }, ERR => {
-                 ////// ////////console.log(ERR);
+
+                 this._notifyService.Toast.fire({
+                  title: 'Algo ha salido mal, intente más tarde',
+                  icon: 'error'
+                });
                  this.GlobalConfigService.spinner = false;
                });
 
@@ -806,6 +873,44 @@ addPhone(type = null){
   }
 }
 
+
+
+
+recoveryPassword(){
+
+    this.GlobalConfigService.spinner = true;
+
+  let id = this._usersService.usuario._id;
+
+  let n = new _NotifyModel(
+    "nAccountPasswordChangeRequest",
+    null,
+    id
+  );
+
+  //console.log('la maldicion que se manda', n);
+  this._notifyService.sendNotifyEmailPOST(n).subscribe((resp: any) => {
+    //console.log('email enviado', resp);
+
+    this._notifyService.Toast.fire({
+      title: resp.message,
+      icon: 'success'
+    })
+
+    this.GlobalConfigService.spinner = false;
+  }, err => {
+    // //console.log('email error');
+
+    this._notifyService.Toast.fire({
+      title: 'La solicitud no pudo ser enviada, intente más tarde',
+      icon: 'error'
+    })
+
+
+    this.GlobalConfigService.spinner = false;
+  });
+
+}
 
 
 

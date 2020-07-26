@@ -51,19 +51,19 @@ export class PostsListsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    // //// ////////console.log('onchanges');
-    // //// ////////console.log('entra en vista');
+    // //// ////////////console.log('onchanges');
+    // //// ////////////console.log('entra en vista');
 
     if (this.type == "sugerencia" && this.not != null && this.idUser != null && this.idUser != "") {
       //
-      //// ////////console.log('sugerencias');
+      //// ////////////console.log('sugerencias');
       this.getSuggestPublic(this.byCategory, this.not);
     } else if (
       this.type == "othersUser" &&
       this.idUser != null &&
       this.idUser != ""
     ) {
-      // //// ////////console.log('aaa', this._searchService.registros);
+      // //// ////////////console.log('aaa', this._searchService.registros);
 
       this.getUserPublication(this.idUser);
     }
@@ -77,7 +77,7 @@ export class PostsListsComponent implements OnInit, OnChanges {
 
 
   ngOnInit(): void {
-    // ////////console.log(this.listado);
+    // ////////////console.log(this.listado);
 
 
   }
@@ -92,18 +92,18 @@ export class PostsListsComponent implements OnInit, OnChanges {
     };
     // category: this.byCategory
 
-    ////// ////////console.log('lo que se manda', l);
+    ////// ////////////console.log('lo que se manda', l);
 
     this.GlobalConfigService.spinner = true;
     this._postService.getSuggestPublicPOST(category, l).subscribe(
       (resp) => {
-        // ////// ////////console.log(resp);
+        // ////// ////////////console.log(resp);
 
         if (resp.status == 200 && resp.ok == true) {
           // this.statsGeneral = resp.data;
 
 this._searchService.registros = resp.data;
-          ////// ////////console.log(resp.data, 'los registros nuevos');
+          ////// ////////////console.log(resp.data, 'los registros nuevos');
           // this.setUserInformation();
           // if(this.usuarioInfo.length > 0){
           // }
@@ -140,18 +140,18 @@ this._searchService.registros = resp.data;
       // not: not,
     };
 
-    ////// ////////console.log('lo que se manda', l);
+    ////// ////////////console.log('lo que se manda', l);
 
     this.GlobalConfigService.spinner = true;
     this._postService.getUserPublicationGET(idUser, l).subscribe(
       (resp) => {
-        // ////// ////////console.log(resp);
+        // ////// ////////////console.log(resp);
 
         if (resp.status == 200 && resp.ok == true) {
           // this.statsGeneral = resp.data;
 
 this._searchService.registros = resp.data;
-          ////// ////////console.log(resp.data, 'los registros nuevos');
+          ////// ////////////console.log(resp.data, 'los registros nuevos');
           // this.setUserInformation();
           // if(this.usuarioInfo.length > 0){
           // }
@@ -182,7 +182,7 @@ this._searchService.registros = resp.data;
 
 
   sendReaction(registro, type: string) {
-    // ////// ////////console.log(registro, 'registor');
+    // ////// ////////////console.log(registro, 'registor');
 
     if (
       this._userService.estaLogueado() == true &&
@@ -229,7 +229,7 @@ this._searchService.registros = resp.data;
   setActualReactions(idPublic) {
     this.GlobalConfigService.spinner = false;
     this._postService.setActualReactionsGET(idPublic).subscribe((resp) => {
-      // ////// ////////console.log(resp);
+      // ////// ////////////console.log(resp);
 
       if (resp.status == 200 && resp.ok == true) {
         resp.reactions.like = 0;

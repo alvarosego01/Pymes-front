@@ -55,11 +55,13 @@ import {IMaskModule} from 'angular-imask';
 import { PlanesComponent } from './components/planes/planes.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { LoadingComponent } from './components/loading/loading.component';
-import { PostEditionComponent } from './pages/dashboard/dashboard.pages.index';
+import { PostEditionComponent, NotifyPreviewComponent } from './pages/dashboard/dashboard.pages.index';
 
 
 // import { SortablejsModule } from 'angular-sortablejs';
 import { SortablejsModule } from 'ngx-sortablejs';
+import { VerifyControlComponent } from './pages/verify-control/verify-control.component';
+import { RecoveryPasswordComponent } from './components/recovery-password/recovery-password.component';
 
 
 @NgModule({
@@ -68,6 +70,7 @@ import { SortablejsModule } from 'ngx-sortablejs';
     AppComponent,
     HomeComponent,
     SearchComponent,
+    NotifyPreviewComponent,
     PostsListsComponent,
     InfoPostComponent,
     CategoryListsComponent,
@@ -87,7 +90,9 @@ import { SortablejsModule } from 'ngx-sortablejs';
     SocialFloatComponent,
     PlanesComponent,
     PaginatorComponent,
-    LoadingComponent
+    LoadingComponent,
+    VerifyControlComponent,
+    RecoveryPasswordComponent
 
 
   ],

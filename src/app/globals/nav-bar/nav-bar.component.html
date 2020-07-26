@@ -60,6 +60,7 @@
           Inicia sesión
         </a>
       </li>
+
       <li class="nav-item registerButton">
         <a class="navButton" [routerLink]="['/register']" routerLinkActive="active">
           Crea tu cuenta
@@ -73,23 +74,29 @@
     <ul class="menuRight navbar-nav ml-auto" *ngIf="this._usersService.token != null">
       <!-- Messages Dropdown Menu -->
 
-      <li class="nav-item">
-        <a class="navButton" [routerLink]="['/dashboard']" routerLinkActive="active">
-          <div class="ico">
-            <img src="../../../assets/dist/img/logoUser.svg" alt="">
-          </div>
-            Panel de usuario
-        </a>
-      </li>
 
 
     </ul>
 
+    <app-notify-preview class="menuRight navbar-nav ml-auto"
+    *ngIf="this._usersService.token != null"
+    >
+
+    </app-notify-preview>
+
 
     <app-login class="loginPc" *ngIf="this._usersService.loginVisible == true"
     (clickOutside)="ocultarLogin($event)"
-    [exclude]="'#navDashboard, #navBar'"
+    [exclude]="'#navDashboard,#navBar,#LoginComponent,a.hiperButton'"
+    [emitOnBlur]="true"
+    [delayClickOutsideInit]="true"
     ></app-login>
+    <app-recovery-password class="loginPc" *ngIf="this._usersService.recoveryPassword == true"
+    (clickOutside)="ocultarRecovery($event)"
+    [exclude]="'#navDashboard,#navBar,#LoginComponent,a.hiperButton'"
+    [emitOnBlur]="true"
+    [delayClickOutsideInit]="true"
+    ></app-recovery-password>
 
 
   </nav>

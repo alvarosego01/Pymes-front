@@ -25,6 +25,8 @@ import { ADMIN_MODULE } from './admin/admin.module';
 
 
 import {IMaskModule} from 'angular-imask';
+import { NotifyPreviewComponent } from './notify-control/notify-preview.component';
+import { NotifyViewComponent } from './notify-control/notify-view.component';
 // import { PostEditionComponent } from './post-control/post-edition/post-edition.component';
 
 
@@ -37,6 +39,8 @@ import {IMaskModule} from 'angular-imask';
     HomeComponent,
     PostManagerComponent,
     AdminComponent,
+    NotifyViewComponent,
+    // NotifyPreviewComponent,
 
 
   ],

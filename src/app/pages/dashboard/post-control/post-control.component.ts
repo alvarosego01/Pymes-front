@@ -100,9 +100,9 @@ filesError: boolean = false;
   ) {
     // this._usersService.setCaptcha();
     // this.datosUsuario = this._usersService.usuario;
-    // ////////// ////////console.log(this.datosUsuario);
+    // ////////// ////////////console.log(this.datosUsuario);
 
-    // ////////// ////////console.log(this._postService.categoryPrincipal);
+    // ////////// ////////////console.log(this._postService.categoryPrincipal);
     this.getCategory();
     this.initCitys();
   }
@@ -119,13 +119,22 @@ filesError: boolean = false;
     this.GlobalConfigService.spinner = true;
     this.activateMap = false;
     x.then((r) => {
-      //////// ////////console.log(r);
+      //////// ////////////console.log(r);
       this.coordsMap = r;
       this.GlobalConfigService.spinner = false;
       if (Object.keys(this.coordsMap).length > 0) {
         this.activateMap = true;
-        // //////// ////////console.log('activado mapa', );
+        // //////// ////////////console.log('activado mapa', );
       }
+
+
+      this._notifyService.Toast.fire({
+        title: '¡Localización almacenada!',
+        // text:'El navegador no soporta la geolocalización',
+        icon: 'success'
+        });
+
+
     }, err => {
       this.GlobalConfigService.spinner = false;
       this._notifyService.Toast.fire({
@@ -241,7 +250,7 @@ filesError: boolean = false;
 
   activateEconomicActivity() {
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    ////////// ////////console.log(this.estadosActividad);
+    ////////// ////////////console.log(this.estadosActividad);
   }
 
   setCiudades(i) {
@@ -256,7 +265,7 @@ filesError: boolean = false;
 
     let k = JSON.parse(i);
 
-    ////console.log('la mierda esta', k );
+    ////////console.log('la mierda esta', k );
 
     let p = k._category;
     let c = k._child;
@@ -295,19 +304,19 @@ filesError: boolean = false;
       this.publications = resp.data;
 
       this.GlobalConfigService.spinner = false;
-      // //////////// ////////console.log(this.listasPerros);
+      // //////////// ////////////console.log(this.listasPerros);
     });
   }
 
   setSubCategoryOther(e) {
-    //////// ////////console.log(e);
+    //////// ////////////console.log(e);
 
     this.ngNewCategory = e == "Otra" ? e : null;
   }
 
   createPublication(forma: NgForm) {
 
-    ////console.log(this._formsResource.checkUrl(forma.value.redInstagram));
+    ////////console.log(this._formsResource.checkUrl(forma.value.redInstagram));
 
     if( (forma.value.redWeb) &&
     forma.value.redWeb != '' &&
@@ -396,8 +405,8 @@ filesError: boolean = false;
     };
 
 
-    ////console.log('forma.value.Category1', forma.value.Category1);
-////console.log('forma.value.subCategory1Form', forma.value.subCategory1Form);
+    ////////console.log('forma.value.Category1', forma.value.Category1);
+////////console.log('forma.value.subCategory1Form', forma.value.subCategory1Form);
 
     var catGroup = [
       {
@@ -415,17 +424,17 @@ filesError: boolean = false;
         _child: ( (forma.value.subCategory3Form) && JSON.parse(forma.value.subCategory3Form)._id != '')? JSON.parse(forma.value.subCategory3Form)._id : null,
         child: ( (forma.value.subCategory3Form) && JSON.parse(forma.value.subCategory3Form).name != '')? JSON.parse(forma.value.subCategory3Form).name : null
       }
-      // //////console.log(cat);
+      // //////////console.log(cat);
     ];
 
-    ////console.log('group cat', catGroup);
+    ////////console.log('group cat', catGroup);
 
     this.categoryError = true;
 
     catGroup.forEach((el, idx) => {
 
 
-      ////console.log('el elemento', el);
+      ////////console.log('el elemento', el);
 
       if(el._principal != null){
         if(el._child != null){
@@ -545,10 +554,10 @@ filesError: boolean = false;
 
   async selectFiles(event) {
     //
-    ////// ////////console.log(this.nroFotos);
-    ////////// ////////console.log(event.target.files);
+    ////// ////////////console.log(this.nroFotos);
+    ////////// ////////////console.log(event.target.files);
     if(event.target.files){
-      //////// ////////console.log('total', event.target.files);
+      //////// ////////////console.log('total', event.target.files);
       for (let index = 0; index < event.target.files.length; index++) {
 
         var reader = new FileReader();
@@ -557,7 +566,7 @@ filesError: boolean = false;
 
         reader.readAsDataURL(event.target.files[index]);
         var fileup = event.target.files[index];
-        //////// ////////console.log('imagen nro ', index, fileup);
+        //////// ////////////console.log('imagen nro ', index, fileup);
 
 
        reader.onload =  ((event:any) => {
@@ -582,13 +591,13 @@ filesError: boolean = false;
 
           // return;
           var x = new Promise((resolve,reject) => {
-            // //////// ////////console.log('entra en promesa', index);
+            // //////// ////////////console.log('entra en promesa', index);
             image.onload = function() {
-              // //////// ////////console.log('datos de imagn',image);
+              // //////// ////////////console.log('datos de imagn',image);
                 var k = [image.width, image.height];
                 resolve(k);
-                //////// ////////console.log('datos promesa', image);
-                //////// ////////console.log('Sale de promesa, resuelve', index);
+                //////// ////////////console.log('datos promesa', image);
+                //////// ////////////console.log('Sale de promesa, resuelve', index);
             };
           })
 
@@ -614,8 +623,8 @@ filesError: boolean = false;
             if(r[0] >= 200 && r[1] >= 200 ){
               this.urlFiles.push(event.target.result);
               this.imagenesSubir.push(fileup);
-              // //////// ////////console.log(fileup.size);
-              // //////// ////////console.log(this.urlFiles, 'urlfiles');
+              // //////// ////////////console.log(fileup.size);
+              // //////// ////////////console.log(this.urlFiles, 'urlfiles');
             }else{
               this._notifyService.Toast.fire({
                 title:'Dimensiones no permitidas',
@@ -630,7 +639,7 @@ filesError: boolean = false;
           }
 
         if(this.ngTypeAdjuntos == 'Catálogo PDF'){
-          ////////// ////////console.log('archivo', reader);
+          ////////// ////////////console.log('archivo', reader);
            // return;
 
          if ( event.target.result.indexOf('PDF') < 0 && this.ngTypeAdjuntos == 'Catálogo PDF') {
@@ -664,8 +673,8 @@ filesError: boolean = false;
               }
               this.urlFiles.push(event.target.result);
               this.imagenesSubir.push(fileup);
-              ////////// ////////console.log(this.urlFiles, 'los datos');
-              ////////// ////////console.log(event.target.result, 'los datos');
+              ////////// ////////////console.log(this.urlFiles, 'los datos');
+              ////////// ////////////console.log(event.target.result, 'los datos');
 
           resolve();
         }
@@ -678,11 +687,11 @@ filesError: boolean = false;
 
       });
 
-       // //////// ////////console.log(this.urlFiles, 'urlfiles');
+       // //////// ////////////console.log(this.urlFiles, 'urlfiles');
 
 
       }
-      //////// ////////console.log(this.imagenesSubir, 'imgsubir finales');
+      //////// ////////////console.log(this.imagenesSubir, 'imgsubir finales');
     }
   }
 
@@ -698,7 +707,7 @@ filesError: boolean = false;
 
 
         this._categoryService.allCategoryList = resp.data;
-        // //////console.log('las categorias', this.categoryList)
+        // //////////console.log('las categorias', this.categoryList)
 
     }, (err) => {
 

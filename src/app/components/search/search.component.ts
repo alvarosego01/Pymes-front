@@ -34,8 +34,7 @@ async searchByText(forma: NgForm){
 
         return;
     }
-    //////console.log('los datos del buscador', forma.value.Busqueda);
-    // this.router.navigate(["/home"]);
+
 
     this._searchService.paginator = [];
 
@@ -49,10 +48,6 @@ async searchByText(forma: NgForm){
 
 
   var parms = params;
-  // await this._searchService.getParameters().then(resp => {
-    // ////////console.log('la respuesta de parametros', resp);
-    // parms = resp;
-  // });
 
   var ppp = {
     params: parms,
@@ -60,30 +55,30 @@ async searchByText(forma: NgForm){
     title: forma.value.Busqueda
   }
 
-  // ////////console.log('params enviados', ppp);
+
 
   var args = this._searchService.changePaginator(ppp);
 
 
-  ////////console.log('args por texto', args);
+
 
 
 
     this.GlobalConfigService.spinner = true;
     this._searchService.searchByTextPOST(args).subscribe((resp) => {
-      // ////// ////////console.log(resp);
+      // ////// ////////////console.log(resp);
       if (resp.status == 200 && resp.ok == true) {
 
         if ((resp.data) &&  resp.data.length > 0 ) {
 
-          ////////console.log('la respuesta de la busqueda', resp);
+          ////////////console.log('la respuesta de la busqueda', resp);
 
           this._searchService.homeTitleResults = 'Resultados';
           this._searchService.registros = resp.data;
           this._searchService.paginator = resp.paginator || null;
           this._searchService.setActualReactions();
 
-          ////// ////////console.log(this._searchService.registros);
+          ////// ////////////console.log(this._searchService.registros);
         }else{
           this._searchService.registros = [];
         }

@@ -10,6 +10,7 @@ import { PostManagerComponent } from './admin.components.index';
 import { DashboardComponent } from '../dashboard.component';
 import { InfoPostComponent } from 'src/app/components/components.index';
 import { ControlCategoryComponent } from './control-category/control-category.component';
+import { UserControlComponent } from './user-control/user-control.component';
 
 
 
@@ -25,6 +26,10 @@ const adminRoutes: Routes = [
         canActivateChild: [AdminVerifyGuard],
         children: [
 
+            {
+                path: 'usersManager',
+                component: UserControlComponent,
+            },
             {
                 path: 'postManager',
                 component: PostManagerComponent,

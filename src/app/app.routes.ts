@@ -1,7 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 
 
-import { HomeComponent, RegisterComponent, UsComponent, ProfileViewComponent } from './pages/pages.index';
+import { HomeComponent, RegisterComponent, UsComponent, ProfileViewComponent, VerifyControlComponent } from './pages/pages.index';
 import { LoginVerifyGuard } from './services/guards/login-verify.guard';
 import { NoLoginVerifyGuard } from './services/guards/guards.index';
 import { InfoPostComponent } from './components/components.index';
@@ -17,6 +17,7 @@ const appRoutes: Routes = [
         // canActivate: [ VerificaTokenGuard ],
         // data: { titulo: 'Dashboard' }
     // },
+    { path: 'verify/:type', component: VerifyControlComponent },
     { path: 'us', component: UsComponent },
     { path: 'publication/infoPost/:id', component: InfoPostComponent },
     { path: 'user/:id', component: ProfileViewComponent },

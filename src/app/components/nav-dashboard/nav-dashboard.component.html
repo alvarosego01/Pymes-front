@@ -86,6 +86,12 @@ class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{
             </a>
           </li>
            <li class="nav-item">
+            <a  class="nav-link" [routerLink]="['/admin/usersManager']" routerLinkActive="active">
+              <i class="fas fa-user-tie nav-icon"></i>
+              <p>Gestión de usuarios</p>
+            </a>
+          </li>
+           <li class="nav-item">
             <a  class="nav-link" [routerLink]="['/admin/postManager']" routerLinkActive="active">
               <i class="fas fa-user-tie nav-icon"></i>
               <p>Gestión de publicaciones</p>
@@ -109,6 +115,13 @@ class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{
             <a  #navlink class="nav-link" [routerLink]="['/dashboard/postControl']" routerLinkActive="active">
               <i class="fas nav-icon fa-tags"></i>
               <p>Control de publicaciones</p>
+            </a>
+          </li>
+
+          <li  class="nav-item">
+            <a  #navlink class="nav-link" [routerLink]="['/dashboard/notify']" routerLinkActive="active">
+              <i class="fas nav-icon fa-bell"></i>
+              <p>Notificaciones</p>
             </a>
           </li>
 

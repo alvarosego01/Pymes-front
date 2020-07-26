@@ -92,11 +92,9 @@ export class PostManagerComponent implements OnInit {
         }
 
         })
-
-
         if (formValues) {
 
-          // ////////console.log(formValues);
+          // ////////////console.log(formValues);
 
           var t = {
             reason: formValues[0].value,
@@ -190,7 +188,7 @@ export class PostManagerComponent implements OnInit {
       .then((borrar) => {
         if (borrar.value) {
           // if (borrar) {
-          // // ////////console.log('borrado');
+          // // ////////////console.log('borrado');
           // return;
           this.GlobalConfigService.spinner = true;
           this._postService
@@ -241,8 +239,8 @@ export class PostManagerComponent implements OnInit {
         });
       }
 
-      // ////////console.log(this.allPublications);
-      ////// ////////console.log(this.allPublications);
+      // ////////////console.log(this.allPublications);
+      ////// ////////////console.log(this.allPublications);
     }, (err) => {
 
       this.GlobalConfigService.spinner = false;

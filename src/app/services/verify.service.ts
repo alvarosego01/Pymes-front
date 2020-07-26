@@ -62,4 +62,27 @@ export class VerifyService {
 
   }
 
+
+
+  decodeURLPOST(token){
+
+    let url = `${_SERVICIOS}/verify/decodeUrl`;
+
+    let l = {
+      decodeURL: token
+    }
+
+    return this.http.post(url, l).pipe(
+      map((resp: any) => {
+
+        return resp;
+      }),
+      catchError((err) => {
+
+        return throwError(err);
+      })
+    );
+
+  }
+
 }

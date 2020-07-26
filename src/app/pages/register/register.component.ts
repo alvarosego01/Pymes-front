@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
 
       this.welcomeMessage();
 
-    // //////// ////////console.log(this._globaConfig.departamentos);
+    // //////// ////////////console.log(this._globaConfig.departamentos);
   }
 
   ngOnInit(): void {
@@ -121,16 +121,16 @@ export class RegisterComponent implements OnInit {
 wrapper.innerHTML= this.mapUrl;
 var div= wrapper.firstChild;
 this.mapElement = div;
-//////// ////////console.log(div);
+//////// ////////////console.log(div);
   }
 
   activateEconomicActivity(){
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    //////// ////////console.log(this.estadosActividad);
+    //////// ////////////console.log(this.estadosActividad);
   }
 
   setCiudades(i){
-    // //////// ////////console.log('Got the selectedVendor as : ', i);
+    // //////// ////////////console.log('Got the selectedVendor as : ', i);
     // return;
     let k = JSON.parse(i);
     k = k.id;
@@ -150,13 +150,20 @@ this.mapElement = div;
   //  this._usuarioService.promiseTimeout(5000, x);
     x.then(r => {
 
-      //////// ////////console.log(r);
+      //////// ////////////console.log(r);
       this.coordsMap = r;
       this._globaConfig.spinner = false;
       if(Object.keys(this.coordsMap).length > 0 ){
         this.activateMap = true;
-      // //////// ////////console.log('activado mapa', );
+      // //////// ////////////console.log('activado mapa', );
       }
+
+      this._notifyService.Toast.fire({
+        title: '¡Localización almacenada!',
+        // text:'El navegador no soporta la geolocalización',
+        icon: 'success'
+        });
+
     }, err => {
       this._globaConfig.spinner = false;
       this._notifyService.Toast.fire({
@@ -172,9 +179,6 @@ this.mapElement = div;
 
 
   userRegister(forma: NgForm, type) {
-
-
-
 
     if (forma.invalid ){
       this._notifyService.Toast.fire({
@@ -206,11 +210,11 @@ this.mapElement = div;
     }
 
     if(this.altMapUrl != null && this.altMapUrl != ''){
-      // //// ////////console.log('lo pone');
+      // //// ////////////console.log('lo pone');
       this.coordsMap.mapUrl = this.altMapUrl;
     }
 
-    // //// ////////console.log(this.coordsMap);
+    // //// ////////////console.log(this.coordsMap);
     // return;
 
     if(type == 'natural'){
@@ -295,7 +299,7 @@ this.mapElement = div;
       // forma.value.estadosActividad,
       );
         //  this.spinner = true;
-       ////console.log(usuario);
+       ////////console.log(usuario);
       //  return;
 
 
@@ -303,14 +307,24 @@ this.mapElement = div;
 //
           this._usuarioService.registroUsuarioPOST( usuario, null ,'natural' )
           .subscribe( resp => {
+
+            //console.log('la maldita respuesta', resp);
 //
             this._globaConfig.spinner = false;
 
-            // let n = new _NotifyModel(
-            //   "nAccountCreatedNoVerify",
-            //   null,
-            //   resp.data._id
-            // );
+            let n = new _NotifyModel(
+              "nAccountCreatedNoVerify",
+              null,
+              resp.data.user._id
+            );
+            this._notifyService.sendNotifyEmailPOST(n).subscribe((resp) => {
+              //console.log('email enviado', resp);
+            }, err => {
+              //console.log('email error');
+
+            });
+
+
 
             this._notifyService.swalNormal.fire({
               title: "¡Cuenta creada con exito!",
@@ -320,13 +334,13 @@ this.mapElement = div;
               confirmButtonText: 'Aceptar'
 
             }).then( (result) => {
-              this._usuarioService.guardarStorage(resp.data.user.id_user, resp.data.t, resp.data.user);
+              this._usuarioService.guardarStorage(resp.data.user._id, resp.data.t, resp.data.user);
               this.router.navigate(['/dashboard/postControl']);
             });
 
-            forma.reset();
+            // forma.reset();
         }, ERR => {
-          ////console.log(ERR);
+          ////////console.log(ERR);
           this._globaConfig.spinner = false;
         });
 
@@ -447,7 +461,7 @@ if(type == 'company'){
 
   );
 
-  //////// ////////console.log(usuario, 'envio company');
+  //////// ////////////console.log(usuario, 'envio company');
       this._globaConfig.spinner = true;
 //
           this._usuarioService.registroUsuarioPOST( null, usuario ,'company' )
@@ -469,7 +483,13 @@ if(type == 'company'){
             forma.reset();
           },
           ERR => {
-            //////// ////////console.log(ERR);
+
+
+            this._notifyService.Toast.fire({
+              title: 'Algo ha salido mal, intente más tarde',
+              icon: 'error'
+            });
+
             this._globaConfig.spinner = false;
           });
 

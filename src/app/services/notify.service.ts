@@ -13,6 +13,7 @@ import { throwError } from "rxjs/internal/observable/throwError";
 import { _NotifyModel } from "../models/models.index";
 
 import swal from "sweetalert2";
+import { UsersService } from './users.service';
 
 @Injectable({
   providedIn: "root",
@@ -37,23 +38,31 @@ export class NotifyService {
     },
   });
 
-  constructor(public http: HttpClient) {}
 
-  sendNotifyEmailPOST(data: _NotifyModel) {
-    return;
+  notificaciones: any = [];
+
+
+  constructor(
+    public http: HttpClient,
+    public _userService: UsersService
+    ) {}
+
+  sendNotifyEmailPOST(data: _NotifyModel, token: string = null) {
+    // return;
     let url = _SERVICIOS + "/notify";
-    //////////// ////////console.log(data, "llega data notif");
+    url = (token != null)? `${url}?t=${token}`: url;
+
+
+    //console.log('correo que se envia', data);
+
     return this.http.post(url, data).pipe(
       map((resp: any) => {
-        //////////// ////////console.log("respuesta notificacion", resp);
-        // alert('Usuario registrado');
 
-        return true;
+
+        return resp;
       }),
       catchError((err) => {
-        //////////// ////////console.log("respuesta notificacion", err);
-        // alert('Error en al registrar');
-        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+
         return throwError(err);
       })
     );
@@ -64,5 +73,66 @@ export class NotifyService {
   welcomeMessage(title, message){
 
   }
+
+
+
+
+  getNotifyByUserGET(id){
+
+
+    let url = `${_SERVICIOS}/notify/${id}?t=${this._userService.token}`;
+
+    //console.log('envia notif', url);
+    return this.http.get(url).pipe(
+        map((resp: any) => {
+
+          //console.log(this.notificaciones);
+
+        return resp;
+    }),
+    catchError((err) => {
+        return throwError(err);
+    })
+    );
+
+  }
+
+  getAllNotifyByUserGET(id){
+
+
+    let url = `${_SERVICIOS}/notify/?t=${this._userService.token}`;
+
+    //console.log('envia notif', url);
+    return this.http.get(url).pipe(
+        map((resp: any) => {
+
+          //console.log(this.notificaciones);
+
+        return resp;
+    }),
+    catchError((err) => {
+        return throwError(err);
+    })
+    );
+
+  }
+
+  deleteNotificactionDELETE(id){
+
+    let url = `${_SERVICIOS}/notify/${id}?t=${this._userService.token}`;
+
+    return this.http.delete(url).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((err) => {
+        return throwError(err);
+      })
+      );
+  }
+
+
+
+
 
 }
