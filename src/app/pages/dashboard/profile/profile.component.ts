@@ -1,11 +1,12 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
-import { NotifyService, GlobalConfigService, PostsService } from 'src/app/services/service.index';
+import { NotifyService,   PostsService } from 'src/app/services/service.index';
 import { NgForm } from '@angular/forms';
 
 import { _UserModelNatural, _UserModelCompany, _NotifyModel
 
    } from 'src/app/models/models.index';
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 
 
 @Component({

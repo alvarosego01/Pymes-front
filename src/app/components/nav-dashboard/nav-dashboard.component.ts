@@ -9,7 +9,8 @@ import {
   AfterViewInit,
 } from "@angular/core";
 import { UsersService } from "src/app/services/users.service";
-import { GlobalConfigService, NotifyService } from "src/app/services/service.index";
+import {   NotifyService } from "src/app/services/service.index";
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 
 @Component({
   selector: "app-nav-dashboard",

@@ -3,7 +3,8 @@ import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { SocialFloatComponent } from 'src/app/globals/globals.index';
-import { GlobalConfigService, NotifyService, UsersService } from 'src/app/services/service.index';
+import {   NotifyService, UsersService } from 'src/app/services/service.index';
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 
 
 // import { Module } from '';

@@ -1,9 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 
 
-import { HomeComponent, RegisterComponent, UsComponent, ProfileViewComponent, VerifyControlComponent } from './pages/pages.index';
-import { LoginVerifyGuard } from './services/guards/login-verify.guard';
-import { NoLoginVerifyGuard } from './services/guards/guards.index';
+import { HomeComponent, RegisterComponent, UsComponent, ProfileViewComponent, VerifyControlComponent, CheckoutResponseComponent } from './pages/pages.index';
 import { InfoPostComponent } from './components/components.index';
 
 // LoginVerifyGuard
@@ -19,6 +17,8 @@ const appRoutes: Routes = [
     // },
     { path: 'verify/:type', component: VerifyControlComponent },
     { path: 'us', component: UsComponent },
+    { path: 'checkoutResponse/:id', component: CheckoutResponseComponent },
+    { path: 'checkoutResponse/:id/:validate', component: CheckoutResponseComponent },
     { path: 'publication/infoPost/:id', component: InfoPostComponent },
     { path: 'user/:id', component: ProfileViewComponent },
     { path: 'register',

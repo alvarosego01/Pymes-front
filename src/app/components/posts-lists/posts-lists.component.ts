@@ -14,13 +14,14 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import {
   PostsService,
-  GlobalConfigService,
+
   NotifyService,
   UsersService,
   SearchService,
 } from "src/app/services/service.index";
 
 import { LocationStrategy } from "@angular/common";
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 // import { EventEmitter } from 'events';
 
 @Component({
@@ -266,6 +267,8 @@ this._searchService.registros = resp.data;
     // this.router.navigate(["publication/infoPost", id]).then(result => {
     //   if(result){
         window.open(`/#/publication/infoPost/${id}`, '_blank');
+
+
       // }
     // });
   }

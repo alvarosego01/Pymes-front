@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PostsService } from 'src/app/services/posts.service';
-import { GlobalConfigService, SearchService, NotifyService } from 'src/app/services/service.index';
+import {   SearchService, NotifyService } from 'src/app/services/service.index';
 import { NgForm } from '@angular/forms';
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 
 @Component({
   selector: 'app-category-lists',

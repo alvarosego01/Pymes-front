@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { GlobalConfigService, SearchService } from 'src/app/services/service.index';
+import {   SearchService } from 'src/app/services/service.index';
 import { Router } from '@angular/router';
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 
 @Component({
   selector: 'app-search',

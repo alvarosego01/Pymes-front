@@ -38,6 +38,10 @@ export class ImagenPipe implements PipeTransform {
         url += `/Post/${img}`;
       break;
 
+      case 'Boost':
+        url += `/Boost/${img}`;
+      break;
+
       // case 'hospital':
       //    url += '/hospitales/' + img;
       // break;

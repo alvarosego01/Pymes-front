@@ -2,7 +2,39 @@
 
 
   <div class="container centralRegister">
+
+
+
+
+    <!-- [exclude]="'#navDashboard,#navBar,#LoginComponent,a.hiperButton'" -->
+
+    <app-publication-preview
+    *ngIf="this.previewPublication == true && this.previewData != null"
+    [previewPublication]="this.previewPublication || false"
+    [previewData]="this.previewData || null"
+    (closePreviewPublication)="this.closePreview()"
+    (accion)="this.accion($event)"
+    ></app-publication-preview>
+
+
+
+
+<app-plan-pauta
+*ngIf="this.openPlanesPauta == true"
+
+[openPlanesPauta]="this.openPlanesPauta"
+[typePurchase]="'new'"
+
+(infoPlanPauta)="this.addPlanPauta($event)"
+(closePlanes)="this.cerrarModal()"
+></app-plan-pauta>
+
+
+
+
   <div class="row">
+
+
 
 
 <div class="animated fadeIn fast card card-primary card-outline card-tabs">
@@ -10,15 +42,87 @@
 
 <div class="card-body">
 
-  <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-    Crea una publicación
-</h4>
-<hr>
+
         <form
         ngNativeValidate
         #f="ngForm"
-        (ngSubmit)="createPublication( f )"
+        (ngSubmit)="sendPreview( f )"
         class="formDataSend" action="">
+
+
+
+      <div
+       class="titleOpc">
+
+       <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+        ¿Qué plan quieres comprar?
+       </h4>
+
+       <div class="form-group clearfix">
+         <h6 >
+           Si quieres tener un mayor alcance adquiere un plan de pauta <a style="font-weight: normal;" class="hiperButton" (click)="this.openPlanes()"> ¡AQUÍ!</a>
+         </h6>
+
+       </div>
+       </div>
+
+     <hr>
+
+    <div class="row">
+
+      <div class="form-group clearfix  col-12">
+
+        <div class="form-check">
+          <input
+          required ngModel #costoPlan="ngModel"
+          value="semestral" class="form-check-input" type="radio" required name="costoPlan" #costoPlan="ngModel">
+          <label class="form-check-label">Plan Semestral por $95.000</label>
+        </div>
+        <div class="form-check">
+          <input
+          required ngModel #costoPlan="ngModel"
+          value="anual" class="form-check-input" type="radio" required name="costoPlan" #costoPlan="ngModel" >
+          <label class="form-check-label">Plan Anual por $145.000</label>
+        </div>
+
+
+
+        <div class="errorSpace" *ngIf="( this.enviado == true && costoPlan.invalid ) || (costoPlan.invalid && (costoPlan.dirty || costoPlan.touched))" >
+          <small *ngIf="costoPlan.errors.required">
+            Esta opción es obligatoria
+          </small>
+
+        </div>
+
+
+
+        <div
+        *ngIf="(this.infoPlanPauta != null)"
+        class="infoPlanPauta">
+
+          <H5
+          style="font-weight: bold;"
+          >
+          <i class="fas fa-shopping-bag resalte    "></i>
+          Has seleccionado el plan de pauta <a  (click)="this.openPlanes()" class="hiperButton">{{ this.infoPlanPauta.plan.planPauta.nombre }}</a>, con un coste de <a  (click)="this.openPlanes()" class="hiperButton">{{ this.infoPlanPauta.plan.planPauta.costo | currencyLocale }}  </a>
+          <a class="colorRed" (click)="this.removePlanPauta()" >
+            <i class="fa fa-times" aria-hidden="true"></i>
+            Eliminar
+            </a>
+          </H5>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+        <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+          Crea una publicación
+      </h4>
+      <hr>
 
             <div class="row">
                  <div class="form-group clearfix col-md-12 col-lg-12">
@@ -491,6 +595,7 @@
 
                 </div>
               </div>
+
                 <div class="row" *ngIf="this.cityTargets.length > 0">
                   <div class="form-group clearfix col-12">
 
@@ -526,9 +631,6 @@
           </div>
 
           <!--  -->
-
-
-
 
              <h4 style="margin-bottom: 15px;" class="titleSpecial4">
               Describe tu producto o servicio
@@ -626,6 +728,7 @@
                   <label class="custom-file-label" for="exampleInputFile">Selecciona 10 {{this.ngTypeAdjuntos}}</label>
 
                 </div>
+
                 <div class="custom-file" *ngIf="this.ngTypeAdjuntos == 'Catálogo PDF' ">
                   <input accept="application/pdf" (change)="selectFiles($event)"  required ngModel name="files" #files="ngModel" type="file" class="custom-file-input" id="exampleInputFile">
                   <label class="custom-file-label" for="exampleInputFile">Selecciona un {{this.ngTypeAdjuntos}}</label>
@@ -697,11 +800,21 @@
                 </div>
             </div>
 
-              <div class="row formButtons centerCustom">
+              <div class="row formButtons ">
                 <button
                 (click)="alEnviar()"
-                type="submit" class="buttonCustom btn btn-success btn-flat">Enviar</button>
+                type="submit"
+                style="margin-left: auto;"
+                class="buttonCustom btn btn-success btn-flat">
+                <i class="fas fa-money-check    "></i>
+                IR A PAGAR
+              </button>
+                <!-- <button -->
+                <!-- (click)="alEnviar()" -->
+                <!-- type="submit" class="buttonCustom btn btn-success btn-flat">¡Paga y publica ahora!</button> -->
               </div>
+              <!-- <div class="row formButtons centerCustom"> -->
+              <!-- </div> -->
 
         </form>
 
@@ -710,3 +823,6 @@
     </div>
     </div>
   </div>
+
+
+

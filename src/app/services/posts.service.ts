@@ -149,10 +149,10 @@ export class PostsService {
   constructor(
     public http: HttpClient,
     public router: Router,
+    public GlobalConfigService: GlobalConfigService,
     // public _verifyService: VerifyService,
     // public _notifyService: NotifyService,
     public _usersService: UsersService,
-    public GlobalConfigService: GlobalConfigService
   ) // public notificacion = new EventEmitter<any>();
   {}
 
@@ -588,7 +588,7 @@ export class PostsService {
       formData.append("_mapUrl", post._mapUrl);
 
       formData.append("type", post.type);
-
+      formData.append("typePost", post.typePost);
 
       formData.append("_infoContact", post._infoContact);
       formData.append("_category", post._category);
@@ -633,6 +633,72 @@ export class PostsService {
       xhr.open("POST", url, true);
       xhr.send(formData);
     });
+  }
+
+  goPayProcessPOST(post: any){
+
+    return new Promise((resolve, reject) => {
+      let formData = new FormData();
+      let xhr = new XMLHttpRequest();
+      let token = this._usersService.token;
+
+      // tipo de proceso
+      let typeRequest = post.typeRequest;
+      // datos del post
+      let dataPost = post.post.infoPost;
+      let filesPost = post.post.files;
+      // datos del plan pauta
+      let planPauta = post.planPauta.plan;
+
+      dataPost = JSON.stringify(dataPost);
+      planPauta = JSON.stringify(planPauta);
+
+      formData.append("typeRequest", typeRequest);
+      formData.append("dataPost", dataPost);
+      formData.append("planPauta", planPauta);
+
+      for (var i = 0; i < filesPost.length; ++i) {
+        formData.append("filesPost[]", filesPost[i], filesPost[i].name);
+      }
+
+      if(post.planPauta != 'No aplica'){
+
+        let filesPlan = post.planPauta.files;
+        for (var i = 0; i < filesPlan.length; ++i) {
+          formData.append("filesPlan[]", filesPlan[i], filesPlan[i].name);
+        }
+
+      }
+      xhr.onreadystatechange = function () {
+
+        if (xhr.readyState === 4) {
+          try {
+
+          if (xhr.status === 200) {
+            // ////////// ////////////console.log( 'Imagen subida' );
+            resolve(JSON.parse(xhr.response));
+          } else {
+            // ////////// ////////////console.log( 'Fallo la subida' );
+            resolve(JSON.parse(xhr.response));
+          }
+
+        }
+        catch (e) {
+            ////// ////////////console.log(e.status);
+        }
+
+      }
+
+      };
+
+      let url = _SERVICIOS + "/post/createOrder" + "?t=" + token;
+
+
+
+      xhr.open("POST", url, true);
+      xhr.send(formData);
+    });
+
   }
 
 
@@ -752,6 +818,24 @@ export class PostsService {
     );
 
 
+
+  }
+
+
+
+  getAllPublicationsByOwnerGET(paginate: number){
+
+    let url = `${_SERVICIOS}/post/publicationsOwner/${this._usersService.usuario._id}?t=${this._usersService.token}&paginate=${paginate}`;
+
+
+    return this.http.get(url).pipe(
+        map((resp: any) => {
+        return resp;
+    }),
+    catchError((err) => {
+        return throwError(err);
+    })
+    );
 
   }
 

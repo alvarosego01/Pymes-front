@@ -9,12 +9,13 @@ import { Router } from "@angular/router";
 
 // importaciones de codigo
 // servicios
-import { UsersService, GlobalConfigService, NotifyService, FormsResourcesService } from "src/app/services/service.index";
+import { UsersService,   NotifyService, FormsResourcesService } from "src/app/services/service.index";
 
 import { _UserModelNatural, _UserModelCompany, _NotifyModel
 
    } from 'src/app/models/models.index';
    import { SocialFloatComponent } from 'src/app/globals/globals.index';
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 
 
 @Component({
@@ -340,8 +341,41 @@ this.mapElement = div;
 
             // forma.reset();
         }, ERR => {
-          ////////console.log(ERR);
-          this._globaConfig.spinner = false;
+
+              console.log('los errores', ERR);
+
+                // var err = data.error.message.errors{}.tipo.message
+                let e = ERR.error.message.errors || null;
+                if(e != null){
+
+                  let errors: any = [];
+
+                for (var [key, value] of Object.entries(e)) {
+                  console.log(key + ' ' + value); // "a 5", "b 7", "c 9"
+                  errors.push(value);
+                }
+
+                errors.forEach((element, idx) => {
+
+                  this._notifyService.Toast.fire({
+                    title: element.message ||'Algo ha salido mal, intente más tarde',
+                    icon: "error",
+
+                  });
+
+                });
+
+              }else{
+
+                this._notifyService.Toast.fire({
+                  title: 'Algo ha salido mal, intente más tarde',
+                  icon: "error",
+
+                });
+
+              }
+
+                this._globaConfig.spinner = false;
         });
 
 
@@ -483,14 +517,20 @@ if(type == 'company'){
             forma.reset();
           },
           ERR => {
-
-
-            this._notifyService.Toast.fire({
-              title: 'Algo ha salido mal, intente más tarde',
-              icon: 'error'
+            // var err = data.error.message.errors{}.tipo.message
+            console.log(ERR);
+            let errors = ERR.error.message.errors;
+            errors.forEach((ele, idx) => {
+              console.log('each', ele.message);
+              this._notifyService.Toast.fire({
+                title: ele.message || 'Algo ha salido mal, intente más tarde',
+                icon: "error",
+                // text: "Ahora vamos a suscribir tus publicaciones",
+              });
             });
 
             this._globaConfig.spinner = false;
+
           });
 
 }

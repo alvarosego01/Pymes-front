@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostsService } from 'src/app/services/posts.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-pdf-view',
@@ -16,7 +17,8 @@ export class PdfViewComponent implements OnInit {
 
 
   constructor(
-    public _postService: PostsService
+    public _postService: PostsService,
+    public _userService: UsersService
   ) { }
 
   ngOnInit(): void {

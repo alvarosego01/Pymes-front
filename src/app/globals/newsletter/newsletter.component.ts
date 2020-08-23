@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import {
-  GlobalConfigService,
+
   NotifyService,
 } from "src/app/services/service.index";
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 
 @Component({
   selector: "app-newsletter",

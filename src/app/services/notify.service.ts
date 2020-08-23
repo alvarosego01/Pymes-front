@@ -100,9 +100,9 @@ export class NotifyService {
   getAllNotifyByUserGET(id){
 
 
-    let url = `${_SERVICIOS}/notify/?t=${this._userService.token}`;
+    let url = `${_SERVICIOS}/notify?t=${this._userService.token}`;
 
-    //console.log('envia notif', url);
+    console.log('envia notif', url);
     return this.http.get(url).pipe(
         map((resp: any) => {
 

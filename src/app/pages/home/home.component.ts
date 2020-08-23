@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef,  } from '@angular/core';
 import { PostsService } from 'src/app/services/posts.service';
-import { GlobalConfigService, SearchService, UsersService, CategoryService } from 'src/app/services/service.index';
+import {   SearchService, UsersService, CategoryService } from 'src/app/services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 
 @Component({
   selector: 'app-home',
@@ -37,9 +38,7 @@ export class HomeComponent implements OnInit {
 
     });
 
-    // this.activatedRoute.children.findIndex()
 
-    ////////////console.log('se vuelve a llamar home');
    }
 
 

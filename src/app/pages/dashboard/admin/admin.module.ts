@@ -12,13 +12,22 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 import { ADMIN_ROUTES } from './admin.routes';
 import { ControlCategoryComponent } from './control-category/control-category.component';
 import { UserControlComponent } from './user-control/user-control.component';
+import { PautaControlComponent } from './pauta-control/pauta-control.component';
+import { BoostOrdersComponent } from './boost-orders/boost-orders.component';
+import { PurchaseStatsComponent } from './purchase-stats/purchase-stats.component';
 
 @NgModule({
   declarations: [
 
   ControlCategoryComponent,
 
-  UserControlComponent],
+  UserControlComponent,
+
+  PautaControlComponent,
+
+  BoostOrdersComponent,
+
+  PurchaseStatsComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -34,7 +43,7 @@ import { UserControlComponent } from './user-control/user-control.component';
     // UsersService,
     // SearchService,
     // NotifyService,
-    // GlobalConfigService,
+    //
 //   ]
 
 })

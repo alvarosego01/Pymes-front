@@ -98,6 +98,24 @@ class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{
             </a>
           </li>
 
+          <li
+
+          class="nav-item">
+            <a  #navlink class="nav-link" [routerLink]="['/admin/ventasOrdenes']" routerLinkActive="active">
+              <i class="fa fa-shopping-bag nav-icon" aria-hidden="true"></i>
+              <p>Ordenes y ventas</p>
+            </a>
+          </li>
+
+          <li
+          class="nav-item">
+            <a  #navlink class="nav-link" [routerLink]="['/admin/dashboard/generalBalance']" routerLinkActive="active">
+              <i class="fas nav-icon fa-chart-pie    "></i>
+              <p>Balances y reportes</p>
+            </a>
+          </li>
+
+
 
         </ul>
 
@@ -114,7 +132,32 @@ class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{
           <li *ngIf="this._usersService.usuario.role != 'ADMIN_ROLE'" class="nav-item">
             <a  #navlink class="nav-link" [routerLink]="['/dashboard/postControl']" routerLinkActive="active">
               <i class="fas nav-icon fa-tags"></i>
-              <p>Control de publicaciones</p>
+              <p>Creación de publicaciones</p>
+            </a>
+          </li>
+
+          <li *ngIf="this._usersService.usuario.role != 'ADMIN_ROLE'" class="nav-item">
+            <a  #navlink class="nav-link" [routerLink]="['/dashboard/historialPost']" routerLinkActive="active">
+              <i class="fas nav-icon fa-clipboard-list    "></i>
+              <p>Historial de publicaciones</p>
+            </a>
+          </li>
+
+          <li
+          *ngIf="this._usersService.usuario.role != 'ADMIN_ROLE'"
+          class="nav-item">
+            <a  #navlink class="nav-link" [routerLink]="['/dashboard/billing']" routerLinkActive="active">
+              <i class="fa fa-shopping-bag nav-icon" aria-hidden="true"></i>
+              <p>Facturación y compras</p>
+            </a>
+          </li>
+
+          <li
+          *ngIf="this._usersService.usuario.role != 'ADMIN_ROLE'"
+          class="nav-item">
+            <a  #navlink class="nav-link" [routerLink]="['/dashboard/generalBalance']" routerLinkActive="active">
+              <i class="fas nav-icon fa-chart-pie    "></i>
+              <p>Balances y reportes</p>
             </a>
           </li>
 

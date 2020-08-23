@@ -2,12 +2,13 @@
 // import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
-// import { UsersService, NotifyService, GlobalConfigService } from 'src/app/services/service.index';
+// import { UsersService, NotifyService} from 'src/app/services/service.index';
 // import { _UserModelNatural } from 'src/app/models/userModel';
 
 import { HttpClient } from '@angular/common/http';
 import {OnInit, Component} from '@angular/core';
-import {UsersService, NotifyService, GlobalConfigService} from '../../services/service.index';
+import {UsersService, NotifyService} from '../../services/service.index';
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     public _usersService: UsersService,
     public http: HttpClient,
     public router: Router,
-    public GlobalConfigService: GlobalConfigService
+       public GlobalConfigService: GlobalConfigService
   ){}
 
 

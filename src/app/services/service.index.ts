@@ -1,13 +1,14 @@
 // export { TokenVerifyGuard } from './token-verify.guard';
 // export { LoginVerifyGuard } from './login-verify.guard';
 
+export { PaymentService } from './payment.service';
+
 export { CategoryService } from './category.service';
 
 export { FormsResourcesService } from './forms-resources.service';
 
 // export { FormResourcesService } from './form-resources.service';
 
-export { GlobalConfigService } from './-global-config.service';
 
 // FormsResourcesService
 
@@ -22,7 +23,12 @@ export {  UsersService } from './users.service';
 export {  SearchService } from './search.service';
 export { NotifyService } from './notify.service';
 
+
+// payment
 // GlobalConfigService
 // FormResourcesService
+
+
+// PaymentService
 
 // CategoryService

@@ -40,7 +40,7 @@ export class UsersService {
     public http: HttpClient,
     public router: Router
   ) // private _notifyService: NotifyService,
-  // // public GlobalConfigService: GlobalConfigService
+  // //    public GlobalConfigService:GlobalConfigService
   {
     // se llama al cargar storage siemp que se inicialize el servicio para que tengan datos manejables.
     this.cargarStorage();

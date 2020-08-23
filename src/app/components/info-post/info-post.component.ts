@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import {
   PostsService,
-  GlobalConfigService,
+
   NotifyService,
   UsersService,
   SearchService,
@@ -11,6 +11,7 @@ import {
 
 import { LocationStrategy } from "@angular/common";
 import { ImagenPipe } from 'src/app/pipes/image-control.pipe';
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 
 @Component({
   selector: "app-info-post",
@@ -18,8 +19,6 @@ import { ImagenPipe } from 'src/app/pipes/image-control.pipe';
   styleUrls: ["./info-post.component.sass"],
 })
 export class InfoPostComponent implements OnInit {
-
-
 
   lectura: boolean = true;
 
@@ -74,46 +73,54 @@ export class InfoPostComponent implements OnInit {
 
   imgPaginate: number = 0;
 
-
-
   canEdit: boolean = false;
   editOpen: boolean = false;
+
+  // por si es preview o publicación normal.
+  @Input("typePublication") typePublication: string = 'normal';
+  @Input("dataPreview") dataPreview: any = null;
 
   constructor(
     public router: Router,
     public activatedRoute: ActivatedRoute,
     public _postService: PostsService,
-    public GlobalConfigService: GlobalConfigService,
+       public GlobalConfigService:GlobalConfigService,
     public _notifyService: NotifyService,
     private url: LocationStrategy,
     public _userService: UsersService,
     public _searchService: SearchService
   ) {
 
-    this._searchService.registros = [];
+    // return;
+    // this._searchService.registros = [];
+
+    console.log('prueba de recepcion', this.typePublication);
+    console.log('dataPreview',this.dataPreview);
+    // window.scroll(0,0);
 
 
-    this.setTypeVisit();
-
-
-    this.activatedRoute.params.subscribe((params) => {
+      this.setTypeVisit();
+      this.activatedRoute.params.subscribe((params) => {
       let id = params["id"];
 
       this.setPublication(id);
 
     });
 
-
     if(this._userService.estaLogueado() == true){
 
       this.lectura = false;
 
     }
+
+
+
     window.scroll(0,0);
+
   }
 
   ngOnInit(): void {
-    window.scroll(0,0);
+
 
   }
 

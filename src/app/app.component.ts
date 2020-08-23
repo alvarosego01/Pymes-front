@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { GlobalConfigService, UsersService } from './services/service.index';
+import {   UsersService } from './services/service.index';
 import { LoginComponent } from './components/login/login.component';
+import { GlobalConfigService } from './services/-global-config.service';
 
 
 
@@ -11,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
+
 export class AppComponent {
   title = 'Mercado Pyme';
 

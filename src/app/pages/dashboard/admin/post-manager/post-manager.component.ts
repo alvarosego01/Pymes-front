@@ -2,11 +2,12 @@ import { Component, OnInit, Input } from "@angular/core";
 
 import {
   NotifyService,
-  GlobalConfigService,
+
   PostsService,
   VerifyService,
 } from "src/app/services/service.index";
 import { NgForm } from "@angular/forms";
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 
 @Component({
   selector: "app-post-manager",

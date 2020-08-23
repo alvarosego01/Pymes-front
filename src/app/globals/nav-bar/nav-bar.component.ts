@@ -2,11 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { recursosWeb } from "src/app/config/recursosWeb";
 import { LoginComponent } from "src/app/components/login/login.component";
 
-import { UsersService, SearchService, GlobalConfigService } from "src/app/services/service.index";
+import { UsersService, SearchService } from "src/app/services/service.index";
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { LocationStrategy } from '@angular/common';
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 
 @Component({
   selector: "app-nav-bar",
@@ -23,7 +24,7 @@ export class NavBarComponent implements OnInit {
     private recursosWeb: recursosWeb,
     public _usersService: UsersService,
     public _searchService: SearchService,
-    public GlobalConfigService: GlobalConfigService,
+    public GlobalConfigService: GlobalConfigService
   )
   // public loginComponent: LoginComponent
   {

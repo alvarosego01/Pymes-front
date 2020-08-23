@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NotifyService, GlobalConfigService, UsersService } from 'src/app/services/service.index';
+import { NotifyService,   UsersService } from 'src/app/services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
+import { GlobalConfigService } from 'src/app/services/-global-config.service';
 
 @Component({
   selector: 'app-notify-control',
@@ -14,7 +15,7 @@ export class NotifyControlComponent implements OnInit {
     public activatedRoute: ActivatedRoute,
     public _notifyService: NotifyService,
     public _usersService: UsersService,
-    public GlobalConfigService: GlobalConfigService
+       public GlobalConfigService: GlobalConfigService
   ) { }
 
   ngOnInit(): void {

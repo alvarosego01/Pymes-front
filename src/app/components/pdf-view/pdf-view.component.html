@@ -4,7 +4,8 @@
   <div id="id01" class="w3-modal"
   [ngClass]="{
     'block': this._postService.PDFFILE != null,
-    'none': this._postService.PDFFILE == null
+    'none': this._postService.PDFFILE == null,
+    'modalSession': this._userService.token != null
   }"
 
   (clickOutside)="ocultarClick($event)"

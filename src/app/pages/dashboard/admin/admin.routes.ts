@@ -11,6 +11,8 @@ import { DashboardComponent } from '../dashboard.component';
 import { InfoPostComponent } from 'src/app/components/components.index';
 import { ControlCategoryComponent } from './control-category/control-category.component';
 import { UserControlComponent } from './user-control/user-control.component';
+import { PurchaseStatsComponent } from './purchase-stats/purchase-stats.component';
+import { GeneralBalanceComponent } from '../dashboard.pages.index';
 
 
 
@@ -25,10 +27,18 @@ const adminRoutes: Routes = [
         canActivate: [AdminVerifyGuard],
         canActivateChild: [AdminVerifyGuard],
         children: [
+            {
+                path: "generalBalance",
+                component: GeneralBalanceComponent,
+              },
 
             {
                 path: 'usersManager',
                 component: UserControlComponent,
+            },
+            {
+                path: 'ventasOrdenes',
+                component: PurchaseStatsComponent,
             },
             {
                 path: 'postManager',

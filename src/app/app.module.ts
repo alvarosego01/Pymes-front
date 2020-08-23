@@ -1,119 +1,139 @@
-import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-
+import { BrowserModule, Title } from "@angular/platform-browser";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 import { Routes, RouterModule } from "@angular/router";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 // rutas
-import { APP_ROUTES } from './app.routes';
+import { APP_ROUTES } from "./app.routes";
 
 // servicios
 import {
   // PostsService,
-         UsersService,
-         SearchService,
-         NotifyService,
-         GlobalConfigService} from '../app/services/service.index';
+  UsersService,
+  SearchService,
+  NotifyService,
+  PaymentService,
+} from "../app/services/service.index";
 
 // componentes
-import { AppComponent } from './app.component';
-import { HomeComponent, NotFoundComponent, RegisterComponent } from './pages/pages.index';
-import { SearchComponent, PostsListsComponent, InfoPostComponent, CategoryListsComponent } from './components/components.index';
-import { NavBarComponent, FooterComponent } from './globals/globals.index';
-import { recursosWeb } from './config/recursosWeb';
-import { ContactComponent } from './pages/contact/contact.component';
-import { LoginComponent } from './components/login/login.component';
-import { UsComponent } from './pages/us/us.component';
-import { NavDashboardComponent } from './components/nav-dashboard/nav-dashboard.component';
+import { AppComponent } from "./app.component";
+import {
+  HomeComponent,
+  NotFoundComponent,
+  RegisterComponent,
+} from "./pages/pages.index";
+import { NavBarComponent, FooterComponent } from "./globals/globals.index";
+import { recursosWeb } from "./config/recursosWeb";
+// recursosWeb
+import { ContactComponent } from "./pages/contact/contact.component";
+import { UsComponent } from "./pages/us/us.component";
 
 // click fuera
-import { ClickOutsideModule } from 'ng-click-outside';
+import { ClickOutsideModule } from "ng-click-outside";
 
 // MODULOS
 
-import { DASHBOARD_MODULE } from './pages/dashboard/dashboard.module';
-import { PipesModule } from './pipes/pipes.module';
-import { PostsService } from './services/posts.service';
-import { ADMIN_MODULE } from './pages/dashboard/admin/admin.module';
-import { NewsletterComponent } from './globals/newsletter/newsletter.component';
-import { ProfileViewComponent } from './pages/profile-view/profile-view.component';
+import { DASHBOARD_MODULE } from "./pages/dashboard/dashboard.module";
+import { PipesModule } from "./pipes/pipes.module";
+import { PostsService } from "./services/posts.service";
+import { ADMIN_MODULE } from "./pages/dashboard/admin/admin.module";
+import { NewsletterComponent } from "./globals/newsletter/newsletter.component";
+import { ProfileViewComponent } from "./pages/profile-view/profile-view.component";
 
+import { SocialFloatComponent } from "./globals/social-float/social-float.component";
 
-import { SocialFloatComponent } from './globals/social-float/social-float.component';
+import { StarRatingModule } from "angular-star-rating";
 
+import { PdfViewerModule } from "ng2-pdf-viewer";
+import { BreadComponent } from "./globals/bread/bread.component";
 
-
-import { StarRatingModule } from 'angular-star-rating';
-
-import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { PdfViewComponent } from './components/pdf-view/pdf-view.component';
-import { BreadComponent } from './globals/bread/bread.component';
-
-import {IMaskModule} from 'angular-imask';
-import { PlanesComponent } from './components/planes/planes.component';
-import { PaginatorComponent } from './components/paginator/paginator.component';
-import { LoadingComponent } from './components/loading/loading.component';
-import { PostEditionComponent, NotifyPreviewComponent } from './pages/dashboard/dashboard.pages.index';
-
+import { IMaskModule } from "angular-imask";
+import {
+  NotifyPreviewComponent,
+} from "./pages/dashboard/dashboard.pages.index";
 
 // import { SortablejsModule } from 'angular-sortablejs';
-import { SortablejsModule } from 'ngx-sortablejs';
-import { VerifyControlComponent } from './pages/verify-control/verify-control.component';
-import { RecoveryPasswordComponent } from './components/recovery-password/recovery-password.component';
+import { SortablejsModule } from "ngx-sortablejs";
+import { VerifyControlComponent } from "./pages/verify-control/verify-control.component";
+import {
+  // InfoPostComponent,
+  InfoPostComponent,
+  SearchComponent,
+  LoadingComponent,
+  LoginComponent,
+  NavDashboardComponent,
+  PaginatorComponent,
+  PdfViewComponent,
+  PlanesComponent,
+  RecoveryPasswordComponent,
+  CategoryListsComponent,
+  PostsListsComponent,
+} from "./components/components.index";
+import { CommonModule } from '@angular/common';
+import { GlobalConfigService } from './services/-global-config.service';
+// import { COMPONENTS_MODULE } from './components/components.module';
 
+
+import {DpDatePickerModule} from 'ng2-date-picker';
+import { CheckoutResponseComponent } from './pages/checkout-response/checkout-response.component';
+// import { GlobalPaginatorComponent } from './components/global-paginator/global-paginator.component';
 
 @NgModule({
   declarations: [
-
     AppComponent,
     HomeComponent,
-    SearchComponent,
     NotifyPreviewComponent,
-    PostsListsComponent,
-    InfoPostComponent,
-    CategoryListsComponent,
     NavBarComponent,
     FooterComponent,
     NotFoundComponent,
     RegisterComponent,
     ContactComponent,
-    LoginComponent,
     UsComponent,
-    NavDashboardComponent,
     NewsletterComponent,
     ProfileViewComponent,
-    PdfViewComponent,
-    PostEditionComponent,
     BreadComponent,
     SocialFloatComponent,
-    PlanesComponent,
-    PaginatorComponent,
-    LoadingComponent,
     VerifyControlComponent,
-    RecoveryPasswordComponent
 
 
+    // componentes
+    LoadingComponent,
+    LoginComponent,
+    NavDashboardComponent,
+    PaginatorComponent,
+    PdfViewComponent,
+    PlanesComponent,
+    RecoveryPasswordComponent,
+    CategoryListsComponent,
+    PostsListsComponent,
+    SearchComponent,
+    InfoPostComponent,
+    CheckoutResponseComponent,
+    // GlobalPaginatorComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     ClickOutsideModule,
     HttpClientModule,
-    APP_ROUTES,
     FormsModule,
     ReactiveFormsModule,
-    DASHBOARD_MODULE,
-    ADMIN_MODULE,
     PipesModule,
     StarRatingModule.forRoot(),
     PdfViewerModule,
     IMaskModule,
     SortablejsModule.forRoot({
       animation: 150,
-      swapThreshold: 1
-    })
+      swapThreshold: 1,
+    }),
+    DpDatePickerModule,
+    APP_ROUTES,
+    // COMPONENTS_MODULE,
+    DASHBOARD_MODULE,
+    ADMIN_MODULE,
   ],
+
   providers: [
     PostsService,
     UsersService,
@@ -121,16 +141,18 @@ import { RecoveryPasswordComponent } from './components/recovery-password/recove
     recursosWeb,
     GlobalConfigService,
     NotifyService,
-    Title
+    PaymentService,
+    Title,
   ],
   bootstrap: [AppComponent],
+  exports: [
+    // GlobalPaginatorComponent
+    // InfoPostComponent
+  ]
+  // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  // entryComponents: []
 
 })
-
-
 export class AppModule {
-
   // platformBrowserDynamic().bootstrapModule(AppModule);
- }
-
-
+}

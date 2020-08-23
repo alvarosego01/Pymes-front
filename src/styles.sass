@@ -60,8 +60,8 @@ h1,h2,h3,h4,h5,h6
 .titleSpecial
     color: $VerdeOscur
     font-weight: bold
-    font-size: 45px
-    line-height: 45px
+    font-size: 50px
+    line-height: 50px
 .titleSpecial2
     color: $VerdeClar
     font-weight: bold
@@ -136,17 +136,27 @@ a.active
     @include responsivo(telefonoTable)
         flex-direction: column
         label
+
             width: 100%!important
-            display: block
+            display: block!important
             margin: 0 auto
             text-align: center
     @include responsivo(pcMedio)
         flex-direction: column
         label
+
             width: 100%!important
-            display: block
+            display: block!important
             margin: 0 auto
             text-align: center
+    .form-group.clearfix
+        display: flex
+        label
+            margin: 0
+            // display: flex
+            align-self: center
+    label
+        font-size: 16px
 
 .titleOpc.geo
     flex-direction: column!important
@@ -210,6 +220,14 @@ a.active
         min-width: 100%!important
         max-width: 100%!important
         min-height: auto!important
+
+.modalSession
+    @include responsivo(general)
+        padding-left: 4.6rem !important
+
+    @include responsivo(resto)
+        padding-left: 4.6rem !important
+
 
 .logo
     width: 250px
@@ -567,6 +585,10 @@ form.formDataSend .terms .icheck-success label
     @include responsivo(resto)
 
 
+button
+    i
+        margin: 5px 0
+        margin-right: 10px
 
 // cards globales de edición y formularios
 .animated.fadeIn.fast.card.card-primary.card-outline.card-tabs
@@ -633,6 +655,9 @@ pdf-viewer.pdfList
         padding-top: 100px!important
     @include responsivo(resto)
         padding-top: 100px!important
+    .container
+        margin: 0!important
+        padding: 0!important
 
 #id01.withForm
     .w3-modal-content.w3-animate-top.w3-card-4
@@ -664,6 +689,13 @@ pdf-viewer.pdfList
 .content-wrapper.fullWidth
     min-height: auto!important
 
+.colorSuccess
+    color: $VerdeOscur!important
+    font-weight: normal!important
+
+.colorWarning
+    color: orange!important
+    font-weight: normal!important
 
 .colorRed
     color: salmon!important
@@ -734,3 +766,53 @@ ul#listImgs
             left: 0
             right: 0
             bottom: 0
+
+
+.card-primary.card-outline
+    border-top: 5px solid #2D907C!important
+
+    // .card-primary.card-outline
+
+.container__days
+    .day-item.is-start-date.is-locked,
+    .day-item.is-end-date.is-locked,
+    .day-item.is-in-range.is-locked
+        color: white!important
+    .day-item.is-start-date,
+    .day-item.is-end-date
+        transition: $trans!important
+        background-color: $VerdeOscur!important
+        color: white!important
+    .day-item.is-in-range
+        transition: $trans!important
+        background-color: $VerdeClar!important
+        color: white!important
+
+
+.formButtons.flexAround
+    display: flex
+    justify-content: space-between
+    flex-direction: row
+    @include responsivo(telefonoTable)
+        flex-direction: column-reverse
+        justify-content: center
+        button
+            margin: auto
+            margin-bottom: 25px!important
+    @include responsivo(pcMedio)
+        flex-direction: column-reverse
+        justify-content: center
+        button
+            margin: auto
+            margin-bottom: 25px!important
+    @include responsivo(general)
+        button
+            margin: 0!important
+    @include responsivo(resto)
+        button
+            margin: 0!important
+
+
+.resalte
+    font-weight: bold
+    color: $VerdeOscur
