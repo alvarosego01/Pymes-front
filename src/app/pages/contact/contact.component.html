@@ -1,1 +1,140 @@
-<p>contact works!</p>
+<div class="contactPage">
+  <img
+    class="imgHeader"
+    src="../../../assets/dist/img/contact/Imagen-Contacto.jpg"
+    alt=""
+  />
+
+  <div class="container contTitle">
+    <div class="title">
+      <h1>
+        CONTÁCTANOS
+      </h1>
+      <h6>
+        Estamos aqui para ayudarte
+      </h6>
+    </div>
+  </div>
+
+  <div class="container contForm">
+    <div class="row">
+      <div class="form col-md-12 col-lg-7">
+        <form
+          ngNativeValidate
+          #f="ngForm"
+          (ngSubmit)="sendContactMessage(f)"
+          class="formDataSend"
+          action=""
+        >
+          <h4 style="margin-bottom: 15px;" class="titleSpecial6">
+            ¿Cómo te podemos ayudar?
+          </h4>
+          <hr />
+
+          <div style="width: 100%;" class="row">
+            <div class="form-group clearfix col-md-12">
+              <div class="input-group">
+                <input
+                  placeholder="Nombre..."
+                  ngModel
+                  name="Name"
+                  type="text"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div style="width: 100%;" class="row">
+            <div class="form-group clearfix col-md-12">
+              <div class="input-group">
+                <input
+                  placeholder="E-mail..."
+                  ngModel
+                  name="Email"
+                  type="email"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div style="width: 100%;" class="row">
+            <div class="form-group clearfix col-md-12">
+              <div class="input-group">
+                <input
+                  placeholder="Teléfono..."
+                  ngModel
+                  name="Telf"
+                  type="tel"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div style="width: 100%;" class="row">
+            <div class="form-group clearfix col-md-12">
+              <div class="input-group">
+
+                  <textarea
+                  class="form-control" required ngModel
+                placeholder="Consulta..." name="Consulta"  cols="30" rows="5"></textarea>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row formButtons">
+            <button
+
+              type="submit"
+              class="buttonCustom btn btn-success btn-flat"
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="info col-md-12 col-lg-5">
+
+        <ul class="listInfo">
+          <li>
+            <a  target="_blank" href="https://wa.me/573187158098?text=Hola+me+gustar%C3%ADa+contactarlos">
+              <i class="fab fa-whatsapp    "></i>
+              3187158098
+            </a>
+
+          </li>
+          <li>
+
+            <a  target="_blank" href="mailto:info@mercadopyme.co">
+              <i class="fas fa-envelope    "></i>
+              info@mercadopyme.co
+            </a>
+          </li>
+          <li>
+
+            <a  target="_blank" href="https://facebook.com/mercadopyme.co">
+              <i class="fab fa-facebook    "></i>
+              @mercadopyme.co
+            </a>
+          </li>
+          <li>
+
+            <a  target="_blank" href="https://instagram.com/mercadopyme.co">
+              <i class="fab fa-instagram    "></i>
+              @mercadopyme.co
+            </a>
+          </li>
+
+
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</div>

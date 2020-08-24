@@ -41,6 +41,8 @@ export class NotifyService {
 
   notificaciones: any = [];
 
+  paginator: any = null;
+
 
   constructor(
     public http: HttpClient,
@@ -53,7 +55,7 @@ export class NotifyService {
     url = (token != null)? `${url}?t=${token}`: url;
 
 
-    //console.log('correo que se envia', data);
+    ////console.log('correo que se envia', data);
 
     return this.http.post(url, data).pipe(
       map((resp: any) => {
@@ -82,11 +84,11 @@ export class NotifyService {
 
     let url = `${_SERVICIOS}/notify/${id}?t=${this._userService.token}`;
 
-    //console.log('envia notif', url);
+    ////console.log('envia notif', url);
     return this.http.get(url).pipe(
         map((resp: any) => {
 
-          //console.log(this.notificaciones);
+          ////console.log(this.notificaciones);
 
         return resp;
     }),
@@ -97,16 +99,16 @@ export class NotifyService {
 
   }
 
-  getAllNotifyByUserGET(id){
+  getAllNotifyByUserGET(paginate: number = 1){
 
 
-    let url = `${_SERVICIOS}/notify?t=${this._userService.token}`;
+    let url = `${_SERVICIOS}/notify?t=${this._userService.token}&paginate=${paginate}`;
 
-    console.log('envia notif', url);
+    //console.log('envia notif', url);
     return this.http.get(url).pipe(
         map((resp: any) => {
 
-          //console.log(this.notificaciones);
+          ////console.log(this.notificaciones);
 
         return resp;
     }),

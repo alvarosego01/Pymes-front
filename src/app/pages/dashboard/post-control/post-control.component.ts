@@ -212,7 +212,7 @@ export class PostControlComponent implements OnInit {
 
   activateEconomicActivity() {
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    ////////// ////////////console.log(this.estadosActividad);
+    ////////// //////////////console.log(this.estadosActividad);
   }
 
   setCiudades(i) {
@@ -226,7 +226,7 @@ export class PostControlComponent implements OnInit {
   setSubCategory(i, nro) {
     let k = JSON.parse(i);
 
-    ////////console.log('la mierda esta', k );
+    //////////console.log('la mierda esta', k );
 
     let p = k._category;
     let c = k._child;
@@ -345,8 +345,8 @@ export class PostControlComponent implements OnInit {
       celPhone: this.ngcelPhone,
     };
 
-    ////////console.log('forma.value.Category1', forma.value.Category1);
-    ////////console.log('forma.value.subCategory1Form', forma.value.subCategory1Form);
+    //////////console.log('forma.value.Category1', forma.value.Category1);
+    //////////console.log('forma.value.subCategory1Form', forma.value.subCategory1Form);
 
     var catGroup = [
       {
@@ -397,10 +397,10 @@ export class PostControlComponent implements OnInit {
             ? JSON.parse(forma.value.subCategory3Form).name
             : null,
       },
-      // //////////console.log(cat);
+      // ////////////console.log(cat);
     ];
 
-    ////////console.log('group cat', catGroup);
+    //////////console.log('group cat', catGroup);
 
     this.categoryError = true;
 
@@ -543,13 +543,13 @@ export class PostControlComponent implements OnInit {
 
     if (event.target.files) {
 
-      //////// ////////////console.log('total', event.target.files);
+      //////// //////////////console.log('total', event.target.files);
       for (let index = 0; index < event.target.files.length; index++) {
         var reader = new FileReader();
         var promesa = new Promise((resolve, reject) => {
           reader.readAsDataURL(event.target.files[index]);
           var fileup = event.target.files[index];
-          //////// ////////////console.log('imagen nro ', index, fileup);
+          //////// //////////////console.log('imagen nro ', index, fileup);
 
           reader.onload = (event: any) => {
             var image = new Image();
@@ -573,13 +573,13 @@ export class PostControlComponent implements OnInit {
             if (this.ngTypeAdjuntos != "Catálogo PDF") {
               // return;
               var x = new Promise((resolve, reject) => {
-                // //////// ////////////console.log('entra en promesa', index);
+                // //////// //////////////console.log('entra en promesa', index);
                 image.onload = function () {
-                  // //////// ////////////console.log('datos de imagn',image);
+                  // //////// //////////////console.log('datos de imagn',image);
                   var k = [image.width, image.height];
                   resolve(k);
-                  //////// ////////////console.log('datos promesa', image);
-                  //////// ////////////console.log('Sale de promesa, resuelve', index);
+                  //////// //////////////console.log('datos promesa', image);
+                  //////// //////////////console.log('Sale de promesa, resuelve', index);
                 };
               });
 
@@ -605,8 +605,8 @@ export class PostControlComponent implements OnInit {
                   if (r[0] >= 200 && r[1] >= 200) {
                     this.urlFiles.push(event.target.result);
                     this.imagenesSubir.push(fileup);
-                    // //////// ////////////console.log(fileup.size);
-                    // //////// ////////////console.log(this.urlFiles, 'urlfiles');
+                    // //////// //////////////console.log(fileup.size);
+                    // //////// //////////////console.log(this.urlFiles, 'urlfiles');
                   } else {
                     this._notifyService.Toast.fire({
                       title: "Dimensiones no permitidas",
@@ -623,7 +623,7 @@ export class PostControlComponent implements OnInit {
             }
 
             if (this.ngTypeAdjuntos == "Catálogo PDF") {
-              ////////// ////////////console.log('archivo', reader);
+              ////////// //////////////console.log('archivo', reader);
               // return;
 
               if (
@@ -678,7 +678,7 @@ export class PostControlComponent implements OnInit {
 
         this._categoryService.allCategoryList = resp.data;
 
-        console.log("las categorias", resp.data);
+        //console.log("las categorias", resp.data);
       },
       (err) => {
         console.error(err);
@@ -706,7 +706,7 @@ export class PostControlComponent implements OnInit {
   }
 
   accion(e) {
-    console.log("la accion", e);
+    //console.log("la accion", e);
 
 
     if (e == "borrador") {
@@ -803,10 +803,10 @@ export class PostControlComponent implements OnInit {
 
     this.infoPlanPauta = plan;
 
-    console.log('el plan se recibe', plan);
+    //console.log('el plan se recibe', plan);
     window.scroll(0,0);
 
-    // console.log('prueba de stringi',
+    // //console.log('prueba de stringi',
     //   JSON.stringify(plan.plan)
     // )
 

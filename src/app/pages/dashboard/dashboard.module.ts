@@ -38,7 +38,8 @@ import { InfoBoostComponent } from './info-boost/info-boost.component';
 import { HistorialPublicationsComponent } from './historial-publications/historial-publications.component';
 import { HistorialBillingPublicationComponent } from './historial-billing-publication/historial-billing-publication.component';
 import { GeneralBalanceComponent } from './general-balance/general-balance.component';
-import { GlobalPaginatorComponent } from 'src/app/components/global-paginator/global-paginator.component';
+import { GLOBALCOMPONENTS_MODULE } from 'src/app/components/components.module';
+// import { GlobalPaginatorComponent } from 'src/app/components/global-paginator/global-paginator.component';
 // import { COMPONENTS_MODULE } from 'src/app/components/components.module';
 
 
@@ -63,7 +64,7 @@ import { GlobalPaginatorComponent } from 'src/app/components/global-paginator/gl
     HistorialPublicationsComponent,
     HistorialBillingPublicationComponent,
     GeneralBalanceComponent,
-    GlobalPaginatorComponent
+    // GlobalPaginatorComponent
 
 
   ],
@@ -82,6 +83,7 @@ import { GlobalPaginatorComponent } from 'src/app/components/global-paginator/gl
       animation: 150,
       swapThreshold: 1,
     }),
+    GLOBALCOMPONENTS_MODULE,
     DpDatePickerModule,
     DASHBOARD_ROUTES,
     // COMPONENTS_MODULE

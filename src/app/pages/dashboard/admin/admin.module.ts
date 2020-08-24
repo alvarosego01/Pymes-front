@@ -15,6 +15,7 @@ import { UserControlComponent } from './user-control/user-control.component';
 import { PautaControlComponent } from './pauta-control/pauta-control.component';
 import { BoostOrdersComponent } from './boost-orders/boost-orders.component';
 import { PurchaseStatsComponent } from './purchase-stats/purchase-stats.component';
+import { GLOBALCOMPONENTS_MODULE } from 'src/app/components/components.module';
 
 @NgModule({
   declarations: [
@@ -27,13 +28,15 @@ import { PurchaseStatsComponent } from './purchase-stats/purchase-stats.componen
 
   BoostOrdersComponent,
 
-  PurchaseStatsComponent],
+  PurchaseStatsComponent
+],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     // [RouterModule.forChild(DASHBOARD_ROUTES)]
+    GLOBALCOMPONENTS_MODULE,
     ADMIN_ROUTES,
     PipesModule
   ],

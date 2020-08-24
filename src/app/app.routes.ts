@@ -1,7 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 
 
-import { HomeComponent, RegisterComponent, UsComponent, ProfileViewComponent, VerifyControlComponent, CheckoutResponseComponent } from './pages/pages.index';
+import { HomeComponent, RegisterComponent, UsComponent, ProfileViewComponent, VerifyControlComponent, CheckoutResponseComponent, ContactComponent } from './pages/pages.index';
 import { InfoPostComponent } from './components/components.index';
 
 // LoginVerifyGuard
@@ -17,6 +17,7 @@ const appRoutes: Routes = [
     // },
     { path: 'verify/:type', component: VerifyControlComponent },
     { path: 'us', component: UsComponent },
+    { path: 'contact', component: ContactComponent },
     { path: 'checkoutResponse/:id', component: CheckoutResponseComponent },
     { path: 'checkoutResponse/:id/:validate', component: CheckoutResponseComponent },
     { path: 'publication/infoPost/:id', component: InfoPostComponent },

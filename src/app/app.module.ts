@@ -77,6 +77,7 @@ import { GlobalConfigService } from './services/-global-config.service';
 
 import {DpDatePickerModule} from 'ng2-date-picker';
 import { CheckoutResponseComponent } from './pages/checkout-response/checkout-response.component';
+import { GLOBALCOMPONENTS_MODULE } from './components/components.module';
 // import { GlobalPaginatorComponent } from './components/global-paginator/global-paginator.component';
 
 @NgModule({
@@ -128,6 +129,7 @@ import { CheckoutResponseComponent } from './pages/checkout-response/checkout-re
       swapThreshold: 1,
     }),
     DpDatePickerModule,
+    GLOBALCOMPONENTS_MODULE,
     APP_ROUTES,
     // COMPONENTS_MODULE,
     DASHBOARD_MODULE,

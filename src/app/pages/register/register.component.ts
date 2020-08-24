@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
 
       this.welcomeMessage();
 
-    // //////// ////////////console.log(this._globaConfig.departamentos);
+    // //////// //////////////console.log(this._globaConfig.departamentos);
   }
 
   ngOnInit(): void {
@@ -122,16 +122,16 @@ export class RegisterComponent implements OnInit {
 wrapper.innerHTML= this.mapUrl;
 var div= wrapper.firstChild;
 this.mapElement = div;
-//////// ////////////console.log(div);
+//////// //////////////console.log(div);
   }
 
   activateEconomicActivity(){
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    //////// ////////////console.log(this.estadosActividad);
+    //////// //////////////console.log(this.estadosActividad);
   }
 
   setCiudades(i){
-    // //////// ////////////console.log('Got the selectedVendor as : ', i);
+    // //////// //////////////console.log('Got the selectedVendor as : ', i);
     // return;
     let k = JSON.parse(i);
     k = k.id;
@@ -151,12 +151,12 @@ this.mapElement = div;
   //  this._usuarioService.promiseTimeout(5000, x);
     x.then(r => {
 
-      //////// ////////////console.log(r);
+      //////// //////////////console.log(r);
       this.coordsMap = r;
       this._globaConfig.spinner = false;
       if(Object.keys(this.coordsMap).length > 0 ){
         this.activateMap = true;
-      // //////// ////////////console.log('activado mapa', );
+      // //////// //////////////console.log('activado mapa', );
       }
 
       this._notifyService.Toast.fire({
@@ -211,11 +211,11 @@ this.mapElement = div;
     }
 
     if(this.altMapUrl != null && this.altMapUrl != ''){
-      // //// ////////////console.log('lo pone');
+      // //// //////////////console.log('lo pone');
       this.coordsMap.mapUrl = this.altMapUrl;
     }
 
-    // //// ////////////console.log(this.coordsMap);
+    // //// //////////////console.log(this.coordsMap);
     // return;
 
     if(type == 'natural'){
@@ -300,7 +300,7 @@ this.mapElement = div;
       // forma.value.estadosActividad,
       );
         //  this.spinner = true;
-       ////////console.log(usuario);
+       //////////console.log(usuario);
       //  return;
 
 
@@ -309,7 +309,7 @@ this.mapElement = div;
           this._usuarioService.registroUsuarioPOST( usuario, null ,'natural' )
           .subscribe( resp => {
 
-            //console.log('la maldita respuesta', resp);
+            ////console.log('la maldita respuesta', resp);
 //
             this._globaConfig.spinner = false;
 
@@ -319,9 +319,9 @@ this.mapElement = div;
               resp.data.user._id
             );
             this._notifyService.sendNotifyEmailPOST(n).subscribe((resp) => {
-              //console.log('email enviado', resp);
+              ////console.log('email enviado', resp);
             }, err => {
-              //console.log('email error');
+              ////console.log('email error');
 
             });
 
@@ -342,7 +342,7 @@ this.mapElement = div;
             // forma.reset();
         }, ERR => {
 
-              console.log('los errores', ERR);
+              //console.log('los errores', ERR);
 
                 // var err = data.error.message.errors{}.tipo.message
                 let e = ERR.error.message.errors || null;
@@ -351,7 +351,7 @@ this.mapElement = div;
                   let errors: any = [];
 
                 for (var [key, value] of Object.entries(e)) {
-                  console.log(key + ' ' + value); // "a 5", "b 7", "c 9"
+                  //console.log(key + ' ' + value); // "a 5", "b 7", "c 9"
                   errors.push(value);
                 }
 
@@ -495,7 +495,7 @@ if(type == 'company'){
 
   );
 
-  //////// ////////////console.log(usuario, 'envio company');
+  //////// //////////////console.log(usuario, 'envio company');
       this._globaConfig.spinner = true;
 //
           this._usuarioService.registroUsuarioPOST( null, usuario ,'company' )
@@ -518,10 +518,10 @@ if(type == 'company'){
           },
           ERR => {
             // var err = data.error.message.errors{}.tipo.message
-            console.log(ERR);
+            //console.log(ERR);
             let errors = ERR.error.message.errors;
             errors.forEach((ele, idx) => {
-              console.log('each', ele.message);
+              //console.log('each', ele.message);
               this._notifyService.Toast.fire({
                 title: ele.message || 'Algo ha salido mal, intente más tarde',
                 icon: "error",

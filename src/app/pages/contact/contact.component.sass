@@ -1,0 +1,133 @@
+
+@import "~src/generals"
+
+
+.form-group
+    padding: 0!important
+
+
+.container
+    // width: 65%!important
+    @include responsivo(telefonoTable)
+        width: 90%!important
+    @include responsivo(pcMedio)
+        width: 80%!important
+    @include responsivo(general)
+        width: 75%!important
+    @include responsivo(resto)
+        width: 65%!important
+
+.input-group
+    margin-bottom: 0!important
+
+.contTitle
+    position: absolute
+    left: 0
+    right: 0
+    // top: 7.5%
+    h6
+        text-align: center
+        color: $GrisOscur
+    h1
+        color: white
+        text-align: center
+        font-weight: bold
+    @include responsivo(telefonoTable)
+        top: 30px
+    @include responsivo(pcMedio)
+        top: 30px
+    @include responsivo(general)
+        top: 80px
+    @include responsivo(resto)
+        top: 100px
+
+.contForm
+    position: absolute
+    left: 0
+    right: 0
+    // top: -350px
+    display: block
+    @include responsivo(telefonoTable)
+        top: 150px
+    @include responsivo(pcMedio)
+        top: 150px
+    @include responsivo(general)
+        top: 200px
+    @include responsivo(resto)
+        top: 250px
+
+.contactPage
+    position: relative
+    background-color: $GrisFondo2
+    padding-bottom: 5%
+    @include responsivo(telefonoTable)
+        padding-bottom: 800px
+    @include responsivo(pcMedio)
+        padding-bottom: 700px
+    @include responsivo(general)
+        padding-bottom: 500px
+    @include responsivo(resto)
+        padding-bottom: 400px
+    .imgHeader
+        width: 100%
+        object-fit: cover
+        object-position: center right
+        @include responsivo(telefonoTable)
+            height: 40%
+        @include responsivo(pcMedio)
+            height: 50%
+        @include responsivo(general)
+            height: 40%
+        @include responsivo(resto)
+            height: auto
+            max-height: 700px
+    .container
+        .form
+            padding: 2.5%
+            background-color: white
+            h3
+                font-weight: bold
+            input
+                max-width: 65%
+                width: 100%
+                display: block
+            textarea
+                width: 100%
+                max-width: 85%
+                display: block
+            @include responsivo(telefonoTable)
+                input,
+                textarea
+                    max-width: 100%
+            @include responsivo(pcMedio)
+                input,
+                textarea
+                    max-width: 100%
+        .info
+            background-color: $GrisOscur
+            display: flex
+            justify-content: center
+            justify-items: center
+            align-items: center
+            ul.listInfo
+                list-style: none
+                width: 70%
+                margin: auto
+                display: block
+                padding: 0!important
+                li
+                    border-bottom: 1px solid white
+                    padding-bottom: 10px
+                    margin-bottom: 15px
+                    a
+                        color: white!important
+                        font-size: 16px
+                        display: flex
+                        align-items: baseline
+                        i
+                            font-size: 28px
+                            margin-right: 5px
+            @include responsivo(telefonoTable)
+                padding: 50px 2.5%
+            @include responsivo(pcMedio)
+                padding: 50px 25px

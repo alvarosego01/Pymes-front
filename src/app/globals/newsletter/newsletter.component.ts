@@ -30,7 +30,7 @@ export class NewsletterComponent implements OnInit {
     this.globalConfig.newsLetterAddPOST(l).subscribe(
       (resp) => {
         // this.router.navigate(['/dashboard']);
-        ////////// ////////////console.log('FUNCIONA', resp);
+        ////////// //////////////console.log('FUNCIONA', resp);
         this.globalConfig.spinner = false;
 
         this._notifyService.Toast.fire({
@@ -40,11 +40,11 @@ export class NewsletterComponent implements OnInit {
 
         forma.reset();
 
-        // //// ////////////console.log(resp);
+        // //// //////////////console.log(resp);
       },
       (ERR) => {
         var resp = ERR;
-        // //// ////////////console.log(resp.error);
+        // //// //////////////console.log(resp.error);
         this._notifyService.Toast.fire({
           title: resp.error.message,
           icon: "error",

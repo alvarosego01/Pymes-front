@@ -35,7 +35,7 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {}
 
   openLogin() {
-    //console.log('open login ');
+    ////console.log('open login ');
     this._usersService.loginVisible = !this._usersService.loginVisible;
 
     this._usersService.recoveryPassword = false;
@@ -47,7 +47,7 @@ export class NavBarComponent implements OnInit {
   ocultarLogin(e: Event) {
 
 
-    //console.log('ocultar login');
+    ////console.log('ocultar login');
       if( e.target['className'] != '' &&
          !e.target['className'].includes("loginController") &&
          !e.target['className'].includes("navButton") &&

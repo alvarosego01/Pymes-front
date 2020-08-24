@@ -9,7 +9,7 @@ export class ImagenPipe implements PipeTransform {
   transform( img: string, tipo: string = 'User', folder: string = '', thumb: boolean = false): any {
 
     img = (img == null)? `${folder}-thumbnail.jpeg`: img;
-    // ////// ////////////console.log('folder', folder);
+    // ////// //////////////console.log('folder', folder);
     let url = _SERVICIOS + '/img';
     url = (thumb == true)? `${url}/thumbs`: url;
 
@@ -47,11 +47,11 @@ export class ImagenPipe implements PipeTransform {
       // break;
 
       default:
-        //////////// ////////////console.log('tipo de imagen no existe, usuario, medicos, hospitales');
+        //////////// //////////////console.log('tipo de imagen no existe, usuario, medicos, hospitales');
         url += '/usurios/xxx';
     }
 
-      // ////////////console.log('imagen', url);
+      // //////////////console.log('imagen', url);
     return url;
   }
 

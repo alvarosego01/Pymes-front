@@ -50,6 +50,13 @@ class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{
             <p>Nosotros</p>
             </a>
           </li>
+          <li class="nav-item registerButton">
+            <a class="nav-link" [routerLink]="['/contact']" #navlink routerLinkActive="active">
+            <!-- <i class="fas     nav-icon"></i> -->
+            <i class="fas fa-envelope nav-icon    "></i>
+            <p>Contacto</p>
+            </a>
+          </li>
 
 
           <li (click)="openLoginByAside()" *ngIf="this._usersService.token == null" class="nav-item loginButton">

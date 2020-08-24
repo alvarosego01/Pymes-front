@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 
 
         this.router.navigate(['/dashboard']);
-        ////////// ////////////console.log('FUNCIONA', resp);
+        ////////// //////////////console.log('FUNCIONA', resp);
         this.GlobalConfigService.spinner = false;
 
         this._notifyService.Toast.fire({
@@ -67,11 +67,11 @@ export class LoginComponent implements OnInit {
         });
 
 
-        // //// ////////////console.log(resp);
+        // //// //////////////console.log(resp);
       },
       ERR => {
         var resp = ERR;
-        // //// ////////////console.log(resp.error);
+        // //// //////////////console.log(resp.error);
           this._notifyService.Toast.fire({
             title: resp.error.message,
             icon: 'error'
@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
 
   openRecoveryPassword(){
 
-    //console.log('open recovery');
+    ////console.log('open recovery');
 
     this._usersService.loginVisible = false;
 

@@ -16,5 +16,8 @@ export { ContactComponent } from './contact/contact.component';
 export { HomeComponent } from "./home/home.component";
 
 
+// ContactComponent
+
+
 
 // InfoPostPageComponent

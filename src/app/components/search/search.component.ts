@@ -67,19 +67,19 @@ async searchByText(forma: NgForm){
 
     this.GlobalConfigService.spinner = true;
     this._searchService.searchByTextPOST(args).subscribe((resp) => {
-      // ////// ////////////console.log(resp);
+      // ////// //////////////console.log(resp);
       if (resp.status == 200 && resp.ok == true) {
 
         if ((resp.data) &&  resp.data.length > 0 ) {
 
-          ////////////console.log('la respuesta de la busqueda', resp);
+          //////////////console.log('la respuesta de la busqueda', resp);
 
           this._searchService.homeTitleResults = 'Resultados';
           this._searchService.registros = resp.data;
           this._searchService.paginator = resp.paginator || null;
           this._searchService.setActualReactions();
 
-          ////// ////////////console.log(this._searchService.registros);
+          ////// //////////////console.log(this._searchService.registros);
         }else{
           this._searchService.registros = [];
         }

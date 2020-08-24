@@ -23,8 +23,14 @@
         align-items: center
         a
             margin: auto 0
+            padding-left: 7.5px
+            padding-right: 7.5px
             i
                 padding-right: 5px
+            @include responsivo(general)
+                font-size: 1.25vw
+            @include responsivo(resto)
+                font-size: 18px
 .logo
     @include responsivo(telefonoTable)
         margin-left: auto!important
@@ -92,7 +98,6 @@ ul.menuRight
                 height: 25px
                 width: 25px
         a
-            padding: 0
             width: auto
             display: flex
             flex-direction: row
@@ -100,9 +105,15 @@ ul.menuRight
             align-content: center
             align-items: center
             margin: auto 0
+            padding-left: 7.5px
+            padding-right: 7.5px
             h6
                 margin-bottom: 0
                 display: block
+            @include responsivo(general)
+                font-size: 1.25vw
+            @include responsivo(resto)
+                font-size: 18px
     li.registerButton
         position: relative
         padding-left: 15px

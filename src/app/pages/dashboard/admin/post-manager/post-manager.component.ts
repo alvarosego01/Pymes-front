@@ -19,6 +19,9 @@ import { GlobalConfigService } from 'src/app/services/-global-config.service';
 export class PostManagerComponent implements OnInit {
   allPublications: any = [];
 
+
+  paginator: any = null;
+
   constructor(
     public _postService: PostsService,
     public GlobalConfigService: GlobalConfigService,
@@ -95,7 +98,7 @@ export class PostManagerComponent implements OnInit {
         })
         if (formValues) {
 
-          // ////////////console.log(formValues);
+          // //////////////console.log(formValues);
 
           var t = {
             reason: formValues[0].value,
@@ -114,7 +117,7 @@ export class PostManagerComponent implements OnInit {
                 // text: '¡Gracias por unirte a Mercado Pyme!',
                 icon: "success",
               });
-              this.getAllPublications(false);
+              this.getAllPublications(this.paginator.currentPage);
             } else {
               this._notifyService.Toast.fire({
                 title: resp.message,
@@ -158,7 +161,7 @@ export class PostManagerComponent implements OnInit {
                 // text: '¡Gracias por unirte a Mercado Pyme!',
                 icon: "success",
               });
-              this.getAllPublications(false);
+              this.getAllPublications(this.paginator.currentPage);
             } else {
               this._notifyService.Toast.fire({
                 title: resp.message,
@@ -189,7 +192,7 @@ export class PostManagerComponent implements OnInit {
       .then((borrar) => {
         if (borrar.value) {
           // if (borrar) {
-          // // ////////////console.log('borrado');
+          // // //////////////console.log('borrado');
           // return;
           this.GlobalConfigService.spinner = true;
           this._postService
@@ -201,7 +204,7 @@ export class PostManagerComponent implements OnInit {
                   // text: '¡Gracias por unirte a Mercado Pyme!',
                   icon: "success",
                 });
-                this.getAllPublications(false);
+                this.getAllPublications(this.paginator.currentPage);
               } else {
                 this._notifyService.Toast.fire({
                   title: borrado.message,
@@ -223,28 +226,33 @@ export class PostManagerComponent implements OnInit {
       });
   }
 
-  getAllPublications(notif: boolean = true) {
+  getAllPublications(paginate: number = 1) {
     this.GlobalConfigService.spinner = true;
 
-    this._postService.getAllPublicationsGET().subscribe((resp) => {
+    this._postService.getAllPublicationsGET(paginate).subscribe((resp) => {
       this.GlobalConfigService.spinner = false;
 
       this.allPublications = resp.data;
 
 
-      if (notif == true) {
-        this._notifyService.Toast.fire({
-          title: resp.message,
-          // text:'El navegador no soporta la geolocalización',
-          icon: "success",
-        });
-      }
 
-      // ////////////console.log(this.allPublications);
-      ////// ////////////console.log(this.allPublications);
+
+      // //////////////console.log(this.allPublications);
+      ////// //////////////console.log(this.allPublications);
     }, (err) => {
 
       this.GlobalConfigService.spinner = false;
     });
   }
+
+
+  newPageResponse(paginate){
+
+
+    this.paginator.currentPage = paginate;
+
+    this.getAllPublications(this.paginator.currentPage);
+
+  }
+
 }

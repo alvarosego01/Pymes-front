@@ -10,13 +10,25 @@ import { GlobalConfigService } from 'src/app/services/-global-config.service';
 })
 export class NotifyControlComponent implements OnInit {
 
+
+
+
+  notificaciones: any = [];
+
+  paginator: any = null;
+
+
   constructor(
         public router: Router,
     public activatedRoute: ActivatedRoute,
     public _notifyService: NotifyService,
     public _usersService: UsersService,
        public GlobalConfigService: GlobalConfigService
-  ) { }
+  ) {
+
+    this.getAllNotifyByUser();
+
+  }
 
   ngOnInit(): void {
   }
@@ -45,7 +57,7 @@ export class NotifyControlComponent implements OnInit {
             title: resp.message,
             icon: 'success'
           })
-          this.getAllNotifyByUser();
+          this.getAllNotifyByUser(this.paginator.currentPage);
           this.GlobalConfigService.spinner = false;
           // this.router.navigate(["/dashboard/notify"]);
         }, (err) => {
@@ -64,25 +76,38 @@ export class NotifyControlComponent implements OnInit {
 
   }
 
-  getAllNotifyByUser() {
+  getAllNotifyByUser(paginate: number = 1) {
 
+    this.GlobalConfigService.spinner = true;
       this._notifyService
-        .getAllNotifyByUserGET(this._usersService.usuario._id)
-        .subscribe(
-          (resp) => {
-            var data = resp.data;
+      .getAllNotifyByUserGET(paginate)
+      .subscribe(
+        (resp) => {
+          var data = resp.data;
 
-            this._notifyService.notificaciones = resp.data;
+          this.notificaciones = resp.data;
 
-            // if (resp.data.registros && resp.data.registros.length > 0) {
-            //   this.existNotif = true;
-            // }
 
-            //console.log("notificaciones", resp.data);
-          },
-          (err) => {}
+          this.paginator = resp.paginator;
+
+          //console.log('la respuesta', resp);
+          this.GlobalConfigService.spinner = false;
+        },
+        (err) => {
+
+          this.GlobalConfigService.spinner = false;
+          }
         );
 
   }
+
+  newPageResponse(paginate){
+
+    this.paginator.currentPage = paginate;
+
+    this.getAllNotifyByUser(paginate);
+
+  }
+
 
 }

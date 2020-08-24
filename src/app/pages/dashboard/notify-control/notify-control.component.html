@@ -13,9 +13,9 @@
             <h1>Notificaciones
 
               <small
-              *ngIf="(this._notifyService.notificaciones) && (this._notifyService.notificaciones.registros.length > 0)"
+              *ngIf="(this.notificaciones) && (this.notificaciones.length > 0)"
               >
-              - {{ this._notifyService.notificaciones.registros.length }}
+              - {{ this.paginator.itemCount }}
               </small>
 
             </h1>
@@ -29,7 +29,7 @@
     <section class="content">
 
         <div
-        *ngIf="(this._notifyService.notificaciones) && (this._notifyService.notificaciones.registros.length > 0)"
+        *ngIf="(this.notificaciones) && (this.notificaciones.length > 0)"
         class="card card-primary card-outline">
 
             <!-- /.card-header -->
@@ -60,7 +60,7 @@
                   <tbody>
 
                   <tr
-                  *ngFor="let item of this._notifyService.notificaciones.registros" >
+                  *ngFor="let item of this.notificaciones" >
 
                     <td>
                         <i
@@ -110,7 +110,16 @@
         </div>
 
 
-      <div class="jumbotron" *ngIf="(this._notifyService.notificaciones == null) || (this._notifyService.notificaciones.registros.length == 0)">
+        <app-global-paginator
+        *ngIf="( this.paginator != null ) && ( this.paginator.pageCount > 1 )"
+        [paginator]="this.paginator"
+        (newPageResponse)="this.newPageResponse($event)"
+        >
+
+        </app-global-paginator>
+
+
+      <div class="jumbotron" *ngIf="(this.notificaciones == null) || (this.notificaciones.length == 0)">
         <h1 class="titleSpecial2">Sin resultados</h1>
         <p>No hay notificaciones en este momento</p>
       </div>

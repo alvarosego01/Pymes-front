@@ -100,14 +100,14 @@ roleName: string;
     public _postService: PostsService
   ) {
 
-    ////// ////////////console.log('entra profile');
+    ////// //////////////console.log('entra profile');
 
     // return;
     activatedRoute.params.subscribe((params) => {
       let id = params["id"];
 
 
-      ////// ////////////console.log(id);
+      ////// //////////////console.log(id);
       // return;
       // this.setPublication(id);
       this.getUserProfile(id);
@@ -132,11 +132,11 @@ roleName: string;
     this._usersService
       .setNewVisitPUT(id)
       .subscribe((resp) => {
-        // ////// ////////////console.log(resp);
+        // ////// //////////////console.log(resp);
 
         if (resp.status == 200 && resp.ok == true) {
           // this._notifyService.Toast.fire({
-          // ////// ////////////console.log(resp);
+          // ////// //////////////console.log(resp);
           // this._notifyService.Toast.fire({
           //   title: resp.message,
           //   // text: '¡Gracias por unirte a Mercado Pyme!',
@@ -162,15 +162,15 @@ roleName: string;
 
     this.GlobalConfigService.spinner = true;
     this._postService.getStatsGeneralGET(id).subscribe((resp) => {
-      // ////// ////////////console.log(resp);
+      // ////// //////////////console.log(resp);
 
-      // ////////////console.log('llamado informacion stats');
+      // //////////////console.log('llamado informacion stats');
       if (resp.status == 200 && resp.ok == true) {
 
 
         // this.statsGeneral = resp.data;
         this.usuarioInfo.statsGeneral  = resp.data
-        //// ////////////console.log(resp.data);
+        //// //////////////console.log(resp.data);
         // this.setUserInformation();
         // if(this.usuarioInfo.length > 0){
         // }
@@ -213,7 +213,7 @@ roleName: string;
   setUserInformation(){
 
 
-    ////// ////////////console.log('informacion de usuario', this.usuarioInfo);
+    ////// //////////////console.log('informacion de usuario', this.usuarioInfo);
 
     switch (this.usuarioInfo.role) {
       case "CLIENTE_ROLE":
@@ -260,14 +260,14 @@ roleName: string;
     this.companyPhonee = this.usuarioInfo._companyPhones;
     this.nrPhones = this.usuarioInfo._companyPhones.length;
 
-    ////// ////////////console.log(this.companyPhonee);
+    ////// //////////////console.log(this.companyPhonee);
   }
 
 
-    ////// ////////////console.log('map',this.usuarioInfo._mapUrl);
+    ////// //////////////console.log('map',this.usuarioInfo._mapUrl);
 
     if(this.usuarioInfo._mapUrl != null){
-      // ////////// ////////////console.log(this.usuarioInfo._mapUrl.mapUrl);
+      // ////////// //////////////console.log(this.usuarioInfo._mapUrl.mapUrl);
       var l = this.usuarioInfo._mapUrl;
       this.setMapUrl(l);
 
@@ -284,10 +284,10 @@ roleName: string;
 
     for (var i = 0; i < this.usuarioInfo._naturalEconomicActivity.length; ++i) {
       this.estadosActividad.push(this.usuarioInfo._naturalEconomicActivity[i].typeActivity);
-      ////////// ////////////console.log(this.usuarioInfo._naturalEconomicActivity[i].details);
+      ////////// //////////////console.log(this.usuarioInfo._naturalEconomicActivity[i].details);
       switch (this.usuarioInfo._naturalEconomicActivity[i].typeActivity) {
         case "Producción":
-        ////////// ////////////console.log('fue produccion');
+        ////////// //////////////console.log('fue produccion');
         this.ProduccionActivity = this.usuarioInfo._naturalEconomicActivity[i].details;
         break;
         case "Comercialización":
@@ -305,7 +305,7 @@ roleName: string;
       }
     }
 
-    ////// ////////////console.log(this.usuarioInfo);
+    ////// //////////////console.log(this.usuarioInfo);
 
     this.GlobalConfigService.setTitle(`Perfil de usuario - ${this.usuarioInfo.name} ${this.usuarioInfo.surname}`);
 
@@ -317,7 +317,7 @@ roleName: string;
 
   this.GlobalConfigService.spinner = true;
   this._usersService.getUserProfileGET(idUser).subscribe((resp) => {
-    // ////// ////////////console.log(resp);
+    // ////// //////////////console.log(resp);
 
     if (resp.status == 200 && resp.ok == true) {
 
@@ -344,7 +344,7 @@ roleName: string;
     this.GlobalConfigService.spinner = false;
 
   },(error) => {
-    // //// ////////////console.log('recibe error acá', error);
+    // //// //////////////console.log('recibe error acá', error);
     this._notifyService.Toast.fire({
       title: error.error.message,
       // text: '¡Gracias por unirte a Mercado Pyme!',
