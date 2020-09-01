@@ -78,7 +78,11 @@ import { GlobalConfigService } from './services/-global-config.service';
 import {DpDatePickerModule} from 'ng2-date-picker';
 import { CheckoutResponseComponent } from './pages/checkout-response/checkout-response.component';
 import { GLOBALCOMPONENTS_MODULE } from './components/components.module';
+import { ZonaPymesComponent } from './pages/zona-pymes/zona-pymes.component';
 // import { GlobalPaginatorComponent } from './components/global-paginator/global-paginator.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -111,6 +115,7 @@ import { GLOBALCOMPONENTS_MODULE } from './components/components.module';
     SearchComponent,
     InfoPostComponent,
     CheckoutResponseComponent,
+    ZonaPymesComponent,
     // GlobalPaginatorComponent,
   ],
   imports: [

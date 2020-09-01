@@ -50,6 +50,17 @@ class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{
             <p>Nosotros</p>
             </a>
           </li>
+
+
+          <li class="nav-item registerButton">
+            <a class="nav-link" [routerLink]="['/zonaPymes']" #navlink routerLinkActive="active">
+            <!-- <i class="fas     nav-icon"></i> -->
+            <i class="fas nav-icon fa-user-friends    "></i>
+
+            <p>Zona Pymes</p>
+            </a>
+          </li>
+
           <li class="nav-item registerButton">
             <a class="nav-link" [routerLink]="['/contact']" #navlink routerLinkActive="active">
             <!-- <i class="fas     nav-icon"></i> -->
@@ -116,7 +127,7 @@ class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{
 
           <li
           class="nav-item">
-            <a  #navlink class="nav-link" [routerLink]="['/admin/dashboard/generalBalance']" routerLinkActive="active">
+            <a  #navlink class="nav-link" [routerLink]="['/admin/generalBalance']" routerLinkActive="active">
               <i class="fas nav-icon fa-chart-pie    "></i>
               <p>Balances y reportes</p>
             </a>

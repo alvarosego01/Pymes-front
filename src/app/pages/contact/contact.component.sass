@@ -25,13 +25,12 @@
     left: 0
     right: 0
     // top: 7.5%
-    h6
+    h1
+        text-align: center
+        color: white
+    p
         text-align: center
         color: $GrisOscur
-    h1
-        color: white
-        text-align: center
-        font-weight: bold
     @include responsivo(telefonoTable)
         top: 30px
     @include responsivo(pcMedio)
@@ -54,7 +53,7 @@
     @include responsivo(general)
         top: 200px
     @include responsivo(resto)
-        top: 250px
+        top: 210px
 
 .contactPage
     position: relative
@@ -67,20 +66,20 @@
     @include responsivo(general)
         padding-bottom: 500px
     @include responsivo(resto)
-        padding-bottom: 400px
+        padding-bottom: 300px
     .imgHeader
         width: 100%
         object-fit: cover
         object-position: center right
         @include responsivo(telefonoTable)
-            height: 40%
+            height: 60%
         @include responsivo(pcMedio)
-            height: 50%
+            height: 60%
         @include responsivo(general)
-            height: 40%
+            height: 60%
         @include responsivo(resto)
             height: auto
-            max-height: 700px
+            max-height: 600px
     .container
         .form
             padding: 2.5%

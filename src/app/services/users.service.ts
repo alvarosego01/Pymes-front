@@ -409,6 +409,28 @@ export class UsersService {
     })
     );
 
+
+
+
   }
+
+
+
+  // servicios para las estadistica generales
+  getDataAdminGET(id){
+
+    let url = `${_SERVICIOS}/stats/${id}?t=${this.token}`;
+    console.log('la url que se manda', url);
+  return this.http.get(url).pipe(
+    map((resp: any) => {
+      return resp;
+    }),
+    catchError((err) => {
+      return throwError(err);
+    })
+    );
+
+  }
+
 
 }

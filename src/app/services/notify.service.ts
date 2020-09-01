@@ -72,12 +72,6 @@ export class NotifyService {
 
 
 
-  welcomeMessage(title, message){
-
-  }
-
-
-
 
   getNotifyByUserGET(id){
 

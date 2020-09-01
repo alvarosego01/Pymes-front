@@ -1,3 +1,5 @@
+export { ZonaPymesComponent } from './zona-pymes/zona-pymes.component';
+
 export { CheckoutResponseComponent } from './checkout-response/checkout-response.component';
 
 export { InfoPostComponent } from '../components/info-post/info-post.component';
@@ -17,6 +19,8 @@ export { HomeComponent } from "./home/home.component";
 
 
 // ContactComponent
+
+
 
 
 

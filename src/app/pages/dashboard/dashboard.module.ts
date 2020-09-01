@@ -42,6 +42,7 @@ import { GLOBALCOMPONENTS_MODULE } from 'src/app/components/components.module';
 // import { GlobalPaginatorComponent } from 'src/app/components/global-paginator/global-paginator.component';
 // import { COMPONENTS_MODULE } from 'src/app/components/components.module';
 
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -83,6 +84,7 @@ import { GLOBALCOMPONENTS_MODULE } from 'src/app/components/components.module';
       animation: 150,
       swapThreshold: 1,
     }),
+    ChartsModule,
     GLOBALCOMPONENTS_MODULE,
     DpDatePickerModule,
     DASHBOARD_ROUTES,

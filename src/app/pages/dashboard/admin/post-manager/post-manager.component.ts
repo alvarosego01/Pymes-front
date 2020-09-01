@@ -234,7 +234,7 @@ export class PostManagerComponent implements OnInit {
 
       this.allPublications = resp.data;
 
-
+      this.paginator = resp.paginator;
 
 
       // //////////////console.log(this.allPublications);

@@ -100,16 +100,10 @@ roleName: string;
     public _postService: PostsService
   ) {
 
-    ////// //////////////console.log('entra profile');
-
     // return;
     activatedRoute.params.subscribe((params) => {
       let id = params["id"];
 
-
-      ////// //////////////console.log(id);
-      // return;
-      // this.setPublication(id);
       this.getUserProfile(id);
 
     });

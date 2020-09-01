@@ -19,8 +19,12 @@ export class ContactComponent implements OnInit {
     public _globaConfig: GlobalConfigService,
     public _notifyService: NotifyService,
     public _formService: FormsResourcesService,
+    public GlobalConfigService: GlobalConfigService
 
-  ) { }
+  ) {
+    this.GlobalConfigService.setTitle('Contacto');
+
+  }
 
   ngOnInit(): void {
   }

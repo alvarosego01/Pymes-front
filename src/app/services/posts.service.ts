@@ -484,23 +484,10 @@ export class PostsService {
 
     return this.http.delete( url ).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta", resp);
-        // alert("Usuario registrado");
-        // swal('Perro registrado', '' , 'success');
-        // let n = new _NotifyModel(
-        //   "nAccountCreatedNoVerify",
-        //   null,
-        //   resp.data._id
-        // );
-        // // this._notifyService.sendNotifyEmailPOST(n).subscribe((resp) => {
-//
-        // });
 
         return resp;
-        // this.guardarStorage( this.usuario._id , this.token, resp['data'])
       }),
       catchError((err) => {
-        ////// //////////////console.log( 'el error', err);
 
 
         return throwError(err);
@@ -518,17 +505,11 @@ export class PostsService {
     //////////// //////////////console.log(data, "llega data notif");
     return this.http.get(url).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta notificacion", resp);
-        // alert('Usuario registrado');
 
-        // //// //////////////console.log('tra', r);
         return resp;
       }),
       catchError((err) => {
-        // //// //////////////console.log("respuesta", err);
-        // return err;
-        // alert('Error en al registrar');
-        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+
         return throwError(err);
       })
     );
@@ -538,18 +519,14 @@ export class PostsService {
   getAllPublicationsGET(paginate) {
     // return;
     let url = `${_SERVICIOS}/post?t=${this._usersService.token}&paginate=${paginate}`;
-    //////////// //////////////console.log(data, "llega data notif");
     return this.http.get(url).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta notificacion", resp);
-        // alert('Usuario registrado');
+
 
         return resp;
       }),
       catchError((err) => {
-        //////////// //////////////console.log("respuesta notificacion", err);
-        // alert('Error en al registrar');
-        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+
         return throwError(err);
       })
     );
@@ -561,12 +538,10 @@ export class PostsService {
     // una vez logeado hace falta grabar la sesión en el local storage designado.
     return this.http.get(url).pipe(
       map((resp: any) => {
-        // //////////// //////////////console.log('respuesta', resp);
 
         return resp;
       }),
       catchError((err) => {
-        // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);
       })
     );

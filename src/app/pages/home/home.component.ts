@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef,  } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy,  } from '@angular/core';
 import { PostsService } from 'src/app/services/posts.service';
 import {   SearchService, UsersService, CategoryService } from 'src/app/services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,7 +9,7 @@ import { GlobalConfigService } from 'src/app/services/-global-config.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy  {
 
   banner:string = '';
 
@@ -61,6 +61,18 @@ export class HomeComponent implements OnInit {
     })
 
   }
+
+  async ngOnDestroy() {
+
+
+    // this._searchService.registros
+
+    this._searchService.registros = [];
+    this._searchService.paginator = [];
+    this._searchService.publications = [];
+
+  }
+
 
   async ngOnInit() {
 
