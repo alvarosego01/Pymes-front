@@ -1,0 +1,34 @@
+
+
+
+<!-- hasPrevPage -->
+<!-- hasNextPage -->
+
+<ul class="pagination " style="margin:20px 0">
+
+    <li class="page-item arrow">
+        <a
+        (click)="this.paginate('prev')" class="page-link"
+        [ngClass]="{'disabled': (this._searchService.paginator) && this._searchService.paginator.hasPrevPage == false}"
+        >
+        <i class="fa fa-angle-left" aria-hidden="true"></i> Anterior</a>
+
+    </li>
+
+    <li
+    *ngFor="let item of this.repeat(this._searchService.paginator.pageCount); let i = index"
+    class="page-item number">
+        <a (click)="this.paginate(i+1)"  class="page-link"
+        [ngClass]="{'active': (this._searchService.paginator) && this._searchService.paginator.currentPage == i + 1}"
+        >{{ i + 1 }}</a>
+    </li>
+
+    <li class="page-item arrow">
+        <a
+        (click)="this.paginate('next')" class="page-link"
+        [ngClass]="{'disabled': (this._searchService.paginator) && this._searchService.paginator.hasNextPage == false}"
+        >Siguiente <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+
+    </li>
+
+  </ul>

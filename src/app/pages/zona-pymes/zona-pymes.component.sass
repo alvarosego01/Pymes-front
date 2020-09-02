@@ -1,0 +1,125 @@
+
+@import "~src/generals"
+
+
+.contTitle
+    background-color: $VerdeClar
+    display: flex
+    justify-content: center
+    justify-items: center
+    align-items: center
+    padding: 50px 0
+    .title
+        h1
+            text-align: center
+            color: white
+        p
+            text-align: center
+            color: $GrisOscur
+
+.container
+    // width: 65%!important
+    @include responsivo(telefonoTable)
+        width: 90%!important
+    @include responsivo(pcMedio)
+        width: 80%!important
+    @include responsivo(general)
+        width: 75%!important
+    @include responsivo(resto)
+        width: 65%!important
+
+
+.zonaPymesPage
+    background-color: $GrisFondo2
+    padding-bottom: 50px
+
+.contenido
+    position: relative
+    top: -40px
+    .infoRow
+        margin-bottom: 0
+        @include responsivo(telefonoTable)
+            margin-bottom: 25px
+        @include responsivo(pcMedio)
+            margin-bottom: 25px
+        .img
+            display: flex
+            box-sizing: border-box
+            img
+                // width: 400px
+                width: inherit
+                // height: 300px
+                display: block
+                object-fit: cover
+                max-width: 400px
+                @include responsivo(telefonoTable)
+                    margin: auto!important
+                    max-width: auto
+                @include responsivo(pcMedio)
+                    margin: auto!important
+                    max-width: auto
+        .info
+            display: flex
+            justify-items: center
+            // justify-content: center
+            align-items: center
+            .texto
+                display: block
+                h2
+                p
+                    color: $GrisClar
+                    font-size: 14px
+                    margin-bottom: 5px
+            @include responsivo(telefonoTable)
+                justify-content: center!important
+                padding: 0!important
+                width: 100%
+                .texto
+                    h2,
+                    p
+                        text-align: center
+                    .row.formButtons
+                        display: flex
+                        justify-content: center
+            @include responsivo(pcMedio)
+                justify-content: center!important
+                padding: 0!important
+                width: 100%
+                .texto
+                    h2,
+                    p
+                        text-align: center
+                    .row.formButtons
+                        display: flex
+                        justify-content: center
+    .infoRow.p1
+        position: relative
+        top: 15px
+    .infoRow.type1
+        .info
+            padding-left: 5%
+        .img
+            img
+                margin-left: auto
+    .infoRow.type2
+        .info
+            justify-content: flex-end
+            padding-right: 5%
+            h2,
+            p
+                text-align: right
+            .row.formButtons
+                display: flex
+                justify-content: flex-end
+        .img
+            img
+                margin-right: auto
+        @include responsivo(telefonoTable)
+            display: flex
+            flex-direction: column-reverse
+
+        @include responsivo(pcMedio)
+            display: flex
+            flex-direction: column-reverse
+
+

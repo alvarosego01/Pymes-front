@@ -1,0 +1,232 @@
+
+
+
+  <div id="id01" class="w3-modal"
+  [ngClass]="{
+    'block': this.planes == true,
+    'none': this.planes == false,
+    'modalSession': this._userService.token != null
+  }">
+
+<div
+(clickOutside)="this.ocultarClick($event)"
+class="w3-modal-content w3-animate-top w3-card-4">
+    <header class="w3-container w3-teal">
+      <span (click)="this.cerrarModal()"
+      class="w3-button w3-display-topright">&times;</span>
+      <h2>Información de planes</h2>
+    </header>
+    <div class="w3-container">
+
+
+<div id="planesComponent">
+
+<div class="infoPlans">
+
+
+<div class="container">
+    <div class="row">
+        <h1 class="title titleSpecial">
+            ¿Qué plan quieres comprar?
+        </h1>
+        <!-- <h5>
+            <span>
+                (Solo para suscriptores)
+            </span>
+        </h5> -->
+
+    </div>
+    <div class="infoData">
+        <div class="container">
+            <div class="row">
+
+                <div class="tarjetaPrecio">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>
+                                MICRO
+                            </h4>
+                            <h6>
+                                Sueña en Grande
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+
+                                <li>
+                                    <p>
+                                        Estrategia de pauta digital durante <strong>3 días</strong> en <strong>1 Red Social</strong>, Facebook o Instagram, para llevar tráfico a tu publicación en Mercado PYME
+                                    </p>
+                                </li>
+
+                                <li>
+                                    <p>Segmentación y optimización demográfica y geográfica de públicos en <strong>1 ciudad</strong></p>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <ul>
+                                <li class="price">
+                                    <p>
+                                        <strong>$65.000</strong>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class=" tarjetaPrecio">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>
+                                PEQUEÑO
+                            </h4>
+                            <h6>
+                                Derriba Obstáculos
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+
+                                <li>
+                                    <p>Estrategia de pauta digital durante <strong>3 días</strong> en <strong>Facebook e Instagram</strong>, para llevar tráfico a tu publicación en Mercado PYME</p>
+                                </li>
+
+                                <li>
+                                    <p>Segmentación y optimización demográfica y geográfica de públicos en <strong>1 ciudad</strong></p>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                          <ul>
+                                <li class="price">
+                                    <p>
+                                        $95.000
+                                    </p>
+                                </li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class=" tarjetaPrecio">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>
+                                MEDIANO
+                            </h4>
+                            <h6>
+                                Expande Horizontes
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+
+                                <li>
+                                    <p>Estrategia de pauta digital durante <strong>3 días</strong> en <strong>Facebook, Instagram y Google Ads</strong> para llevar tráfico a tu publicación en Mercado PYME</p>
+                                </li>
+
+                                <li>
+                                    <p>Segmentación y optimización demográfica y geográfica de públicos en hasta <strong>2 ciudades</strong></p>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                          <ul>
+                              <li class="price">
+                                    <p>
+                                        $200.000
+                                    </p>
+                                </li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class=" tarjetaPrecio">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>
+                                GRANDE
+                            </h4>
+                            <h6>
+                                Vuela Alto
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>
+                                    <p>Estrategia de pauta digital durante <strong>5 días</strong> en <strong>Facebook, Instagram y Google Ads</strong> para llevar tráfico a tu publicación en Mercado PYME</p>
+                                </li>
+
+                                <li>
+                                    <p>Segmentación y optimización demográfica y geográfica de públicos en hasta <strong>3 ciudades</strong></p>
+                                </li>
+
+
+
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                          <ul>
+                                <li class="price">
+                                    <p>
+                                        $350.000
+                                    </p>
+                                </li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="row">
+                    <h3
+                    style="font-weight: bold!important; width: 100%; text-align: center;"
+                     class="colorRed">
+                        Este plan incluyen piezas publicitarias basadas en plantillas de Mercado Pyme, para piezas con otras características se debe pagar el valor del diseño
+                    </h3>
+                </div>
+
+                <div class="row">
+
+                    <div
+                    style="width: 100%;"
+                    class="titleOpc centerCustom">
+
+                        <h4 style="margin-bottom: 15px; font-weight: normal!important;" class="titleSpecial2 grisOscuro">
+                            ¿Necesitas algo diferente a nuestros planes? Contáctanos
+                        </h4>
+                        <div class="formButtons">
+
+                          <ul class="nav nav-pills whatsapp">
+                            <li>
+                                <a href="https://wa.me/573187158098?text=Hola+me+gustar%C3%ADa+contactarlos">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </li>
+
+                            </ul>
+
+                        </div>
+                        </div>
+                        <hr>
+
+                </div>
+
+
+                </div>
+                </div>
+                </div>
+
+            </div>
+            </div>
+
+
+        </div>
+    <!-- </div> -->
+    </div>

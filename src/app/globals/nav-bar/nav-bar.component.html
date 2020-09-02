@@ -92,8 +92,10 @@
 
     </ul>
 
-    <app-notify-preview class="menuRight navbar-nav ml-auto"
-    *ngIf="this._usersService.token != null"
+    <app-notify-preview
+
+    class="menuRight navbar-nav ml-auto"
+    *ngIf="(this._usersService.token != null) && (this.GlobalConfigService.isMobile() != true)"
     >
 
     </app-notify-preview>

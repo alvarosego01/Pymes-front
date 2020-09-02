@@ -1,0 +1,110 @@
+
+
+
+
+
+
+<div class="containerFull" >
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>
+              Control de usuarios - <span *ngIf="this.paginator != null">{{ this.paginator.itemCount }}</span>
+
+            </h1>
+          </div>
+
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section
+
+    class="content">
+
+      <!-- Default box -->
+      <div class="card card-solid">
+        <div class="card-body pb-0">
+          <div
+          *ngIf="(this._users) && (this._users.length > 0)"
+          class="row d-flex align-items-stretch">
+
+
+
+            <div
+            *ngFor="let item of this._users"
+            class="col-md-12 col-lg-3 d-flex align-items-stretch">
+              <div
+              style="width: 100%;"
+              class="card bg-light">
+                <div class="card-header text-muted border-bottom-0">
+                  {{ item.role | roleTransform }}
+                </div>
+                <div class="card-body pt-0">
+                  <div class="row">
+                    <div class="col-7">
+                      <h2 class="lead"><b>{{item.name}} {{item.surname}}</b></h2><br>
+                      <!-- <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p> -->
+                      <ul class="ml-4 mb-0 fa-ul text-muted">
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> {{item.department}} - {{item.city}} </li>
+                        <li
+                        *ngIf="(item.phone) && (item.phone != null)"
+                        class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
+                           Teléfono fijo: {{ item.phone }}
+                        </li>
+                        <li
+                        *ngIf="(item.celPhone) && (item.celPhone != null)"
+                        class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
+                           Teléfono Movil: {{ item.celPhone }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-5 text-center">
+                      <img
+                      style="width: 75px; height: 75px;"
+                      [src]="item.imgProfile | imagen:'User':item._id " alt="" class="img-circle img-fluid">
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="text-right">
+
+                    <a
+                    [routerLink]="['/user', item._id]" routerLinkActive="active"
+                    class="btn btn-sm btn-primary">
+                      <i class="fas fa-user"></i> Ver usuario
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+          </div>
+        </div>
+        <!-- /.card-body -->
+
+        <!-- /.card-footer -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+
+
+    <app-global-paginator
+    *ngIf="( this.paginator != null ) && ( this.paginator.pageCount > 1 )"
+    [paginator]="this.paginator"
+    (newPageResponse)="this.newPageResponse($event)"
+    >
+
+    </app-global-paginator>
+
+
+    <!-- /.content -->
+  </div>

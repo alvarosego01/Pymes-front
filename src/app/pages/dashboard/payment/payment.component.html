@@ -1,0 +1,223 @@
+
+
+
+
+
+<div
+*ngIf="(this.factura != null)"
+class="containerFull" >
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+
+          <div class="col-sm-6">
+            <h1>Factura de pago
+
+
+
+            </h1>
+          </div>
+
+      </div><!-- /.container-fluid -->
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+
+
+            <!-- Main content -->
+            <div class="invoice p-3 mb-3">
+              <!-- title row -->
+              <div
+              class="headerFact row">
+                <div class="col-12">
+                  <h4>
+                    <img
+
+                     class="logoFact" src="../../../assets/dist/img/logoPyme.svg" alt="">
+                    <small class="float-right">Fecha: {{ this.factura.created_at }}</small>
+                  </h4>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- info row -->
+              <div class="row invoice-info">
+                <div class="col-sm-4 invoice-col">
+                  De
+                  <address>
+                    <strong>Mercado Pyme C.A.</strong><br>
+                    <!-- Dirección: <br>                -->
+                    Teléfono: 3187158098<br>
+                    Email: info@mercadopyme.co
+                  </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                  Para
+                  <address>
+                    <strong>{{ this.factura.user.name }} {{ this.factura.user.surname }}</strong><br>
+                    {{ this.factura.user.department }} {{ this.factura.user.city }} <br>
+                    Teléfono:  {{ this.factura.user.phone || null && this.factura.user.celPhone }} <br>
+                    Email: {{ this.factura.user.email }}
+                  </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                  <b>Factura #{{ this.factura.serial }}</b><br>
+
+
+                  <div
+                  *ngIf="(this.factura != null) && (this.factura.process.payProcess == 'Completed')"
+                  class="status">
+
+
+                  <h5
+                  style="margin-bottom: 15px;"
+                  >
+                    Estado:
+                    <span
+                    [ngClass]="{
+                      'colorSuccess': ( this._paymentService.getStatusEpayco( this.factura.process.status ) == 1 ),
+                      'colorWarning': ( this._paymentService.getStatusEpayco( this.factura.process.status ) == 2 ),
+                      'colorRed': ( this._paymentService.getStatusEpayco( this.factura.process.status ) == 3 )
+                    }"
+                    >
+                      {{ this.factura.process.status }}
+                    </span>
+                  </h5>
+
+                  <!-- [routerLink]="[ '/checkoutResponse', 'this.factura.post._id', { ref_payco = 'this.factura.process.referencePay' } ]" -->
+
+                <button
+                *ngIf="(this.factura.process.referencePay != null)"
+                (click)="this.verFacturaEpayco()"
+
+                routerLinkActive="active"
+                type="button"
+                class="buttonCustom btn btn-success btn-flat">
+                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                Ver factura Epayco
+              </button>
+
+
+
+                  </div>
+
+
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+              <!-- Table row -->
+              <div class="row">
+                <div class="col-12 table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                    <tr>
+                      <th>Servicio</th>
+                      <th>Costo</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr
+                    *ngFor="let item of this.factura.description"
+                    >
+                      <td>
+
+                        Plan {{ item.plan }}
+                        <span *ngIf="(item.days)">
+                          - Publicación: {{ this.factura.post.title }}
+                        </span>
+
+                      </td>
+                      <td> {{ item.costo | currencyLocale }} </td>
+                    </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+              <div class="row">
+                <!-- accepted payments column -->
+                <div class="col-md-12 col-lg-8">
+
+
+
+                </div>
+                <!-- /.col -->
+                <div class="col-md-12 col-lg-4">
+
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tbody>
+                      <!-- <tr>
+                        <th>Tax (9.3%)</th>
+                        <td>$10.34</td>
+                      </tr> -->
+                      <!-- <tr>
+                        <th>Shipping:</th>
+                        <td>$5.80</td>
+                      </tr> -->
+                      <tr>
+                        <th>Total:</th>
+                        <td> {{ this.factura.price | currencyLocale }} </td>
+                      </tr>
+                    </tbody></table>
+                  </div>
+                  <div
+
+                  class="row formButtons">
+
+                  <button
+                  *ngIf="(this.factura.status == false)"
+                  type="button"
+                  (click)="processPay()"
+                  style="margin-left: auto;width: fit-content;padding: 0; background: none; border: none; cursor: pointer;" class="epayco-button-render">
+                      <img src="https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/epayco/boton_de_cobro_epayco2.png">
+                    </button>
+
+
+                  </div>
+
+
+
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+              <!-- this row will not appear when printing -->
+              <!-- <div class="row no-print"> -->
+                <!-- <div class="col-12"> -->
+                  <!-- <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a> -->
+                  <!-- <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i>
+                    Submit Payment
+                  </button> -->
+                  <!-- <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                    <i class="fas fa-download"></i> Generate PDF
+                  </button> -->
+
+
+                <!-- </div> -->
+              <!-- </div> -->
+            </div>
+            <!-- /.invoice -->
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div>
+
+
+    </section>
+
+
+</div>

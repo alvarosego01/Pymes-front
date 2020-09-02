@@ -1,0 +1,52 @@
+@import "~src/generals"
+
+
+
+
+// ul.pagination
+
+
+
+ul.pagination
+    background-color: transparent!important
+    justify-content: flex-end
+    li
+        transition: $trans
+        background-color: transparent!important
+        magin: 0 5px
+        border: 0
+        a
+            font-size: 14px
+            background-color: transparent!important
+            color: $grisTitulo
+            border: 0
+        a.active
+            color: $VerdeOscur!important
+        &:hover
+            color: $VerdeClar!important
+    li.arrow
+        margin: 0 10px
+    li.number
+        margin: 0 10px
+    @include responsivo(telefonoTable)
+        justify-content: center!important
+        li
+            margin: 0 2.5px!important
+            a
+                font-size: 14px!important
+                padding: 2.5px!important
+        li.arrow
+            margin: 0 5px!important
+        li.number
+            margin: 0 5px!important
+    @include responsivo(pcMedio)
+        justify-content: center!important
+        li
+            margin: 0 2.5px!important
+            a
+                font-size: 14px!important
+                padding: 2.5px!important
+        li.arrow
+            margin: 0 5px!important
+        li.number
+            margin: 0 5px!important

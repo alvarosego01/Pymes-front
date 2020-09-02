@@ -1,0 +1,177 @@
+
+
+
+
+
+
+
+<div class="containerFull" >
+
+
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+
+        <div class="col-sm-6">
+          <h1>Facturación y compras
+
+            <small
+            *ngIf="(this.registros) && (this.registros.length > 0)"
+            >
+            - {{ this.registros.length }}
+            </small>
+
+          </h1>
+        </div>
+
+    </div><!-- /.container-fluid -->
+    </div><!-- /.container-fluid -->
+  </section>
+
+
+    <!-- Main content -->
+    <section class="content">
+
+      <div
+      *ngIf="(this.registros) && (this.registros.length > 0)"
+      class="card card-primary card-outline">
+
+          <!-- /.card-header -->
+          <div class="card-body p-0">
+
+            <div class="table-responsive mailbox-messages">
+
+              <table class="table table-hover table-striped">
+
+                  <thead>
+                        <tr>
+                          <th>
+                            Estado
+                          </th>
+
+                          <th>
+                            Factura
+                          </th>
+
+                            <th >
+                              Detalle
+                            </th>
+                            <th >
+                              Costo
+                            </th>
+                            <th >
+                              Fecha de orden
+                            </th>
+
+                            <th>
+                              Opción
+                            </th>
+
+                        </tr>
+                    </thead>
+
+                  <tbody>
+
+
+
+                  <tr
+                  *ngFor="let item of this.registros" >
+
+
+                      <td
+                      *ngIf="item.process.payProcess != 'onProcess'"
+                      [ngClass]="{
+                        'colorSuccess': ( this._paymentService.getStatusEpayco( item.process.status ) == 1 ),
+                        'colorWarning': ( this._paymentService.getStatusEpayco( item.process.status ) == 2 ),
+                        'colorRed': ( this._paymentService.getStatusEpayco( item.process.status ) == 3 )
+                      }"
+                      >
+                        {{ item.process.status }}
+                      </td>
+
+                      <td
+                      *ngIf="item.process.payProcess == 'onProcess'"
+                      >
+                        Sin tramitar
+                      </td>
+
+                      <td>
+                        #{{ item.serial }}
+                      </td>
+                    <td>
+
+
+                      <span>
+                      Plan {{ item.description[0].plan }} - Publicación: {{item.post.title}}
+                      </span>
+                      <br>
+                      <span
+                      *ngIf="item.description[1]"
+                      >
+                        Plan {{ item.description[1].plan }}
+                      </span>
+
+                    </td>
+
+                    <td>
+                      {{ item.price | currencyLocale }}
+                    </td>
+
+
+                    <td>
+                      Creado: {{ item.created_at }} <br>
+                      <span
+                      *ngIf="item.process.datePay != null"
+                      >
+                        Pagado: {{ item.process.datePay }}
+                      </span>
+                      <!-- <span
+                      *ngIf="item.process.datePay != null"
+                      >Tran {{item.process.datePay}} </span> -->
+                    </td>
+
+                    <td class=" py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <button
+                        type="button"
+                        [routerLink]="['/dashboard/paymentProcess/', item._id ]"
+                        class="btn btn-info"><i class="fas fa-eye"></i>
+                        Ver factura
+                      </button>
+
+                      </div>
+
+                    </td>
+
+
+                  </tr>
+
+                    </tbody>
+
+              </table>
+
+            </div>
+
+          </div>
+
+      </div>
+
+      <app-global-paginator
+      *ngIf="( this.paginator != null ) && ( this.paginator.pageCount > 1 )"
+      [paginator]="this.paginator"
+      (newPageResponse)="this.newPageResponse($event)"
+      >
+
+      </app-global-paginator>
+
+
+
+<div class="jumbotron" *ngIf="(this.registros == null) || (this.registros.length == 0)">
+        <h1 class="titleSpecial2">Sin resultados</h1>
+        <p>No tienes facturas en este momento</p>
+      </div>
+
+    </section>
+
+</div>
+

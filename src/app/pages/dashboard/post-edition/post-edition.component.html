@@ -1,0 +1,601 @@
+
+
+  <div id="id01" class="w3-modal withForm"
+  [ngClass]="{
+    'block': this.Edit == true,
+    'none': this.Edit == false,
+    'modalSession': this._usersService.token != null
+  }">
+
+<div
+(clickOutside)="this.cerrarModal($event)"
+[exclude]="'#floatButton, .buttonCustom ,button, i'"
+class="w3-modal-content w3-animate-top w3-card-4">
+    <header class="w3-container w3-teal">
+      <span (click)="this.cerrarModalClick()"
+      class="w3-button w3-display-topright">&times;</span>
+      <h2>Cambiar información de publicación</h2>
+    </header>
+    <div class="w3-container">
+
+
+
+      <form
+      ngNativeValidate
+      #f="ngForm"
+      (ngSubmit)="updatePublication( f )"
+      class="formDataSend" action="">
+
+
+          <div class="rowOptions">
+
+            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+              Datos de contacto en tu publicación
+            </h4>
+            <hr>
+          </div>
+
+          <div class="row">
+            <div class="form-group clearfix col-md-12 col-lg-4">
+              <label for="Phone">Teléfono <span class="colorRed">(*)</span></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <input  [imask]="this._formsResource.phoneMask()"   [(ngModel)]="this.ngPhone" required  name="Phone" #Phone="ngModel" type="tel" class="form-control" >
+              </div>
+
+              <div class="errorSpace" *ngIf="( this.enviado == true && Phone.invalid ) || (Phone.invalid && (Phone.dirty || Phone.touched))" >
+                <small *ngIf="Phone.errors.required">
+                  Este campo es obligatorio
+                </small>
+
+              </div>
+
+          </div>
+
+          <div class="form-group clearfix col-md-12 col-lg-4">
+            <label for="celPhone">Teléfono celular <span class="colorRed">(*)</span></label>
+          <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-mobile-alt"></i>
+                  </span>
+              </div>
+              <input required [imask]="this._formsResource.phoneMask()"  [(ngModel)]="this.ngcelPhone"   name="celPhone" #celPhone="ngModel" type="tel" class="form-control" >
+            </div>
+
+            <div class="errorSpace" *ngIf="( this.enviado == true && celPhone.invalid ) || (celPhone.invalid && (celPhone.dirty || celPhone.touched))" >
+              <small *ngIf="celPhone.errors.required">
+                Este campo es obligatorio
+              </small>
+
+            </div>
+        </div>
+
+        <div class="form-group clearfix col-md-12 col-lg-4">
+          <label for="Email">Email <span class="colorRed">(*)</span></label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                  <i class="fas fa-envelope"></i>
+                </span>
+            </div>
+            <input   required  name="Email" #Email="ngModel" type="email" class="form-control"  [(ngModel)]="this.ngEmail" >
+        </div>
+
+        <div class="errorSpace" *ngIf="( this.enviado == true && Email.invalid ) || (Email.invalid && (Email.dirty || Email.touched))" >
+          <small *ngIf="Email.errors.required">
+            Este campo es obligatorio
+          </small>
+
+        </div>
+
+        </div>
+
+
+          </div>
+
+
+        <div class="row">
+
+            <div class="form-group clearfix col-md-12 col-lg-6">
+             <label for="redWhatsapp">Whatsapp</label>
+           <div class="input-group">
+           <div class="input-group-prepend">
+             <span class="input-group-text">
+              <i class="fab fa-whatsapp"></i>
+               </span>
+           </div>
+           <input [imask]="this._formsResource.phoneMask()" ngModel name="redWhatsapp"  type="text" class="form-control" [(ngModel)]="this.redWhatsapp" >
+         </div>
+         </div>
+
+            <div class="form-group clearfix col-md-12 col-lg-6">
+             <label for="redWeb">Página Web</label>
+           <div class="input-group">
+           <div class="input-group-prepend">
+             <span class="input-group-text">
+              <i class="fas fa-globe"></i>
+               </span>
+           </div>
+           <input  ngModel name="redWeb"  type="text" class="form-control" [(ngModel)]="this.redWeb" >
+         </div>
+         </div>
+
+
+        </div>
+
+
+        <div class="titleOpc">
+
+          <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+            Redes sociales
+          </h4>
+
+
+          <div class="formButtons">
+
+            <ul class="nav nav-pills">
+              <li class="nav-item"><a (click)="changeTypeRedes('url')" class="nav-link buttonCustom"
+                [ngClass]="{'active': this.redes == 'url'}"
+                >URL</a></li>
+
+              <li class="nav-item"><a (click)="changeTypeRedes('user')" class="nav-link buttonCustom"
+                [ngClass]="{'active': this.redes == 'user'}"
+                >Usuario</a></li>
+
+              </ul>
+
+          </div>
+
+
+
+          </div>
+          <hr>
+
+        <div class="row" *ngIf="(this.redes) && this.redes == 'url'">
+
+          <div class="form-group clearfix col-md-12 col-lg-6">
+            <label for="redInstagram">Instagram</label>
+          <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+             <i class="fab fa-instagram"></i>
+              </span>
+          </div>
+          <input placeholder="Pega tu Instagram aquí"  ngModel name="redInstagram"  type="url" class="form-control" [(ngModel)]="this.redInstagram">
+        </div>
+        </div>
+
+        <div class="form-group clearfix col-md-12 col-lg-6">
+         <label for="redFacebook">Facebook</label>
+       <div class="input-group">
+       <div class="input-group-prepend">
+         <span class="input-group-text">
+          <i class="fab fa-facebook"></i>
+           </span>
+       </div>
+       <input placeholder="Pega tu Facebook aquí"  ngModel name="redFacebook"  type="url" class="form-control" [(ngModel)]="this.redFacebook">
+     </div>
+     </div>
+
+
+        </div>
+        <div class="row" *ngIf="(this.redes) && this.redes == 'user'">
+
+          <div class="form-group clearfix col-md-12 col-lg-6">
+            <label for="redInstagram">Instagram</label>
+          <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+             <i class="fab fa-instagram"></i>
+              </span>
+          </div>
+          <input  [imask]="this._formsResource.userRedes()" ngModel name="redInstagram"  type="text" class="form-control" [(ngModel)]="this.redInstagram">
+        </div>
+        </div>
+
+        <div class="form-group clearfix col-md-12 col-lg-6">
+         <label for="redFacebook">Facebook</label>
+       <div class="input-group">
+       <div class="input-group-prepend">
+         <span class="input-group-text">
+          <i class="fab fa-facebook"></i>
+           </span>
+       </div>
+       <input [imask]="this._formsResource.userRedes()"  ngModel name="redFacebook"  type="text" class="form-control" [(ngModel)]="this.redFacebook">
+     </div>
+     </div>
+
+
+        </div>
+
+
+
+
+           <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+            ¿Dónde quieres que sea vista tu publicación? <span class="colorRed">(*)</span>
+            <!--  -->
+        </h4>
+        <hr>
+           <div class="row">
+            <div class="form-group clearfix col-md-12 col-lg-4">
+              <label for="Department">Departamento</label>
+            <div class="input-group" >
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                       <i class="fa fa-home" aria-hidden="true"></i>
+
+                    </span>
+                  </div>
+                  <select (change)="setCiudades($event.target.value)" [(ngModel)]="this.ngDepartment"  ngModel name="Department" #Department="ngModel" class="form-control" >
+                      <option value="" disabled selected ></option>
+                      <option *ngFor="let item of this.GlobalConfigService.departamentos" value="{{item | json}}">
+                        {{item.departamento}}
+                      </option>
+
+                    </select>
+              </div>
+              </div>
+
+               <div class="form-group clearfix col-md-12 col-lg-4">
+                <label for="City">Ciudad</label>
+              <div class="input-group" >
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                       <i class="fa fa-home" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <select   [(ngModel)]="this.ngCity" ngModel name="City" #City="ngModel" class="form-control" >
+                      <option value="" disabled selected></option>
+                      <option *ngFor="let item of this.ciudades"  value="{{item}}">
+                        {{item}}
+                      </option>
+
+                    </select>
+
+
+
+              </div>
+              </div>
+
+              <div class="form-group clearfix col-md-12 col-lg-4">
+                <label><br></label>
+
+              <div class="formButtons" style="flex-direction: column;">
+                <button style="width: 100%; margin: 0 auto"  type="button" (click)="addCityTarget()" class="buttonCustom btn btn-success btn-flat">+Agregar ciudad</button>
+              </div>
+
+              </div>
+            </div>
+              <div class="row" *ngIf="this.cityTargets.length > 0">
+                <div class="form-group clearfix col-12">
+
+                  <table class="table table-hover" style="width: 100%;">
+                    <thead>
+                      <tr>
+                        <th>Departamento</th>
+                        <th>Ciudad</th>
+                        <th>Eliminar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of this.cityTargets; let i = index">
+                        <td>{{item.department}}</td>
+                        <td>{{item.city}}</td>
+                        <td> <button style="width: 100%; width: unset!important;"  type="button" (click)="deleteCity(i)" class="buttonCustom btn btn-danger btn-flat"><i class="fas fa-trash-alt"></i></button></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+
+              </div>
+              </div>
+
+
+    <!-- error para las categorias -->
+
+        <div class="errorSpace" *ngIf="this.citysError == true">
+          <small >
+            Es obligatorio seleccionar al menos una ciudad
+          </small>
+
+        </div>
+
+        <!--  -->
+
+
+
+
+           <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+            Describe tu producto o servicio
+        </h4>
+        <hr>
+
+           <div class="row">
+            <div class="form-group col-md-12 col-lg-6">
+              <label for="IncludeDesc">¿Qué incluye? <span class="colorRed">(*)</span></label>
+              <textarea  [(ngModel)]="ngIncludeDesc"
+              [ngModelOptions]="{standalone: true}"
+              [maxlength]="350"
+              required  name="IncludeDesc" #IncludeDesc="ngModel" class="form-control" rows="3" placeholder="En este espacio puedes explicar los detalles que incluye tu producto o servicio"></textarea>
+              <small
+              *ngIf="(this.ngIncludeDesc) && this.ngIncludeDesc != ''"
+              >{{ this.ngIncludeDesc.length }}/350</small>
+
+
+              <div class="errorSpace" *ngIf="( this.enviado == true && IncludeDesc.invalid ) || (IncludeDesc.invalid && (IncludeDesc.dirty || IncludeDesc.touched))" >
+                <small *ngIf="IncludeDesc.errors.required">
+                  Este campo es obligatorio
+                </small>
+
+              </div>
+
+
+            </div>
+
+
+            <div class="form-group col-md-12 col-lg-6">
+              <label for="notIncludeDesc">¿Qué no incluye? <span class="colorRed">(*)</span></label>
+              <textarea  [(ngModel)]="ngnotIncludeDesc"
+              [ngModelOptions]="{standalone: true}"
+              [maxlength]="350"
+              required  name="notIncludeDesc" #notIncludeDesc="ngModel" class="form-control" rows="3" placeholder="En este espacio puedes explicar los detalles que no estan presentes en tu producto o servicio"></textarea>
+              <small
+              *ngIf="(this.ngnotIncludeDesc) && this.ngnotIncludeDesc != ''"
+              >{{ this.ngnotIncludeDesc.length }}/350</small>
+
+
+              <div class="errorSpace" *ngIf="( this.enviado == true && notIncludeDesc.invalid ) || (notIncludeDesc.invalid && (notIncludeDesc.dirty || notIncludeDesc.touched))" >
+                <small *ngIf="notIncludeDesc.errors.required">
+                  Este campo es obligatorio
+                </small>
+
+              </div>
+
+            </div>
+
+           </div>
+
+
+
+      <div *ngIf="this.ngTypeAdjuntos != 'Catálogo PDF'  ">
+
+      <!-- </div>      -->
+           <div
+           *ngIf="(this._files) && (this._files.length > 0) && (this._files[0].type != 'PDF') "
+            class="titleOpc">
+
+            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+              Orden de imagenes
+            </h4>
+
+            <div class="form-group clearfix">
+              <label >
+                Arrastra las imagenes para organizarlas
+              </label>
+
+            </div>
+            </div>
+
+          <hr>
+
+      <div
+      *ngIf="(this._files) && (this._files.length > 0) && (this._files[0].type != 'PDF') "
+      class="row">
+
+
+          <div
+          class="form-group col-12" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
+
+          <ul
+          [sortablejs]="this._files" [sortablejsOptions]="this.options"
+          id="listImgs">
+            <li *ngFor="let files of this._files; let i = index"
+            [ngClass]="{'deleted': (files.delete) && (files.delete == true)}">
+              <button
+              type="button"
+              *ngIf="this.canChangeFiles == true"
+              (click)="setDeleted(i)"
+              class="delete">
+              <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+              <img
+               class="imgSelected"  [src]="files.file | imagen:'Post':files.folder" alt="">
+
+            </li>
+          </ul>
+
+          </div>
+
+
+      </div>
+
+
+           <div *ngIf="(this.canChangeFiles != true) && (this._files) && (this._files.length > 0) && (this._files[0].type != 'PDF') && (this.nroFotos > 0) ">
+
+             <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+              Puedes añadir {{ this.nroFotos }} imágenes más
+            </h4>
+            <hr>
+          </div>
+
+        <div class="row" *ngIf="(this.canChangeFiles != true) && (this._files) && (this._files.length > 0) && (this._files[0].type != 'PDF') && (this.nroFotos > 0)">
+
+          <div class="form-group col-12">
+            <!-- {{ this.ngTypeAdjuntos }} -->
+
+            <label for="files">Selecciona los adjuntos <span class="colorRed">(*)</span></label>
+            <div class="input-group">
+
+              <div class="custom-file" >
+                <input accept="image/*" multiple (change)="selectFiles($event)"  ngModel name="files" #files="ngModel" type="file" class="custom-file-input" id="exampleInputFile">
+                <label class="custom-file-label" for="exampleInputFile">Selecciona {{ this.nroFotos }} imágenes</label>
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+        <div class="row" *ngIf="(this.canChangeFiles != true) && (this._files) && (this._files.length > 0) && (this._files[0].type != 'PDF') && (this.nroFotos > 0)">
+          <div class="form-group col-12" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
+
+            <!-- <img  -->
+            <!-- (click)="deleteSelected(i)" class="imgSelected" *ngFor="let item of urlFiles; let i = index" [src]="item" alt=""> -->
+
+            <ul
+            [sortablejs]="this.urlFiles" [sortablejsOptions]="this.options"
+            id="listImgs">
+              <li *ngFor="let files of urlFiles; let i = index">
+                <button
+
+                (click)="deleteSelected(i)"
+                class="delete">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                <img
+                 class="imgSelected"  [src]="files" alt="">
+
+              </li>
+            </ul>
+
+          </div>
+        </div>
+</div>
+
+           <div *ngIf="(this.canChangeFiles == true)  ">
+
+             <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+              Cambiar archivos
+            </h4>
+            <hr>
+          </div>
+
+        <div class="row" *ngIf="this.canChangeFiles == true">
+
+            <div class="form-group clearfix col-md-12 col-lg-6">
+          <label for="typeAdjuntos">¿Qué contenido deseas subir? <span class="colorRed">(*)</span></label>
+        <div class="input-group" >
+          <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fas fa-file-upload"></i>
+
+              </span>
+            </div>
+            <select (change)="clearFiles($event.target.value)" [(ngModel)]="ngTypeAdjuntos"  ngModel name="typeAdjuntos" #typeAdjuntos="ngModel" class="form-control" >
+
+                <option value="Fotos" selected >Fotos</option>
+                <option value="Catálogo PDF" >PDF</option>
+                <!-- <option value="Catálogo PDF">Catálogo PDF</option> -->
+
+              </select>
+
+        </div>
+
+        <div class="errorSpace" *ngIf="( this.enviado == true && typeAdjuntos.invalid ) || (typeAdjuntos.invalid && (typeAdjuntos.dirty || typeAdjuntos.touched))" >
+          <small *ngIf="typeAdjuntos.errors.required">
+            Este campo es obligatorio
+          </small>
+
+        </div>
+
+
+        </div>
+
+
+          <div *ngIf="this.ngTypeAdjuntos != null"  class="form-group col-md-12 col-lg-6">
+            <!-- {{ this.ngTypeAdjuntos }} -->
+
+            <label for="files">Selecciona los adjuntos <span class="colorRed">(*)</span></label>
+            <div class="input-group">
+
+              <div class="custom-file" *ngIf="this.ngTypeAdjuntos != 'Catálogo PDF' && this.nroFotos > 0">
+                <input accept="image/*" multiple (change)="selectFiles($event)"  ngModel name="files" #files="ngModel" type="file" class="custom-file-input" id="exampleInputFile">
+                <label class="custom-file-label" for="exampleInputFile">Selecciona {{this.nroFotos}} {{this.ngTypeAdjuntos}}</label>
+
+              </div>
+              <p *ngIf="this.nroFotos == 0">
+                Máximo limite de imágenes permitido
+              </p>
+              <div class="custom-file" *ngIf="this.ngTypeAdjuntos == 'Catálogo PDF' ">
+                <input accept="application/pdf" (change)="selectFiles($event)"  ngModel name="files" #files="ngModel" type="file" class="custom-file-input" id="exampleInputFile">
+                <label class="custom-file-label" for="exampleInputFile">Selecciona un {{this.ngTypeAdjuntos}}</label>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+        <div class="row" *ngIf="(this.canChangeFiles == true) && this.ngTypeAdjuntos != 'Catálogo PDF'">
+          <div class="form-group col-12" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
+
+            <img
+            (click)="deleteSelected(i)" class="imgSelected" *ngFor="let item of urlFiles; let i = index" [src]="item" alt="">
+
+          </div>
+        </div>
+
+        <div class="row" *ngIf="(this.canChangeFiles == true) && this.ngTypeAdjuntos == 'Catálogo PDF' && this.urlFiles.length == 1">
+          <div class="form-group col-12" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
+            <!-- <img (click)="deleteSelected(item)" class="imgSelected" *ngFor="let item of urlFiles" [src]="item" alt=""> -->
+
+            <div class="row formButtons centerCustom" >
+              <button (click)="deleteSelected()" type="button" class="buttonCustom btn btn-danger btn-flat">Eliminar PDF</button>
+            </div>
+
+          </div>
+        </div>
+
+
+        <hr>
+        <div class="titleOpc socialHelp">
+
+          <h6 style="margin-bottom: 15px;" class="titleSpecial6">
+            ¿Necesitas ayuda para cambiar tu información? <br> ¡Escríbenos por Whatsapp!
+          </h6>
+
+
+          <div class="socialHelp">
+
+            <a href="https://wa.me/573187158098?text=Hola+me+gustar%C3%ADa+contactarlos">
+              <i class="fab fa-whatsapp"></i>
+          </a>
+      </div>
+
+
+
+          </div>
+          <hr>
+
+
+
+
+            <div class="row formButtons centerCustom">
+              <button
+              (click)="alEnviar()"
+              type="submit" class="buttonCustom btn btn-success btn-flat">Actualizar</button>
+            </div>
+
+      </form>
+
+
+
+
+    </div>
+
+</div>
+
+
+</div>

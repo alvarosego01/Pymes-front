@@ -1,0 +1,1697 @@
+
+
+
+  <div id="id01" class="w3-modal"
+  [ngClass]="{
+    'block': this.openPlanesPauta == true,
+    'none': this.openPlanesPauta == false,
+    'modalSession': this._usersService.token != null
+  }">
+
+
+  <!-- (clickOutside)="this.ocultarClick($event)" -->
+ <!--  [emitOnBlur]="true"
+  [delayClickOutsideInit]="true"
+  [exclude]="'button, a'" -->
+  <div
+class="w3-modal-content w3-animate-top w3-card-4">
+    <header class="w3-container w3-teal">
+      <span (click)="this.cerrarModal()"
+      class="w3-button w3-display-topright">&times;</span>
+      <h2>Información de planes</h2>
+    </header>
+    <div class="w3-container">
+
+
+<div id="planesComponent">
+
+<div class="infoPlans">
+
+
+    <!-- etapa 1 -->
+<div
+*ngIf="(this.paso == 0)"
+class="container">
+    <div class="row">
+        <h1 class="title titleSpecial">
+            ¿Qué plan quieres comprar?
+        </h1>
+        <!-- <h5>
+            <span>
+                (Solo para suscriptores)
+            </span>
+        </h5> -->
+
+    </div>
+    <div class="infoData">
+        <div class="container">
+            <div class="row">
+
+                <div class="tarjetaPrecio">
+                    <div
+                    (click)="selectPauta('Micro', '65000')"
+                    class="card">
+                        <div class="card-header">
+                            <h4>
+                                MICRO
+                            </h4>
+                            <h6>
+                                Sueña en Grande
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+
+                                <li>
+                                    <p>
+                                        Estrategia de pauta digital durante <strong>3 días</strong> en <strong>1 Red Social</strong>, Facebook o Instagram, para llevar tráfico a tu publicación en Mercado PYME
+                                    </p>
+                                </li>
+
+                                <li>
+                                    <p>Segmentación y optimización demográfica y geográfica de públicos en <strong>1 ciudad</strong></p>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <ul>
+                                <li class="price">
+                                    <p>
+                                        <strong>$65.000</strong>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class=" tarjetaPrecio">
+                    <div
+                    (click)="selectPauta('Pequeño', '95000')"
+                    class="card">
+                        <div class="card-header">
+                            <h4>
+                                PEQUEÑO
+                            </h4>
+                            <h6>
+                                Derriba Obstáculos
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+
+                                <li>
+                                    <p>Estrategia de pauta digital durante <strong>3 días</strong> en <strong>Facebook e Instagram</strong>, para llevar tráfico a tu publicación en Mercado PYME</p>
+                                </li>
+
+                                <li>
+                                    <p>Segmentación y optimización demográfica y geográfica de públicos en <strong>1 ciudad</strong></p>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                          <ul>
+                                <li class="price">
+                                    <p>
+                                        $95.000
+                                    </p>
+                                </li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class=" tarjetaPrecio">
+                    <div
+                    (click)="selectPauta('Mediano', '200000')"
+                    class="card">
+                        <div class="card-header">
+                            <h4>
+                                MEDIANO
+                            </h4>
+                            <h6>
+                                Expande Horizontes
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+
+                                <li>
+                                    <p>Estrategia de pauta digital durante <strong>3 días</strong> en <strong>Facebook, Instagram y Google Ads</strong> para llevar tráfico a tu publicación en Mercado PYME</p>
+                                </li>
+
+                                <li>
+                                    <p>Segmentación y optimización demográfica y geográfica de públicos en hasta <strong>2 ciudades</strong></p>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                          <ul>
+                              <li class="price">
+                                    <p>
+                                        $200.000
+                                    </p>
+                                </li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class=" tarjetaPrecio">
+                    <div
+                    (click)="selectPauta('Grande', '350000')"
+                    class="card">
+                        <div class="card-header">
+                            <h4>
+                                GRANDE
+                            </h4>
+                            <h6>
+                                Vuela Alto
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>
+                                    <p>Estrategia de pauta digital durante <strong>5 días</strong> en <strong>Facebook, Instagram y Google Ads</strong> para llevar tráfico a tu publicación en Mercado PYME</p>
+                                </li>
+
+                                <li>
+                                    <p>Segmentación y optimización demográfica y geográfica de públicos en hasta <strong>3 ciudades</strong></p>
+                                </li>
+
+
+
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                          <ul>
+                                <li class="price">
+                                    <p>
+                                        $350.000
+                                    </p>
+                                </li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="row">
+                    <h4
+                    style="font-weight: bold!important; width: 100%; text-align: center;"
+                     class="colorRed">
+                        Este plan incluyen piezas publicitarias basadas en plantillas de Mercado Pyme, para piezas con otras características se debe pagar el valor del diseño
+                    </h4>
+                </div>
+
+                <div class="row">
+
+                    <div
+                    style="width: 100%;"
+                    class="titleOpc centerCustom">
+
+                        <h4 style="margin-bottom: 15px; font-weight: normal!important;" class="titleSpecial2 grisOscuro">
+                            ¿Necesitas algo diferente a nuestros planes? Contáctanos
+                        </h4>
+                        <div class="formButtons">
+
+                          <ul class="nav nav-pills whatsapp">
+                            <li>
+                                <a href="https://wa.me/573187158098?text=Hola+me+gustar%C3%ADa+contactarlos">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </li>
+
+                            </ul>
+
+                        </div>
+                        </div>
+                        <hr>
+
+                </div>
+
+
+                </div>
+                </div>
+                </div>
+                <!-- / etapa 1 -->
+
+                <!-- etapa 2 -->
+                <div
+                *ngIf="(this.paso == 1) && (this.tipo == 'Micro')"
+                class="container">
+
+<div class="row typePauta">
+
+    <div class="animated fadeIn fast card card-primary card-outline card-tabs">
+
+        <div class="card-body">
+
+          <div class="row">
+            <h5
+            class="titleSpecial4"
+            style="text-align: center; width: 100%; display: block"
+            >
+              Plan Micro
+
+            </h5>
+          </div>
+
+          <div class="row">
+
+
+          <form
+          ngNativeValidate
+          #c="ngForm"
+          (ngSubmit)="savePlanPauta( c )"
+          class="formDataSend" action="">
+
+
+          <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+            ¿En qué red social quieres tu anuncio?
+        </h4>
+        <hr>
+
+        <div class="row">
+
+           <div class="form-group clearfix  col-12">
+
+            <div class="form-check">
+                <input
+                required ngModel #redesPublico="ngModel"
+                value="Facebook" class="form-check-input" type="radio" required name="redesPublico" #redesPublico="ngModel">
+                <label class="form-check-label">Facebook</label>
+              </div>
+
+              <div class="form-check">
+                <input
+                required ngModel #redesPublico="ngModel"
+                value="Instagram" class="form-check-input" type="radio" required name="redesPublico" #redesPublico="ngModel" >
+                <label class="form-check-label">Instagram</label>
+              </div>
+
+
+              <div class="errorSpace" *ngIf="( this.enviado == true && redesPublico.invalid ) || (redesPublico.invalid && (redesPublico.dirty || redesPublico.touched))" >
+                <small *ngIf="redesPublico.errors.required">
+                    Debes seleccionar una opción
+                </small>
+
+              </div>
+
+        </div>
+      </div>
+
+
+
+      <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+        ¿En qué fechas saldrá tu anuncio?
+    </h4>
+    <hr>
+        <div class="row">
+
+          <div class="form-group clearfix col-md-12">
+          <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <!-- <i class="fa fa-phone" aria-hidden="true"></i> -->
+                  <i class="fas fa-calendar    "></i>
+                  </span>
+              </div>
+              <input
+              [required]="this._formsResource.emptyField('fechaPautas')"
+              id="fechaPautas" [(ngModel)]="this.ngfechaPautas"  name="fechaPautas" #fechaPautas="ngModel" type="text" class="form-control" >
+            </div>
+
+            <div class="errorSpace" *ngIf="( this.enviado == true && fechaPautas.invalid ) || (fechaPautas.invalid && (fechaPautas.dirty || fechaPautas.touched))" >
+              <small *ngIf="fechaPautas.errors.required">
+                Este campo es obligatorio
+              </small>
+
+            </div>
+
+        </div>
+
+
+        </div>
+
+
+           <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                ¿En qué ciudad quieres tu anuncio?
+                <!--  -->
+            </h4>
+            <hr>
+               <div class="row">
+                <div class="form-group clearfix col-md-12 col-lg-4">
+                  <label for="Department">Departamento</label>
+                <div class="input-group" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                           <i class="fa fa-home" aria-hidden="true"></i>
+
+                        </span>
+                      </div>
+                      <select (change)="setCiudades($event.target.value)" [(ngModel)]="this.ngDepartment"  ngModel name="Department" #Department="ngModel" class="form-control" >
+                          <option value="" disabled selected ></option>
+                          <option *ngFor="let item of this.GlobalConfigService.departamentos" value="{{item | json}}">
+                            {{item.departamento}}
+                          </option>
+
+                        </select>
+                  </div>
+                  </div>
+
+                   <div class="form-group clearfix col-md-12 col-lg-4">
+                    <label for="City">Ciudad</label>
+                  <div class="input-group" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                           <i class="fa fa-home" aria-hidden="true"></i>
+                        </span>
+                      </div>
+                      <select   [(ngModel)]="this.ngCity" ngModel name="City" #City="ngModel" class="form-control" >
+                          <option value="" disabled selected></option>
+                          <option *ngFor="let item of this.ciudades"  value="{{item}}">
+                            {{item}}
+                          </option>
+
+                        </select>
+
+
+
+                  </div>
+                  </div>
+
+                  <div
+                  *ngIf="(this.cityTargets.length == 0) || (this.cityTargets.length < this.nroCiudades)"
+                  class="form-group clearfix col-md-12 col-lg-4">
+                    <label><br></label>
+
+                  <div class="formButtons" style="flex-direction: column;">
+                    <button style="width: 100%; margin: 0 auto"  type="button" (click)="addCityTarget()" class="buttonCustom btn btn-success btn-flat">+Agregar ciudad</button>
+                  </div>
+
+                  </div>
+                </div>
+
+                <div class="row" *ngIf="this.cityTargets.length > 0">
+                  <div class="form-group clearfix col-12">
+
+                    <table class="table table-hover" style="width: 100%;">
+                      <thead>
+                        <tr>
+                          <th>Departamento</th>
+                          <th>Ciudad</th>
+                          <th>Eliminar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of this.cityTargets; let i = index">
+                          <td>{{item.department}}</td>
+                          <td>{{item.city}}</td>
+                          <td> <button style="width: 100%; width: unset!important;"  type="button" (click)="deleteCityTarget(i)" class="buttonCustom btn btn-danger btn-flat"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+
+                </div>
+                </div>
+
+                <div class="row">
+                    <div class="errorSpace" *ngIf="this.citysError == true">
+                        <small >
+                          Es obligatorio seleccionar al menos una ciudad
+                        </small>
+
+                      </div>
+
+                </div>
+
+
+
+
+                <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                  ¿Qué publico quieres que vea tu anuncio?
+                  <!--  -->
+              </h4>
+              <hr>
+                <div class="row">
+
+                  <div class="form-group clearfix col-md-12 col-lg-4">
+
+          <div
+          *ngFor="let option of this.generoObj; let i = index"
+          class="form-check">
+          <input
+          [(ngModel)]="this.generoObj[i].checked"
+          [required]="this._formsResource.minSelectCheckBox(1, this.generoObj)"
+            [value]="option.value" class="form-check-input" type="checkbox" name="generoObj" >
+            <label class="form-check-label">
+              {{option.name}}
+            </label>
+          </div>
+
+          <div class="errorSpace" *ngIf="( this.enviado == true && ( this._formsResource.minSelectCheckBox(1, this.generoObj) ) ) " >
+            <small >
+              Debes seleccionar una opción
+            </small>
+
+          </div>
+
+
+
+                  </div>
+
+                  <div class="form-group clearfix col-md-12 col-lg-4">
+
+                <div
+          *ngFor="let option of this.edadesObj; let i = index"
+          class="form-check">
+            <input
+            [(ngModel)]="this.edadesObj[i].checked"
+            [required]="this._formsResource.minSelectCheckBox(1, this.edadesObj)"
+            [value]="option.value" class="form-check-input" type="checkbox" name="edadesObj" >
+            <label class="form-check-label">
+              {{option.name}}
+            </label>
+          </div>
+
+
+          <div class="errorSpace" *ngIf="( this.enviado == true && ( this._formsResource.minSelectCheckBox(1, this.edadesObj) ) ) " >
+            <small >
+              Debes seleccionar una opción
+            </small>
+
+          </div>
+
+
+                  </div>
+
+                  <div class="form-group clearfix col-md-12 col-lg-4">
+
+         <div
+          *ngFor="let option of this.estadoCivilObj; let i = index"
+          class="form-check">
+            <input
+            [(ngModel)]="this.estadoCivilObj[i].checked"
+            [required]="this._formsResource.minSelectCheckBox(1, this.estadoCivilObj)"
+            [value]="option.value" class="form-check-input" type="checkbox" name="estadoCivilObj" >
+            <label class="form-check-label">
+              {{option.name}}
+            </label>
+          </div>
+
+
+          <div class="errorSpace" *ngIf="( this.enviado == true && ( this._formsResource.minSelectCheckBox(1, this.estadoCivilObj) ) ) " >
+            <small >
+              Debes seleccionar una opción
+            </small>
+
+          </div>
+
+
+                  </div>
+
+
+                </div>
+
+            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                Cuentanos más de tu publico
+            </h4>
+            <hr>
+
+                <div class="row">
+
+                  <div class="form-group col-md-12">
+                  <textarea
+                  [(ngModel)]="ngCuentaPublico"
+                  [ngModelOptions]="{standalone: true}"
+                  [maxlength]="350"
+                  required  name="cuentaPublico" #cuentaPublico="ngModel" class="form-control" rows="3" placeholder="Escribe aquí información como profesiones, ocupaciones, cargos, gustos e intereses que pueden tener las personas a las que quieres llegar."></textarea>
+                  <small
+                  *ngIf="(this.ngCuentaPublico) && this.ngCuentaPublico != ''"
+                  >{{ this.ngCuentaPublico.length }}/350</small>
+
+
+                  <div class="errorSpace" *ngIf="( this.enviado == true && cuentaPublico.invalid ) || (cuentaPublico.invalid && (cuentaPublico.dirty || cuentaPublico.touched))" >
+                    <small *ngIf="cuentaPublico.errors.required">
+                      Este campo es obligatorio
+                    </small>
+
+                  </div>
+
+                </div>
+
+                </div>
+
+            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                Sube la foto para tu anuncio y tu logo
+            </h4>
+            <hr>
+                <div class="row">
+
+                 <div   class="form-group col-md-12">
+                <!-- {{ this.ngTypeAdjuntos }} -->
+
+                <div class="input-group">
+
+                  <div class="custom-file" >
+                    <input accept="image/*" multiple (change)="selectFiles($event)"  required ngModel name="files" #files="ngModel" type="file" class="custom-file-input" id="exampleInputFile">
+                    <label class="custom-file-label" for="exampleInputFile">Selecciona los archivos </label>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+                </div>
+
+                <div class="row" >
+                  <div class="form-group col-12" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
+
+                    <img data-toggle="tooltip" data-placement="top" title="Eliminar"
+                    (click)="deleteSelected(i)" class="imgSelected" *ngFor="let item of urlFiles; let i = index" [src]="item" alt="">
+
+                  </div>
+                </div>
+
+
+                  <div class="row formButtons flexAround ">
+                    <button
+
+                    (click)="this.Atras()"
+                    style="margin-left: auto;"
+                    class="buttonCustom btn btn-success btn-flat">
+                    <!-- <i class="fas fa-times    "></i> -->
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    Atras
+                  </button>
+
+                    <button
+                    (click)="alEnviar()"
+                    type="submit"
+                    style="margin-left: auto;"
+                    class="buttonCustom btn btn-success btn-flat">
+                    <i class="fas fa-shopping-bag    "></i>
+                    Seleccionar
+                  </button>
+                  </div>
+
+
+
+          </form>
+
+          </div>
+
+        </div>
+
+    </div>
+
+  </div>
+
+                </div>
+                <div
+                *ngIf="(this.paso == 1) && (this.tipo == 'Pequeño')"
+                class="container">
+
+
+<div class="row typePauta">
+
+    <div class="animated fadeIn fast card card-primary card-outline card-tabs">
+
+        <div class="card-body">
+
+          <div class="row">
+            <h5
+            class="titleSpecial4"
+            style="text-align: center; width: 100%; display: block"
+            >
+              Plan Pequeño
+
+            </h5>
+          </div>
+
+          <div class="row">
+
+
+          <form
+          ngNativeValidate
+          #c="ngForm"
+          (ngSubmit)="savePlanPauta( c )"
+          class="formDataSend" action="">
+
+
+      <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+        ¿En qué fechas saldrá tu anuncio?
+    </h4>
+    <hr>
+        <div class="row">
+
+          <div class="form-group clearfix col-md-12">
+          <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <!-- <i class="fa fa-phone" aria-hidden="true"></i> -->
+                  <i class="fas fa-calendar    "></i>
+                  </span>
+              </div>
+              <input
+              [required]="this._formsResource.emptyField('fechaPautas')"
+              id="fechaPautas" [(ngModel)]="this.ngfechaPautas"  name="fechaPautas" #fechaPautas="ngModel" type="text" class="form-control" >
+            </div>
+
+            <div class="errorSpace" *ngIf="( this.enviado == true && fechaPautas.invalid ) || (fechaPautas.invalid && (fechaPautas.dirty || fechaPautas.touched))" >
+              <small *ngIf="fechaPautas.errors.required">
+                Este campo es obligatorio
+              </small>
+
+            </div>
+
+        </div>
+
+
+        </div>
+
+
+           <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                ¿En qué ciudad quieres tu anuncio?
+                <!--  -->
+            </h4>
+            <hr>
+               <div class="row">
+                <div class="form-group clearfix col-md-12 col-lg-4">
+                  <label for="Department">Departamento</label>
+                <div class="input-group" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                           <i class="fa fa-home" aria-hidden="true"></i>
+
+                        </span>
+                      </div>
+                      <select (change)="setCiudades($event.target.value)" [(ngModel)]="this.ngDepartment"  ngModel name="Department" #Department="ngModel" class="form-control" >
+                          <option value="" disabled selected ></option>
+                          <option *ngFor="let item of this.GlobalConfigService.departamentos" value="{{item | json}}">
+                            {{item.departamento}}
+                          </option>
+
+                        </select>
+                  </div>
+                  </div>
+
+                   <div class="form-group clearfix col-md-12 col-lg-4">
+                    <label for="City">Ciudad</label>
+                  <div class="input-group" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                           <i class="fa fa-home" aria-hidden="true"></i>
+                        </span>
+                      </div>
+                      <select   [(ngModel)]="this.ngCity" ngModel name="City" #City="ngModel" class="form-control" >
+                          <option value="" disabled selected></option>
+                          <option *ngFor="let item of this.ciudades"  value="{{item}}">
+                            {{item}}
+                          </option>
+
+                        </select>
+
+
+
+                  </div>
+                  </div>
+
+                  <div
+                  *ngIf="(this.cityTargets.length == 0) || (this.cityTargets.length < this.nroCiudades)"
+                  class="form-group clearfix col-md-12 col-lg-4">
+                    <label><br></label>
+
+                  <div class="formButtons" style="flex-direction: column;">
+                    <button style="width: 100%; margin: 0 auto"  type="button" (click)="addCityTarget()" class="buttonCustom btn btn-success btn-flat">+Agregar ciudad</button>
+                  </div>
+
+                  </div>
+                </div>
+
+                <div class="row" *ngIf="this.cityTargets.length > 0">
+                  <div class="form-group clearfix col-12">
+
+                    <table class="table table-hover" style="width: 100%;">
+                      <thead>
+                        <tr>
+                          <th>Departamento</th>
+                          <th>Ciudad</th>
+                          <th>Eliminar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of this.cityTargets; let i = index">
+                          <td>{{item.department}}</td>
+                          <td>{{item.city}}</td>
+                          <td> <button style="width: 100%; width: unset!important;"  type="button" (click)="deleteCityTarget(i)" class="buttonCustom btn btn-danger btn-flat"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+
+                </div>
+                </div>
+
+                <div class="row">
+                    <div class="errorSpace" *ngIf="this.citysError == true">
+                        <small >
+                          Es obligatorio seleccionar al menos una ciudad
+                        </small>
+
+                      </div>
+
+                </div>
+
+
+
+
+                <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                  ¿Qué publico quieres que vea tu anuncio?
+                  <!--  -->
+              </h4>
+              <hr>
+                <div class="row">
+
+                  <div class="form-group clearfix col-md-12 col-lg-4">
+
+          <div
+          *ngFor="let option of this.generoObj; let i = index"
+          class="form-check">
+          <input
+          [(ngModel)]="this.generoObj[i].checked"
+          [required]="this._formsResource.minSelectCheckBox(1, this.generoObj)"
+            [value]="option.value" class="form-check-input" type="checkbox" name="generoObj" >
+            <label class="form-check-label">
+              {{option.name}}
+            </label>
+          </div>
+
+          <div class="errorSpace" *ngIf="( this.enviado == true && ( this._formsResource.minSelectCheckBox(1, this.generoObj) ) ) " >
+            <small >
+              Debes seleccionar una opción
+            </small>
+
+          </div>
+
+
+
+                  </div>
+
+                  <div class="form-group clearfix col-md-12 col-lg-4">
+
+                <div
+          *ngFor="let option of this.edadesObj; let i = index"
+          class="form-check">
+            <input
+            [(ngModel)]="this.edadesObj[i].checked"
+            [required]="this._formsResource.minSelectCheckBox(1, this.edadesObj)"
+            [value]="option.value" class="form-check-input" type="checkbox" name="edadesObj" >
+            <label class="form-check-label">
+              {{option.name}}
+            </label>
+          </div>
+
+
+          <div class="errorSpace" *ngIf="( this.enviado == true && ( this._formsResource.minSelectCheckBox(1, this.edadesObj) ) ) " >
+            <small >
+              Debes seleccionar una opción
+            </small>
+
+          </div>
+
+
+                  </div>
+
+                  <div class="form-group clearfix col-md-12 col-lg-4">
+
+         <div
+          *ngFor="let option of this.estadoCivilObj; let i = index"
+          class="form-check">
+            <input
+            [(ngModel)]="this.estadoCivilObj[i].checked"
+            [required]="this._formsResource.minSelectCheckBox(1, this.estadoCivilObj)"
+            [value]="option.value" class="form-check-input" type="checkbox" name="estadoCivilObj" >
+            <label class="form-check-label">
+              {{option.name}}
+            </label>
+          </div>
+
+
+          <div class="errorSpace" *ngIf="( this.enviado == true && ( this._formsResource.minSelectCheckBox(1, this.estadoCivilObj) ) ) " >
+            <small >
+              Debes seleccionar una opción
+            </small>
+
+          </div>
+
+
+                  </div>
+
+
+                </div>
+
+            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                Cuentanos más de tu publico
+            </h4>
+            <hr>
+
+                <div class="row">
+
+                  <div class="form-group col-md-12">
+                  <textarea
+                  [(ngModel)]="ngCuentaPublico"
+                  [ngModelOptions]="{standalone: true}"
+                  [maxlength]="350"
+                  required  name="cuentaPublico" #cuentaPublico="ngModel" class="form-control" rows="3" placeholder="Escribe aquí información como profesiones, ocupaciones, cargos, gustos e intereses que pueden tener las personas a las que quieres llegar."></textarea>
+                  <small
+                  *ngIf="(this.ngCuentaPublico) && this.ngCuentaPublico != ''"
+                  >{{ this.ngCuentaPublico.length }}/350</small>
+
+
+                  <div class="errorSpace" *ngIf="( this.enviado == true && cuentaPublico.invalid ) || (cuentaPublico.invalid && (cuentaPublico.dirty || cuentaPublico.touched))" >
+                    <small *ngIf="cuentaPublico.errors.required">
+                      Este campo es obligatorio
+                    </small>
+
+                  </div>
+
+                </div>
+
+                </div>
+
+            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                Sube la foto para tu anuncio y tu logo
+            </h4>
+            <hr>
+                <div class="row">
+
+                 <div   class="form-group col-md-12">
+                <!-- {{ this.ngTypeAdjuntos }} -->
+
+                <div class="input-group">
+
+                  <div class="custom-file" >
+                    <input accept="image/*" multiple (change)="selectFiles($event)"  required ngModel name="files" #files="ngModel" type="file" class="custom-file-input" id="exampleInputFile">
+                    <label class="custom-file-label" for="exampleInputFile">Selecciona los archivos </label>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+                </div>
+
+                <div class="row" >
+                  <div class="form-group col-12" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
+
+                    <img data-toggle="tooltip" data-placement="top" title="Eliminar"
+                    (click)="deleteSelected(i)" class="imgSelected" *ngFor="let item of urlFiles; let i = index" [src]="item" alt="">
+
+                  </div>
+                </div>
+
+
+                  <div class="row formButtons flexAround ">
+                    <button
+
+                    (click)="this.Atras()"
+                    style="margin-left: auto;"
+                    class="buttonCustom btn btn-success btn-flat">
+                    <!-- <i class="fas fa-times    "></i> -->
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    Atras
+                  </button>
+
+                    <button
+                    (click)="alEnviar()"
+                    type="submit"
+                    style="margin-left: auto;"
+                    class="buttonCustom btn btn-success btn-flat">
+                    <i class="fas fa-shopping-bag    "></i>
+                    Seleccionar
+                  </button>
+                  </div>
+
+
+
+          </form>
+
+          </div>
+
+        </div>
+
+    </div>
+
+  </div>
+
+
+                </div>
+                <div
+                *ngIf="(this.paso == 1) && (this.tipo == 'Mediano')"
+                class="container">
+
+                <div class="row typePauta">
+
+                    <div class="animated fadeIn fast card card-primary card-outline card-tabs">
+
+                        <div class="card-body">
+
+                          <div class="row">
+                            <h5
+                            class="titleSpecial4"
+                            style="text-align: center; width: 100%; display: block"
+                            >
+                              Plan Mediano
+
+                            </h5>
+                          </div>
+
+                          <div class="row">
+
+
+                          <form
+                          ngNativeValidate
+                          #c="ngForm"
+                          (ngSubmit)="savePlanPauta( c )"
+                          class="formDataSend" action="">
+
+
+                      <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                        ¿En qué fechas saldrá tu anuncio?
+                    </h4>
+                    <hr>
+                        <div class="row">
+
+                          <div class="form-group clearfix col-md-12">
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <!-- <i class="fa fa-phone" aria-hidden="true"></i> -->
+                                  <i class="fas fa-calendar    "></i>
+                                  </span>
+                              </div>
+                              <input
+                              [required]="this._formsResource.emptyField('fechaPautas')"
+                              id="fechaPautas" [(ngModel)]="this.ngfechaPautas"  name="fechaPautas" #fechaPautas="ngModel" type="text" class="form-control" >
+                            </div>
+
+                            <div class="errorSpace" *ngIf="( this.enviado == true && fechaPautas.invalid ) || (fechaPautas.invalid && (fechaPautas.dirty || fechaPautas.touched))" >
+                              <small *ngIf="fechaPautas.errors.required">
+                                Este campo es obligatorio
+                              </small>
+
+                            </div>
+
+                        </div>
+
+
+                        </div>
+
+
+                           <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                                ¿En qué ciudad quieres tu anuncio?
+                                <!--  -->
+                            </h4>
+                            <hr>
+                               <div class="row">
+                                <div class="form-group clearfix col-md-12 col-lg-4">
+                                  <label for="Department">Departamento</label>
+                                <div class="input-group" >
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                           <i class="fa fa-home" aria-hidden="true"></i>
+
+                                        </span>
+                                      </div>
+                                      <select (change)="setCiudades($event.target.value)" [(ngModel)]="this.ngDepartment"  ngModel name="Department" #Department="ngModel" class="form-control" >
+                                          <option value="" disabled selected ></option>
+                                          <option *ngFor="let item of this.GlobalConfigService.departamentos" value="{{item | json}}">
+                                            {{item.departamento}}
+                                          </option>
+
+                                        </select>
+                                  </div>
+                                  </div>
+
+                                   <div class="form-group clearfix col-md-12 col-lg-4">
+                                    <label for="City">Ciudad</label>
+                                  <div class="input-group" >
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                           <i class="fa fa-home" aria-hidden="true"></i>
+                                        </span>
+                                      </div>
+                                      <select   [(ngModel)]="this.ngCity" ngModel name="City" #City="ngModel" class="form-control" >
+                                          <option value="" disabled selected></option>
+                                          <option *ngFor="let item of this.ciudades"  value="{{item}}">
+                                            {{item}}
+                                          </option>
+
+                                        </select>
+
+
+
+                                  </div>
+                                  </div>
+
+                                  <div
+                                  *ngIf="(this.cityTargets.length == 0) || (this.cityTargets.length < this.nroCiudades)"
+                                  class="form-group clearfix col-md-12 col-lg-4">
+                                    <label><br></label>
+
+                                  <div class="formButtons" style="flex-direction: column;">
+                                    <button style="width: 100%; margin: 0 auto"  type="button" (click)="addCityTarget()" class="buttonCustom btn btn-success btn-flat">+Agregar ciudad</button>
+                                  </div>
+
+                                  </div>
+                                </div>
+
+                                <div class="row" *ngIf="this.cityTargets.length > 0">
+                                  <div class="form-group clearfix col-12">
+
+                                    <table class="table table-hover" style="width: 100%;">
+                                      <thead>
+                                        <tr>
+                                          <th>Departamento</th>
+                                          <th>Ciudad</th>
+                                          <th>Eliminar</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let item of this.cityTargets; let i = index">
+                                          <td>{{item.department}}</td>
+                                          <td>{{item.city}}</td>
+                                          <td> <button style="width: 100%; width: unset!important;"  type="button" (click)="deleteCityTarget(i)" class="buttonCustom btn btn-danger btn-flat"><i class="fas fa-trash-alt"></i></button></td>
+                                        </tr>
+
+                                      </tbody>
+                                    </table>
+
+                                </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="errorSpace" *ngIf="this.citysError == true">
+                                        <small >
+                                          Es obligatorio seleccionar al menos una ciudad
+                                        </small>
+
+                                      </div>
+
+                                </div>
+
+
+
+
+                                <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                                  ¿Qué publico quieres que vea tu anuncio?
+                                  <!--  -->
+                              </h4>
+                              <hr>
+                                <div class="row">
+
+                                  <div class="form-group clearfix col-md-12 col-lg-4">
+
+                          <div
+                          *ngFor="let option of this.generoObj; let i = index"
+                          class="form-check">
+                          <input
+                          [(ngModel)]="this.generoObj[i].checked"
+                          [required]="this._formsResource.minSelectCheckBox(1, this.generoObj)"
+                            [value]="option.value" class="form-check-input" type="checkbox" name="generoObj" >
+                            <label class="form-check-label">
+                              {{option.name}}
+                            </label>
+                          </div>
+
+                          <div class="errorSpace" *ngIf="( this.enviado == true && ( this._formsResource.minSelectCheckBox(1, this.generoObj) ) ) " >
+                            <small >
+                              Debes seleccionar una opción
+                            </small>
+
+                          </div>
+
+
+
+                                  </div>
+
+                                  <div class="form-group clearfix col-md-12 col-lg-4">
+
+                                <div
+                          *ngFor="let option of this.edadesObj; let i = index"
+                          class="form-check">
+                            <input
+                            [(ngModel)]="this.edadesObj[i].checked"
+                            [required]="this._formsResource.minSelectCheckBox(1, this.edadesObj)"
+                            [value]="option.value" class="form-check-input" type="checkbox" name="edadesObj" >
+                            <label class="form-check-label">
+                              {{option.name}}
+                            </label>
+                          </div>
+
+
+                          <div class="errorSpace" *ngIf="( this.enviado == true && ( this._formsResource.minSelectCheckBox(1, this.edadesObj) ) ) " >
+                            <small >
+                              Debes seleccionar una opción
+                            </small>
+
+                          </div>
+
+
+                                  </div>
+
+                                  <div class="form-group clearfix col-md-12 col-lg-4">
+
+                         <div
+                          *ngFor="let option of this.estadoCivilObj; let i = index"
+                          class="form-check">
+                            <input
+                            [(ngModel)]="this.estadoCivilObj[i].checked"
+                            [required]="this._formsResource.minSelectCheckBox(1, this.estadoCivilObj)"
+                            [value]="option.value" class="form-check-input" type="checkbox" name="estadoCivilObj" >
+                            <label class="form-check-label">
+                              {{option.name}}
+                            </label>
+                          </div>
+
+
+                          <div class="errorSpace" *ngIf="( this.enviado == true && ( this._formsResource.minSelectCheckBox(1, this.estadoCivilObj) ) ) " >
+                            <small >
+                              Debes seleccionar una opción
+                            </small>
+
+                          </div>
+
+
+                                  </div>
+
+
+                                </div>
+
+                            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                                Cuentanos más de tu publico
+                            </h4>
+                            <hr>
+
+                                <div class="row">
+                                  <div class="form-group col-md-12">
+                                  <textarea
+                                  [(ngModel)]="ngCuentaPublico"
+                                  [ngModelOptions]="{standalone: true}"
+                                  [maxlength]="350"
+                                  required  name="cuentaPublico" #cuentaPublico="ngModel" class="form-control" rows="3" placeholder="Escribe aquí información como profesiones, ocupaciones, cargos, gustos e intereses que pueden tener las personas a las que quieres llegar."></textarea>
+                                  <small
+                                  *ngIf="(this.ngCuentaPublico) && this.ngCuentaPublico != ''"
+                                  >{{ this.ngCuentaPublico.length }}/350</small>
+
+
+                                  <div class="errorSpace" *ngIf="( this.enviado == true && cuentaPublico.invalid ) || (cuentaPublico.invalid && (cuentaPublico.dirty || cuentaPublico.touched))" >
+                                    <small *ngIf="cuentaPublico.errors.required">
+                                      Este campo es obligatorio
+                                    </small>
+
+                                  </div>
+
+                                </div>
+                                </div>
+
+                            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                                ¿Qué palabras quieres usar en el buscador de Google para que te encuentren?
+                            </h4>
+                            <hr>
+
+                                <div class="row">
+                                  <div class="form-group col-md-12">
+                                  <textarea
+                                  [(ngModel)]="palabrasBuscador"
+                                  [ngModelOptions]="{standalone: true}"
+                                  [maxlength]="350"
+                                  required  name="buscadorPalabras" #buscadorPalabras="ngModel" class="form-control" rows="3" ></textarea>
+                                  <small
+                                  *ngIf="(this.palabrasBuscador) && this.palabrasBuscador != ''"
+                                  >{{ this.palabrasBuscador.length }}/350</small>
+
+
+                                  <div class="errorSpace" *ngIf="( this.enviado == true && buscadorPalabras.invalid ) || (buscadorPalabras.invalid && (buscadorPalabras.dirty || buscadorPalabras.touched))" >
+                                    <small *ngIf="buscadorPalabras.errors.required">
+                                      Este campo es obligatorio
+                                    </small>
+
+                                  </div>
+
+                                </div>
+                                </div>
+
+                            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                                Sube la foto para tu anuncio y tu logo
+                            </h4>
+                            <hr>
+                                <div class="row">
+
+                                 <div   class="form-group col-md-12">
+                                <!-- {{ this.ngTypeAdjuntos }} -->
+
+                                <div class="input-group">
+
+                                  <div class="custom-file" >
+                                    <input accept="image/*" multiple (change)="selectFiles($event)"  required ngModel name="files" #files="ngModel" type="file" class="custom-file-input" id="exampleInputFile">
+                                    <label class="custom-file-label" for="exampleInputFile">Selecciona los archivos </label>
+
+                                  </div>
+
+                                </div>
+
+                              </div>
+
+
+                                </div>
+
+                                <div class="row" >
+                                  <div class="form-group col-12" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
+
+                                    <img data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                    (click)="deleteSelected(i)" class="imgSelected" *ngFor="let item of urlFiles; let i = index" [src]="item" alt="">
+
+                                  </div>
+                                </div>
+
+
+                                  <div class="row formButtons flexAround ">
+                                    <button
+
+                                    (click)="this.Atras()"
+                                    style="margin-left: auto;"
+                                    class="buttonCustom btn btn-success btn-flat">
+                                    <!-- <i class="fas fa-times    "></i> -->
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    Atras
+                                  </button>
+
+                                    <button
+                                    (click)="alEnviar()"
+                                    type="submit"
+                                    style="margin-left: auto;"
+                                    class="buttonCustom btn btn-success btn-flat">
+                                    <i class="fas fa-shopping-bag    "></i>
+                                    Seleccionar
+                                  </button>
+                                  </div>
+
+
+
+                          </form>
+
+                          </div>
+
+                        </div>
+
+                    </div>
+
+                  </div>
+
+
+                </div>
+                <div
+                *ngIf="(this.paso == 1) && (this.tipo == 'Grande')"
+                class="container">
+
+                <div class="row typePauta">
+
+                    <div class="animated fadeIn fast card card-primary card-outline card-tabs">
+
+                        <div class="card-body">
+
+                          <div class="row">
+                            <h5
+                            class="titleSpecial4"
+                            style="text-align: center; width: 100%; display: block"
+                            >
+                              Plan Grande
+
+                            </h5>
+                          </div>
+
+                          <div class="row">
+
+
+                          <form
+                          ngNativeValidate
+                          #c="ngForm"
+                          (ngSubmit)="savePlanPauta( c )"
+                          class="formDataSend" action="">
+
+
+                      <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                        ¿En qué fechas saldrá tu anuncio?
+                    </h4>
+                    <hr>
+                        <div class="row">
+
+                          <div class="form-group clearfix col-md-12">
+                          <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <!-- <i class="fa fa-phone" aria-hidden="true"></i> -->
+                                  <i class="fas fa-calendar    "></i>
+                                  </span>
+                              </div>
+                              <input
+                              [required]="this._formsResource.emptyField('fechaPautas')"
+                              id="fechaPautas" [(ngModel)]="this.ngfechaPautas"  name="fechaPautas" #fechaPautas="ngModel" type="text" class="form-control" >
+                            </div>
+
+                            <div class="errorSpace" *ngIf="( this.enviado == true && fechaPautas.invalid ) || (fechaPautas.invalid && (fechaPautas.dirty || fechaPautas.touched))" >
+                              <small *ngIf="fechaPautas.errors.required">
+                                Este campo es obligatorio
+                              </small>
+
+                            </div>
+
+                        </div>
+
+
+                        </div>
+
+
+                           <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                                ¿En qué ciudad quieres tu anuncio?
+                                <!--  -->
+                            </h4>
+                            <hr>
+                               <div class="row">
+                                <div class="form-group clearfix col-md-12 col-lg-4">
+                                  <label for="Department">Departamento</label>
+                                <div class="input-group" >
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                           <i class="fa fa-home" aria-hidden="true"></i>
+
+                                        </span>
+                                      </div>
+                                      <select (change)="setCiudades($event.target.value)" [(ngModel)]="this.ngDepartment"  ngModel name="Department" #Department="ngModel" class="form-control" >
+                                          <option value="" disabled selected ></option>
+                                          <option *ngFor="let item of this.GlobalConfigService.departamentos" value="{{item | json}}">
+                                            {{item.departamento}}
+                                          </option>
+
+                                        </select>
+                                  </div>
+                                  </div>
+
+                                   <div class="form-group clearfix col-md-12 col-lg-4">
+                                    <label for="City">Ciudad</label>
+                                  <div class="input-group" >
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                           <i class="fa fa-home" aria-hidden="true"></i>
+                                        </span>
+                                      </div>
+                                      <select   [(ngModel)]="this.ngCity" ngModel name="City" #City="ngModel" class="form-control" >
+                                          <option value="" disabled selected></option>
+                                          <option *ngFor="let item of this.ciudades"  value="{{item}}">
+                                            {{item}}
+                                          </option>
+
+                                        </select>
+
+
+
+                                  </div>
+                                  </div>
+
+                                  <div
+                                  *ngIf="(this.cityTargets.length == 0) || (this.cityTargets.length < this.nroCiudades)"
+                                  class="form-group clearfix col-md-12 col-lg-4">
+                                    <label><br></label>
+
+                                  <div class="formButtons" style="flex-direction: column;">
+                                    <button style="width: 100%; margin: 0 auto"  type="button" (click)="addCityTarget()" class="buttonCustom btn btn-success btn-flat">+Agregar ciudad</button>
+                                  </div>
+
+                                  </div>
+                                </div>
+
+                                <div class="row" *ngIf="this.cityTargets.length > 0">
+                                  <div class="form-group clearfix col-12">
+
+                                    <table class="table table-hover" style="width: 100%;">
+                                      <thead>
+                                        <tr>
+                                          <th>Departamento</th>
+                                          <th>Ciudad</th>
+                                          <th>Eliminar</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let item of this.cityTargets; let i = index">
+                                          <td>{{item.department}}</td>
+                                          <td>{{item.city}}</td>
+                                          <td> <button style="width: 100%; width: unset!important;"  type="button" (click)="deleteCityTarget(i)" class="buttonCustom btn btn-danger btn-flat"><i class="fas fa-trash-alt"></i></button></td>
+                                        </tr>
+
+                                      </tbody>
+                                    </table>
+
+                                </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="errorSpace" *ngIf="this.citysError == true">
+                                        <small >
+                                          Es obligatorio seleccionar al menos una ciudad
+                                        </small>
+
+                                      </div>
+
+                                </div>
+
+
+
+
+                                <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                                  ¿Qué publico quieres que vea tu anuncio?
+                                  <!--  -->
+                              </h4>
+                              <hr>
+                                <div class="row">
+
+                                  <div class="form-group clearfix col-md-12 col-lg-4">
+
+                          <div
+                          *ngFor="let option of this.generoObj; let i = index"
+                          class="form-check">
+                          <input
+                          [(ngModel)]="this.generoObj[i].checked"
+                          [required]="this._formsResource.minSelectCheckBox(1, this.generoObj)"
+                            [value]="option.value" class="form-check-input" type="checkbox" name="generoObj" >
+                            <label class="form-check-label">
+                              {{option.name}}
+                            </label>
+                          </div>
+
+                          <div class="errorSpace" *ngIf="( this.enviado == true && ( this._formsResource.minSelectCheckBox(1, this.generoObj) ) ) " >
+                            <small >
+                              Debes seleccionar una opción
+                            </small>
+
+                          </div>
+
+
+
+                                  </div>
+
+                                  <div class="form-group clearfix col-md-12 col-lg-4">
+
+                                <div
+                          *ngFor="let option of this.edadesObj; let i = index"
+                          class="form-check">
+                            <input
+                            [(ngModel)]="this.edadesObj[i].checked"
+                            [required]="this._formsResource.minSelectCheckBox(1, this.edadesObj)"
+                            [value]="option.value" class="form-check-input" type="checkbox" name="edadesObj" >
+                            <label class="form-check-label">
+                              {{option.name}}
+                            </label>
+                          </div>
+
+
+                          <div class="errorSpace" *ngIf="( this.enviado == true && ( this._formsResource.minSelectCheckBox(1, this.edadesObj) ) ) " >
+                            <small >
+                              Debes seleccionar una opción
+                            </small>
+
+                          </div>
+
+
+                                  </div>
+
+                                  <div class="form-group clearfix col-md-12 col-lg-4">
+
+                         <div
+                          *ngFor="let option of this.estadoCivilObj; let i = index"
+                          class="form-check">
+                            <input
+                            [(ngModel)]="this.estadoCivilObj[i].checked"
+                            [required]="this._formsResource.minSelectCheckBox(1, this.estadoCivilObj)"
+                            [value]="option.value" class="form-check-input" type="checkbox" name="estadoCivilObj" >
+                            <label class="form-check-label">
+                              {{option.name}}
+                            </label>
+                          </div>
+
+
+                          <div class="errorSpace" *ngIf="( this.enviado == true && ( this._formsResource.minSelectCheckBox(1, this.estadoCivilObj) ) ) " >
+                            <small >
+                              Debes seleccionar una opción
+                            </small>
+
+                          </div>
+
+
+                                  </div>
+
+
+                                </div>
+
+                            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                                Cuentanos más de tu publico
+                            </h4>
+                            <hr>
+
+                                <div class="row">
+                                  <div class="form-group col-md-12">
+                                  <textarea
+                                  [(ngModel)]="ngCuentaPublico"
+                                  [ngModelOptions]="{standalone: true}"
+                                  [maxlength]="350"
+                                  required  name="cuentaPublico" #cuentaPublico="ngModel" class="form-control" rows="3" placeholder="Escribe aquí información como profesiones, ocupaciones, cargos, gustos e intereses que pueden tener las personas a las que quieres llegar."></textarea>
+                                  <small
+                                  *ngIf="(this.ngCuentaPublico) && this.ngCuentaPublico != ''"
+                                  >{{ this.ngCuentaPublico.length }}/350</small>
+
+
+                                  <div class="errorSpace" *ngIf="( this.enviado == true && cuentaPublico.invalid ) || (cuentaPublico.invalid && (cuentaPublico.dirty || cuentaPublico.touched))" >
+                                    <small *ngIf="cuentaPublico.errors.required">
+                                      Este campo es obligatorio
+                                    </small>
+
+                                  </div>
+
+                                </div>
+                                </div>
+
+                            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                                ¿Qué palabras quieres usar en el buscador de Google para que te encuentren?
+                            </h4>
+                            <hr>
+
+                                <div class="row">
+                                  <div class="form-group col-md-12">
+                                  <textarea
+                                  [(ngModel)]="palabrasBuscador"
+                                  [ngModelOptions]="{standalone: true}"
+                                  [maxlength]="350"
+                                  required  name="buscadorPalabras" #buscadorPalabras="ngModel" class="form-control" rows="3" ></textarea>
+                                  <small
+                                  *ngIf="(this.palabrasBuscador) && this.palabrasBuscador != ''"
+                                  >{{ this.palabrasBuscador.length }}/350</small>
+
+
+                                  <div class="errorSpace" *ngIf="( this.enviado == true && buscadorPalabras.invalid ) || (buscadorPalabras.invalid && (buscadorPalabras.dirty || buscadorPalabras.touched))" >
+                                    <small *ngIf="buscadorPalabras.errors.required">
+                                      Este campo es obligatorio
+                                    </small>
+
+                                  </div>
+
+                                </div>
+                                </div>
+
+                            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                                Sube la foto para tu anuncio y tu logo
+                            </h4>
+                            <hr>
+                                <div class="row">
+
+                                 <div   class="form-group col-md-12">
+                                <!-- {{ this.ngTypeAdjuntos }} -->
+
+                                <div class="input-group">
+
+                                  <div class="custom-file" >
+                                    <input accept="image/*" multiple (change)="selectFiles($event)"  required ngModel name="files" #files="ngModel" type="file" class="custom-file-input" id="exampleInputFile">
+                                    <label class="custom-file-label" for="exampleInputFile">Selecciona los archivos </label>
+
+                                  </div>
+
+                                </div>
+
+                              </div>
+
+
+                                </div>
+
+                                <div class="row" >
+                                  <div class="form-group col-12" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
+
+                                    <img data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                    (click)="deleteSelected(i)" class="imgSelected" *ngFor="let item of urlFiles; let i = index" [src]="item" alt="">
+
+                                  </div>
+                                </div>
+
+
+                                  <div class="row formButtons flexAround ">
+                                    <button
+
+                                    (click)="this.Atras()"
+                                    style="margin-left: auto;"
+                                    class="buttonCustom btn btn-success btn-flat">
+                                    <!-- <i class="fas fa-times    "></i> -->
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    Atras
+                                  </button>
+
+                                    <button
+                                    (click)="alEnviar()"
+                                    type="submit"
+                                    style="margin-left: auto;"
+                                    class="buttonCustom btn btn-success btn-flat">
+                                    <i class="fas fa-shopping-bag    "></i>
+                                    Seleccionar
+                                  </button>
+                                  </div>
+
+
+
+                          </form>
+
+                          </div>
+
+                        </div>
+
+                    </div>
+
+                  </div>
+
+
+                </div>
+                <!-- / etapa 2 -->
+
+            </div>
+            </div>
+
+
+        </div>
+    <!-- </div> -->
+    </div>

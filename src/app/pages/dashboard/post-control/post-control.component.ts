@@ -105,6 +105,9 @@ export class PostControlComponent implements OnInit {
     public router: Router,
     public _paymentService: PaymentService
   ) {
+
+    this.GlobalConfigService.setTitle('Creación de publicaciones');
+
     this.getCategory();
     this.initCitys();
   }

@@ -1,0 +1,190 @@
+
+
+
+
+
+<div class="containerFull" >
+
+
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+
+          <div class="col-sm-6">
+            <h1>Historial de publicaciones
+
+              <small
+              *ngIf="(this.registros) && (this.registros.length > 0)"
+              >
+              - {{ this.paginator.itemCount }}
+              </small>
+
+            </h1>
+          </div>
+
+      </div><!-- /.container-fluid -->
+      </div><!-- /.container-fluid -->
+    </section>
+
+
+      <!-- Main content -->
+      <section class="content">
+
+        <div
+        *ngIf="(this.registros) && (this.registros.length > 0)"
+        class="card card-primary card-outline">
+
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+
+              <div class="table-responsive mailbox-messages">
+
+                <table class="table table-hover table-striped">
+
+                    <thead>
+                      <tr>
+
+                        <th>
+                          Tipo
+                        </th>
+
+                        <th >
+                          Producto o servicio
+                        </th>
+
+                        <th >
+                            Categorías
+                        </th>
+
+                        <th>
+                            Estado
+                        </th>
+
+                        <th>
+                            Opciones
+                        </th>
+                    </tr>
+
+                    </thead>
+
+                <tbody
+                style="width: 100%"
+                >
+                    <!-- acá fa el foreacht en tr -->
+                    <tr
+                    *ngFor="let item of this.registros"
+                    >
+
+                          <td>
+                            <span *ngIf="item.typePost == 'borrador'">
+                              Borrador
+                            </span>
+                            <span *ngIf="item.typePost == 'Publicación'">
+                              Publicación
+                            </span>
+                          </td>
+
+                          <td>
+
+                            <a>
+                                {{item.title}}
+                            </a>
+                            <br>
+                            <small>
+                                {{item.created_at}}
+                            </small>
+                        </td>
+
+                        <td>
+                          <ul *ngIf="(item._category.length > 0)">
+                              <li *ngFor="let cate of item._category">
+                                  <small *ngIf="(cate._principal != null) && (cate._child != null)">
+                                      {{ cate._principal._category }} - {{ cate.child }}
+                                  </small>
+                              </li>
+                          </ul>
+                        </td>
+
+                      <td *ngIf="(item.verify_at) &&  item.verify_at != null">
+
+                        <div *ngIf="(!item.status)">
+
+                          <span class="badge badge-danger">No aprobado</span>
+                          <p *ngIf="(item._adminReasons)" style="text-align: left; margin-top: 10px;">
+                            {{ item._adminReasons.reasons }}
+                          </p>
+
+                        </div>
+
+                        <span *ngIf="(item.status)" class="badge badge-success">Aprobado</span>
+
+                      </td>
+
+                      <td *ngIf="(item.verify_at == null)">
+
+                        <span
+                        *ngIf="(item.typePost != 'borrador')"
+                        class="badge badge-warning">No revisado</span>
+                        <span
+                        *ngIf="(item.typePost == 'borrador')"
+                        >No publicado</span>
+
+
+                      </td>
+
+
+
+
+
+                      <td class="project-actions text-right">
+                        <button  [routerLink]="['/publication/infoPost', item._id ]" style="width: 100%!important;" class="buttonCustom btn btn-success btn-flat">
+                            <i class="fas fa-folder">
+                            </i>
+                            Ver
+                        </button>
+
+
+                        <button
+                        [routerLink]="[ '/dashboard/historialBillingPost', item._id ]"
+                        *ngIf="item.typePost != 'borrador'" style="width: 100%!important;"  class="buttonCustom btn btn-primary btn-flat">
+
+                            <i class="fas fa-file-invoice-dollar    "></i>
+                            Ver facturas
+                        </button>
+
+
+                    </td>
+
+
+
+                    </tr>
+                </tbody>
+
+                </table>
+
+              </div>
+
+            </div>
+
+          </div>
+            <app-global-paginator
+            *ngIf="( this.paginator != null ) && ( this.paginator.pageCount > 1 )"
+            [paginator]="this.paginator"
+            (newPageResponse)="this.newPageResponse($event)"
+            >
+
+            </app-global-paginator>
+
+
+
+
+        <div class="jumbotron" *ngIf="(this.registros == null) || (this.registros.length == 0)">
+          <h1 class="titleSpecial2">Sin resultados</h1>
+          <p>No hay publicaciones en este momento</p>
+        </div>
+
+
+    </section>
+
+
+</div>

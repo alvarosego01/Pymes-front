@@ -1,0 +1,440 @@
+<div class="containerFull">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Balances y reportes
+                    </h1>
+                </div>
+
+            </div><!-- /.container-fluid -->
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section
+    *ngIf="(this._userService.roleName == 'Administrador') && (this.statsGeneral != null)"
+    class="content">
+
+        <div class="row">
+            <div class="col-md-12 col-lg-4">
+              <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1">
+                  <i class="fas fa-money-bill    "></i>
+                </span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Ventas</span>
+                  <span class="info-box-number">
+                    {{ this.totalVentas | currencyLocale }}
+
+
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <!-- <div class="col-md-12 col-lg-4">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1">
+                  <i class="fas fa-eye    "></i>
+                </span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Visitas</span>
+                  <span class="info-box-number">41,410</span>
+                </div>
+                 /.info-box-content -->
+              <!-- </div> -->
+              <!-- /.info-box -->
+            <!-- </div> -->
+            <!-- /.col -->
+
+            <!-- fix for small devices only -->
+            <div class="clearfix hidden-md-up"></div>
+
+            <div class="col-md-12 col-lg-4">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1">
+                  <i class="fas fa-briefcase    "></i>
+                </span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Publicaciones</span>
+                  <span class="info-box-number">{{ this.statsGeneral.allPosts.length }}</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-12 col-lg-4">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Usuarios</span>
+                  <span class="info-box-number">{{ this.statsGeneral.allUsers.length }}</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title">Información de usuarios y publicaciones</h5>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <!-- <div class="btn-group">
+                      <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                        <i class="fas fa-wrench"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right" role="menu">
+                        <a href="#" class="dropdown-item">Action</a>
+                        <a href="#" class="dropdown-item">Another action</a>
+                        <a href="#" class="dropdown-item">Something else here</a>
+                        <a class="dropdown-divider"></a>
+                        <a href="#" class="dropdown-item">Separated link</a>
+                      </div>
+                    </div> -->
+
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body" style="display: block;">
+                  <div class="row">
+                    <div class="col-md-12 col-lg-8">
+                      <p class="text-center">
+                        <strong>Usuarios y publicaciones por mes</strong>
+                      </p>
+
+                      <div class="chart-wrapper">
+                        <canvas
+                        class="chartBar"
+                        baseChart
+                        [datasets]="this.barChartData"
+                        [labels]="this.barChartLabels"
+                        [options]="this.barChartOptions"
+                        [plugins]="this.barChartPlugins"
+                        [legend]="this.barChartLegend"
+                        [chartType]="this.barChartType">
+                      </canvas>
+                    </div>
+
+
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-12 col-lg-4">
+                      <p class="text-center">
+                        <strong>Tipos de usuario</strong>
+                      </p>
+
+
+                      <div class="chart-wrapper">
+                        <canvas
+                        *ngIf="(doughnutChartLabels != null) && (doughnutChartData != null)"
+                        class="chartDonut"
+                        baseChart
+                        [data]="this.doughnutChartData"
+                        [labels]="this.doughnutChartLabels"
+                        [chartType]="this.doughnutChartType">
+                      </canvas>
+                    </div>
+
+                    </div>
+                    <!-- /.col -->
+                  </div>
+
+                  <!-- <div class="row">
+                    <div class="jumbotron" *ngIf="(this.allPublications) && this.allPublications.length == 0">
+                      <h1 class="titleSpecial2">Sin resultados</h1>
+                      <p>En este momento</p>
+                    </div>
+                  </div> -->
+
+                  <!-- /.row -->
+                </div>
+                <!-- ./card-body -->
+
+                <!-- /.card-footer -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title">Información de facturas y ordenes</h5>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <!-- <div class="btn-group">
+                      <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                        <i class="fas fa-wrench"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right" role="menu">
+                        <a href="#" class="dropdown-item">Action</a>
+                        <a href="#" class="dropdown-item">Another action</a>
+                        <a href="#" class="dropdown-item">Something else here</a>
+                        <a class="dropdown-divider"></a>
+                        <a href="#" class="dropdown-item">Separated link</a>
+                      </div>
+                    </div> -->
+
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body" style="display: block;">
+                  <div class="row">
+                    <div class="col-md-12 col-lg-8">
+                      <p class="text-center">
+                        <strong>Facturas por mes</strong>
+                      </p>
+
+                      <div class="chart-wrapper">
+                        <canvas
+                        class="chartBar"
+                        baseChart
+                        [datasets]="this.OrdenesbarChartData"
+                        [labels]="this.barChartLabels"
+                        [options]="this.barChartOptions"
+                        [plugins]="this.barChartPlugins"
+                        [legend]="this.barChartLegend"
+                        [chartType]="this.barChartType">
+                      </canvas>
+                    </div>
+
+
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-12 col-lg-4">
+                      <p class="text-center">
+                        <strong>Tipos de ordenes</strong>
+                      </p>
+
+                      <div class="chart-wrapper">
+                        <canvas
+                        *ngIf="(OrdenesdoughnutChartLabels != null) && (OrdenesdoughnutChartData != null)"
+                        class="chartDonut"
+                        baseChart
+                        [data]="this.OrdenesdoughnutChartData"
+                        [labels]="this.OrdenesdoughnutChartLabels"
+                        [chartType]="this.OrdenesdoughnutChartType">
+                      </canvas>
+                    </div>
+
+
+
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+                </div>
+                <!-- ./card-body -->
+
+                <!-- /.card-footer -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+
+
+
+          <div class="row last12Section">
+
+            <div class="col-md-12 col-lg-4">
+
+
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Últimos 12 usuarios</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                  <ul class="users-list clearfix">
+
+                    <li
+                    *ngFor="let item of this.statsGeneral.allUsers.slice(0, 12); let i = index"
+
+                    >
+                      <img [src]="item.imgProfile | imagen:'User':item._id" alt="User Image">
+                      <a class="users-list-name" [routerLink]="['/user', item._id]" routerLinkActive="active">{{ item.name }} {{ item.surname }} </a>
+                      <small class="users-list-date">{{ item.created_at }}</small>
+                    </li>
+
+
+                  </ul>
+                  <!-- /.users-list -->
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer text-center">
+                  <a [routerLink]="['/admin/usersManager']" routerLinkActive="active">Ver todos</a>
+                </div>
+                <!-- /.card-footer -->
+              </div>
+
+
+                </div>
+
+
+
+
+            <div class="col-md-12 col-lg-4">
+
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Últimas 12 publicaciones</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                  <ul class="products-list product-list-in-card pl-2 pr-2">
+
+                    <li
+                    *ngFor="let item of this.statsGeneral.allPosts.slice(0, 12); let i = index"
+                    class="item">
+                      <div class="product-img">
+                        <img
+                        *ngIf="item._files[0].type != 'PDF'"
+                        [src]="item.thumbnail | imagen:'Post':item._id:true " alt="Product Image" class="img-size-50">
+
+                          <pdf-viewer
+                          *ngIf="(item._files[0]) && item._files[0].type == 'PDF'"
+                          class="pdfList"
+                          [src]="item._files[0].file | imagen:'Post':item._files[0].folder "
+                          [render-text]="false"
+                          [page]="1"
+                          [show-all]="false"
+
+                          [original-size]="false"
+                          [autoresize]="false"
+                          style="display: block;">
+                          </pdf-viewer>
+
+
+                      </div>
+
+
+
+                      <div class="product-info">
+                        <a [routerLink]="['/publication/infoPost', item._id]" routerLinkActive="active" class="product-title">{{ item.title }}
+                        </a>
+                        <span class="product-description">
+                          Dueño: {{ item.user.name }} {{ item.user.surname }}
+                        </span>
+                      </div>
+                    </li>
+
+                    <!-- /.item -->
+                  </ul>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer text-center">
+                  <a [routerLink]="['/admin/postManager']" routerLinkActive="active" class="uppercase">Ver todas</a>
+                </div>
+                <!-- /.card-footer -->
+              </div>
+
+                </div>
+
+
+
+
+            <div class="col-md-12 col-lg-4">
+
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Últimas 12 notificaciones</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                  <ul class="products-list product-list-in-card pl-2 pr-2">
+
+                    <li
+                    *ngFor="let item of this._notifyService.notificaciones.slice(0, 12); let i = index"
+                    class="item">
+                      <div class="product-img">
+                        <i
+                        *ngIf="item.read == false"
+                        class="fa fa-envelope" aria-hidden="true"></i>
+
+                        <i
+                        *ngIf="item.read == true"
+                        class="fa fa-envelope-open" aria-hidden="true"></i>
+                      </div>
+                      <div class="product-info">
+                        <a
+                        [routerLink]="['/dashboard/notify/message', item._id ]"
+                        routerLinkActive="active"
+                         class="product-title">{{ item.subject }}
+                        </a>
+                        <span class="product-description">
+                          {{item.created_at}}
+                        </span>
+                      </div>
+                    </li>
+
+                    <!-- /.item -->
+                  </ul>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer text-center">
+                  <a [routerLink]="['/dashboard/notify']" routerLinkActive="active" class="uppercase">Ver todas</a>
+                </div>
+                <!-- /.card-footer -->
+              </div>
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+    </section>
+
+
+</div>

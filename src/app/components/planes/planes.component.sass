@@ -1,0 +1,240 @@
+@import "~src/generals"
+
+
+
+
+.block
+    display: block
+.none
+    display: none
+
+
+.container
+    width: 100%!important
+    margin: 0!important
+
+.infoPlans
+    padding: 60px 0
+    padding-bottom: 25px
+    background-color: white
+    margin-bottom: 0
+    .iva
+        text-align: left
+    h5
+        color: $VerdeClar
+        width: 100%
+        display: bock
+        text-align: center
+    .infoData
+        margin: 50px 0
+        display: flex
+        flex-direction: row
+        .container
+            width: 100%!important
+        .row
+            // display: flex
+            // flex-direction: row
+            // height: 100%
+            display: flex
+            flex-direction: row
+            @include responsivo(telefonoTable)
+                flex-direction: column
+            @include responsivo(pcMedio)
+                flex-direction: row
+        .tarjetaPrecio
+            // height: 100%
+            // display: table-cell
+            // margin-left: 10px
+            // margin-right: 10px
+            width: 22.5%
+            margin: 0 1.25%
+            margin-bottom: 25px
+            @include responsivo(telefonoTable)
+                width: 100%
+                margin: 0 auto
+                margin-bottom: 25px
+            @include responsivo(pcMedio)
+                width: 50%
+                padding-left: 2.5%
+                padding-right: 2.5%
+                margin: 0 auto
+                margin-bottom: 25px
+            .card
+                // height: 100%
+                margin-bottom: 0
+                height: 100%
+                .card-header
+                    h4
+                        width: 100%
+                        text-align: center
+                        font-weight: bold
+                        // @include responsivo(general)
+                            // display: none
+                        @include responsivo(resto)
+                            br
+                                display: none
+                    h6
+                        width: 100%
+                        text-align: center
+                        // color: $VerdeClar
+                .card-footer
+                    padding-top: 0!important
+                .card-body,
+                .card-footer
+                    background-color: $GrisFondo2
+                    padding: 0
+                    padding-top: 15px
+                    display: flex
+                    // justify-content: center
+                    ul
+                        width: 100%
+                        display: grid
+                        list-style: none
+                        padding: 0
+                        margin-bottom: 0
+                        li
+                            display: block
+                            width: 100%
+                            text-align: center
+                            margin-bottom: 10px
+                            // margin-left: 10px
+                            // margin-right: 10px
+                            color: $GrisClar
+                            padding-bottom: 5px
+                            padding-left: 5%
+                            padding-right: 5%
+                            font-size: 17px
+                            // height: 100px
+                            display: flex
+                            align-content: center
+                            align-items: center
+                            flex-direction: row
+                            position: relative
+                            &::after
+                                content: ''
+                                position: absolute
+                                width: 90%
+                                display: block
+                                margin: 0 auto
+                                bottom: 0
+                                left: 0
+                                right: 0
+                                border-bottom: 1px solid white
+                            p
+                                margin-bottom: 0
+                                text-align: center
+                                width: 100%
+                                display: block
+                                // border-bottom: 1px solid white
+                        @include responsivo(telefonoTable)
+                            li
+                                p
+                                    font-size: 20px!important
+                                    width: 100%
+                                    display: block
+                                    text-align: center
+                        @include responsivo(pcMedio)
+                            li
+                                p
+                                    font-size: 20px!important
+                                    width: 100%
+                                    display: block
+                                    text-align: center
+                        li.special
+                            height: unset
+                            // background-color: $GrisClar
+                            // color: white
+                            padding-top: 10px
+                            padding-bottom: 10px
+                            margin-bottom: 0
+                            min-height: 66px!important
+                            display: grid
+                            align-items: center
+                            align-content: center
+                            height: fit-content!important
+                            font-weight: bold
+                            // &::after
+                                // display: none!important
+                            // justify-content: center
+                        li.price
+                            height: unset
+                            border-bottom: 0
+                            color: $VerdeOscur
+                            font-size: 20px
+                            font-weight: bold
+                            padding-top: 10px
+                            padding-bottom: 10px
+                            margin-bottom: 0
+                            flex-direction: row
+                            text-align: center
+                            justify-content: center
+                            height: fit-content!important
+                            &::after
+                                display: none!important
+            &:nth-child(1)
+                .card-header
+                    background-color: $verdeMasClar
+                    h4
+                        color: $GrisOscur
+                    h6
+                        color: $GrisClar
+            &:nth-child(2)
+                .card-header
+                    background-color: $verdeMasClar
+                    h4
+                        color: $GrisOscur
+                    h6
+                        color: $GrisClar
+            &:nth-child(3)
+                .card-header
+                    background-color: $VerdeClar
+                    h4
+                        color: white
+                    h6
+                        color: $GrisOscur
+                ul
+                    li
+                        &:nth-child(5)
+                            // height: 125px
+            &:nth-child(4)
+                .card-header
+                    background-color: $VerdeOscur
+                    h4
+                        color: white
+                    h6
+                        color: $GrisOscur
+                ul
+                    li
+                        &:nth-child(5)
+                            // height: 125px
+
+ul.whatsapp
+    list-style: none
+    padding: 0
+    margin: 0
+    margin: 0 25px
+    li
+        a
+            width: 65px
+            height: 65px
+            display: block
+            background-color: $GrisOscur
+            border-radius: 100%
+            position: relative
+            i
+                color: white
+                position: absolute
+                font-size: 40px
+                left: 0
+                right: 0
+                top: 0
+                bottom: 0
+                // display: block
+                margin: auto
+                display: flex
+                align-content: center
+                align-items: center
+                justify-items: center
+                justify-content: center
+            &:hover
+                background-color: $VerdeOscur

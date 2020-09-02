@@ -1,0 +1,253 @@
+
+
+
+
+
+
+
+
+<div class="containerFull" >
+
+
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+
+          <div class="col-sm-6">
+            <h1>
+                Información de orden de pauta
+
+
+            </h1>
+          </div>
+
+      </div><!-- /.container-fluid -->
+      </div><!-- /.container-fluid -->
+    </section>
+
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="containerr">
+
+            <div class="row">
+
+                <div
+                *ngIf="(this.boost) "
+                style="padding: 15px;"
+                class="col-md-12 col-lg-8"
+                >
+
+                    <div
+                    style="padding: 15px;"
+                    class="card card-primary card-outline">
+
+                    <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                        <i class="fas fa-user-friends    "> </i> Audiencia
+                      </h4>
+                      <hr>
+                      <div class="row">
+
+                        <div class="col-md-12 col-lg-4">
+
+                            <ul class="audiencialista">
+                                <li *ngFor="let item of this.boost.audience[0].year">
+
+                                    <i
+                                    *ngIf="item.checked == false"
+                                    class="far fa-square" aria-hidden="true"></i>
+
+
+                                    <i
+                                    *ngIf="item.checked == true"
+                                    class="fas fa-check-square colorSuccess" aria-hidden="true"></i>
+
+
+
+                                    <span>
+                                        {{ item.name }}
+                                    </span>
+
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <div class="col-md-12 col-lg-4">
+
+                            <ul class="audiencialista">
+                                <li *ngFor="let item of this.boost.audience[0].gender">
+
+                                    <i
+                                    *ngIf="item.checked == false"
+                                    class="far fa-square" aria-hidden="true"></i>
+
+                                    <i
+                                    *ngIf="item.checked == true"
+                                    class="fas fa-check-square colorSuccess" aria-hidden="true"></i>
+
+                                    <span>
+                                        {{ item.name }}
+                                    </span>
+
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <div class="col-md-12 col-lg-4">
+
+                            <ul class="audiencialista">
+                                <li *ngFor="let item of this.boost.audience[0].status">
+
+                                    <i
+                                    *ngIf="item.checked == false"
+                                    class="far fa-square" aria-hidden="true"></i>
+
+                                    <i
+                                    *ngIf="item.checked == true"
+                                    class="fas fa-check-square colorSuccess" aria-hidden="true"></i>
+
+                                    <span>
+                                        {{ item.name }}
+                                    </span>
+
+                                </li>
+                            </ul>
+
+                        </div>
+
+                      </div>
+
+
+                      <div
+                      *ngIf="(this.boost.audience[0].description != null)"
+                      >
+
+                      <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                       <i class="fas fa-info    "></i> Información sobre el público
+                      </h4>
+                      <hr>
+
+                      </div>
+
+                      <div
+                      *ngIf="(this.boost.audience[0].description != null)"
+                      class="row">
+
+                        <div class="col-md-12">
+                            <p>
+                                {{ this.boost.audience[0].description }}
+                            </p>
+                        </div>
+
+                      </div>
+                      <div
+                      *ngIf="(this.boost.palabrasBuscador != null)"
+                      >
+
+                      <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                       <i class="fas fa-globe    "></i> Palabras para el buscador
+                      </h4>
+                      <hr>
+
+                      </div>
+
+                      <div
+                      *ngIf="(this.boost.palabrasBuscador != null)"
+                      class="row">
+
+                        <div class="col-md-12">
+                            <p>
+                                {{ this.boost.palabrasBuscador }}
+                            </p>
+                        </div>
+
+                      </div>
+
+                </div>
+            </div>
+                <div
+                *ngIf="(this.boost) "
+                style="padding: 15px;"
+                class="col-md-12 col-lg-4"
+                >
+
+                    <div
+                    style="padding: 15px;"
+                    class="card card-primary card-outline">
+
+
+                    <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                      <i class="fas fa-calendar-alt    "></i>  Fechas de la pauta
+                      </h4>
+                      <hr>
+
+                      <div class="row">
+                          <p>
+                             {{ this.boost.daysReamming.inicio }} - {{ this.boost.daysReamming.finalizacion }}
+                            </p>
+                      </div>
+
+
+                    <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                        <i class="fas fa-map-marked-alt    "></i> Ciudades y departamentos
+                        </h4>
+                        <hr>
+
+                      <div class="row">
+                        <p>
+                            <span
+                            *ngFor="let item of this.boost._cityTarget"
+                            >
+                            {{ item.department }} - {{ item.city }} <br>
+                            </span>
+                        </p>
+                      </div>
+
+                      <div
+                      *ngIf="this.boost.redesPublico[0] != 'No aplica'"
+                      >
+
+                        <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                            <i class="fas fa-thumbs-up    "></i> Redes sociales seleccionadas
+                        </h4>
+                            <hr>
+
+
+                          <div class="row">
+
+                          </div>
+                      </div>
+
+                    <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                        <i class="fas fa-image    "></i> Imágen de anuncio y logo
+                    </h4>
+                        <hr>
+
+                      <div class="row">
+
+                        <div class="file">
+
+                            <a *ngFor="let item of this.boost._files" [href]="item.file | imagen:'Boost':item.folder">
+
+                                <img  [src]="item.file | imagen:'Boost':item.folder" alt="">
+                            </a>
+
+                        </div>
+
+                      </div>
+
+                      </div>
+
+
+                </div>
+            </div>
+
+
+
+    </div>
+
+    </section>
+
+</div>

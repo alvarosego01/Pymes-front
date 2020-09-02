@@ -1,0 +1,74 @@
+
+
+
+
+
+<div
+*ngIf="(this.existNotif == true)"
+class="containerFull" >
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+
+          <div class="col-sm-6">
+            <h1>Información de notificación</h1>
+          </div>
+
+      </div><!-- /.container-fluid -->
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+
+
+        <div class="card card-primary card-outline">
+
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+              <div class="mailbox-read-info">
+
+                <h6>
+                  <i
+                  *ngIf="this.notificacion.read == false"
+                  class="fa fa-envelope" aria-hidden="true"></i>
+
+                  <i
+                  *ngIf="this.notificacion.read == true"
+                  class="fa fa-envelope-open" aria-hidden="true"></i>
+                  {{this.notificacion.subject}}
+                  <span class="mailbox-read-time float-right">{{ this.notificacion.created_at }}
+
+                    <div class="btn-group btn-group-sm">
+                      <button
+                      type="button"
+                      (click)="deleteNotif(this.notificacion._id)"
+                      class="btn btn-danger"><i class="fas fa-trash"></i>
+                    </button>
+                    </div>
+
+                  </span></h6>
+              </div>
+              <!-- /.mailbox-read-info -->
+
+              <!-- /.mailbox-controls -->
+              <div class="mailbox-read-message">
+
+                <p>
+                  {{ this.notificacion.description }}
+                </p>
+
+              </div>
+              <!-- /.mailbox-read-message -->
+            </div>
+
+          </div>
+
+
+
+    </section>
+
+  </div>
+

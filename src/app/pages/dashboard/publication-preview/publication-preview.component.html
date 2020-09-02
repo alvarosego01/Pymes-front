@@ -1,0 +1,467 @@
+<div
+  id="id01"
+  class="w3-modal"
+  [ngClass]="{
+    'block': this.previewPublication == true,
+    'none': this.previewPublication == false,
+    'modalSession': this._userService.token != null
+  }"
+>
+
+
+
+<div class="formButtons opcPreview">
+
+  <button
+  (click)="this.guardarBorrador()"
+    type="button"
+    class="buttonCustom btn btn-success btn-flat"
+  >
+    <i class="fas fa-save    "></i>
+    Guardar como borrador
+  </button>
+
+  <button
+
+  (click)="this.goPay()"
+    type="button"
+    class="buttonCustom btn btn-success btn-flat"
+  >
+  <i class="fas fa-money-check    "></i>
+    IR A PAGAR
+  </button>
+</div>
+
+
+<!-- (clickOutside)="this.ocultarClick($event)" -->
+<!-- [emitOnBlur]="true" -->
+<!-- [delayClickOutsideInit]="true" -->
+<!-- [exclude]="'button, a'" -->
+  <div
+    class="w3-modal-content w3-animate-top w3-card-4"
+  >
+    <header class="w3-container w3-teal">
+      <span (click)="this.cerrarModal()" class="w3-button w3-display-topright"
+        >&times;</span
+      >
+      <h2>Así se verá tu publicación</h2>
+    </header>
+    <div class="w3-container">
+      <div id="previewComponent">
+        <div class="infoPreview">
+          <div class="container">
+            <div class="infoData">
+              <div class="container">
+                <!--
+                  inicio del componente de preview
+                 -->
+
+                <div
+                  *ngIf="this.publication != undefined"
+                  id="homeContainer"
+                  class="contentGeneral content-wrapper"
+                >
+                  <!-- Content Header (Page header) -->
+
+                  <!-- Main content -->
+                  <section>
+                    <div class="row migPan padd10">
+
+
+                    </div>
+                    <div class="row padd10 infoGeneralContent">
+                      <div
+                        class="fileSide col-md-12 col-lg-6"
+                        *ngIf="
+                          this.publication != undefined &&
+                          this.publication._files.length > 0 &&
+                          this.publication.typeFiles === 'Catálogo PDF'
+                        "
+                        [ngClass]="{
+                          typePDF:
+                            this.publication._files[0] &&
+                            this.publication.typeFiles === 'Catálogo PDF'
+                        }"
+                      >
+
+
+                      <pdf-viewer
+                      class="pdfList"
+                      [src]="this.publication._files[0]"
+                      [render-text]="false"
+                      [page]="1"
+                      [show-all]="false"
+
+                      [original-size]="false"
+                      [autoresize]="false"
+                      style="display: block;">
+                      </pdf-viewer>
+
+
+                        <div class="iconoDownload">
+                          <a
+                            class="hiperButtonWhite"
+                          >
+                            <i class="fas fa-download"></i>
+                            Visualizar catálogo
+                          </a>
+                        </div>
+                      </div>
+
+                      <div
+                        class="fileSide col-md-12 col-lg-6"
+                        *ngIf="
+                          this.publication != undefined &&
+                          this.publication._files.length > 0 &&
+                          this.publication.typeFiles != 'Catálogo PDF'
+                        "
+                      >
+                        <div class="front col-12">
+                          <img
+                            [src]="this.imgActive"
+                            class="product-image"
+                            alt="Product Image"
+                          />
+                        </div>
+                        <div class="list col-12 product-image-thumbs">
+                          <a class="arrowIMG" (click)="sliderIMG(-1)">
+                            <i class="fas fa-arrow-left"></i>
+                          </a>
+                          <div
+                            *ngFor="
+                              let files of this.publication._files.slice(
+                                this.imgPaginate,
+                                this.imgPaginate + 4
+                              );
+                              let i = index
+                            "
+                            class="animated fadeIn fast product-image-thumb"
+                            (click)="setActiveIMG(files, i)"
+                          >
+                            <img
+                              [src]="files"
+                              alt="Product Image"
+                            />
+                          </div>
+                          <a class="arrowIMG" (click)="sliderIMG(+1)">
+                            <i class="fas fa-arrow-right"></i>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div class="infoSide col-md-12 col-lg-6">
+
+
+                        <div class="dataHeader">
+                          <!-- <h5 class="titleSpecial6">
+                    {{ this.publication._category._principal._category }} - {{ this.publication._category.child }}
+                  </h5> -->
+
+                          <ul *ngIf="this.publication._category.length > 0">
+                            <li
+                              *ngFor="let cate of this.publication._category"
+                              [ngStyle]="{
+                                display:
+                                  cate._principal == null || cate._child == null
+                                    ? 'none'
+                                    : ''
+                              }"
+                            >
+                              <!-- *ngIf="(cate._principal != null) && (cate._child != null)" -->
+                              <h5
+                                class="titleSpecial6"
+                                *ngIf="
+                                  cate._principal != null && cate._child != null
+                                "
+                              >
+                                {{ this.getCategoryPrincipal(cate._principal) }} -
+                                {{ cate.child }}
+                              </h5>
+                            </li>
+                          </ul>
+
+                          <small>
+                            {{ this.publication.created_at }}
+                          </small>
+                          <small>
+                            {{ this.ciudades }}
+                          </small>
+
+                          <h3 class="title">
+                            {{ this.publication.title }}
+                          </h3>
+                        </div>
+
+                        <h5 class="titleDesc">
+                          Descripción
+                        </h5>
+                        <div class="row desc">
+                          <div class="col-md-12 col-lg-12">
+                            <h6>
+                              Incluye:
+                            </h6>
+                            <p>
+                              {{
+                                this.publication.content | stringLimit: 99999
+                              }}
+                            </p>
+                            <hr />
+                          </div>
+                          <div class="col-md-12 col-lg-12">
+                            <h6>
+                              No incluye:
+                            </h6>
+                            <p>
+                              {{
+                                this.publication.notContent | stringLimit: 99999
+                              }}
+                            </p>
+                            <hr />
+                          </div>
+                        </div>
+
+                        <div class="reactions">
+                          <ul>
+                            <li>
+                              <a
+                                class="active"
+                              >
+                                <i class="fas fa-thumbs-up"></i>
+                                <span class="number">
+                                  1
+                                </span>
+                              </a>
+                            </li>
+                            <li>
+                              <a
+
+                              >
+                                <i class="fas fa-thumbs-down"></i>
+                                <span class="number">
+                                  0
+                                </span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <div class="contact">
+                          <div class="formButtons">
+                            <button
+
+                              type="button"
+                              class="buttonCustom btn btn-success btn-flat"
+                            >
+                              Contactar
+                            </button>
+                          </div>
+                        </div>
+
+                        <div class="userOwner">
+                          <a
+                            class="navButton"
+                            [routerLink]="['/user', this.publication.user._id]"
+                            routerLinkActive="active"
+                          >
+                            <div class="ico">
+                              <img
+                                src="../../../assets/dist/img/logoUser.svg"
+                                alt=""
+                              />
+                            </div>
+                            <span
+                              *ngIf="
+                                this.publication.user.role != 'EMPRESA_ROLE'
+                              "
+                            >
+                              {{ this.publication.user.name }}
+                              {{ this.publication.user.surname }}
+                            </span>
+                            <span
+                              *ngIf="
+                                this.publication.user.role == 'EMPRESA_ROLE'
+                              "
+                            >
+                              {{ this.publication.user._dataPyme.nameCompany }}
+                            </span>
+                          </a>
+                        </div>
+
+                        <div class="star row">
+                          <star-rating
+                            labelPosition="right"
+                            [labelText]="5"
+                            id="starsSetter"
+                            size="medium"
+                            [readOnly]="false"
+                            [showHalfStars]="true"
+                            [starType]="'svg'"
+                            [rating]="5"
+                          >
+                          </star-rating>
+                          <!-- (starClickChange)="sendPuntaje($event)" -->
+                        </div>
+
+                        <div
+                          *ngIf="this.publication._socialNet"
+                          class="row socialShare"
+                        >
+                          <a
+                            *ngIf="
+                              this.publication._socialNet.whatsapp &&
+                              this.publication._socialNet.whatsapp != ''
+                            "
+                            class="text-gray"
+                          >
+                            <i class="fab fa-whatsapp"></i>
+                          </a>
+                          <a
+                            *ngIf="
+                              this.publication._socialNet.instagram &&
+                              this.publication._socialNet.instagram != ''
+                            "
+                            class="text-gray"
+                          >
+                            <i class="fab fa-instagram"></i>
+                          </a>
+                          <a
+                            *ngIf="
+                              this.publication._socialNet.facebook &&
+                              this.publication._socialNet.facebook != ''
+                            "
+                            class="text-gray"
+                          >
+                            <i class="fab fa-facebook"></i>
+                          </a>
+                          <a
+                            *ngIf="
+                              this.publication._socialNet.web &&
+                              this.publication._socialNet.web != ''
+                            "
+                            class="text-gray"
+                          >
+                            <i class="fas fa-globe"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      *ngIf="
+                        this.publication.user.role == 'EMPRESA_ROLE' &&
+                        this.publication.user._dataPyme.logo != ''
+                      "
+                      class="row padd10 logoCompany"
+                    >
+                      <img
+                        [src]="
+                          this.publication.user._dataPyme.logo
+                            | imagen: 'User':this.publication.user._id
+                        "
+                        alt=""
+                      />
+                    </div>
+
+                    <div class="row padd10 cityTarget">
+                      <div class="contentTitleHr">
+                        <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                          Trabajamos en
+                        </h4>
+                        <hr />
+                      </div>
+                      <div class="ciudades col-md-12 col-lg-12">
+                        <ul>
+                          <li
+                            *ngFor="
+                              let cityTarget of this.publication._cityTarget
+                            "
+                          >
+                            <i class="fas fa-map-marked"></i>
+                            {{ cityTarget.department }} - {{ cityTarget.city }}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="comentarios padd10">
+                      <div class="row" style="margin-bottom: 0;">
+                        <div class="col-md-12 col-lg-6 contentTitleHr">
+                          <h4
+                            style="margin-bottom: 15px;"
+                            class="titleSpecial4"
+                          >
+                            Opiniones
+                          </h4>
+                          <hr />
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12 col-lg-6 comenta">
+                          <!-- <div *ngIf="this._userService.estaLogueado() == true" class="comentBox"> -->
+                          <div class="comentBox">
+                            <h5
+                              style="margin-bottom: 15px;"
+                              class="titleSpecial6"
+                            >
+                              Comenta
+                            </h5>
+
+                            <form ngNativeValidate>
+                              <div class="row">
+                                <div class="form-group col-md-12 col-lg-12">
+                                  <!-- <label for="IncludeDesc">¿Qué incluye?</label> -->
+                                  <textarea
+                                    ngModel
+                                    name="coment"
+                                    class="form-control"
+                                    rows="3"
+                                  ></textarea>
+                                </div>
+                              </div>
+
+                              <div class="row formButtons">
+                                <button
+                                  type="button"
+                                  class="buttonCustom btn btn-success btn-flat"
+                                >
+                                  Enviar
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="row"
+                      *ngIf="this.publication._mapUrl.mapUrl != null"
+                    >
+                      <div class="map col-md-12 col-lg-12">
+                        <!-- <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+                  Geolocalización:
+                </h4> -->
+
+                        <div class="boxMap" *ngIf="this.activateMap == true">
+                          <div
+                            *ngIf="this.map != null"
+                            [innerHtml]="this.map | safeUrl"
+                            style="width: 100%;"
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- </div> -->
+                  </section>
+                </div>
+
+                <!-- fin del componente del preview -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -26,6 +26,7 @@ export class NotifyControlComponent implements OnInit {
        public GlobalConfigService: GlobalConfigService
   ) {
 
+    this.GlobalConfigService.setTitle('Notificaciones');
     this.getAllNotifyByUser();
 
   }
