@@ -130,18 +130,22 @@
                       >Tran {{item.process.datePay}} </span> -->
                     </td>
 
-                    <td class=" py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
+                    <td >
+                      <div class="row formButtons">
+
                         <button
                         type="button"
                         [routerLink]="['/dashboard/paymentProcess/', item._id ]"
-                        class="btn btn-info"><i class="fas fa-eye"></i>
+                        class="buttonCustom btn btn-success btn-flat"><i class="fas fa-eye"></i>
                         Ver factura
                       </button>
 
                       </div>
 
                     </td>
+
+
+
 
 
                   </tr>

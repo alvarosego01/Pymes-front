@@ -386,13 +386,13 @@ if(this.tipo == 'Grande'){
 
 
 
-    // //console.log('redesPublico', this.redesPublico);
-    // //console.log("generoObj", this.generoObj);
-    // //console.log("edadesObj", this.edadesObj);
-    // //console.log("estadoCivilObj", this.estadoCivilObj);
-    // //console.log("ngCuentaPublico", this.ngCuentaPublico);
-    // //console.log("fechas", this.fechas);
-    // //console.log("cityTargets", this.cityTargets);
+    // ////// console.log('redesPublico', this.redesPublico);
+    // ////// console.log("generoObj", this.generoObj);
+    // ////// console.log("edadesObj", this.edadesObj);
+    // ////// console.log("estadoCivilObj", this.estadoCivilObj);
+    // ////// console.log("ngCuentaPublico", this.ngCuentaPublico);
+    // ////// console.log("fechas", this.fechas);
+    // ////// console.log("cityTargets", this.cityTargets);
   }
 
 
@@ -406,13 +406,13 @@ if(this.tipo == 'Grande'){
   async selectFiles(event) {
 
     if (event.target.files) {
-      //////// //////////////console.log('total', event.target.files);
+      //////// ////// console.log('total', event.target.files);
       for (let index = 0; index < event.target.files.length; index++) {
         var reader = new FileReader();
         var promesa = new Promise((resolve, reject) => {
           reader.readAsDataURL(event.target.files[index]);
           var fileup = event.target.files[index];
-          //////// //////////////console.log('imagen nro ', index, fileup);
+          //////// ////// console.log('imagen nro ', index, fileup);
 
           reader.onload = (event: any) => {
             var image = new Image();
@@ -436,13 +436,13 @@ if(this.tipo == 'Grande'){
             if (this.ngTypeAdjuntos != "Catálogo PDF") {
               // return;
               var x = new Promise((resolve, reject) => {
-                // //////// //////////////console.log('entra en promesa', index);
+                // //////// ////// console.log('entra en promesa', index);
                 image.onload = function () {
-                  // //////// //////////////console.log('datos de imagn',image);
+                  // //////// ////// console.log('datos de imagn',image);
                   var k = [image.width, image.height];
                   resolve(k);
-                  //////// //////////////console.log('datos promesa', image);
-                  //////// //////////////console.log('Sale de promesa, resuelve', index);
+                  //////// ////// console.log('datos promesa', image);
+                  //////// ////// console.log('Sale de promesa, resuelve', index);
                 };
               });
 
@@ -468,8 +468,8 @@ if(this.tipo == 'Grande'){
                   if (r[0] >= 200 && r[1] >= 200) {
                     this.urlFiles.push(event.target.result);
                     this.imagenesSubir.push(fileup);
-                    // //////// //////////////console.log(fileup.size);
-                    // //////// //////////////console.log(this.urlFiles, 'urlfiles');
+                    // //////// ////// console.log(fileup.size);
+                    // //////// ////// console.log(this.urlFiles, 'urlfiles');
                   } else {
                     this._notifyService.Toast.fire({
                       title: "Dimensiones no permitidas",

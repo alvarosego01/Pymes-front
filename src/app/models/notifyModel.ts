@@ -11,5 +11,6 @@ export class _NotifyModel {
         public subject?: string,
         public link?: string,
         public created_at?: string,
+        public infoData?: any
     ) {}
   }

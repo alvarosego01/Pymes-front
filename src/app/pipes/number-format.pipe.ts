@@ -10,7 +10,7 @@ export class NumberFormatPipe implements PipeTransform {
     var str = value;
     var l = str.toString().replace(/[^a-zA-Z0-9]/g, "");
 
-    // // //////////////console.log(l);
+    // // ////// console.log(l);
 
 
     return l;

@@ -20,12 +20,12 @@ export class PlanesComponent implements OnInit {
   ) {
 
 
-    // ////////console.log('AAAA', this.planes);
+    // //////////// console.log('AAAA', this.planes);
 
   }
 
   ngOnInit(): void {
-    // // //////////////console.log('AAAA2', this.planes);
+    // // ////// console.log('AAAA2', this.planes);
   }
 
 
@@ -44,7 +44,7 @@ export class PlanesComponent implements OnInit {
       !e.target['className'].includes("hiperButton") &&
       // !e.target['className'].includes("navButton") &&
       this.planes != false ){
-        // //////////////console.log(e);
+        // ////// console.log(e);
 
   //  this._usersService.loginVisible = false;
 

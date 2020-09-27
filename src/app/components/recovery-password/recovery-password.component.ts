@@ -30,7 +30,7 @@ export class RecoveryPasswordComponent implements OnInit {
 
   openLogin() {
 
-    ////console.log('open login');
+    //////// console.log('open login');
 
     this._usersService.loginVisible = true;
 
@@ -58,7 +58,7 @@ export class RecoveryPasswordComponent implements OnInit {
     }
 
     this._notifyService.sendNotifyEmailPOST(data).subscribe((resp: any) => {
-      ////console.log('email enviado', resp);
+      //////// console.log('email enviado', resp);
 
       this._notifyService.Toast.fire({
         title: resp.message,
@@ -73,7 +73,7 @@ export class RecoveryPasswordComponent implements OnInit {
         title: err.error.message || 'Algo ha salido mal, intente más tarde',
         icon: 'error'
       })
-      // ////console.log('email error');
+      // //////// console.log('email error');
       this.GlobalConfigService.spinner = false;
     });
 

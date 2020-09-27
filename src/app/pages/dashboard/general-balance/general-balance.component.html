@@ -14,6 +14,295 @@
 
     <!-- Main content -->
     <section
+    *ngIf="(this._userService.roleName != 'Administrador') && (this.statsGeneral != null)"
+    class="content">
+   <div class="row">
+
+
+            <div class="col-md-12 col-lg-6">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1">
+                  <i class="fas fa-eye    "></i>
+                </span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Visitas</span>
+                  <span class="info-box-number"> {{ this.usuarioInfo.statsGeneral.visits || 0 }} </span>
+                </div>
+
+                </div>
+
+            </div>
+
+            <div class="clearfix hidden-md-up"></div>
+
+            <div class="col-md-12 col-lg-6">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1">
+                  <i class="fas fa-briefcase    "></i>
+                </span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Publicaciones</span>
+                  <span class="info-box-number">{{ this.statsGeneral.AllMyPost.length || 0 }}</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <!-- /.col -->
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title">Información de publicaciones</h5>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+
+
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body" style="display: block;">
+                  <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                      <p class="text-center">
+                        <strong>Publicaciones por mes</strong>
+                      </p>
+
+                      <div
+                      *ngIf="(this.statsGeneral.AllMyPost) && (this.statsGeneral.AllMyPost.length > 0)"
+                      style="padding-left: 5%; padding-right: 5%;"
+                      class="chart-wrapper">
+                        <canvas
+                        class="chartBar"
+                        baseChart
+                        [datasets]="this.UsersbarChartData"
+                        [labels]="this.barChartLabels"
+                        [options]="this.barChartOptions"
+                        [plugins]="this.barChartPlugins"
+                        [legend]="this.barChartLegend"
+                        [chartType]="this.barChartType">
+                      </canvas>
+                    </div>
+
+
+                    <div
+                    style="width: 100%; margin-bottom: 0!important;"
+                    class="jumbotron"
+                    *ngIf="(!this.statsGeneral.AllMyPost) || (this.statsGeneral.AllMyPost.length == 0)"
+                    >
+                      <h1 class="titleSpecial2">Sin resultados</h1>
+                      <p>En este momento</p>
+                    </div>
+
+
+
+
+                    </div>
+
+                  </div>
+
+                  <!-- <div class="row">
+                    <div class="jumbotron" *ngIf="(this.allPublications) && this.allPublications.length == 0">
+                      <h1 class="titleSpecial2">Sin resultados</h1>
+                      <p>En este momento</p>
+                    </div>
+                  </div> -->
+
+                  <!-- /.row -->
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="row last12Section">
+
+
+
+
+            <div class="col-md-12 col-lg-6">
+
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Últimas 12 publicaciones</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div
+                *ngIf="(this.statsGeneral.AllMyPost) && (this.statsGeneral.AllMyPost.length > 0)"
+                class="card-body p-0">
+                  <ul
+
+                  class="products-list product-list-in-card pl-2 pr-2">
+
+                    <li
+                    *ngFor="let item of this.statsGeneral.AllMyPost.slice(0, 12); let i = index"
+                    class="item">
+                      <div class="product-img">
+                        <img
+                        *ngIf="item._files[0].type != 'PDF'"
+                        [src]="item.thumbnail | imagen:'Post':item._id:true " alt="Product Image" class="img-size-50">
+
+                          <pdf-viewer
+                          *ngIf="(item._files[0]) && item._files[0].type == 'PDF'"
+                          class="pdfList"
+                          [src]="item._files[0].file | imagen:'Post':item._files[0].folder "
+                          [render-text]="false"
+                          [page]="1"
+                          [show-all]="false"
+
+                          [original-size]="false"
+                          [autoresize]="false"
+                          style="display: block;">
+                          </pdf-viewer>
+
+
+                      </div>
+
+
+
+                      <div class="product-info">
+                        <a [routerLink]="['/publication/infoPost', item._id]" routerLinkActive="active" class="product-title">{{ item.title }}
+                        </a>
+                        <span class="product-description">
+                          {{ item.created_at }}
+                        </span>
+                      </div>
+                    </li>
+
+                    <!-- /.item -->
+                  </ul>
+                </div>
+                <!-- /.card-body -->
+                <div
+                *ngIf="(this.statsGeneral.AllMyPost) && (this.statsGeneral.AllMyPost.length > 0)"
+                class="card-footer text-center">
+                  <a [routerLink]="['/dashboard/historialPost']" routerLinkActive="active" class="uppercase">Ver todas</a>
+                </div>
+
+                    <div
+                    style="width: 100%; margin-bottom: 0!important;"
+                    class="jumbotron"
+                    *ngIf="(!this.statsGeneral.AllMyPost) || (this.statsGeneral.AllMyPost.length == 0)"
+                    >
+                      <h1 class="titleSpecial2">Sin resultados</h1>
+                      <p>En este momento</p>
+                    </div>
+
+
+
+                <!-- /.card-footer -->
+              </div>
+
+                </div>
+
+
+
+
+            <div class="col-md-12 col-lg-6">
+
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Últimas 12 notificaciones</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div
+                *ngIf="(this._notifyService.notificaciones) && (this._notifyService.notificaciones.length > 0)"
+                class="card-body p-0">
+                  <ul class="products-list product-list-in-card pl-2 pr-2">
+
+                    <li
+                    *ngFor="let item of this._notifyService.notificaciones.slice(0, 12); let i = index"
+                    class="item">
+                      <div class="product-img">
+                        <i
+                        *ngIf="item.read == false"
+                        class="fa fa-envelope" aria-hidden="true"></i>
+
+                        <i
+                        *ngIf="item.read == true"
+                        class="fa fa-envelope-open" aria-hidden="true"></i>
+                      </div>
+                      <div class="product-info">
+                        <a
+                        [routerLink]="['/dashboard/notify/message', item._id ]"
+                        routerLinkActive="active"
+                         class="product-title">{{ item.subject }}
+                        </a>
+                        <span class="product-description">
+                          {{item.created_at}}
+                        </span>
+                      </div>
+                    </li>
+
+                    <!-- /.item -->
+                  </ul>
+                </div>
+                <!-- /.card-body -->
+                <div
+                *ngIf="(this._notifyService.notificaciones) && (this._notifyService.notificaciones.length > 0)"
+                class="card-footer text-center">
+                  <a [routerLink]="['/dashboard/notify']" routerLinkActive="active" class="uppercase">Ver todas</a>
+                </div>
+                <!-- /.card-footer -->
+
+                <div
+                style="width: 100%; margin-bottom: 0!important;"
+                class="jumbotron"
+                *ngIf="(!this._notifyService.notificaciones) || (this._notifyService.notificaciones.length == 0)"
+                >
+                  <h1 class="titleSpecial2">Sin resultados</h1>
+                  <p>En este momento</p>
+                </div>
+
+
+
+              </div>
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+    </section>
+
+    <section
     *ngIf="(this._userService.roleName == 'Administrador') && (this.statsGeneral != null)"
     class="content">
 
@@ -32,9 +321,7 @@
 
                   </span>
                 </div>
-                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box -->
             </div>
             <!-- /.col -->
             <!-- <div class="col-md-12 col-lg-4">
@@ -97,18 +384,7 @@
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus"></i>
                     </button>
-                    <!-- <div class="btn-group">
-                      <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                        <i class="fas fa-wrench"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right" role="menu">
-                        <a href="#" class="dropdown-item">Action</a>
-                        <a href="#" class="dropdown-item">Another action</a>
-                        <a href="#" class="dropdown-item">Something else here</a>
-                        <a class="dropdown-divider"></a>
-                        <a href="#" class="dropdown-item">Separated link</a>
-                      </div>
-                    </div> -->
+
 
                   </div>
                 </div>
@@ -166,14 +442,13 @@
 
                   <!-- /.row -->
                 </div>
-                <!-- ./card-body -->
 
-                <!-- /.card-footer -->
               </div>
-              <!-- /.card -->
+
             </div>
-            <!-- /.col -->
+
           </div>
+
           <div class="row">
             <div class="col-md-12">
               <div class="card">

@@ -22,15 +22,13 @@ import { _PostModel } from "../models/postModel";
 import { UsersService } from "./users.service";
 
 import { EventEmitter } from "@angular/core";
-import { VerifyService } from './verify.service';
-import { GlobalConfigService } from './-global-config.service';
+import { VerifyService } from "./verify.service";
+import { GlobalConfigService } from "./-global-config.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class PostsService {
-
-
   PDFFILE: string = null;
   idUserComponent: string = null; // = "this.publication.user._id";
   notComponent: string = null; // = "this.publication._id
@@ -152,9 +150,8 @@ export class PostsService {
     public GlobalConfigService: GlobalConfigService,
     // public _verifyService: VerifyService,
     // public _notifyService: NotifyService,
-    public _usersService: UsersService,
-  ) // public notificacion = new EventEmitter<any>();
-  {}
+    public _usersService: UsersService // public notificacion = new EventEmitter<any>();
+  ) {}
 
   // '/reactions/:id/:p',mdAutentication.verificaToken,(req,res,next)=>
   // {
@@ -166,354 +163,303 @@ export class PostsService {
   //   let id = req.params.id;
 
   // (registro.index, this.publication._id , type
-  sendReactionCommentPOST(index, idPublic, type){
-
+  sendReactionCommentPOST(index, idPublic, type) {
     let url = `${_SERVICIOS}/post/comments/reactions/${idPublic}/${index}`;
 
-    url = (this._usersService.estaLogueado() == true)? `${url}?t=${this._usersService.token}`: url;
+    url =
+      this._usersService.estaLogueado() == true
+        ? `${url}?t=${this._usersService.token}`
+        : url;
 
-    ////// //////////////console.log(url);
+    ////// ////// console.log(url);
 
     let reaction = {
-      r: type
-    }
+      r: type,
+    };
 
     return this.http.post(url, reaction).pipe(
       map((resp: any) => {
-
         return resp;
       }),
       catchError((err) => {
-
         return throwError(err);
       })
     );
-
-
   }
 
-  getUserPublicationGET(idUser ,limites){
-
+  getUserPublicationGET(idUser, limites) {
     // publicacionesUser/5ec5cb9121f1fc03d8067b34
 
     let url = `${_SERVICIOS}/post/publicacionesUser/${idUser}`;
-    // //////////////console.log('url', url);
-    //////////// //////////////console.log(data, "llega data notif");
-    return this.http.post(url,  limites).pipe(
+    // ////// console.log('url', url);
+    //////////// ////// console.log(data, "llega data notif");
+    return this.http.post(url, limites).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta notificacion", resp);
+        //////////// ////// console.log("respuesta notificacion", resp);
         // alert('Usuario registrado');
 
         return resp;
       }),
       catchError((err) => {
-        //////////// //////////////console.log("respuesta notificacion", err);
+        //////////// ////// console.log("respuesta notificacion", err);
         // alert('Error en al registrar');
         // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);
       })
     );
-
-
   }
 
-  getSuggestPublicPOST(category, limites){
-
+  getSuggestPublicPOST(category, limites) {
     // publicacionesUser/5ec5cb9121f1fc03d8067b34
     let url = `${_SERVICIOS}/post/sameCategory/${category}`;
-    // //////////////console.log('url', url);
-    //////////// //////////////console.log(data, "llega data notif");
-    return this.http.post(url,  limites).pipe(
+    // ////// console.log('url', url);
+    //////////// ////// console.log(data, "llega data notif");
+    return this.http.post(url, limites).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta notificacion", resp);
+        //////////// ////// console.log("respuesta notificacion", resp);
         // alert('Usuario registrado');
 
         return resp;
       }),
       catchError((err) => {
-        //////////// //////////////console.log("respuesta notificacion", err);
+        //////////// ////// console.log("respuesta notificacion", err);
         // alert('Error en al registrar');
         // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);
       })
     );
-
-
   }
 
-
-
-  createCommentPOST(idPublication, data){
+  createCommentPOST(idPublication, data) {
     // /post/comments
     let url = `${_SERVICIOS}/post/comments/${idPublication}`;
 
-
     // let url = `${_SERVICIOS}/post/comments/reactions/${idPublic}/${index}`;
 
-    url = (this._usersService.estaLogueado() == true)? `${url}?t=${this._usersService.token}`: url;
+    url =
+      this._usersService.estaLogueado() == true
+        ? `${url}?t=${this._usersService.token}`
+        : url;
 
-
-    //////////// //////////////console.log(data, "llega data notif");
+    //////////// ////// console.log(data, "llega data notif");
     return this.http.post(url, data).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta notificacion", resp);
+        //////////// ////// console.log("respuesta notificacion", resp);
         // alert('Usuario registrado');
 
         return resp;
       }),
       catchError((err) => {
-        //////////// //////////////console.log("respuesta notificacion", err);
+        //////////// ////// console.log("respuesta notificacion", err);
         // alert('Error en al registrar');
         // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);
       })
     );
-
-
   }
 
-  deleteCommentDELETE( ideComment, publicationId ){
-
+  deleteCommentDELETE(ideComment, publicationId) {
     let url = `${_SERVICIOS}/post/comments/${publicationId}/${ideComment}?t=${this._usersService.token}`;
-    //////////// //////////////console.log(data, "llega data notif");
+    //////////// ////// console.log(data, "llega data notif");
 
-    ////// //////////////console.log('url', url);
+    ////// ////// console.log('url', url);
     return this.http.delete(url).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta notificacion", resp);
+        //////////// ////// console.log("respuesta notificacion", resp);
         // alert('Usuario registrado');
 
         return resp;
       }),
       catchError((err) => {
-        //////////// //////////////console.log("respuesta notificacion", err);
+        //////////// ////// console.log("respuesta notificacion", err);
         // alert('Error en al registrar');
         // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);
       })
     );
-
   }
 
-  getCommentsGET(idUser){
-
+  getCommentsGET(idUser) {
     let url = `${_SERVICIOS}/post/comments/${idUser}`;
-    //////////// //////////////console.log(data, "llega data notif");
+    //////////// ////// console.log(data, "llega data notif");
     return this.http.get(url).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta notificacion", resp);
+        //////////// ////// console.log("respuesta notificacion", resp);
         // alert('Usuario registrado');
 
         return resp;
       }),
       catchError((err) => {
-        //////////// //////////////console.log("respuesta notificacion", err);
+        //////////// ////// console.log("respuesta notificacion", err);
         // alert('Error en al registrar');
         // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);
       })
     );
-
-
   }
-  getStatsGeneralGET(idUser){
+  getStatsGeneralGET(idUser) {
+    let url = `${_SERVICIOS}/post/stats/${idUser}?t=${this._usersService.token}`;
 
-    let url = `${_SERVICIOS}/post/stats/${idUser}`;
-    //////////// //////////////console.log(data, "llega data notif");
+    //// console.log('envio url', url);
 
-    //// //////////////console.log('envia', url);
     return this.http.get(url).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta notificacion", resp);
-        // alert('Usuario registrado');
-
         return resp;
       }),
       catchError((err) => {
-        //////////// //////////////console.log("respuesta notificacion", err);
-        // alert('Error en al registrar');
-        // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);
       })
     );
-
-
   }
 
-
-  setNewVisitPUT(id){
+  setNewVisitPUT(id) {
     // /post/view/5ed1087cd1baa3076cf32edd
     let url = `${_SERVICIOS}/post/view/`;
 
-    ////// //////////////console.log('url', url);
-    // ////// //////////////console.log('lo que se manda', dataCompany);
+    ////// ////// console.log('url', url);
+    // ////// ////// console.log('lo que se manda', dataCompany);
 
-    let l  ={
-      id: id
-    }
-       return this.http.put( url, l ).pipe(
-         map((resp: any) => {
-           //////////// //////////////console.log("respuesta", resp);
-           // alert("Usuario registrado");
-           // swal('Perro registrado', '' , 'success');
-           let n = new _NotifyModel(
-             "nAccountCreatedNoVerify",
-             null,
-             resp.data._id
-           );
-           // this._notifyService.sendNotifyEmailPOST(n).subscribe((resp) => {
-      //  ////// //////////////console.log('funciona visita', resp);
-            return resp;
-         }),
-         catchError((err) => {
-
-          // ////// //////////////console.log('error visita', err);
-           return throwError(err);
-         })
-       );
-
+    let l = {
+      id: id,
+    };
+    return this.http.put(url, l).pipe(
+      map((resp: any) => {
+        //////////// ////// console.log("respuesta", resp);
+        // alert("Usuario registrado");
+        // swal('Perro registrado', '' , 'success');
+        let n = new _NotifyModel(
+          "nAccountCreatedNoVerify",
+          null,
+          resp.data._id
+        );
+        // this._notifyService.sendNotifyEmailPOST(n).subscribe((resp) => {
+        //  ////// ////// console.log('funciona visita', resp);
+        return resp;
+      }),
+      catchError((err) => {
+        // ////// ////// console.log('error visita', err);
+        return throwError(err);
+      })
+    );
   }
-
 
   // .......................................................
 
-
-  sendReactionPOST(idPublic, type){
+  sendReactionPOST(idPublic, type) {
     // http://localhost:5160/post/reaction
 
     let url = `${_SERVICIOS}/post/reaction/${idPublic}`;
 
     // let url = `${_SERVICIOS}/post/comments/reactions/${idPublic}/${index}`;
 
-    url = (this._usersService.estaLogueado() == true)? `${url}?t=${this._usersService.token}`: url;
+    url =
+      this._usersService.estaLogueado() == true
+        ? `${url}?t=${this._usersService.token}`
+        : url;
 
     let reaction = {
-      r: type
-    }
+      r: type,
+    };
 
     return this.http.post(url, reaction).pipe(
       map((resp: any) => {
-
         return resp;
       }),
       catchError((err) => {
-
         return throwError(err);
       })
     );
-
   }
 
-  setActualRankingGET(idPublic){
-
+  setActualRankingGET(idPublic) {
     let url = `${_SERVICIOS}/post/ranking/stars/${idPublic}`;
-    //////////// //////////////console.log(data, "llega data notif");
+    //////////// ////// console.log(data, "llega data notif");
     return this.http.get(url).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta notificacion", resp);
-        // alert('Usuario registrado');
+
 
         return resp;
       }),
       catchError((err) => {
-        //////////// //////////////console.log("respuesta notificacion", err);
-        // alert('Error en al registrar');
-        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+
         return throwError(err);
       })
     );
-
-
   }
 
-  sendRankingPOST(idPublic, points){
+  sendRankingPOST(idPublic, points) {
     // http://localhost:5160/post/reaction
 
     let url = `${_SERVICIOS}/post/ranking/stars/${idPublic}`;
 
-
-    url = (this._usersService.estaLogueado() == true)? `${url}?t=${this._usersService.token}`: url;
+    url =
+      this._usersService.estaLogueado() == true
+        ? `${url}?t=${this._usersService.token}`
+        : url;
 
     let reaction = {
-      points: points
-    }
+      points: points,
+    };
 
-    // //// //////////////console.log(url);
+    // //// ////// console.log(url);
     // return;
 
     return this.http.post(url, reaction).pipe(
       map((resp: any) => {
-
         return resp;
       }),
       catchError((err) => {
-
         return throwError(err);
       })
     );
-
   }
 
-
-  setActualReactionsGET(idPublication){
-
+  setActualReactionsGET(idPublication) {
     let url = `${_SERVICIOS}/post/reaction/${idPublication}`;
-    //////////// //////////////console.log(data, "llega data notif");
+    //////////// ////// console.log(data, "llega data notif");
     return this.http.get(url).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta notificacion", resp);
-        // alert('Usuario registrado');
+
 
         return resp;
       }),
       catchError((err) => {
-        //////////// //////////////console.log("respuesta notificacion", err);
-        // alert('Error en al registrar');
-        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+
         return throwError(err);
       })
     );
-
-
   }
 
-  deletePublicDELETE(idPublic){
+  deletePublicDELETE(idPublic) {
+    let url = `${_SERVICIOS}/post/${this._usersService.usuario._id}/${idPublic}`;
+    url += "?t=" + this._usersService.token;
 
-    let url = _SERVICIOS + '/post/' + idPublic;
-    url += '?t=' + this._usersService.token;
-
-    return this.http.delete( url ).pipe(
+    return this.http.delete(url).pipe(
       map((resp: any) => {
-
         return resp;
       }),
       catchError((err) => {
-
-
         return throwError(err);
       })
     );
   }
 
-  getSinglePostGET(idPublication){
-
+  getSinglePostGET(idPublication) {
     let url = `${_SERVICIOS}/post/publicacion/${idPublication}`;
 
+    url =
+      this._usersService.estaLogueado() == true
+        ? `${url}?t=${this._usersService.token}`
+        : url;
 
-    url = (this._usersService.estaLogueado() == true)? `${url}?t=${this._usersService.token}`: url;
-
-    //////////// //////////////console.log(data, "llega data notif");
     return this.http.get(url).pipe(
       map((resp: any) => {
-
         return resp;
       }),
       catchError((err) => {
-
         return throwError(err);
       })
     );
-
   }
 
   getAllPublicationsGET(paginate) {
@@ -521,12 +467,9 @@ export class PostsService {
     let url = `${_SERVICIOS}/post?t=${this._usersService.token}&paginate=${paginate}`;
     return this.http.get(url).pipe(
       map((resp: any) => {
-
-
         return resp;
       }),
       catchError((err) => {
-
         return throwError(err);
       })
     );
@@ -538,7 +481,6 @@ export class PostsService {
     // una vez logeado hace falta grabar la sesión en el local storage designado.
     return this.http.get(url).pipe(
       map((resp: any) => {
-
         return resp;
       }),
       catchError((err) => {
@@ -548,7 +490,6 @@ export class PostsService {
   }
 
   createPublication(post: any, archivo: any) {
-
     return new Promise((resolve, reject) => {
       let formData = new FormData();
       let xhr = new XMLHttpRequest();
@@ -573,46 +514,51 @@ export class PostsService {
 
       // formData.append("img", archivo, archivo.name);
       for (var i = 0; i < archivo.length; ++i) {
-        ////////// //////////////console.log(archivo[i].name);
+        ////////// ////// console.log(archivo[i].name);
         formData.append("files[]", archivo[i], archivo[i].name);
       }
 
-      xhr.onreadystatechange = function () {
+      xhr.upload.addEventListener(
+        "progress",
+        (e: any) => {
+          // let percent: string = ((e.loaded / e.total) * 100, 10) + "%";
+          // console.log("progress", (e.loaded / e.total) * 100);
 
+          this.GlobalConfigService.porcentaje = (e.loaded / e.total) * 100;
+        },
+        true
+      );
+
+
+      xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           try {
-
-          if (xhr.status === 200) {
-            // ////////// //////////////console.log( 'Imagen subida' );
-            resolve(JSON.parse(xhr.response));
-          } else {
-            // ////////// //////////////console.log( 'Fallo la subida' );
-            resolve(JSON.parse(xhr.response));
+            if (xhr.status === 200) {
+              // ////////// ////// console.log( 'Imagen subida' );
+              resolve(JSON.parse(xhr.response));
+            } else {
+              // ////////// ////// console.log( 'Fallo la subida' );
+              resolve(JSON.parse(xhr.response));
+            }
+          } catch (e) {
+            ////// ////// console.log(e.status);
           }
-
         }
-        catch (e) {
-            ////// //////////////console.log(e.status);
-        }
-
-      }
-
       };
 
       // this.GlobalConfigService.spinner = false;
       let url = _SERVICIOS + "/post" + "?t=" + token;
 
-      //////////// //////////////console.log('la url', url);
-      //////////// //////////////console.log('formada', formData);
+      //////////// ////// console.log('la url', url);
+      //////////// ////// console.log('formada', formData);
 
       xhr.open("POST", url, true);
       xhr.send(formData);
     });
   }
 
-  goPayProcessPOST(post: any){
-
-    return new Promise((resolve, reject) => {
+  goPayProcessPOST(post: any) {
+    return new Promise(async (resolve, reject) => {
       let formData = new FormData();
       let xhr = new XMLHttpRequest();
       let token = this._usersService.token;
@@ -623,64 +569,75 @@ export class PostsService {
       let dataPost = post.post.infoPost;
       let filesPost = post.post.files;
       // datos del plan pauta
-      let planPauta = post.planPauta.plan;
 
       dataPost = JSON.stringify(dataPost);
-      planPauta = JSON.stringify(planPauta);
 
       formData.append("typeRequest", typeRequest);
       formData.append("dataPost", dataPost);
-      formData.append("planPauta", planPauta);
 
       for (var i = 0; i < filesPost.length; ++i) {
         formData.append("filesPost[]", filesPost[i], filesPost[i].name);
       }
 
-      if(post.planPauta != 'No aplica'){
-
+      if (post.planPauta != "No aplica") {
+        let planPauta = post.planPauta.plan;
+        planPauta = JSON.stringify(planPauta);
         let filesPlan = post.planPauta.files;
         for (var i = 0; i < filesPlan.length; ++i) {
           formData.append("filesPlan[]", filesPlan[i], filesPlan[i].name);
         }
 
+        formData.append("planPauta", planPauta);
+      } else {
+        let planPauta = JSON.stringify(post.planPauta);
+        formData.append("planPauta", planPauta);
       }
-      xhr.onreadystatechange = function () {
 
+      xhr.upload.addEventListener(
+        "progress",
+        (e: any) => {
+          // let percent: string = ((e.loaded / e.total) * 100, 10) + "%";
+          // console.log("progress", (e.loaded / e.total) * 100);
+
+          this.GlobalConfigService.porcentaje = (e.loaded / e.total) * 100;
+        },
+        true
+      );
+
+      // xhr.upload.onprogress = function (e) {
+      //   // For uploads
+      //   if (e.lengthComputable) {
+      //     // console.log("loaded", e.loaded);
+      //     // console.log("total", e.total);
+
+      //     // console.log((e.loaded / e.total) * 100);
+      //   }
+      // };
+
+      xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           try {
-
-          if (xhr.status === 200) {
-            // ////////// //////////////console.log( 'Imagen subida' );
-            resolve(JSON.parse(xhr.response));
-          } else {
-            // ////////// //////////////console.log( 'Fallo la subida' );
-            resolve(JSON.parse(xhr.response));
+            if (xhr.status === 200) {
+              // ////////// ////// console.log( 'Imagen subida' );
+              resolve(JSON.parse(xhr.response));
+            } else {
+              // ////////// ////// console.log( 'Fallo la subida' );
+              resolve(JSON.parse(xhr.response));
+            }
+          } catch (e) {
+            ////// ////// console.log(e.status);
           }
-
         }
-        catch (e) {
-            ////// //////////////console.log(e.status);
-        }
-
-      }
-
       };
 
       let url = _SERVICIOS + "/post/createOrder" + "?t=" + token;
 
-
-
       xhr.open("POST", url, true);
       xhr.send(formData);
     });
-
   }
 
-
-
   updatePublicationSET(post: any, archivo: any) {
-
-
     return new Promise((resolve, reject) => {
       let formData = new FormData();
       let xhr = new XMLHttpRequest();
@@ -697,62 +654,54 @@ export class PostsService {
 
       // formData.append("img", archivo, archivo.name);
       for (var i = 0; i < archivo.length; ++i) {
-        ////////// //////////////console.log(archivo[i].name);
+        ////////// ////// console.log(archivo[i].name);
         formData.append("files[]", archivo[i], archivo[i].name);
       }
 
-      xhr.onreadystatechange = async function () {
+      // xhr.onprogress = async () => {};
 
+      xhr.onreadystatechange = async function () {
         if (xhr.readyState === 1) {
           //  this.makeLoad(25);
-          }
+        }
         if (xhr.readyState === 2) {
-          }
+        }
         if (xhr.readyState === 3) {
-          }
+        }
         if (xhr.readyState === 4) {
           try {
-
-          if (xhr.status === 200) {
-            // ////////// //////////////console.log( 'Imagen subida' );
-            resolve(JSON.parse(xhr.response));
-          } else {
-            // ////////// //////////////console.log( 'Fallo la subida' );
-            resolve(JSON.parse(xhr.response));
+            if (xhr.status === 200) {
+              // ////////// ////// console.log( 'Imagen subida' );
+              resolve(JSON.parse(xhr.response));
+            } else {
+              // ////////// ////// console.log( 'Fallo la subida' );
+              resolve(JSON.parse(xhr.response));
+            }
+          } catch (e) {
+            ////// ////// console.log(e.status);
           }
-
         }
-        catch (e) {
-            ////// //////////////console.log(e.status);
-        }
-
-      }
-
       };
 
       // this.GlobalConfigService.spinner = false;
       let url = `${_SERVICIOS}/post/${post.postId}?t=${token}`;
 
-      //////////// //////////////console.log('la url', url);
-      //////////// //////////////console.log('formada', formData);
+      //////////// ////// console.log('la url', url);
+      //////////// ////// console.log('formada', formData);
 
       xhr.open("PUT", url, true);
       xhr.send(formData);
     });
-
   }
 
-
-
-  categoryCountsGET(type: boolean = true){
-
+  categoryCountsGET(type: boolean = true) {
     // /post/categoryCount/true
     let url = `${_SERVICIOS}/post/categoryCount/${type}`;
 
     // una vez logeado hace falta grabar la sesión en el local storage designado.
     return this.http.get(url).pipe(
       map((resp: any) => {
-        // //////////// //////////////console.log('respuesta', resp);
+        // //////////// ////// console.log('respuesta', resp);
 
         return resp;
       }),
@@ -761,28 +710,20 @@ export class PostsService {
         return throwError(err);
       })
     );
-
-
   }
 
-
-
-  changeCategoryPUT(data: any){
-
-
-
-
-      var l = {
-        _category: data._category,//id de categoria
-        nro: data.nro
-      }
+  changeCategoryPUT(data: any) {
+    var l = {
+      _category: data._category, //id de categoria
+      nro: data.nro,
+    };
 
     let url = `${_SERVICIOS}/post/categoryChange/${data._idPost}/${data.type}?t=${this._usersService.token}`;
 
     // una vez logeado hace falta grabar la sesión en el local storage designado.
     return this.http.put(url, l).pipe(
       map((resp: any) => {
-        // //////////// //////////////console.log('respuesta', resp);
+        // //////////// ////// console.log('respuesta', resp);
 
         return resp;
       }),
@@ -791,27 +732,18 @@ export class PostsService {
         return throwError(err);
       })
     );
-
-
-
   }
 
-
-
-  getAllPublicationsByOwnerGET(paginate: number){
-
+  getAllPublicationsByOwnerGET(paginate: number) {
     let url = `${_SERVICIOS}/post/publicationsOwner/${this._usersService.usuario._id}?t=${this._usersService.token}&paginate=${paginate}`;
 
-
     return this.http.get(url).pipe(
-        map((resp: any) => {
+      map((resp: any) => {
         return resp;
-    }),
-    catchError((err) => {
+      }),
+      catchError((err) => {
         return throwError(err);
-    })
+      })
     );
-
   }
-
 }

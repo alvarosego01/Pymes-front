@@ -38,10 +38,8 @@ export class UsersService {
 
   constructor(
     public http: HttpClient,
-    public router: Router
-  ) // private _notifyService: NotifyService,
-  // //    public GlobalConfigService:GlobalConfigService
-  {
+    public router: Router // private _notifyService: NotifyService, // //    public GlobalConfigService:GlobalConfigService
+  ) {
     // se llama al cargar storage siemp que se inicialize el servicio para que tengan datos manejables.
     this.cargarStorage();
   }
@@ -54,27 +52,20 @@ export class UsersService {
     // /post/view/5ed1087cd1baa3076cf32edd
     let url = `${_SERVICIOS}/user/view/`;
 
-    ////// //////////////console.log('url', url);
-    // ////// //////////////console.log('lo que se manda', dataCompany);
-
     let l = {
       id: id,
     };
     return this.http.put(url, l).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta", resp);
-        // alert("Usuario registrado");
-        // swal('Perro registrado', '' , 'success');
-        let n = new _NotifyModel(
-          "nAccountCreatedNoVerify",
-          null,
-          resp.data._id
-        );
+        // let n = new _NotifyModel(
+        //   "nAccountCreatedNoVerify",
+        //   null,
+        //   resp.data._id
+        // );
 
         return resp;
       }),
       catchError((err) => {
-        // ////// //////////////console.log('error visita', err);
         return throwError(err);
       })
     );
@@ -94,18 +85,11 @@ export class UsersService {
 
   getUserProfileGET(idUser) {
     let url = `${_SERVICIOS}/user/profile/${idUser}`;
-    //////////// //////////////console.log(data, "llega data notif");
     return this.http.get(url).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta notificacion", resp);
-        // alert('Usuario registrado');
-
         return resp;
       }),
       catchError((err) => {
-        //////////// //////////////console.log("respuesta notificacion", err);
-        // alert('Error en al registrar');
-        // swal( 'Error en al registrar', err.error.mensaje, 'error');
         return throwError(err);
       })
     );
@@ -158,8 +142,6 @@ export class UsersService {
       this.token = null;
       this.usuario = null;
     }
-
-    // //////////// //////////////console.log('cargar storage token: ', this.token);
   }
 
   setCaptcha() {
@@ -170,7 +152,7 @@ export class UsersService {
     this.captcha[1] = var2;
     this.captcha[2] = var1 + var2;
 
-    // //////////// //////////////console.log(this.captcha);
+    // //////////// ////// console.log(this.captcha);
   }
 
   registroUsuarioPOST(
@@ -236,7 +218,7 @@ export class UsersService {
       let token = this.token;
 
       formData.append("imagen", archivo, archivo.name);
-      ////// //////////////console.log('envia tio', file);
+      ////// ////// console.log('envia tio', file);
       formData.append("type", file);
 
       xhr.onreadystatechange = function () {
@@ -251,8 +233,8 @@ export class UsersService {
 
       let url = _SERVICIOS + "/upload/" + tipo + "/" + id + "?t=" + token;
 
-      //////////// //////////////console.log('la url', url);
-      //////////// //////////////console.log('formada', formData);
+      //////////// ////// console.log('la url', url);
+      //////////// ////// console.log('formada', formData);
 
       xhr.open("PUT", url, true);
       xhr.send(formData);
@@ -264,7 +246,7 @@ export class UsersService {
 
     return this.http.put(url, dataCompany).pipe(
       map((resp: any) => {
-        //////////// //////////////console.log("respuesta", resp);
+        //////////// ////// console.log("respuesta", resp);
         // alert("Usuario registrado");
         // swal('Perro registrado', '' , 'success');
         let n = new _NotifyModel(
@@ -282,6 +264,40 @@ export class UsersService {
     );
   }
 
+  ADMINupdateUserPUT(
+    usuarioNatural: _UserModelNatural = null,
+    usuarioCompany: _UserModelCompany = null,
+    type,
+    user: string
+  ) {
+    let url = `${_SERVICIOS}/user/${user}/?t=${this.token}`;
+
+    let usuario: any;
+    if (type == "natural") {
+      usuario = usuarioNatural;
+    }
+    if (type == "company") {
+      usuario = usuarioCompany;
+    }
+
+    return this.http.put(url, usuario).pipe(
+      map((resp: any) => {
+
+        // let n = new _NotifyModel(
+        //   "nAccountCreatedNoVerify",
+        //   null,
+        //   resp.data._id
+        // );
+
+        // this.guardarStorage(this.usuario._id, this.token, resp["data"]);
+      }),
+      catchError((err) => {
+        ////// ////// console.log( 'el error', err);
+
+        return throwError(err);
+      })
+    );
+  }
   updateUserPUT(
     usuarioNatural: _UserModelNatural = null,
     usuarioCompany: _UserModelCompany = null,
@@ -300,16 +316,16 @@ export class UsersService {
     return this.http.put(url, usuario).pipe(
       map((resp: any) => {
 
-        let n = new _NotifyModel(
-          "nAccountCreatedNoVerify",
-          null,
-          resp.data._id
-        );
+        // let n = new _NotifyModel(
+        //   "nAccountCreatedNoVerify",
+        //   null,
+        //   resp.data._id
+        // );
 
         this.guardarStorage(this.usuario._id, this.token, resp["data"]);
       }),
       catchError((err) => {
-        ////// //////////////console.log( 'el error', err);
+        ////// ////// console.log( 'el error', err);
 
         return throwError(err);
       })
@@ -319,22 +335,20 @@ export class UsersService {
   getLocation() {
     // this.GlobalConfigService.spinner = true;
     if ("geolocation" in navigator) {
-
-
       var x = new Promise((resolve, reject) => {
-        // ////////// //////////////console.log('entra al geo');
+        // ////////// ////// console.log('entra al geo');
         setTimeout(function () {
           reject("timeout");
         }, 10000);
 
         navigator.geolocation.getCurrentPosition((position) => {
-          ////// //////////////console.log('entra');
+          ////// ////// console.log('entra');
           var l = {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
             mapUrl: `https://maps.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}&hl=es;z=14&output=embed`,
           };
-          // ////////// //////////////console.log(position.coords.latitude, position.coords.longitude);
+          // ////////// ////// console.log(position.coords.latitude, position.coords.longitude);
 
           resolve(l);
         });
@@ -359,12 +373,11 @@ export class UsersService {
   }
 
   changePasswordPUT(data, token = null) {
-
     let url = `${_SERVICIOS}/user/changePassword`;
     url = token != null ? `${url}?t=${token}` : url;
 
-    ////console.log('la url', url);
-    ////console.log('la data', data);
+    //////// console.log('la url', url);
+    //////// console.log('la data', data);
     return this.http.put(url, data).pipe(
       map((resp: any) => {
         return resp;
@@ -373,16 +386,14 @@ export class UsersService {
         return throwError(err);
       })
     );
-
   }
 
   changeEmailPUT(token) {
-
     let url = `${_SERVICIOS}/user/changeEmail?t=${token}`;
     // url = token != null ? `${_SERVICIOS}?t=${token}` : url;
 
-    ////console.log('la url', url);
-    // ////console.log('la data', data);
+    //////// console.log('la url', url);
+    // //////// console.log('la data', data);
 
     return this.http.put(url, null).pipe(
       map((resp: any) => {
@@ -392,45 +403,43 @@ export class UsersService {
         return throwError(err);
       })
     );
-
   }
 
-
-
-  sendContactMessagePOST(data){
-
+  sendContactMessagePOST(data) {
     let url = `${_SERVICIOS}/contact`;
     return this.http.post(url, data).pipe(
-        map((resp: any) => {
+      map((resp: any) => {
         return resp;
-    }),
-    catchError((err) => {
+      }),
+      catchError((err) => {
         return throwError(err);
-    })
+      })
     );
-
-
-
-
   }
-
-
 
   // servicios para las estadistica generales
-  getDataAdminGET(id){
-
+  getDataAdminGET(id) {
     let url = `${_SERVICIOS}/stats/${id}?t=${this.token}`;
-    console.log('la url que se manda', url);
-  return this.http.get(url).pipe(
-    map((resp: any) => {
-      return resp;
-    }),
-    catchError((err) => {
-      return throwError(err);
-    })
+    //// console.log('la url que se manda', url);
+    return this.http.get(url).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((err) => {
+        return throwError(err);
+      })
     );
-
   }
 
-
+  removeUserDELETE(id) {
+    let url = `${_SERVICIOS}/user/${id}?t=${this.token}`;
+    return this.http.delete(url).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((err) => {
+        return throwError(err);
+      })
+    );
+  }
 }

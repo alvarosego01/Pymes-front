@@ -54,7 +54,7 @@ export class HistorialBillingPublicationComponent implements OnInit {
       this.registros = data;
       this.paginator = resp.paginator;
 
-      //console.log('los registros', resp);
+      ////// console.log('los registros', resp);
 
       this.GlobalConfigService.spinner = false;
     },

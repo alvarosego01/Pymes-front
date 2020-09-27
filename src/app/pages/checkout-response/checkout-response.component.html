@@ -1,5 +1,5 @@
 <div
-*ngIf="(this.consultEpayco)"
+*ngIf="(this.factura)"
 id="centralContainer" class="content-wrapper fullWidth">
   <!-- Content Header (Page header) -->
 
@@ -36,44 +36,44 @@ id="centralContainer" class="content-wrapper fullWidth">
                         <tr>
                           <td>Referencia</td>
                           <td id="referencia">
-                            {{ this.consultEpayco.data.x_id_invoice }}
+                            {{ this.factura._epaycoBill.x_id_invoice }}
                           </td>
                         </tr>
                         <tr>
                           <td class="bold">Fecha</td>
                           <td id="fecha" class="">
-                            {{ this.consultEpayco.data.x_transaction_date }}
+                            {{ this.factura._epaycoBill.x_transaction_date }}
                           </td>
                         </tr>
                         <tr>
                           <td>Respuesta</td>
                           <td id="respuesta">
-                            {{ this.consultEpayco.data.x_response }}
+                            {{ this.factura._epaycoBill.x_response }}
                           </td>
                         </tr>
                         <tr>
                           <td>Motivo</td>
                           <td id="motivo">
-                            {{ this.consultEpayco.data.x_response_reason_text }}
+                            {{ this.factura._epaycoBill.x_response_reason_text }}
                           </td>
                         </tr>
                         <tr>
                           <td class="bold">Banco</td>
                           <td class="" id="banco">
-                            {{ this.consultEpayco.data.x_bank_name }}
+                            {{ this.factura._epaycoBill.x_bank_name }}
                           </td>
                         </tr>
 
                         <tr>
                           <td class="bold">Recibo</td>
                           <td id="recibo">
-                            {{ this.consultEpayco.data.x_transaction_id }}
+                            {{ this.factura._epaycoBill.x_transaction_id }}
                           </td>
                         </tr>
                         <tr>
                           <td class="bold">Total</td>
                           <td class="" id="total">
-                            {{ this.consultEpayco.data.x_amount | currencyLocale  }}
+                            {{ this.factura._epaycoBill.x_amount | currencyLocale  }}
                           </td>
                         </tr>
                       </tbody>

@@ -50,7 +50,7 @@ export class BillingPurchaseComponent implements OnInit {
       this.registros = data;
       this.paginator = resp.paginator;
 
-      //console.log('facturas', this.registros);
+      ////// console.log('facturas', this.registros);
       this.GlobalConfigService.spinner = false;
     }, (err) => {
 

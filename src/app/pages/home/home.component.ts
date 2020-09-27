@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy  {
 
 
   cargarBibliotecaCategorias(){
-    ////////////console.log('se buscan las categorias');
+    //// console.log('se buscan las categorias');
 
     return  new Promise((resolve, reject) => {
       this._categoryService.getCategoryGET().subscribe( response => {
@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit, OnDestroy  {
 
         resolve(response.data);
 
-        // ////////////console.log('base de categorias', this._categoryService.allCategoryList);
+        // //// console.log('base de categorias', this._categoryService.allCategoryList);
 
       }, err => {
 
@@ -90,12 +90,12 @@ export class HomeComponent implements OnInit, OnDestroy  {
 
 
 
-      // // //////////////console.log('los parametros', params);
-      // //////////////console.log('params url', params);
-      ////////////console.log('los malditos parametros', this.params);
+      // // ////// console.log('los parametros', params);
+      // ////// console.log('params url', params);
+      //// console.log('los malditos parametros', this.params);
       if(Object.keys(this.params).length == 0){
 
-        ////////////console.log('no hay parametros');
+        //// console.log('no hay parametros');
         this.setFirstLook();
         // this._searchService.setParameters();
 
@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit, OnDestroy  {
 
       if(this.params.busqueda == 'todo' ){
 
-        ////////////console.log('caso todo');
+        //// console.log('caso todo');
         this.setFirstLook();
       }else
       if((this.params.busqueda == 'categoria' || this.params.busqueda == 'catSub')
@@ -115,7 +115,157 @@ export class HomeComponent implements OnInit, OnDestroy  {
         this.searchByCategory(this.params.categoria, this.params.subCategoria);
 
       }else
+      if(this.params.busqueda == 'ubicacion'){
+
+
+          // this._searchService.paginator = [];
+
+    let pars = null;
+    await this._searchService.getParameters().then(resp => {
+      // // ////// console.log('la respuesta de parametros', resp);
+      pars = resp;
+    });
+
+    ////// console.log('en este caso ', pars);
+
+    let parms = {};
+
+    if((pars) && pars.categoria != null && pars.categoria != ''){
+
+      let params = {
+        busqueda: 'ubicacion',
+        city: this.params.city,
+        categoria: (pars.categoria != null && pars.categoria != '')? pars.categoria : null,
+        subCategoria: (pars.subCategoria != null && pars.subCategoria != '')? pars.subCategoria : null,
+        // pagina: (pars.pagina != null && pars.pagina != '')? pars.pagina : null
+
+      }
+
+      parms = params;
+      this._searchService.setParameters(parms, 0);
+
+    }else{
+
+      let params = {
+        busqueda: 'ubicacion',
+        city: this.params.city,
+
+        // categoria: (pars.categoria != null && pars.categoria != '')? pars.categoria : null,
+        // subCategoria: (pars.subCategoria != null && pars.subCategoria != '')? pars.subCategoria : null,
+        // pagina: 0
+
+      }
+
+      parms = params;
+
+      this._searchService.setParameters(parms, 0);
+    }
+
+
+
+  var ppp = {
+    params: parms,
+    change: 'new'
+  }
+
+
+  var args = this._searchService.changePaginator(ppp);
+
+
+
+this.GlobalConfigService.spinner = true;
+this._searchService.searchByTextPOST(args).subscribe((resp) => {
+  // ////// ////// console.log(resp);
+
+  if ((resp.data) &&  resp.data.length > 0 ) {
+
+
+
+    this._searchService.homeTitleResults = 'Resultados';
+
+this._searchService.registros = resp.data;
+    this._searchService.paginator = resp.paginator || null;
+    this._searchService.setActualReactions();
+
+
+    if(this.GlobalConfigService.isMobile() == true){
+
+      this.GlobalConfigService.selectorElement('.productList h5.titleSection').then(r => {
+
+        this.GlobalConfigService.scrollIt(r);
+
+
+      });
+
+    }
+
+
+  } else {
+
+    this._searchService.registros = [];
+    this._searchService.paginator = [];
+  }
+
+  this.GlobalConfigService.spinner = false;
+});
+
+
+      }
       if(this.params.busqueda == 'buscador'){
+
+        // console.log('en buscador', this.params);
+        // busqueda: "buscador"
+// title: "hogar"
+
+this._searchService.paginator = [];
+
+
+let params = {
+  busqueda: 'buscador',
+  title: this.params.title
+}
+
+this._searchService.setParameters(params, 0);
+
+var parms = params;
+
+var ccc = {
+  params: parms,
+  change: 'new',
+  title: this.params.title
+}
+
+
+var args = this._searchService.changePaginator(ccc);
+
+  this.GlobalConfigService.spinner = true;
+  this._searchService.searchByTextPOST(args).subscribe((resp) => {
+    // ////// ////// console.log(resp);
+    if (resp.status == 200 && resp.ok == true) {
+
+      if ((resp.data) &&  resp.data.length > 0 ) {
+
+        ////// console.log('la respuesta de la busqueda', resp);
+
+        this._searchService.homeTitleResults = 'Resultados';
+        this._searchService.registros = resp.data;
+        this._searchService.paginator = resp.paginator || null;
+        this._searchService.setActualReactions();
+
+        ////// ////// console.log(this._searchService.registros);
+      }else{
+        this._searchService.registros = [];
+      }
+
+
+    } else {
+
+    }
+
+    this.GlobalConfigService.spinner = false;
+  });
+
+
 
       }
       else
@@ -127,7 +277,7 @@ export class HomeComponent implements OnInit, OnDestroy  {
 
 
 
-        // //////////////console.log(params);
+        // ////// console.log(params);
 
 
 
@@ -141,7 +291,7 @@ export class HomeComponent implements OnInit, OnDestroy  {
 
  async searchByCategory(argumento: string, child:string = null){
 
-    //////////////console.log('category from home');
+    ////// console.log('category from home');
 
     let l = {
       categoryp: argumento,
@@ -158,7 +308,7 @@ export class HomeComponent implements OnInit, OnDestroy  {
 
     let pars = null;
     await this._searchService.getParameters().then(resp => {
-      // // //////////////console.log('la respuesta de parametros', resp);
+      // // ////// console.log('la respuesta de parametros', resp);
       pars = resp;
     });
 
@@ -178,7 +328,7 @@ export class HomeComponent implements OnInit, OnDestroy  {
 
     this.GlobalConfigService.spinner = true;
     this._searchService.searchByCategoryPOST(args).subscribe((resp) => {
-      // ////// //////////////console.log(resp);
+      // ////// ////// console.log(resp);
 
       if (resp.status == 200 && resp.ok == true) {
 
@@ -199,7 +349,7 @@ this._searchService.registros = resp.data;
 
               this.GlobalConfigService.scrollIt(r);
 
-              //////////////console.log('se mueve a', r);
+              ////// console.log('se mueve a', r);
 
             });
 
@@ -210,7 +360,7 @@ this._searchService.registros = resp.data;
 
         }else{
 
-          //////////////console.log('no recibbi nada');
+          ////// console.log('no recibbi nada');
 
           this._searchService.registros = [];
           this._searchService.paginator = [];
@@ -262,11 +412,11 @@ this._searchService.registros = resp.data;
 
   setFirstLook() {
 
-    ////////////console.log('llama first');
+    //// console.log('llama first');
     this.GlobalConfigService.spinner = true;
     this._searchService.setFirstLookPOST().subscribe((resp) => {
-      // ////// //////////////console.log(resp);
-      // //////////////console.log('los resultadotes', resp);
+      // ////// ////// console.log(resp);
+      // ////// console.log('los resultadotes', resp);
       // this._searchService.setParameters({busqueda: 'todo'}, 0, 12);
       if (resp.status == 200 && resp.ok == true) {
 

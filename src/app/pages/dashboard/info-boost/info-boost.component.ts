@@ -77,4 +77,10 @@ export class InfoBoostComponent implements OnInit {
   }
 
 
+
+  openOPC(){
+
+  }
+
+
 }

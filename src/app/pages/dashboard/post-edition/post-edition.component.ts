@@ -128,7 +128,7 @@ options: any = {};
     this.options = {
       // onUpdate: (event: any) => {
         // this.postChangesToServer();
-        // ////////console.log('cambios', this._files);
+        // //////////// console.log('cambios', this._files);
       // },
       animation: 150
     };
@@ -141,7 +141,7 @@ options: any = {};
       this.canChangeFiles = (this.publicacion._adminReasons != null && this.publicacion._adminReasons.changeFiles)? this.publicacion._adminReasons.changeFiles : false;
       this._files = this.publicacion._files;
 
-      ////////console.log('this.publicacion._adminReasons', this.publicacion._adminReasons);
+      //////////// console.log('this.publicacion._adminReasons', this.publicacion._adminReasons);
 
     this.setNroFotos();
 
@@ -159,7 +159,7 @@ options: any = {};
       }
 
       this.Typee = this.publicacion.type;
-      // ////////console.log('tipo', this.Typee);
+      // //////////// console.log('tipo', this.Typee);
       this.ngIncludeDesc = this.publicacion.content;
       this.ngnotIncludeDesc = this.publicacion.notContent;
 
@@ -189,13 +189,13 @@ options: any = {};
 
       });
 
-        ////////console.log('la cuenta de f', f);
+        //////////// console.log('la cuenta de f', f);
       var archivos = (f.length >= 1 && f.length <= 10)? f.length : 10;
 
       // if( (10 - archivos) >= 0 ){
       this.nroFotos = ( (10 - archivos) >= 0 )? 10 - archivos: 0;
 
-        ////////console.log('disponibles', this.nroFotos);
+        //////////// console.log('disponibles', this.nroFotos);
       // }
 
     }
@@ -206,7 +206,7 @@ options: any = {};
 
   deleteCity(i) {
 
-    ////////console.log('delete city');
+    //////////// console.log('delete city');
     this.cityTargets.splice(i, 1);
     return;
   }
@@ -217,12 +217,12 @@ options: any = {};
     this.GlobalConfigService.spinner = true;
     this.activateMap = false;
     x.then((r) => {
-      //////// //////////////console.log(r);
+      //////// ////// console.log(r);
       this.coordsMap = r;
       this.GlobalConfigService.spinner = false;
       if (Object.keys(this.coordsMap).length > 0) {
         this.activateMap = true;
-        // //////// //////////////console.log('activado mapa', );
+        // //////// ////// console.log('activado mapa', );
       }
       this._notifyService.Toast.fire({
         title: '¡Localización almacenada!',
@@ -277,7 +277,7 @@ options: any = {};
     this._files[i].delete = (this._files[i].delete && this._files[i].delete == true)? false: true;
 
     this.setNroFotos();
-    // ////////console.log(this._files[i]);
+    // //////////// console.log(this._files[i]);
 
   }
 
@@ -412,10 +412,10 @@ seleccionImage(archivo: File) {
 
 async selectFiles(event) {
   //
-  ////// //////////////console.log(this.nroFotos);
-  ////////// //////////////console.log(event.target.files);
+  ////// ////// console.log(this.nroFotos);
+  ////////// ////// console.log(event.target.files);
   if(event.target.files){
-    //////// //////////////console.log('total', event.target.files);
+    //////// ////// console.log('total', event.target.files);
     for (let index = 0; index < event.target.files.length; index++) {
 
       var reader = new FileReader();
@@ -424,7 +424,7 @@ async selectFiles(event) {
 
       reader.readAsDataURL(event.target.files[index]);
       var fileup = event.target.files[index];
-      //////// //////////////console.log('imagen nro ', index, fileup);
+      //////// ////// console.log('imagen nro ', index, fileup);
 
 
      reader.onload =  ((event:any) => {
@@ -449,13 +449,13 @@ async selectFiles(event) {
 
         // return;
         var x = new Promise((resolve,reject) => {
-          // //////// //////////////console.log('entra en promesa', index);
+          // //////// ////// console.log('entra en promesa', index);
           image.onload = function() {
-            // //////// //////////////console.log('datos de imagn',image);
+            // //////// ////// console.log('datos de imagn',image);
               var k = [image.width, image.height];
               resolve(k);
-              //////// //////////////console.log('datos promesa', image);
-              //////// //////////////console.log('Sale de promesa, resuelve', index);
+              //////// ////// console.log('datos promesa', image);
+              //////// ////// console.log('Sale de promesa, resuelve', index);
           };
         })
 
@@ -481,8 +481,8 @@ async selectFiles(event) {
           if(r[0] >= 200 && r[1] >= 200 ){
             this.urlFiles.push(event.target.result);
             this.imagenesSubir.push(fileup);
-            // //////// //////////////console.log(fileup.size);
-            // //////// //////////////console.log(this.urlFiles, 'urlfiles');
+            // //////// ////// console.log(fileup.size);
+            // //////// ////// console.log(this.urlFiles, 'urlfiles');
           }else{
             this._notifyService.Toast.fire({
               title:'Dimensiones no permitidas',
@@ -497,7 +497,7 @@ async selectFiles(event) {
         }
 
       if(this.ngTypeAdjuntos == 'Catálogo PDF'){
-        ////////// //////////////console.log('archivo', reader);
+        ////////// ////// console.log('archivo', reader);
          // return;
 
        if ( event.target.result.indexOf('PDF') < 0 && this.ngTypeAdjuntos == 'Catálogo PDF') {
@@ -531,8 +531,8 @@ async selectFiles(event) {
             }
             this.urlFiles.push(event.target.result);
             this.imagenesSubir.push(fileup);
-            ////////// //////////////console.log(this.urlFiles, 'los datos');
-            ////////// //////////////console.log(event.target.result, 'los datos');
+            ////////// ////// console.log(this.urlFiles, 'los datos');
+            ////////// ////// console.log(event.target.result, 'los datos');
 
         resolve();
       }
@@ -545,11 +545,11 @@ async selectFiles(event) {
 
     });
 
-     // //////// //////////////console.log(this.urlFiles, 'urlfiles');
+     // //////// ////// console.log(this.urlFiles, 'urlfiles');
 
 
     }
-    //////// //////////////console.log(this.imagenesSubir, 'imgsubir finales');
+    //////// ////// console.log(this.imagenesSubir, 'imgsubir finales');
   }
 }
 
@@ -565,7 +565,7 @@ getCategory(){
 
 
       this._categoryService.allCategoryList = resp.data;
-      // ////////////console.log('las categorias', this.categoryList)
+      // //// console.log('las categorias', this.categoryList)
 
   }, (err) => {
 
@@ -620,7 +620,7 @@ setSubCategory(i, nro) {
 
   let k = JSON.parse(i);
 
-  //////////console.log('la mierda esta', k );
+  // console.log('la mierda esta', k );
 
   let p = k._category;
   let c = k._child;
@@ -656,7 +656,7 @@ setSubCategory(i, nro) {
 
 updatePublication(forma: NgForm){
 
-  //////////console.log(this._formsResource.checkUrl(forma.value.redInstagram));
+  // console.log(this._formsResource.checkUrl(forma.value.redInstagram));
 
     if( (forma.value.redWeb) &&
     forma.value.redWeb != '' &&
@@ -764,7 +764,7 @@ updatePublication(forma: NgForm){
     };
 
 
-    // ////////console.log('los datos', post);
+    // //////////// console.log('los datos', post);
     // return;
 
     this.GlobalConfigService.spinner = true;

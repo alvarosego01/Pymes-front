@@ -1,0 +1,26 @@
+
+
+
+
+@import "~src/generals"
+
+
+.infoUser
+    @include responsivo(telefonoTable)
+        display: flex
+        flex-direction: column-reverse
+        h2
+            text-align: center
+        ul
+            display: block
+            margin: 0 auto!important
+            width: fit-content
+    @include responsivo(pcMedio)
+        display: flex
+        flex-direction: column-reverse
+        h2
+            text-align: center
+        ul
+            display: block
+            margin: 0 auto!important
+            width: fit-content

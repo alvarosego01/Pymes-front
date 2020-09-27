@@ -49,9 +49,7 @@ import { PdfViewerModule } from "ng2-pdf-viewer";
 import { BreadComponent } from "./globals/bread/bread.component";
 
 import { IMaskModule } from "angular-imask";
-import {
-  NotifyPreviewComponent,
-} from "./pages/dashboard/dashboard.pages.index";
+import { NotifyPreviewComponent } from "./pages/dashboard/dashboard.pages.index";
 
 // import { SortablejsModule } from 'angular-sortablejs';
 import { SortablejsModule } from "ngx-sortablejs";
@@ -60,7 +58,6 @@ import {
   // InfoPostComponent,
   InfoPostComponent,
   SearchComponent,
-  LoadingComponent,
   LoginComponent,
   NavDashboardComponent,
   PaginatorComponent,
@@ -70,19 +67,16 @@ import {
   CategoryListsComponent,
   PostsListsComponent,
 } from "./components/components.index";
-import { CommonModule } from '@angular/common';
-import { GlobalConfigService } from './services/-global-config.service';
+import { CommonModule } from "@angular/common";
+import { GlobalConfigService } from "./services/-global-config.service";
 // import { COMPONENTS_MODULE } from './components/components.module';
 
-
-import {DpDatePickerModule} from 'ng2-date-picker';
-import { CheckoutResponseComponent } from './pages/checkout-response/checkout-response.component';
-import { GLOBALCOMPONENTS_MODULE } from './components/components.module';
-import { ZonaPymesComponent } from './pages/zona-pymes/zona-pymes.component';
+import { DpDatePickerModule } from "ng2-date-picker";
+import { CheckoutResponseComponent } from "./pages/checkout-response/checkout-response.component";
+import { GLOBALCOMPONENTS_MODULE } from "./components/components.module";
+import { ZonaPymesComponent } from "./pages/zona-pymes/zona-pymes.component";
+import { EditUserComponent } from "./pages/dashboard/admin/edit-user/edit-user.component";
 // import { GlobalPaginatorComponent } from './components/global-paginator/global-paginator.component';
-
-
-
 
 @NgModule({
   declarations: [
@@ -100,10 +94,9 @@ import { ZonaPymesComponent } from './pages/zona-pymes/zona-pymes.component';
     BreadComponent,
     SocialFloatComponent,
     VerifyControlComponent,
-
+    EditUserComponent,
 
     // componentes
-    LoadingComponent,
     LoginComponent,
     NavDashboardComponent,
     PaginatorComponent,
@@ -155,10 +148,9 @@ import { ZonaPymesComponent } from './pages/zona-pymes/zona-pymes.component';
   exports: [
     // GlobalPaginatorComponent
     // InfoPostComponent
-  ]
+  ],
   // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
   // entryComponents: []
-
 })
 export class AppModule {
   // platformBrowserDynamic().bootstrapModule(AppModule);

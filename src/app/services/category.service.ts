@@ -40,11 +40,11 @@ export class CategoryService {
 
 
       let url = `${_SERVICIOS}/category/?t=${this._userService.token}`;
-      // ////////////console.log('url', url);
+      // //// console.log('url', url);
     // una vez logeado hace falta grabar la sesión en el local storage designado.
     return this.http.post(url ,data).pipe(
       map((resp: any) => {
-        // //////////// //////////////console.log('respuesta', resp);
+        // //////////// ////// console.log('respuesta', resp);
 
         return resp;
       }),
@@ -59,11 +59,11 @@ export class CategoryService {
 
 
     let url = `${_SERVICIOS}/category/subcategoria/${data.type}?t=${this._userService.token}`;
-    ////////////console.log('url', url);
+    //// console.log('url', url);
   // una vez logeado hace falta grabar la sesión en el local storage designado.
   return this.http.post(url ,data).pipe(
     map((resp: any) => {
-      // //////////// //////////////console.log('respuesta', resp);
+      // //////////// ////// console.log('respuesta', resp);
 
       return resp;
     }),
@@ -85,7 +85,7 @@ export class CategoryService {
 
   return this.http.get(url).pipe(
     map((resp: any) => {
-      // //////////// //////////////console.log('respuesta', resp);
+      // //////////// ////// console.log('respuesta', resp);
 
       return resp;
     }),
@@ -110,11 +110,11 @@ export class CategoryService {
       }
 
       let url = `${_SERVICIOS}/category/principal/${data._id}?t=${this._userService.token}`;
-    // ////////////console.log('url', url);
+    // //// console.log('url', url);
   // una vez logeado hace falta grabar la sesión en el local storage designado.
   return this.http.put(url, l).pipe(
     map((resp: any) => {
-      // //////////// //////////////console.log('respuesta', resp);
+      // //////////// ////// console.log('respuesta', resp);
 
       return resp;
     }),
@@ -137,11 +137,11 @@ export class CategoryService {
     }
 
     let url = `${_SERVICIOS}/category/subcategoria/${data._id}/${data.idx}?t=${this._userService.token}`;
-    // ////////////console.log('url', url);
+    // //// console.log('url', url);
   // una vez logeado hace falta grabar la sesión en el local storage designado.
   return this.http.put(url, l).pipe(
     map((resp: any) => {
-      // //////////// //////////////console.log('respuesta', resp);
+      // //////////// ////// console.log('respuesta', resp);
 
       return resp;
     }),

@@ -84,17 +84,31 @@ export class GeneralBalanceComponent implements OnInit {
 
 
 
+// para user normal
+
+
+UsersbarChartData: ChartDataSets[] = [
+  { data: [0,0,0,0,0,0,0,0,0,0,0,0], label: 'Publicaciones' },
+  // { data: null, label: 'Usuarios' },
+];
+
+
+
+usuarioInfo: any = [];
+
+
   constructor(
 
     public _postService: PostsService,
     public GlobalConfigService: GlobalConfigService,
     public _notifyService: NotifyService,
     public _verifyService: VerifyService,
-    public _userService: UsersService
+    public _userService: UsersService,
+
 
   ) {
     this.GlobalConfigService.setTitle('Balances y reportes');
-    console.log('this._userService.roleName', this._userService.roleName);
+    //// console.log('this._userService.roleName', this._userService.roleName);
 
     if(this._userService.roleName == 'Administrador'){
 
@@ -102,11 +116,104 @@ export class GeneralBalanceComponent implements OnInit {
 
     }else{
 
+      this.getDataUser(this._userService.usuario._id);
+
     }
 
    }
 
   ngOnInit(): void {
+  }
+
+  getStatsGeneral(id){
+
+    return new Promise((resolve, reject) => {
+
+      this._postService.getStatsGeneralGET(id).subscribe((resp) => {
+
+
+        resolve( resp.data );
+
+      }, (err) => {
+
+        reject();
+
+      });
+
+
+    })
+  }
+
+  getDataUser(id){
+
+    //// console.log('id', id);
+    this.GlobalConfigService.spinner = true;
+
+    this._userService.getDataAdminGET(id).subscribe( async (resp: any) => {
+
+
+     await this.getStatsGeneral(id).then(r => {
+
+        this.usuarioInfo.statsGeneral = r;
+
+        //// console.log('this.usuarioInfo', this.usuarioInfo);
+
+        }, err => {
+          console.error(err);
+          this.GlobalConfigService.spinner = false;
+        })
+
+        //// console.log('el retorno', resp);
+        this.statsGeneral = resp.data;
+
+
+        if(this.statsGeneral.dateUserPublications.posts != null && this.statsGeneral.dateUserPublications.posts.length > 0){
+
+
+
+        this.statsGeneral.dateUserPublications.posts[0].meses.forEach( (element,idx) => {
+
+          // meses.push(element.mes);
+          var index = null;
+          index = this.barChartLabels.findIndex(r => {
+
+            // //// console.log('ryear', r.year);
+            return r === element.mes;
+          });
+
+          if(index != null){
+
+            if(element.registros.length > 0){
+
+              element.registros.forEach((el, idx) => {
+
+                if(el[0] != null){
+                  let xx:any = this.UsersbarChartData[0].data[index];
+                  xx++;
+                  this.UsersbarChartData[0].data[index] = xx;
+                }
+
+              });
+
+
+
+            }
+          }
+
+
+        });
+      }
+
+
+
+      this.GlobalConfigService.spinner = false;
+
+
+    }, (err) => {
+
+      this.GlobalConfigService.spinner = false;
+    });
+
   }
 
 
@@ -116,7 +223,7 @@ export class GeneralBalanceComponent implements OnInit {
 
     this._userService.getDataAdminGET(id).subscribe((resp: any) => {
 
-      console.log('el retorno', resp);
+      //// console.log('el retorno', resp);
       this.statsGeneral = resp.data;
 
       // roleTransform
@@ -126,13 +233,19 @@ export class GeneralBalanceComponent implements OnInit {
       this.doughnutChartData = [ resp.data.typeUsers.ADMIN_ROLE, resp.data.typeUsers.CLIENTE_ROLE, resp.data.typeUsers.EMPRESA_ROLE  ];
 
 
+
+
+      if(this.statsGeneral.dateUserPublications.bills != null && this.statsGeneral.dateUserPublications.bills.length > 0 ){
+
+
+
       this.statsGeneral.dateUserPublications.bills[0].meses.forEach( (element,idx) => {
 
         // meses.push(element.mes);
         var index = null;
         index = this.barChartLabels.findIndex(r => {
 
-          // console.log('ryear', r.year);
+          // //// console.log('ryear', r.year);
           return r === element.mes;
         });
 
@@ -163,13 +276,19 @@ export class GeneralBalanceComponent implements OnInit {
 
       });
 
+    }
+
+      if(this.statsGeneral.dateUserPublications.posts != null && this.statsGeneral.dateUserPublications.posts.length > 0){
+
+
+
       this.statsGeneral.dateUserPublications.posts[0].meses.forEach( (element,idx) => {
 
         // meses.push(element.mes);
         var index = null;
         index = this.barChartLabels.findIndex(r => {
 
-          // console.log('ryear', r.year);
+          // //// console.log('ryear', r.year);
           return r === element.mes;
         });
 
@@ -182,13 +301,18 @@ export class GeneralBalanceComponent implements OnInit {
 
       });
 
+    }
+      if(this.statsGeneral.dateUserPublications.users != null && this.statsGeneral.dateUserPublications.users.length > 0){
+
+
+
       this.statsGeneral.dateUserPublications.users[0].meses.forEach( (element,idx) => {
 
         // meses.push(element.mes);
         var index = null;
         index = this.barChartLabels.findIndex(r => {
 
-          // console.log('ryear', r.year);
+          // //// console.log('ryear', r.year);
           return r === element.mes;
         });
 
@@ -200,6 +324,8 @@ export class GeneralBalanceComponent implements OnInit {
 
 
       });
+
+    }
 
       if( this.statsGeneral.salesStatus.length > 0 ){
 

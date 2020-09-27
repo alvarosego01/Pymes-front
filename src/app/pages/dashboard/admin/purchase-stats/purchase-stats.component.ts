@@ -67,7 +67,7 @@ export class PurchaseStatsComponent implements OnInit {
 
       this.registrosPaginator = resp.paginator;
 
-      //console.log('facturas', this.registros);
+      ////// console.log('facturas', this.registros);
       resolve();
     }, (err) => {
 
@@ -95,7 +95,7 @@ export class PurchaseStatsComponent implements OnInit {
 
         this.boostsPaginator = resp.paginator;
 
-        //console.log('boosts', this.boosts);
+        ////// console.log('boosts', this.boosts);
         resolve();
       }, (err) => {
 

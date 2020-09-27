@@ -34,7 +34,7 @@ export class NotifyPreviewComponent implements OnInit {
             //   this.existNotif = true;
             // }
 
-            ////console.log("notificaciones", resp.data);
+            //////// console.log("notificaciones", resp.data);
           },
           (err) => {}
         );

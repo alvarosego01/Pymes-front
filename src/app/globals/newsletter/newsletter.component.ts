@@ -12,6 +12,8 @@ import { GlobalConfigService } from 'src/app/services/-global-config.service';
   styleUrls: ["./newsletter.component.sass"],
 })
 export class NewsletterComponent implements OnInit {
+
+  enviado: boolean = false;
   constructor(
     public globalConfig: GlobalConfigService,
     public _notifyService: NotifyService
@@ -30,7 +32,7 @@ export class NewsletterComponent implements OnInit {
     this.globalConfig.newsLetterAddPOST(l).subscribe(
       (resp) => {
         // this.router.navigate(['/dashboard']);
-        ////////// //////////////console.log('FUNCIONA', resp);
+        ////////// ////// console.log('FUNCIONA', resp);
         this.globalConfig.spinner = false;
 
         this._notifyService.Toast.fire({
@@ -40,21 +42,58 @@ export class NewsletterComponent implements OnInit {
 
         forma.reset();
 
-        // //// //////////////console.log(resp);
+        // //// ////// console.log(resp);
       },
       (ERR) => {
-        var resp = ERR;
-        // //// //////////////console.log(resp.error);
-        this._notifyService.Toast.fire({
-          title: resp.error.message,
-          icon: "error",
+        // var resp = ERR;
+        // // //// ////// console.log(resp.error);
+        // this._notifyService.Toast.fire({
+        //   title: resp.error.message,
+        //   icon: "error",
+        // });
+
+        let e = ERR.error.message.errors || null;
+        if(e != null){
+
+          let errors: any = [];
+
+        for (var [key, value] of Object.entries(e)) {
+          ////// console.log(key + ' ' + value); // "a 5", "b 7", "c 9"
+          errors.push(value);
+        }
+
+        errors.forEach((element, idx) => {
+
+          this._notifyService.Toast.fire({
+            title: element.message ||'Algo ha salido mal, intente más tarde',
+            icon: "error",
+
+          });
+
         });
+
+      }else{
+
+        this._notifyService.Toast.fire({
+          title: 'Algo ha salido mal, intente más tarde',
+          icon: "error",
+
+        });
+
+      }
 
         this.globalConfig.spinner = false;
       }
     );
   }
 
+
+  alEnviar(){
+
+
+    this.enviado = true;
+
+  }
 
 
 }

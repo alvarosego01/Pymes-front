@@ -77,7 +77,7 @@ export class GlobalConfigService {
 
 
 
-        // //////////////console.log(element);
+        // ////// console.log(element);
         if(element){
 
           element.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -121,7 +121,7 @@ export class GlobalConfigService {
                 return resp;
               }),
               catchError( err =>{
-                ////////// //////////////console.log(err);
+                ////////// ////// console.log(err);
                 // this._notifyService.Toast.fire({
                 //   title: 'Algo ha salido mal',
                 //   icon: 'error'
@@ -145,7 +145,7 @@ export class GlobalConfigService {
                 return resp;
               }),
               catchError( err =>{
-                ////////// //////////////console.log(err);
+                ////////// ////// console.log(err);
                 // this._notifyService.Toast.fire({
                 //   title: 'Algo ha salido mal',
                 //   icon: 'error'

@@ -50,7 +50,7 @@ export class CategoryListsComponent implements OnInit {
 
     // this.GlobalConfigService.spinner = true;
     this._postService.categoryCountsGET(type).subscribe((resp) => {
-      // ////// //////////////console.log(resp);
+      // ////// ////// console.log(resp);
 
       if (resp.status == 200 && resp.ok == true) {
         // this._notifyService.Toast.fire({
@@ -58,7 +58,7 @@ export class CategoryListsComponent implements OnInit {
 
         this.listaCategory = resp.data;
 
-        // ////////////console.log('categorias utiles', this.listaCategory);
+        // //// console.log('categorias utiles', this.listaCategory);
 
         this.GlobalConfigService.spinner = false;
       } else {
@@ -95,7 +95,7 @@ export class CategoryListsComponent implements OnInit {
 
     // this.GlobalConfigService.spinner = true;
     this._searchService.searchByOrderPOST(l).subscribe((resp) => {
-      // ////// //////////////console.log(resp);
+      // ////// ////// console.log(resp);
 
       if (resp.status == 200 && resp.ok == true) {
         // this._notifyService.Toast.fire({
@@ -103,7 +103,7 @@ export class CategoryListsComponent implements OnInit {
 
 this._searchService.registros = resp.data;
           this._searchService.setActualReactions();
-          ////// //////////////console.log(this._searchService.registros);
+          ////// ////// console.log(this._searchService.registros);
         }else{
           this._searchService.registros = [];
         }
@@ -142,11 +142,11 @@ async sendSearchByUbicacion(forma: NgForm){
 
     let pars = null;
     await this._searchService.getParameters().then(resp => {
-      // // //////////////console.log('la respuesta de parametros', resp);
+      // // ////// console.log('la respuesta de parametros', resp);
       pars = resp;
     });
 
-    //////////////console.log('en este caso ', pars);
+    ////// console.log('en este caso ', pars);
 
     let parms = {};
 
@@ -187,22 +187,15 @@ async sendSearchByUbicacion(forma: NgForm){
     params: parms,
     change: 'new'
   }
-  //////////////console.log('los ppp', ppp);
 
-//   // //////////////console.log('params enviados ppp', ppp);
 
   var args = this._searchService.changePaginator(ppp);
 
-//   this.GlobalConfigService.spinner = true;
 
-//   // //////////////console.log('los argumentos que se mandan', args);
-
-//////////////console.log('los args', args);
-// return;
 
 this.GlobalConfigService.spinner = true;
 this._searchService.searchByTextPOST(args).subscribe((resp) => {
-  // ////// //////////////console.log(resp);
+  // ////// ////// console.log(resp);
 
   if ((resp.data) &&  resp.data.length > 0 ) {
 
@@ -221,7 +214,6 @@ this._searchService.registros = resp.data;
 
         this.GlobalConfigService.scrollIt(r);
 
-        //////////////console.log('se mueve a', r);
 
       });
 
@@ -229,7 +221,6 @@ this._searchService.registros = resp.data;
 
 
   } else {
-    //////////////console.log('no recibbi nada');
 
     this._searchService.registros = [];
     this._searchService.paginator = [];
@@ -263,12 +254,12 @@ this._searchService.registros = resp.data;
 
   this.GlobalConfigService.spinner = true;
   this._searchService.searchByCategoryPOST(l).subscribe((resp) => {
-    // ////// //////////////console.log(resp);
+    // ////// ////// console.log(resp);
 
 
     if (resp.status == 200 && resp.ok == true) {
       // this._notifyService.Toast.fire({
-      // ////// //////////////console.log(resp);
+      // ////// ////// console.log(resp);
       // this._notifyService.Toast.fire({
       //   title: resp.message,
       //   // text: '¡Gracias por unirte a Mercado Pyme!',
@@ -279,7 +270,7 @@ this._searchService.registros = resp.data;
 
 this._searchService.registros = resp.data[0];
         this._searchService.setActualReactions();
-        ////// //////////////console.log(this._searchService.registros);
+        ////// ////// console.log(this._searchService.registros);
       }else{
         this._searchService.registros = [];
       }
@@ -289,7 +280,7 @@ this._searchService.registros = resp.data[0];
       // text: '¡Gracias por unirte a Mercado Pyme!',
       // icon: "error",
       // });
-      ////// //////////////console.log(resp,' existe el error');
+      ////// ////// console.log(resp,' existe el error');
       this.GlobalConfigService.spinner = false;
     }
 
@@ -302,18 +293,18 @@ this._searchService.registros = resp.data[0];
   async searchByCategory(argumento: string, child:string = null, idPadre: string = null, idChild: string = null){
 
 
-    //////////console.log('veces que se llama', argumento);
-    //////////////console.log('category from category');
+    // console.log('veces que se llama', argumento);
+    ////// console.log('category from category');
 
-    ////////////console.log('idPadre', idPadre);
-    ////////////console.log('idChild', idChild);
+    //// console.log('idPadre', idPadre);
+    //// console.log('idChild', idChild);
 
   // return;
 
     this._searchService.catState.base = argumento;
     this._searchService.catState.child = (child != null && child != '')? child : null;
     this._searchService.paginator = [];
-    //////////////console.log(this._searchService.catState);
+    ////// console.log(this._searchService.catState);
 
   let l = {
     categoryp: argumento,
@@ -333,7 +324,7 @@ this._searchService.registros = resp.data[0];
   this._searchService.setParameters(params, 0);
   parms = params;
   // await this._searchService.getParameters().then(resp => {
-  //   // // //////////////console.log('la respuesta de parametros', resp);
+  //   // // ////// console.log('la respuesta de parametros', resp);
   //   parms = resp;
   // });
 
@@ -344,17 +335,17 @@ this._searchService.registros = resp.data[0];
     idChild: (idChild != null)? idChild: null,
   }
 
-  // //////////////console.log('params enviados ppp', ppp);
+  // ////// console.log('params enviados ppp', ppp);
 
   var args = this._searchService.changePaginator(ppp);
 
   this.GlobalConfigService.spinner = true;
 
-  // //////////////console.log('los argumentos que se mandan', args);
+  // ////// console.log('los argumentos que se mandan', args);
 
   this._searchService.searchByCategoryPOST(args).subscribe((resp) => {
 
-    // // //////////////console.log('por categorias', resp.data);
+    // // ////// console.log('por categorias', resp.data);
 
     if (resp.status == 200 && resp.ok == true) {
 
@@ -368,7 +359,7 @@ this._searchService.registros = resp.data[0];
         this._searchService.paginator = resp.paginator || null;
         this._searchService.setActualReactions();
 
-        // //////////////console.log('como queda el paginador', this._searchService.paginator);
+        // ////// console.log('como queda el paginador', this._searchService.paginator);
 
         if(this.GlobalConfigService.isMobile() == true){
 
@@ -376,13 +367,13 @@ this._searchService.registros = resp.data[0];
 
             this.GlobalConfigService.scrollIt(r);
 
-            //////////////console.log('se mueve a', r);
+            ////// console.log('se mueve a', r);
 
           });
 
         }
 
-        //// //////////////console.log('actualiza', this._searchService.registros);
+        //// ////// console.log('actualiza', this._searchService.registros);
       } else {
         //
         this._searchService.registros = [];
@@ -408,7 +399,7 @@ this._searchService.registros = resp.data[0];
   getAll() {
     this.GlobalConfigService.spinner = true;
     this._searchService.setFirstLookPOST().subscribe((resp) => {
-      // ////// //////////////console.log(resp);
+      // ////// ////// console.log(resp);
 
       this._searchService.setParameters({busqueda: 'todo'}, 0);
 
@@ -464,7 +455,7 @@ this._searchService.registros = resp.data;
 
         this.GlobalConfigService.scrollIt(r);
 
-        //////////////console.log('se mueve a', r);
+        ////// console.log('se mueve a', r);
 
       });
 

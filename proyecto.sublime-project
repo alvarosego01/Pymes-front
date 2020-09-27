@@ -1,9 +1,17 @@
-// {
-// 	"import_root": ".",
-// 	"space_around_braces": false,
-// 	"folders": [
-// 		{
-// 			"path": "."
-// 		}
-// 	]
+{
+	"remove_trailing_index": true,
+	"autocomplete_auto_import": true,
+	"autocomplete_export_names": true,
+	// "import_path_mapping": "enabled",
+	"import_root": ".",
+	"from_quote": "'",
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+// 	"tslint": {
+// 	"args": ["--project", "${folder}"]
 // }
+}

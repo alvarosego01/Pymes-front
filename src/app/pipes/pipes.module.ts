@@ -8,6 +8,7 @@ import { TagsPipe } from './tags.pipe';
 import { RoleTransformPipe } from './role-transform.pipe';
 import { StringLimitPipe } from './string-limit.pipe';
 import { CurrencyLocalePipe } from './currency-locale.pipe';
+import { StatusTransformPipe } from './status-transform.pipe';
 // import { SafeUrlPipe } from './';
 
 
@@ -23,7 +24,8 @@ import { CurrencyLocalePipe } from './currency-locale.pipe';
     TagsPipe,
     RoleTransformPipe,
     StringLimitPipe,
-    CurrencyLocalePipe
+    CurrencyLocalePipe,
+    StatusTransformPipe
   ],
   exports: [
     ImagenPipe,
@@ -33,7 +35,8 @@ import { CurrencyLocalePipe } from './currency-locale.pipe';
     TagsPipe,
     RoleTransformPipe,
     StringLimitPipe,
-    CurrencyLocalePipe
+    CurrencyLocalePipe,
+    StatusTransformPipe
   ]
 })
 export class PipesModule { }

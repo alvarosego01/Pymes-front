@@ -330,7 +330,7 @@ setActualReactions() {
   searchByPricePOST(argumento){
 
 
-    ////// //////////////console.log(argumento);
+    ////// ////// console.log(argumento);
     let url = `${_SERVICIOS}/find`;
 
 
@@ -418,7 +418,7 @@ changePaginator(data: any){
           changePaginator: data.change
         }
 
-        ////////////console.log('caso buscador', argumento);
+        //// console.log('caso buscador', argumento);
         return argumento;
       }
 
@@ -435,7 +435,7 @@ changePaginator(data: any){
           idChild: null
         }
 
-        ////////////console.log('caso categoria', argumento);
+        //// console.log('caso categoria', argumento);
 
 
 
@@ -456,7 +456,7 @@ changePaginator(data: any){
 
         }
 
-        ////////////console.log('caso sub', argumento);
+        //// console.log('caso sub', argumento);
         return argumento;
       }
 
@@ -493,10 +493,10 @@ changePaginator(data: any){
   transformCatId(principal: string, child:string = null){
 
 
-    // ////////////console.log('entra en transform');
+    // //// console.log('entra en transform');
     var l = this._categoryService.allCategoryList;
 
-    // ////////////console.log('la l', l);
+    // //// console.log('la l', l);
 
     var c = null;
 

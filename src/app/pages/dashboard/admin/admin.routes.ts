@@ -6,18 +6,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { AdminVerifyGuard } from 'src/app/services/guards/guards.index';
 
-import { PostManagerComponent } from './admin.components.index';
+import { AlertaPymesComponent, PostManagerComponent } from './admin.components.index';
 import { DashboardComponent } from '../dashboard.component';
 import { InfoPostComponent } from 'src/app/components/components.index';
 import { ControlCategoryComponent } from './control-category/control-category.component';
 import { UserControlComponent } from './user-control/user-control.component';
 import { PurchaseStatsComponent } from './purchase-stats/purchase-stats.component';
 import { GeneralBalanceComponent } from '../dashboard.pages.index';
-
-
-
-
-
 
 const adminRoutes: Routes = [
 
@@ -35,6 +30,10 @@ const adminRoutes: Routes = [
             {
                 path: 'usersManager',
                 component: UserControlComponent,
+            },
+            {
+                path: 'alertaPymes',
+                component: AlertaPymesComponent,
             },
             {
                 path: 'ventasOrdenes',

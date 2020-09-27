@@ -413,7 +413,7 @@ class="floatButton bottom" id="floatButton">
 
             </div>
 
-            <div class="row " *ngIf="this.publication._mapUrl.mapUrl != null">
+            <div class="row " *ngIf="(this.publication._mapUrl) && this.publication._mapUrl.mapUrl != null">
 
               <div class="map col-md-12 col-lg-12" >
                 <!-- <h4 style="margin-bottom: 15px;" class="titleSpecial4">

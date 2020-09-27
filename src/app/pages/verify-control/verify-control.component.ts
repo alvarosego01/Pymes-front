@@ -44,13 +44,13 @@ export class VerifyControlComponent implements OnInit {
 
     this.activatedRoute.params.subscribe( async (params) => {
       let type = params["type"];
-      ////console.log(type);
+      //////// console.log(type);
 
       if(type != null && type != ''){
 
         await this._searchService.getParameters().then( (resp: any) => {
 
-          ////console.log('resp', resp);
+          //////// console.log('resp', resp);
           let t = (resp.t != null && resp.t != '')? resp.t: null;
 
             if(t == null){
@@ -88,7 +88,7 @@ export class VerifyControlComponent implements OnInit {
         title: resp.message,
         icon: 'success'
       })
-      ////console.log('la resp del decoded', resp);
+      //////// console.log('la resp del decoded', resp);
 
       this.type = resp.data.type;
       // this.url = resp.data.url;
@@ -151,7 +151,7 @@ export class VerifyControlComponent implements OnInit {
     this.GlobalConfigService.spinner = true;
 
     this._userService.changePasswordPUT(l, this.token).subscribe((resp) => {
-      ////console.log('la resp', resp);
+      //////// console.log('la resp', resp);
 
       this._notifyService.Toast.fire({
         title: resp.message,
@@ -210,11 +210,11 @@ export class VerifyControlComponent implements OnInit {
           );
 
           this._notifyService.sendNotifyEmailPOST(l, t).subscribe((resp: any) => {
-            ////console.log('email enviado', resp);
+            //////// console.log('email enviado', resp);
           // return;
           // this.GlobalConfigService.spinner = false;
         }, err => {
-          // ////console.log('email error');
+          // //////// console.log('email error');
         });
 
         resolve(true);

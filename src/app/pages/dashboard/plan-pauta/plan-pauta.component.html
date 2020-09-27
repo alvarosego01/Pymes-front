@@ -281,15 +281,25 @@ class="container">
 
             <div class="form-check">
                 <input
-                required ngModel #redesPublico="ngModel"
-                value="Facebook" class="form-check-input" type="radio" required name="redesPublico" #redesPublico="ngModel">
+                required ngModel #redesPublico="ngModel" id="faceRadio"
+                value="Facebook" class="form-check-input customInput" type="radio" required name="redesPublico" #redesPublico="ngModel">
+                    <label for="faceRadio" class="labelRadio">
+            <i  class="true far fa-check-square"></i>
+            <i  class="false far fa-square"></i>
+          </label>
+
                 <label class="form-check-label">Facebook</label>
               </div>
 
               <div class="form-check">
                 <input
-                required ngModel #redesPublico="ngModel"
-                value="Instagram" class="form-check-input" type="radio" required name="redesPublico" #redesPublico="ngModel" >
+                required ngModel #redesPublico="ngModel" id="instaRadio"
+                value="Instagram" class="form-check-input customInput" type="radio" required name="redesPublico" #redesPublico="ngModel" >
+                      <label for="instaRadio" class="labelRadio">
+            <i  class="true far fa-check-square"></i>
+            <i  class="false far fa-square"></i>
+          </label>
+
                 <label class="form-check-label">Instagram</label>
               </div>
 
@@ -446,9 +456,15 @@ class="container">
           *ngFor="let option of this.generoObj; let i = index"
           class="form-check">
           <input
-          [(ngModel)]="this.generoObj[i].checked"
+          [(ngModel)]="this.generoObj[i].checked" [id]="'radio1'+i+1"
           [required]="this._formsResource.minSelectCheckBox(1, this.generoObj)"
-            [value]="option.value" class="form-check-input" type="checkbox" name="generoObj" >
+            [value]="option.value" class="form-check-input customInput" type="checkbox" name="generoObj" >
+
+            <label [for]="'radio1'+i+1" class="labelRadio">
+              <i  class="true far fa-check-square"></i>
+              <i  class="false far fa-square"></i>
+            </label>
+
             <label class="form-check-label">
               {{option.name}}
             </label>
@@ -471,9 +487,16 @@ class="container">
           *ngFor="let option of this.edadesObj; let i = index"
           class="form-check">
             <input
-            [(ngModel)]="this.edadesObj[i].checked"
+            [(ngModel)]="this.edadesObj[i].checked" [id]="'radio2'+i+1"
             [required]="this._formsResource.minSelectCheckBox(1, this.edadesObj)"
-            [value]="option.value" class="form-check-input" type="checkbox" name="edadesObj" >
+            [value]="option.value" class="form-check-input customInput" type="checkbox" name="edadesObj" >
+
+            <label [for]="'radio2'+i+1" class="labelRadio">
+              <i  class="true far fa-check-square"></i>
+              <i  class="false far fa-square"></i>
+            </label>
+
+
             <label class="form-check-label">
               {{option.name}}
             </label>
@@ -496,9 +519,16 @@ class="container">
           *ngFor="let option of this.estadoCivilObj; let i = index"
           class="form-check">
             <input
-            [(ngModel)]="this.estadoCivilObj[i].checked"
+            [(ngModel)]="this.estadoCivilObj[i].checked" [id]="'radio3'+i+1"
             [required]="this._formsResource.minSelectCheckBox(1, this.estadoCivilObj)"
-            [value]="option.value" class="form-check-input" type="checkbox" name="estadoCivilObj" >
+            [value]="option.value" class="form-check-input customInput" type="checkbox" name="estadoCivilObj" >
+
+            <label [for]="'radio3'+i+1" class="labelRadio">
+              <i  class="true far fa-check-square"></i>
+              <i  class="false far fa-square"></i>
+            </label>
+
+
             <label class="form-check-label">
               {{option.name}}
             </label>
@@ -786,9 +816,17 @@ class="container">
           *ngFor="let option of this.generoObj; let i = index"
           class="form-check">
           <input
-          [(ngModel)]="this.generoObj[i].checked"
+          [(ngModel)]="this.generoObj[i].checked" [id]="'radio1'+i+1"
           [required]="this._formsResource.minSelectCheckBox(1, this.generoObj)"
-            [value]="option.value" class="form-check-input" type="checkbox" name="generoObj" >
+            [value]="option.value" class="form-check-input customInput" type="checkbox" name="generoObj" >
+
+            <label [for]="'radio1'+i+1" class="labelRadio">
+              <i  class="true far fa-check-square"></i>
+              <i  class="false far fa-square"></i>
+            </label>
+
+
+
             <label class="form-check-label">
               {{option.name}}
             </label>
@@ -811,9 +849,16 @@ class="container">
           *ngFor="let option of this.edadesObj; let i = index"
           class="form-check">
             <input
-            [(ngModel)]="this.edadesObj[i].checked"
+            [(ngModel)]="this.edadesObj[i].checked" [id]="'radio2'+i+1"
             [required]="this._formsResource.minSelectCheckBox(1, this.edadesObj)"
-            [value]="option.value" class="form-check-input" type="checkbox" name="edadesObj" >
+            [value]="option.value" class="form-check-input customInput" type="checkbox" name="edadesObj" >
+
+            <label [for]="'radio2'+i+1" class="labelRadio">
+              <i  class="true far fa-check-square"></i>
+              <i  class="false far fa-square"></i>
+            </label>
+
+
             <label class="form-check-label">
               {{option.name}}
             </label>
@@ -836,9 +881,16 @@ class="container">
           *ngFor="let option of this.estadoCivilObj; let i = index"
           class="form-check">
             <input
-            [(ngModel)]="this.estadoCivilObj[i].checked"
+            [(ngModel)]="this.estadoCivilObj[i].checked" [id]="'radio3'+i+1"
             [required]="this._formsResource.minSelectCheckBox(1, this.estadoCivilObj)"
-            [value]="option.value" class="form-check-input" type="checkbox" name="estadoCivilObj" >
+            [value]="option.value" class="form-check-input customInput" type="checkbox" name="estadoCivilObj" >
+
+            <label [for]="'radio3'+i+1" class="labelRadio">
+              <i  class="true far fa-check-square"></i>
+              <i  class="false far fa-square"></i>
+            </label>
+
+
             <label class="form-check-label">
               {{option.name}}
             </label>
@@ -1126,9 +1178,15 @@ class="container">
                           *ngFor="let option of this.generoObj; let i = index"
                           class="form-check">
                           <input
-                          [(ngModel)]="this.generoObj[i].checked"
+                          [(ngModel)]="this.generoObj[i].checked" [id]="'radio1'+i+1"
                           [required]="this._formsResource.minSelectCheckBox(1, this.generoObj)"
-                            [value]="option.value" class="form-check-input" type="checkbox" name="generoObj" >
+                            [value]="option.value" class="form-check-input customInput" type="checkbox" name="generoObj" >
+
+                            <label [for]="'radio1'+i+1" class="labelRadio">
+                              <i  class="true far fa-check-square"></i>
+                              <i  class="false far fa-square"></i>
+                            </label>
+
                             <label class="form-check-label">
                               {{option.name}}
                             </label>
@@ -1151,9 +1209,15 @@ class="container">
                           *ngFor="let option of this.edadesObj; let i = index"
                           class="form-check">
                             <input
-                            [(ngModel)]="this.edadesObj[i].checked"
+                            [(ngModel)]="this.edadesObj[i].checked" [id]="'radio2'+i+1"
                             [required]="this._formsResource.minSelectCheckBox(1, this.edadesObj)"
-                            [value]="option.value" class="form-check-input" type="checkbox" name="edadesObj" >
+                            [value]="option.value" class="form-check-input customInput" type="checkbox" name="edadesObj" >
+
+                            <label [for]="'radio2'+i+1" class="labelRadio">
+                              <i  class="true far fa-check-square"></i>
+                              <i  class="false far fa-square"></i>
+                            </label>
+
                             <label class="form-check-label">
                               {{option.name}}
                             </label>
@@ -1176,9 +1240,15 @@ class="container">
                           *ngFor="let option of this.estadoCivilObj; let i = index"
                           class="form-check">
                             <input
-                            [(ngModel)]="this.estadoCivilObj[i].checked"
+                            [(ngModel)]="this.estadoCivilObj[i].checked" [id]="'radio3'+i+1"
                             [required]="this._formsResource.minSelectCheckBox(1, this.estadoCivilObj)"
-                            [value]="option.value" class="form-check-input" type="checkbox" name="estadoCivilObj" >
+                            [value]="option.value" class="form-check-input customInput" type="checkbox" name="estadoCivilObj" >
+
+                            <label [for]="'radio3'+i+1" class="labelRadio">
+                              <i  class="true far fa-check-square"></i>
+                              <i  class="false far fa-square"></i>
+                            </label>
+
                             <label class="form-check-label">
                               {{option.name}}
                             </label>
@@ -1491,9 +1561,16 @@ class="container">
                           *ngFor="let option of this.generoObj; let i = index"
                           class="form-check">
                           <input
-                          [(ngModel)]="this.generoObj[i].checked"
+                          [(ngModel)]="this.generoObj[i].checked"  [id]="'radio1'+i+1"
                           [required]="this._formsResource.minSelectCheckBox(1, this.generoObj)"
-                            [value]="option.value" class="form-check-input" type="checkbox" name="generoObj" >
+                            [value]="option.value" class="form-check-input customInput" type="checkbox" name="generoObj" >
+
+                                 <label [for]="'radio1'+i+1" class="labelRadio">
+                              <i  class="true far fa-check-square"></i>
+                              <i  class="false far fa-square"></i>
+                            </label>
+
+
                             <label class="form-check-label">
                               {{option.name}}
                             </label>
@@ -1516,9 +1593,16 @@ class="container">
                           *ngFor="let option of this.edadesObj; let i = index"
                           class="form-check">
                             <input
-                            [(ngModel)]="this.edadesObj[i].checked"
+                            [(ngModel)]="this.edadesObj[i].checked" [id]="'radio2'+i+1"
                             [required]="this._formsResource.minSelectCheckBox(1, this.edadesObj)"
-                            [value]="option.value" class="form-check-input" type="checkbox" name="edadesObj" >
+                            [value]="option.value" class="form-check-input customInput" type="checkbox" name="edadesObj" >
+
+                                 <label [for]="'radio2'+i+1" class="labelRadio">
+                              <i  class="true far fa-check-square"></i>
+                              <i  class="false far fa-square"></i>
+                            </label>
+
+
                             <label class="form-check-label">
                               {{option.name}}
                             </label>
@@ -1541,9 +1625,16 @@ class="container">
                           *ngFor="let option of this.estadoCivilObj; let i = index"
                           class="form-check">
                             <input
-                            [(ngModel)]="this.estadoCivilObj[i].checked"
+                            [(ngModel)]="this.estadoCivilObj[i].checked"   [id]="'radio3'+i+1"
                             [required]="this._formsResource.minSelectCheckBox(1, this.estadoCivilObj)"
-                            [value]="option.value" class="form-check-input" type="checkbox" name="estadoCivilObj" >
+                            [value]="option.value" class="form-check-input customInput" type="checkbox" name="estadoCivilObj" >
+
+                                 <label [for]="'radio3'+i+1" class="labelRadio">
+                              <i  class="true far fa-check-square"></i>
+                              <i  class="false far fa-square"></i>
+                            </label>
+
+
                             <label class="form-check-label">
                               {{option.name}}
                             </label>

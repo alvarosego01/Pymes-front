@@ -8,7 +8,7 @@ export class StringLimitPipe implements PipeTransform {
     const biggestWord = 50;
     const elipses = "...";
 
-    // ////////////console.log('value', value);
+    // //// console.log('value', value);
     if (value === "undefined" || value === null || value == '') {
       return "Sin descripción";
     }

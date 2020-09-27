@@ -1,286 +1,259 @@
+<div class="containerFull">
 
 
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+
+        <div class="col-sm-6">
+          <h1>
+            Lista de facturas
 
 
-<div class="containerFull" >
-
-
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-
-          <div class="col-sm-6">
-            <h1>
-                Lista de facturas
-
-
-            </h1>
-          </div>
+          </h1>
+        </div>
 
       </div><!-- /.container-fluid -->
-      </div><!-- /.container-fluid -->
-    </section>
+    </div><!-- /.container-fluid -->
+  </section>
 
 
-      <!-- Main content -->
-      <section class="content">
+  <!-- Main content -->
+  <section class="content">
 
-        <div
-        *ngIf="(this.registros) && (this.registros.length > 0)"
-        class="card card-primary card-outline">
+    <div *ngIf="(this.registros) && (this.registros.length > 0)" class="card card-primary card-outline">
 
-            <!-- /.card-header -->
-            <div class="card-body p-0">
+      <!-- /.card-header -->
+      <div class="card-body p-0">
 
-              <div class="table-responsive mailbox-messages">
+        <div class="table-responsive mailbox-messages">
 
-                <table class="table table-hover table-striped">
+          <table class="table table-hover table-striped">
 
-                    <thead>
-                          <tr>
-                            <th>
-                              Estado
-                            </th>
-                              <th >
-                                Detalle
-                              </th>
-                              <th >
-                                Costo
-                              </th>
-                              <th >
-                                Fecha de orden
-                              </th>
+            <thead>
+              <tr>
+                <th>
+                  Estado
+                </th>
+                <th>
+                  Detalle
+                </th>
+                <th>
+                  Costo
+                </th>
+                <th>
+                  Fecha de orden
+                </th>
 
-                              <th>
-                                Opción
-                              </th>
+                <th>
+                  Opción
+                </th>
 
-                          </tr>
-                      </thead>
+              </tr>
+            </thead>
 
-                    <tbody>
+            <tbody>
 
 
 
-                    <tr
-                    *ngFor="let item of this.registros" >
+              <tr *ngFor="let item of this.registros">
 
 
-                    <td
-                    *ngIf="item.process.payProcess != 'onProcess'"
-                    [ngClass]="{
+                <td *ngIf="item.process.payProcess != 'onProcess'" [ngClass]="{
                       'colorSuccess': ( this._paymentService.getStatusEpayco( item.process.status ) == 1 ),
                       'colorWarning': ( this._paymentService.getStatusEpayco( item.process.status ) == 2 ),
                       'colorRed': ( this._paymentService.getStatusEpayco( item.process.status ) == 3 )
-                    }"
-                    >
-                      {{ item.process.status }}
-                    </td>
+                    }">
+                  {{ item.process.status }}
+                </td>
 
-                    <td
-                    *ngIf="item.process.payProcess == 'onProcess'"
-                    >
-                      Sin tramitar
-                    </td>
+                <td *ngIf="item.process.payProcess == 'onProcess'">
+                  Sin tramitar
+                </td>
 
-                      <td>
+                <td>
 
-                        <span>
-                        Plan {{ item.description[0].plan }} - Publicación: {{item.post.title}}
-                        </span>
-                        <br>
-                        <span
-                        *ngIf="item.description[1]"
-                        >
-                          Plan {{ item.description[1].plan }}
-                        </span>
+                  <span>
+                    Plan {{ item.description[0].plan }} - Publicación: {{item.post.title}}
+                  </span>
+                  <br>
+                  <span *ngIf="item.description[1]">
+                    Plan {{ item.description[1].plan }}
+                  </span>
 
-                      </td>
+                </td>
 
-                      <td>
-                        {{ item.price | currencyLocale }}
-                      </td>
+                <td>
+                  {{ item.price | currencyLocale }}
+                </td>
 
 
-                      <td>
-                        Creado: {{ item.created_at }} <br>
-                        <!-- <span
+                <td>
+                  Creado: {{ item.created_at }} <br>
+                  <!-- <span
                         *ngIf="item.process.datePay != null"
                         >Tran {{item.process.datePay}} </span> -->
-                      </td>
+                </td>
 
-                      <td class=" py-0 align-middle">
-                        <div class="btn-group btn-group-sm">
-                          <button
-                          type="button"
-                          [routerLink]="['/dashboard/paymentProcess/', item._id ]"
-                          class="btn btn-info"><i class="fas fa-eye"></i>
-                          Ver factura
-                        </button>
+                <td>
+                  <div class="row formButtons">
+                    <button type="button" [routerLink]="['/dashboard/paymentProcess/', item._id ]"
+                      class="buttonCustom btn btn-success btn-flat">
+                      <i class="fas fa-eye"></i>
+                      Ver factura
+                    </button>
 
-                        </div>
-
-                      </td>
+                  </div>
 
 
-                    </tr>
 
-                      </tbody>
+                </td>
 
-                </table>
 
-              </div>
+              </tr>
 
-            </div>
+            </tbody>
+
+          </table>
 
         </div>
 
-        <app-global-paginator
-        *ngIf="( this.registrosPaginator != null ) && ( this.registrosPaginator.pageCount > 1 )"
-        [paginator]="this.registrosPaginator"
-        (newPageResponse)="this.newPageResponseRegistros($event)"
-        >
+      </div>
 
-        </app-global-paginator>
+    </div>
+
+    <app-global-paginator *ngIf="( this.registrosPaginator != null ) && ( this.registrosPaginator.pageCount > 1 )"
+      [paginator]="this.registrosPaginator" (newPageResponse)="this.newPageResponseRegistros($event)">
+
+    </app-global-paginator>
 
 
-  <div class="jumbotron" *ngIf="(this.registros == null) || (this.registros.length == 0)">
-          <h1 class="titleSpecial2">Sin facturas</h1>
-          <p>En este momento</p>
+    <div class="jumbotron" *ngIf="(this.registros == null) || (this.registros.length == 0)">
+      <h1 class="titleSpecial2">Sin facturas</h1>
+      <p>En este momento</p>
+    </div>
+
+  </section>
+
+
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+
+        <div class="col-sm-6">
+          <h1>
+            Lista de ordenes de plan de pauta
+
+
+          </h1>
         </div>
 
-      </section>
+      </div><!-- /.container-fluid -->
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <div *ngIf="(this.boosts) && (this.boosts.length > 0)" class="card card-primary card-outline">
+
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+
+      <div class="table-responsive mailbox-messages">
+
+        <table class="table table-hover table-striped">
+
+          <thead>
+            <tr>
+              <th>
+                Estado
+              </th>
+              <th>
+                Detalle
+              </th>
+              <th>
+                Costo
+              </th>
+              <th>
+                Fechas del plan
+              </th>
+
+              <th>
+                Opción
+              </th>
+
+            </tr>
+          </thead>
+
+          <tbody>
 
 
-      <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-
-            <div class="col-sm-6">
-              <h1>
-                  Lista de ordenes de plan de pauta
+            <tr *ngFor="let item of this.boosts">
 
 
-              </h1>
-            </div>
-
-        </div><!-- /.container-fluid -->
-        </div><!-- /.container-fluid -->
-      </section>
-
-        <div
-        *ngIf="(this.boosts) && (this.boosts.length > 0)"
-        class="card card-primary card-outline">
-
-            <!-- /.card-header -->
-            <div class="card-body p-0">
-
-              <div class="table-responsive mailbox-messages">
-
-                <table class="table table-hover table-striped">
-
-                    <thead>
-                        <tr>
-                            <th>
-                              Estado
-                            </th>
-                              <th >
-                                Detalle
-                              </th>
-                              <th >
-                                Costo
-                              </th>
-                              <th >
-                                Fechas del plan
-                              </th>
-
-                              <th>
-                                Opción
-                              </th>
-
-                          </tr>
-                    </thead>
-
-                    <tbody>
-
-
-                    <tr
-                    *ngFor="let item of this.boosts" >
-
-
-                        <td
-                        [ngClass]="{
+              <td [ngClass]="{
                           'colorSuccess': item.status == true ,
                           'colorRed': item.status == false
-                        }"
-                        >
-                            <span
-                            *ngIf="item.status == true"
-                            >
-                            Activo
-                            </span>
-                            <span
-                            *ngIf="item.status == false"
-                            >
-                            Inactivo
-                            </span>
-                        </td>
+                        }">
+                <span *ngIf="item.status == true">
+                  Activo - {{ item.process | statusTransform }}
+                </span>
+                <span *ngIf="item.status == false">
+                  Inactivo - {{ item.process | statusTransform }}
+                </span>
+              </td>
 
-                      <td>
+              <td>
 
-                        Plan de pauta {{ item.name }} - Publicación: {{item.postRef.title}}
+                Plan de pauta {{ item.name }} - Publicación: {{item.postRef.title}}
 
-                      </td>
+              </td>
 
-                      <td>
-                        {{ item.price | currencyLocale }}
-                      </td>
+              <td>
+                {{ item.price | currencyLocale }}
+              </td>
 
 
-                      <td>
-                        Inicio: {{ item.daysReamming.inicio }} <br>
-                        Finalización: {{ item.daysReamming.finalizacion }}
+              <td>
+                Inicio: {{ item.daysReamming.inicio }} <br>
+                Finalización: {{ item.daysReamming.finalizacion }}
 
-                      </td>
+              </td>
 
-                      <td class=" py-0 align-middle">
-                        <div class="btn-group btn-group-sm">
-                          <button
-                          type="button"
-                          [routerLink]="['/dashboard/infoPauta/', item._id ]"
-                          class="btn btn-info"><i class="fas fa-eye"></i>
-                          Ver orden
-                        </button>
+              <td>
+                <div class="row formButtons">
+                  <button type="button" [routerLink]="['/dashboard/infoPauta/', item._id ]"
+                    class="buttonCustom btn btn-success btn-flat">
+                    <i class="fas fa-eye"></i>
+                    Ver orden
+                  </button>
 
-                        </div>
-
-                      </td>
-
-
-                    </tr>
-
-                    </tbody>
-
-                </table>
-            </div>
-            </div>
-        </div>
-
-        <app-global-paginator
-        *ngIf="( this.boostsPaginator != null ) && ( this.boostsPaginator.pageCount > 1 )"
-        [paginator]="this.boostsPaginator"
-        (newPageResponse)="this.newPageResponseBoost($event)"
-        >
-
-        </app-global-paginator>
-
-
-        <div class="jumbotron" *ngIf="(this.boosts == null) || (this.boosts.length == 0)">
-            <h1 class="titleSpecial2">Sin ordenes de plan de pauta</h1>
-            <p>En este momento</p>
-          </div>
+                </div>
 
 
 
+
+              </td>
+
+
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+    </div>
   </div>
 
+  <app-global-paginator *ngIf="( this.boostsPaginator != null ) && ( this.boostsPaginator.pageCount > 1 )"
+    [paginator]="this.boostsPaginator" (newPageResponse)="this.newPageResponseBoost($event)">
+
+  </app-global-paginator>
+
+
+  <div class="jumbotron" *ngIf="(this.boosts == null) || (this.boosts.length == 0)">
+    <h1 class="titleSpecial2">Sin ordenes de plan de pauta</h1>
+    <p>En este momento</p>
+  </div>
+
+
+
+</div>

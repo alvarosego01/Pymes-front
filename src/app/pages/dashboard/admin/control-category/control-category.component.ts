@@ -52,13 +52,13 @@ export class ControlCategoryComponent implements OnInit {
           icon: "success",
         });
 
-        // ////////////console.log('alguna respuesta', resp)
+        // //// console.log('alguna respuesta', resp)
         this.newCategoryData.type = null;
         this.newCategoryData.name = null;
         this.getCategory();
         // this.getAllPublications();
-      // //////////////console.log(this.allPublications);
-      ////// //////////////console.log(this.allPublications);
+      // ////// console.log(this.allPublications);
+      ////// ////// console.log(this.allPublications);
     }, (err) => {
       console.error(err);
       this.GlobalConfigService.spinner = false;
@@ -82,8 +82,8 @@ export class ControlCategoryComponent implements OnInit {
         this.newCategoryData.type = null;
         this.newCategoryData.name = null;
         this.getCategory();
-      // //////////////console.log(this.allPublications);
-      ////// //////////////console.log(this.allPublications);
+      // ////// console.log(this.allPublications);
+      ////// ////// console.log(this.allPublications);
     }, (err) => {
       console.error(err);
       this.GlobalConfigService.spinner = false;
@@ -105,7 +105,7 @@ export class ControlCategoryComponent implements OnInit {
       l.forEach((element, i) => {
 
       if (i === l.length - 1){
-        // ////////////console.log("Last callback call at index " + idx + " with value " + i );
+        // //// console.log("Last callback call at index " + idx + " with value " + i );
         c+= `"${element._id}":"${element._category}"`
     }else{
       c+= `"${element._id}":"${element._category}",`
@@ -119,7 +119,7 @@ export class ControlCategoryComponent implements OnInit {
     c +=
     `{"New": "Nueva categoria principal"}`;
   }
-    // ////////////console.log(c);
+    // //// console.log(c);
     return JSON.parse(c);
     // return c;
   }
@@ -175,7 +175,7 @@ export class ControlCategoryComponent implements OnInit {
         if(r.value){
 
           this.newCategoryData.name = r.value;
-        ////////////console.log(this.newCategoryData);
+        //// console.log(this.newCategoryData);
 
         this.newCategory(this.newCategoryData);
 
@@ -218,7 +218,7 @@ export class ControlCategoryComponent implements OnInit {
       if(r.value){
 
         // this.newCategoryData.name = r.value;
-      // ////////////console.log(this.newCategoryData);
+      // //// console.log(this.newCategoryData);
         var l = {
           _id: id,
           idx: idx,
@@ -226,7 +226,7 @@ export class ControlCategoryComponent implements OnInit {
           change: r.value
         }
 
-        ////////////console.log('cambio sub', l);
+        //// console.log('cambio sub', l);
       this.editCategory(l);
 
     }
@@ -277,7 +277,7 @@ export class ControlCategoryComponent implements OnInit {
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
       });
 
-      //////////console.log('LOS POSTS', this.posts);
+      // console.log('LOS POSTS', this.posts);
 
     }, (err) => {
 
@@ -308,7 +308,7 @@ export class ControlCategoryComponent implements OnInit {
 
       // this.posts = resp.data;
 
-      // ////////////console.log(this.posts);
+      // //// console.log(this.posts);
       this._notifyService.Toast.fire({
         title: resp.message,
         // text:'El navegador no soporta la geolocalización',

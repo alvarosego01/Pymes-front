@@ -1,142 +1,133 @@
-
-
-
-  <div class="container centralRegister">
-
-
-
-
-    <!-- [exclude]="'#navDashboard,#navBar,#LoginComponent,a.hiperButton'" -->
-
-    <app-publication-preview
-    *ngIf="this.previewPublication == true && this.previewData != null"
-    [previewPublication]="this.previewPublication || false"
-    [previewData]="this.previewData || null"
-    (closePreviewPublication)="this.closePreview()"
-    (accion)="this.accion($event)"
-    ></app-publication-preview>
+<div class="container centralRegister">
 
 
 
 
-<app-plan-pauta
-*ngIf="this.openPlanesPauta == true"
+  <!-- [exclude]="'#navDashboard,#navBar,#LoginComponent,a.hiperButton'" -->
 
-[openPlanesPauta]="this.openPlanesPauta"
-[typePurchase]="'new'"
-
-(infoPlanPauta)="this.addPlanPauta($event)"
-(closePlanes)="this.cerrarModal()"
-></app-plan-pauta>
+  <app-publication-preview *ngIf="this.previewPublication == true && this.previewData != null"
+    [previewPublication]="this.previewPublication || false" [previewData]="this.previewData || null"
+    (closePreviewPublication)="this.closePreview()" (accion)="this.accion($event)"></app-publication-preview>
 
 
 
+
+  <app-plan-pauta *ngIf="this.openPlanesPauta == true" [openPlanesPauta]="this.openPlanesPauta" [typePurchase]="'new'"
+    (infoPlanPauta)="this.addPlanPauta($event)" (closePlanes)="this.cerrarModal()"></app-plan-pauta>
+
+
+  <app-loading *ngIf="this.GlobalConfigService.porcentaje > 0" [porcentaje]="this.GlobalConfigService.porcentaje">
+
+  </app-loading>
 
   <div class="row">
 
 
 
 
-<div class="animated fadeIn fast card card-primary card-outline card-tabs">
+    <div class="animated fadeIn fast card card-primary card-outline card-tabs">
 
 
-<div class="card-body">
+      <div class="card-body">
 
 
-        <form
-        ngNativeValidate
-        #f="ngForm"
-        (ngSubmit)="sendPreview( f )"
-        class="formDataSend" action="">
+        <form ngNativeValidate #f="ngForm" (ngSubmit)="sendPreview( f )" class="formDataSend" action="">
 
 
 
-      <div
-       class="titleOpc">
+          <div class="titleOpc">
 
-       <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-        ¿Qué plan quieres comprar?
-       </h4>
+            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+              ¿Qué plan quieres comprar?
+            </h4>
 
-       <div class="form-group clearfix">
-         <h6 >
-           Si quieres tener un mayor alcance adquiere un plan de pauta <a style="font-weight: normal;" class="hiperButton" (click)="this.openPlanes()"> ¡AQUÍ!</a>
-         </h6>
+            <div class="form-group clearfix">
+              <h6>
+                Si quieres tener un mayor alcance adquiere un plan de pauta <a style="font-weight: normal;"
+                  class="hiperButton" (click)="this.openPlanes()"> ¡AQUÍ!</a>
+              </h6>
 
-       </div>
-       </div>
+            </div>
+          </div>
 
-     <hr>
+          <hr>
 
-    <div class="row">
+          <div class="row">
 
-      <div class="form-group clearfix  col-12">
+            <div class="form-group clearfix  col-12">
 
-        <div class="form-check">
-          <input
-          required ngModel #costoPlan="ngModel"
-          value="semestral" class="form-check-input" type="radio" required name="costoPlan" #costoPlan="ngModel">
-          <label class="form-check-label">Plan Semestral por $95.000</label>
-        </div>
-        <div class="form-check">
-          <input
-          required ngModel #costoPlan="ngModel"
-          value="anual" class="form-check-input" type="radio" required name="costoPlan" #costoPlan="ngModel" >
-          <label class="form-check-label">Plan Anual por $145.000</label>
-        </div>
-
-
-
-        <div class="errorSpace" *ngIf="( this.enviado == true && costoPlan.invalid ) || (costoPlan.invalid && (costoPlan.dirty || costoPlan.touched))" >
-          <small *ngIf="costoPlan.errors.required">
-            Esta opción es obligatoria
-          </small>
-
-        </div>
+              <div class="form-check">
+                <input required ngModel #costoPlan="ngModel" id="radio1" value="semestral" class="form-check-input customInput"
+                  type="radio" required name="costoPlan" #costoPlan="ngModel">
+                <label for="radio1" class="labelRadio">
+                  <i class="true far fa-check-square"></i>
+                  <i class="false far fa-square"></i>
+                </label>
+                <label class="form-check-label">Plan Semestral por $95.000</label>
+              </div>
+              <div class="form-check">
+                <input required ngModel #costoPlan="ngModel" id="radio2" value="anual" class="form-check-input customInput"
+                  type="radio" required name="costoPlan" #costoPlan="ngModel">
+                <label for="radio2" class="labelRadio">
+                  <i class="true far fa-check-square"></i>
+                  <i class="false far fa-square"></i>
+                </label>
+                <label class="form-check-label">Plan Anual por $145.000</label>
+              </div>
 
 
 
-        <div
-        *ngIf="(this.infoPlanPauta != null)"
-        class="infoPlanPauta">
+              <div class="errorSpace"
+                *ngIf="( this.enviado == true && costoPlan.invalid ) || (costoPlan.invalid && (costoPlan.dirty || costoPlan.touched))">
+                <small *ngIf="costoPlan.errors.required">
+                  Esta opción es obligatoria
+                </small>
 
-          <H5
-          style="font-weight: bold;"
-          >
-          <i class="fas fa-shopping-bag resalte    "></i>
-          Has seleccionado el plan de pauta <a  (click)="this.openPlanes()" class="hiperButton">{{ this.infoPlanPauta.plan.planPauta.nombre }}</a>, con un coste de <a  (click)="this.openPlanes()" class="hiperButton">{{ this.infoPlanPauta.plan.planPauta.costo | currencyLocale }}  </a>
-          <a class="colorRed" (click)="this.removePlanPauta()" >
-            <i class="fa fa-times" aria-hidden="true"></i>
-            Eliminar
-            </a>
-          </H5>
-
-        </div>
+              </div>
 
 
-      </div>
+
+              <div *ngIf="(this.infoPlanPauta != null)" class="infoPlanPauta">
+
+                <H5 style="font-weight: bold;">
+                  <i class="fas fa-shopping-bag resalte    "></i>
+                  Has seleccionado el plan de pauta <a (click)="this.openPlanes()"
+                    class="hiperButton">{{ this.infoPlanPauta.plan.planPauta.nombre }}</a>, con un coste de <a
+                    (click)="this.openPlanes()"
+                    class="hiperButton">{{ this.infoPlanPauta.plan.planPauta.costo | currencyLocale }} </a>
+                  <a class="colorRed" (click)="this.removePlanPauta()">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                    Eliminar
+                  </a>
+                </H5>
+
+              </div>
 
 
-    </div>
+            </div>
 
-        <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-          Crea una publicación
-      </h4>
-      <hr>
 
-            <div class="row">
-                 <div class="form-group clearfix col-md-12 col-lg-12">
-                  <label for="Title">Indica tu producto o servicio <span class="colorRed">(*)</span></label>
-                <div class="input-group">
+          </div>
+
+          <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+            Crea una publicación
+          </h4>
+          <hr>
+
+          <div class="row">
+            <div class="form-group clearfix col-md-12 col-lg-12">
+              <label for="Title">Indica tu producto o servicio <span class="colorRed">(*)</span></label>
+              <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
                     <i class="fa fa-tag" aria-hidden="true"></i>
-                    </span>
+                  </span>
                 </div>
-                <input  required ngModel name="Title" #Title="ngModel" type="text" class="form-control" >
+                <input required ngModel name="Title" #Title="ngModel" type="text" class="form-control">
               </div>
 
-              <div class="errorSpace" *ngIf="( this.enviado == true && Title.invalid ) || (Title.invalid && (Title.dirty || Title.touched))" >
+              <div class="errorSpace"
+                *ngIf="( this.enviado == true && Title.invalid ) || (Title.invalid && (Title.dirty || Title.touched))">
                 <small *ngIf="Title.errors.required">
                   Este campo es obligatorio
                 </small>
@@ -144,120 +135,134 @@
               </div>
 
 
-              </div>
             </div>
+          </div>
 
-            <div class="rowOptions">
+          <div class="rowOptions">
 
-              <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-                Datos de contacto en tu publicación
-              </h4>
-              <hr>
-            </div>
+            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+              Datos de contacto en tu publicación
+            </h4>
+            <hr>
+          </div>
 
-            <div class="row">
-              <div class="form-group clearfix col-md-12 col-lg-4">
-                <label for="Phone">Teléfono <span class="colorRed">(*)</span></label>
+          <div class="row">
+            <div class="form-group clearfix col-md-12 col-lg-4">
+              <label for="Phone">Teléfono </label>
               <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="fa fa-phone" aria-hidden="true"></i>
-                      </span>
-                  </div>
-                  <input  [imask]="this._formsResource.phoneMask()"  [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngPhone" required  name="Phone" #Phone="ngModel" type="tel" class="form-control" >
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                  </span>
                 </div>
+                <input [imask]="this._formsResource.phoneMask()" [disabled]="this.autoDataContact == true"
+                  [(ngModel)]="this.ngPhone" name="Phone" #Phone="ngModel" type="tel" class="form-control">
+              </div>
 
-                <div class="errorSpace" *ngIf="( this.enviado == true && Phone.invalid ) || (Phone.invalid && (Phone.dirty || Phone.touched))" >
-                  <small *ngIf="Phone.errors.required">
-                    Este campo es obligatorio
-                  </small>
+              <div class="errorSpace"
+                *ngIf="( this.enviado == true && Phone.invalid ) || (Phone.invalid && (Phone.dirty || Phone.touched))">
+                <small *ngIf="Phone.errors.required">
+                  Este campo es obligatorio
+                </small>
 
-                </div>
+              </div>
 
             </div>
 
             <div class="form-group clearfix col-md-12 col-lg-4">
               <label for="celPhone">Teléfono celular <span class="colorRed">(*)</span></label>
-            <div class="input-group">
+              <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
                     <i class="fas fa-mobile-alt"></i>
-                    </span>
+                  </span>
                 </div>
-                <input required [imask]="this._formsResource.phoneMask()" [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngcelPhone"   name="celPhone" #celPhone="ngModel" type="tel" class="form-control" >
+                <input required [imask]="this._formsResource.phoneMask()" [disabled]="this.autoDataContact == true"
+                  [(ngModel)]="this.ngcelPhone" name="celPhone" #celPhone="ngModel" type="tel" class="form-control">
               </div>
 
-              <div class="errorSpace" *ngIf="( this.enviado == true && celPhone.invalid ) || (celPhone.invalid && (celPhone.dirty || celPhone.touched))" >
+              <div class="errorSpace"
+                *ngIf="( this.enviado == true && celPhone.invalid ) || (celPhone.invalid && (celPhone.dirty || celPhone.touched))">
                 <small *ngIf="celPhone.errors.required">
                   Este campo es obligatorio
                 </small>
 
               </div>
-          </div>
+            </div>
 
-          <div class="form-group clearfix col-md-12 col-lg-4">
-            <label for="Email">Email <span class="colorRed">(*)</span></label>
-          <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
+            <div class="form-group clearfix col-md-12 col-lg-4">
+              <label for="Email">Email <span class="colorRed">(*)</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
                     <i class="fas fa-envelope"></i>
                   </span>
+                </div>
+                <input required name="Email" #Email="ngModel" type="email" class="form-control"
+                  [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngEmail">
               </div>
-              <input   required  name="Email" #Email="ngModel" type="email" class="form-control" [disabled]="this.autoDataContact == true" [(ngModel)]="this.ngEmail" >
-          </div>
 
-          <div class="errorSpace" *ngIf="( this.enviado == true && Email.invalid ) || (Email.invalid && (Email.dirty || Email.touched))" >
-            <small *ngIf="Email.errors.required">
-              Este campo es obligatorio
-            </small>
+              <div class="errorSpace"
+                *ngIf="( this.enviado == true && Email.invalid ) || (Email.invalid && (Email.dirty || Email.touched))">
+                <small *ngIf="Email.errors.required">
+                  Este campo es obligatorio
+                </small>
 
-          </div>
-
-          </div>
-
-
-            </div>
-
-
-
-            <div class="form-group clearfix">
-              <div class="icheck-success">
-
-                <label for="usarMismosDatos">
-                  <input [(ngModel)]="this.autoDataContact" (click)="activateDataUser($event)"  type="checkbox" id="usarMismosDatos">
-                  ¿Deseas editar tus  datos de contacto para esta publicación?
-                </label>
               </div>
 
             </div>
+
+
+          </div>
+
+
+
+          <div class="form-group clearfix">
+            <div class="icheck-success">
+              <input class="customInput" [(ngModel)]="this.autoDataContact" (click)="activateDataUser($event)" type="checkbox"
+                id="usarMismosDatos">
+
+              <label for="usarMismosDatos" class="labelRadio">
+                <i class="true far fa-check-square"></i>
+                <i class="false far fa-square"></i>
+              </label>
+
+
+              <label for="usarMismosDatos">
+                ¿Deseas editar tus datos de contacto para esta publicación?
+              </label>
+            </div>
+
+          </div>
 
 
           <div class="row">
 
 
-              <div class="form-group clearfix col-md-12 col-lg-6">
-               <label for="redWhatsapp">Whatsapp</label>
-             <div class="input-group">
-             <div class="input-group-prepend">
-               <span class="input-group-text">
-                <i class="fab fa-whatsapp"></i>
-                 </span>
-             </div>
-             <input [imask]="this._formsResource.phoneMask()" ngModel name="redWhatsapp" #redWhatsapp="ngModel" type="text" class="form-control" >
-           </div>
-           </div>
+            <div class="form-group clearfix col-md-12 col-lg-6">
+              <label for="redWhatsapp">Whatsapp</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fab fa-whatsapp"></i>
+                  </span>
+                </div>
+                <input [imask]="this._formsResource.phoneMask()" ngModel name="redWhatsapp" #redWhatsapp="ngModel"
+                  type="text" class="form-control">
+              </div>
+            </div>
 
-              <div class="form-group clearfix col-md-12 col-lg-6">
-               <label for="redWeb">Página Web</label>
-             <div class="input-group">
-             <div class="input-group-prepend">
-               <span class="input-group-text">
-                <i class="fas fa-globe"></i>
-                 </span>
-             </div>
-             <input  ngModel name="redWeb" #redWeb="ngModel" type="text" class="form-control" >
-           </div>
-           </div>
+            <div class="form-group clearfix col-md-12 col-lg-6">
+              <label for="redWeb">Página Web</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fas fa-globe"></i>
+                  </span>
+                </div>
+                <input ngModel name="redWeb" #redWeb="ngModel" type="text" class="form-control">
+              </div>
+            </div>
 
 
           </div>
@@ -274,47 +279,47 @@
 
               <ul class="nav nav-pills">
                 <li class="nav-item"><a (click)="changeTypeRedes('url')" class="nav-link buttonCustom"
-                  [ngClass]="{'active': this.redes == 'url'}"
-                  >URL</a></li>
+                    [ngClass]="{'active': this.redes == 'url'}">URL</a></li>
 
                 <li class="nav-item"><a (click)="changeTypeRedes('user')" class="nav-link buttonCustom"
-                  [ngClass]="{'active': this.redes == 'user'}"
-                  >Usuario</a></li>
+                    [ngClass]="{'active': this.redes == 'user'}">Usuario</a></li>
 
-                </ul>
-
-            </div>
-
-
+              </ul>
 
             </div>
-            <hr>
+
+
+
+          </div>
+          <hr>
 
           <div class="row" *ngIf="(this.redes) && this.redes == 'url'">
 
             <div class="form-group clearfix col-md-12 col-lg-6">
               <label for="redInstagram">Instagram</label>
-            <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-               <i class="fab fa-instagram"></i>
-                </span>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fab fa-instagram"></i>
+                  </span>
+                </div>
+                <input placeholder="Pega tu Instagram aquí" ngModel name="redInstagram" #redInstagram="ngModel"
+                  type="url" class="form-control">
+              </div>
             </div>
-            <input placeholder="Pega tu Instagram aquí"  ngModel name="redInstagram" #redInstagram="ngModel" type="url" class="form-control" >
-          </div>
-          </div>
 
-          <div class="form-group clearfix col-md-12 col-lg-6">
-           <label for="redFacebook">Facebook</label>
-         <div class="input-group">
-         <div class="input-group-prepend">
-           <span class="input-group-text">
-            <i class="fab fa-facebook"></i>
-             </span>
-         </div>
-         <input placeholder="Pega tu Facebook aquí"  ngModel name="redFacebook" #redFacebook="ngModel" type="url" class="form-control" >
-       </div>
-       </div>
+            <div class="form-group clearfix col-md-12 col-lg-6">
+              <label for="redFacebook">Facebook</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fab fa-facebook"></i>
+                  </span>
+                </div>
+                <input placeholder="Pega tu Facebook aquí" ngModel name="redFacebook" #redFacebook="ngModel" type="url"
+                  class="form-control">
+              </div>
+            </div>
 
 
           </div>
@@ -322,215 +327,227 @@
 
             <div class="form-group clearfix col-md-12 col-lg-6">
               <label for="redInstagram">Instagram</label>
-            <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-               <i class="fab fa-instagram"></i>
-                </span>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fab fa-instagram"></i>
+                  </span>
+                </div>
+                <input [imask]="this._formsResource.userRedes()" ngModel name="redInstagram" #redInstagram="ngModel"
+                  type="text" class="form-control">
+              </div>
             </div>
-            <input  [imask]="this._formsResource.userRedes()" ngModel name="redInstagram" #redInstagram="ngModel" type="text" class="form-control" >
-          </div>
-          </div>
 
-          <div class="form-group clearfix col-md-12 col-lg-6">
-           <label for="redFacebook">Facebook</label>
-         <div class="input-group">
-         <div class="input-group-prepend">
-           <span class="input-group-text">
-            <i class="fab fa-facebook"></i>
-             </span>
-         </div>
-         <input [imask]="this._formsResource.userRedes()"  ngModel name="redFacebook" #redFacebook="ngModel" type="text" class="form-control" >
-       </div>
-       </div>
+            <div class="form-group clearfix col-md-12 col-lg-6">
+              <label for="redFacebook">Facebook</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fab fa-facebook"></i>
+                  </span>
+                </div>
+                <input [imask]="this._formsResource.userRedes()" ngModel name="redFacebook" #redFacebook="ngModel"
+                  type="text" class="form-control">
+              </div>
+            </div>
 
 
           </div>
 
 
-            <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-              Información de la publicación
+          <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+            Información de la publicación
           </h4>
           <hr>
 
-             <div class="row">
-              <div class="form-group clearfix col-md-12 col-lg-12">
-                <label for="Type">¿Publicarás productos o servicios? <span class="colorRed">(*)</span></label>
-              <div class="input-group" >
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fa fa-star" aria-hidden="true"></i>
+          <div class="row">
+            <div class="form-group clearfix col-md-12 col-lg-12">
+              <label for="Type">¿Publicarás productos o servicios? <span class="colorRed">(*)</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-star" aria-hidden="true"></i>
 
-                      </span>
-                    </div>
-                    <select  required ngModel name="Type" #Type="ngModel" class="form-control">
-                        <option value="" disabled selected></option>
-                        <option value="Producto">Productos</option>
-                        <option value="Servicio">Servicios</option>
-
-
-                      </select>
+                  </span>
                 </div>
-
-                <div class="errorSpace" *ngIf="( this.enviado == true && Type.invalid ) || (Type.invalid && (Type.dirty || Type.touched))" >
-                  <small *ngIf="Type.errors.required">
-                    Este campo es obligatorio
-                  </small>
-
-                </div>
+                <select required ngModel name="Type" #Type="ngModel" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option value="Producto">Productos</option>
+                  <option value="Servicio">Servicios</option>
 
 
-                </div>
+                </select>
               </div>
 
-              <div class="row" *ngIf="(this._categoryService.allCategoryList)">
-              <div class="form-group clearfix col-md-12 col-lg-6">
-                <label for="Category">Elige la categoría</label>
-              <div class="input-group" >
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              <div class="errorSpace"
+                *ngIf="( this.enviado == true && Type.invalid ) || (Type.invalid && (Type.dirty || Type.touched))">
+                <small *ngIf="Type.errors.required">
+                  Este campo es obligatorio
+                </small>
 
-                      </span>
-                    </div>
-                    <select   ngModel name="Category1"  *ngIf="(this._categoryService.allCategoryList)"  (change)="setSubCategory($event.target.value, 1)"  class="form-control">
-                        <option value="" disabled selected></option>
-                        <option *ngFor="let item of this._categoryService.allCategoryList; let i = index" value="{{ item | json }}">
-                          {{ item._category }}
-                        </option>
+              </div>
 
 
-                      </select>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="(this._categoryService.allCategoryList)">
+            <div class="form-group clearfix col-md-12 col-lg-6">
+              <label for="Category">Elige la categoría</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+                  </span>
+                </div>
+                <select ngModel name="Category1" *ngIf="(this._categoryService.allCategoryList)"
+                  (change)="setSubCategory($event.target.value, 1)" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option *ngFor="let item of this._categoryService.allCategoryList; let i = index"
+                    value="{{ item | json }}">
+                    {{ item._category }}
+                  </option>
+
+
+                </select>
+              </div>
+
+            </div>
+            ​
+            <div class="form-group clearfix col-md-12 col-lg-6">
+              <label for="subCategory">Sub categoría</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+                  </span>
                 </div>
 
-                </div>
-                ​
-                <div class="form-group clearfix col-md-12 col-lg-6">
-                  <label for="subCategory">Sub categoría</label>
-                <div class="input-group" >
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <select *ngIf="(this._categoryService.allCategoryList)" ngModel name="subCategory1Form"
+                  class="form-control" [disabled]="this.subCategory1.length == 0">
+                  <!-- <option value="" disabled selected></option> -->
+                  <!-- <option value="Sin categoría" selected>Sin sub categoría</option> -->
+                  <option *ngFor="let item of this.subCategory1" value="{{ item | json }}">
+                    {{ item.name }}
+                  </option>
 
-                      </span>
-                    </div>
+                </select>
 
-                    <select *ngIf="(this._categoryService.allCategoryList)"   ngModel name="subCategory1Form" class="form-control" [disabled] = "this.subCategory1.length == 0" >
-                        <!-- <option value="" disabled selected></option> -->
-                        <!-- <option value="Sin categoría" selected>Sin sub categoría</option> -->
-                        <option *ngFor="let item of this.subCategory1"  value="{{ item | json }}">
-                          {{ item.name }}
-                        </option>
-
-                      </select>
-
-                </div>
+              </div>
 
 
-                </div>
+            </div>
 
           </div>
 
-              <div class="row">
-              <div class="form-group clearfix col-md-12 col-lg-6">
-                <label for="Category">Elige la categoría </label>
-              <div class="input-group" >
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          <div class="row">
+            <div class="form-group clearfix col-md-12 col-lg-6">
+              <label for="Category">Elige la categoría </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
 
-                      </span>
-                    </div>
-                    <select *ngIf="(this._categoryService.allCategoryList)"  (change)="setSubCategory($event.target.value, 2)" ngModel name="Category2" class="form-control">
-                        <option value="" disabled selected></option>
-                        <option *ngFor="let item of this._categoryService.allCategoryList; let i = index" value="{{ item | json }}">
-                          {{ item._category }}
-                        </option>
-
-
-                      </select>
+                  </span>
                 </div>
+                <select *ngIf="(this._categoryService.allCategoryList)"
+                  (change)="setSubCategory($event.target.value, 2)" ngModel name="Category2" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option *ngFor="let item of this._categoryService.allCategoryList; let i = index"
+                    value="{{ item | json }}">
+                    {{ item._category }}
+                  </option>
+
+
+                </select>
+              </div>
+            </div>
+            ​
+
+
+
+            <div class="form-group clearfix col-md-12 col-lg-6">
+              <label for="subCategory">Sub categoría </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+                  </span>
                 </div>
-                ​
 
+                <select *ngIf="(this._categoryService.allCategoryList)" ngModel name="subCategory2Form"
+                  class="form-control" [disabled]="this.subCategory2.length == 0">
+                  <!-- <option value="" disabled selected></option> -->
+                  <!-- <option value="Sin categoría" selected>Sin sub categoría</option> -->
+                  <option *ngFor="let item of this.subCategory2" value="{{ item | json }}">
+                    {{ item.name }}
+                  </option>
 
+                </select>
 
-                <div class="form-group clearfix col-md-12 col-lg-6">
-                  <label for="subCategory">Sub categoría </label>
-                <div class="input-group" >
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-
-                      </span>
-                    </div>
-
-                    <select *ngIf="(this._categoryService.allCategoryList)"   ngModel name="subCategory2Form" class="form-control" [disabled] = "this.subCategory2.length == 0">
-                        <!-- <option value="" disabled selected></option> -->
-                        <!-- <option value="Sin categoría" selected>Sin sub categoría</option> -->
-                        <option *ngFor="let item of this.subCategory2"  value="{{ item | json }}">
-                          {{ item.name }}
-                        </option>
-
-                      </select>
-
-                </div>
-                </div>
+              </div>
+            </div>
 
           </div>
 
-              <div class="row">
-              <div class="form-group clearfix col-md-12 col-lg-6">
-                <label for="Category">Elige la categoría </label>
-              <div class="input-group" >
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          <div class="row">
+            <div class="form-group clearfix col-md-12 col-lg-6">
+              <label for="Category">Elige la categoría </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
 
-                      </span>
-                    </div>
-                    <select *ngIf="(this._categoryService.allCategoryList)"  (change)="setSubCategory($event.target.value, 3)"  ngModel name="Category3"  class="form-control">
-                        <option value="" disabled selected></option>
-                        <option *ngFor="let item of this._categoryService.allCategoryList; let i = index" value="{{ item | json }}">
-                          {{ item._category }}
-                        </option>
-
-
-                      </select>
+                  </span>
                 </div>
+                <select *ngIf="(this._categoryService.allCategoryList)"
+                  (change)="setSubCategory($event.target.value, 3)" ngModel name="Category3" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option *ngFor="let item of this._categoryService.allCategoryList; let i = index"
+                    value="{{ item | json }}">
+                    {{ item._category }}
+                  </option>
+
+
+                </select>
+              </div>
+            </div>
+            ​
+
+
+
+            <div class="form-group clearfix col-md-12 col-lg-6">
+              <label for="subCategory">Sub categoría </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+                  </span>
                 </div>
-                ​
 
+                <select *ngIf="(this._categoryService.allCategoryList)" ngModel name="subCategory3Form"
+                  class="form-control" [disabled]="this.subCategory3.length == 0">
+                  <!-- <option value="" disabled selected></option> -->
+                  <!-- <option value="Sin categoría" selected>Sin sub categoría</option> -->
+                  <option *ngFor="let item of this.subCategory3" value="{{ item | json }}">
+                    {{ item.name }}
+                  </option>
 
+                </select>
 
-                <div class="form-group clearfix col-md-12 col-lg-6">
-                  <label for="subCategory">Sub categoría </label>
-                <div class="input-group" >
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-
-                      </span>
-                    </div>
-
-                    <select *ngIf="(this._categoryService.allCategoryList)"   ngModel name="subCategory3Form" class="form-control" [disabled] = "this.subCategory3.length == 0">
-                        <!-- <option value="" disabled selected></option> -->
-                        <!-- <option value="Sin categoría" selected>Sin sub categoría</option> -->
-                        <option *ngFor="let item of this.subCategory3"  value="{{ item | json }}">
-                          {{ item.name }}
-                        </option>
-
-                      </select>
-
-                </div>
-                </div>
+              </div>
+            </div>
 
           </div>
 
           <!-- error para las categorias -->
 
           <div class="errorSpace" *ngIf="this.categoryError == true">
-            <small >
+            <small>
               Es obligatorio seleccionar al menos un conjunto de categorias
             </small>
 
@@ -540,91 +557,95 @@
 
 
 
-             <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-              ¿Dónde quieres que sea vista tu publicación? <span class="colorRed">(*)</span>
-              <!--  -->
+          <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+            ¿Dónde quieres que sea vista tu publicación? <span class="colorRed">(*)</span>
+            <!--  -->
           </h4>
           <hr>
-             <div class="row">
-              <div class="form-group clearfix col-md-12 col-lg-4">
-                <label for="Department">Departamento</label>
-              <div class="input-group" >
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                         <i class="fa fa-home" aria-hidden="true"></i>
+          <div class="row">
+            <div class="form-group clearfix col-md-12 col-lg-4">
+              <label for="Department">Departamento</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-home" aria-hidden="true"></i>
 
-                      </span>
-                    </div>
-                    <select (change)="setCiudades($event.target.value)" [(ngModel)]="this.ngDepartment"  ngModel name="Department" #Department="ngModel" class="form-control" >
-                        <option value="" disabled selected ></option>
-                        <option *ngFor="let item of this.GlobalConfigService.departamentos" value="{{item | json}}">
-                          {{item.departamento}}
-                        </option>
-
-                      </select>
+                  </span>
                 </div>
+                <select (change)="setCiudades($event.target.value)" [(ngModel)]="this.ngDepartment" ngModel
+                  name="Department" #Department="ngModel" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option *ngFor="let item of this.GlobalConfigService.departamentos" value="{{item | json}}">
+                    {{item.departamento}}
+                  </option>
+
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group clearfix col-md-12 col-lg-4">
+              <label for="City">Ciudad</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                  </span>
                 </div>
+                <select [(ngModel)]="this.ngCity" ngModel name="City" #City="ngModel" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option *ngFor="let item of this.ciudades" value="{{item}}">
+                    {{item}}
+                  </option>
 
-                 <div class="form-group clearfix col-md-12 col-lg-4">
-                  <label for="City">Ciudad</label>
-                <div class="input-group" >
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                         <i class="fa fa-home" aria-hidden="true"></i>
-                      </span>
-                    </div>
-                    <select   [(ngModel)]="this.ngCity" ngModel name="City" #City="ngModel" class="form-control" >
-                        <option value="" disabled selected></option>
-                        <option *ngFor="let item of this.ciudades"  value="{{item}}">
-                          {{item}}
-                        </option>
-
-                      </select>
+                </select>
 
 
 
-                </div>
-                </div>
+              </div>
+            </div>
 
-                <div class="form-group clearfix col-md-12 col-lg-4">
-                  <label><br></label>
+            <div class="form-group clearfix col-md-12 col-lg-4">
+              <label><br></label>
 
-                <div class="formButtons" style="flex-direction: column;">
-                  <button style="width: 100%; margin: 0 auto"  type="button" (click)="addCityTarget()" class="buttonCustom btn btn-success btn-flat">+Agregar ciudad</button>
-                </div>
-
-                </div>
+              <div class="formButtons" style="flex-direction: column;">
+                <button style="width: 100%; margin: 0 auto" type="button" (click)="addCityTarget()"
+                  class="buttonCustom btn btn-success btn-flat">+Agregar ciudad</button>
               </div>
 
-                <div class="row" *ngIf="this.cityTargets.length > 0">
-                  <div class="form-group clearfix col-12">
+            </div>
+          </div>
 
-                    <table class="table table-hover" style="width: 100%;">
-                      <thead>
-                        <tr>
-                          <th>Departamento</th>
-                          <th>Ciudad</th>
-                          <th>Eliminar</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let item of this.cityTargets; let i = index">
-                          <td>{{item.department}}</td>
-                          <td>{{item.city}}</td>
-                          <td> <button style="width: 100%; width: unset!important;"  type="button" (click)="deleteCityTarget(i)" class="buttonCustom btn btn-danger btn-flat"><i class="fas fa-trash-alt"></i></button></td>
-                        </tr>
+          <div class="row" *ngIf="this.cityTargets.length > 0">
+            <div class="form-group clearfix col-12">
 
-                      </tbody>
-                    </table>
+              <table class="table table-hover" style="width: 100%;">
+                <thead>
+                  <tr>
+                    <th>Departamento</th>
+                    <th>Ciudad</th>
+                    <th>Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of this.cityTargets; let i = index">
+                    <td>{{item.department}}</td>
+                    <td>{{item.city}}</td>
+                    <td> <button style="width: 100%; width: unset!important;" type="button"
+                        (click)="deleteCityTarget(i)" class="buttonCustom btn btn-danger btn-flat"><i
+                          class="fas fa-trash-alt"></i></button></td>
+                  </tr>
 
-                </div>
-                </div>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
 
 
-      <!-- error para las categorias -->
+          <!-- error para las categorias -->
 
           <div class="errorSpace" *ngIf="this.citysError == true">
-            <small >
+            <small>
               Es obligatorio seleccionar al menos una ciudad
             </small>
 
@@ -632,105 +653,107 @@
 
           <!--  -->
 
-             <h4 style="margin-bottom: 15px;" class="titleSpecial4">
-              Describe tu producto o servicio
+          <h4 style="margin-bottom: 15px;" class="titleSpecial4">
+            Describe tu producto o servicio
           </h4>
           <hr>
 
-             <div class="row">
-              <div class="form-group col-md-12 col-lg-6">
-                <label for="IncludeDesc">¿Qué incluye? <span class="colorRed">(*)</span></label>
-                <textarea  [(ngModel)]="ngIncludeDesc"
-                [ngModelOptions]="{standalone: true}"
-                [maxlength]="350"
-                required  name="IncludeDesc" #IncludeDesc="ngModel" class="form-control" rows="3" placeholder="En este espacio puedes explicar los detalles que incluye tu producto o servicio"></textarea>
-                <small
-                *ngIf="(this.ngIncludeDesc) && this.ngIncludeDesc != ''"
-                >{{ this.ngIncludeDesc.length }}/350</small>
+          <div class="row">
+            <div class="form-group col-md-12 col-lg-6">
+              <label for="IncludeDesc">¿Qué incluye? <span class="colorRed">(*)</span></label>
+              <textarea [(ngModel)]="ngIncludeDesc" [ngModelOptions]="{standalone: true}" [maxlength]="350" required
+                name="IncludeDesc" #IncludeDesc="ngModel" class="form-control" rows="3"
+                placeholder="En este espacio puedes explicar los detalles que incluye tu producto o servicio"></textarea>
+              <small
+                *ngIf="(this.ngIncludeDesc) && this.ngIncludeDesc != ''">{{ this.ngIncludeDesc.length }}/350</small>
 
 
-                <div class="errorSpace" *ngIf="( this.enviado == true && IncludeDesc.invalid ) || (IncludeDesc.invalid && (IncludeDesc.dirty || IncludeDesc.touched))" >
-                  <small *ngIf="IncludeDesc.errors.required">
-                    Este campo es obligatorio
-                  </small>
-
-                </div>
-
+              <div class="errorSpace"
+                *ngIf="( this.enviado == true && IncludeDesc.invalid ) || (IncludeDesc.invalid && (IncludeDesc.dirty || IncludeDesc.touched))">
+                <small *ngIf="IncludeDesc.errors.required">
+                  Este campo es obligatorio
+                </small>
 
               </div>
 
 
-              <div class="form-group col-md-12 col-lg-6">
-                <label for="notIncludeDesc">¿Qué no incluye? <span class="colorRed">(*)</span></label>
-                <textarea  [(ngModel)]="ngnotIncludeDesc"
-                [ngModelOptions]="{standalone: true}"
-                [maxlength]="350"
-                required  name="notIncludeDesc" #notIncludeDesc="ngModel" class="form-control" rows="3" placeholder="En este espacio puedes explicar los detalles que no estan presentes en tu producto o servicio"></textarea>
-                <small
-                *ngIf="(this.ngnotIncludeDesc) && this.ngnotIncludeDesc != ''"
-                >{{ this.ngnotIncludeDesc.length }}/350</small>
+            </div>
 
 
-                <div class="errorSpace" *ngIf="( this.enviado == true && notIncludeDesc.invalid ) || (notIncludeDesc.invalid && (notIncludeDesc.dirty || notIncludeDesc.touched))" >
-                  <small *ngIf="notIncludeDesc.errors.required">
-                    Este campo es obligatorio
-                  </small>
+            <div class="form-group col-md-12 col-lg-6">
+              <label for="notIncludeDesc">¿Qué no incluye? <span class="colorRed">(*)</span></label>
+              <textarea [(ngModel)]="ngnotIncludeDesc" [ngModelOptions]="{standalone: true}" [maxlength]="350" required
+                name="notIncludeDesc" #notIncludeDesc="ngModel" class="form-control" rows="3"
+                placeholder="En este espacio puedes explicar los detalles que no estan presentes en tu producto o servicio"></textarea>
+              <small
+                *ngIf="(this.ngnotIncludeDesc) && this.ngnotIncludeDesc != ''">{{ this.ngnotIncludeDesc.length }}/350</small>
 
-                </div>
+
+              <div class="errorSpace"
+                *ngIf="( this.enviado == true && notIncludeDesc.invalid ) || (notIncludeDesc.invalid && (notIncludeDesc.dirty || notIncludeDesc.touched))">
+                <small *ngIf="notIncludeDesc.errors.required">
+                  Este campo es obligatorio
+                </small>
 
               </div>
 
-             </div>
+            </div>
+
+          </div>
 
 
 
 
           <div class="row">
 
-              <div class="form-group clearfix col-md-12 col-lg-6">
-            <label for="typeAdjuntos">¿Qué contenido deseas subir? <span class="colorRed">(*)</span></label>
-          <div class="input-group" >
-            <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fas fa-file-upload"></i>
+            <div class="form-group clearfix col-md-12 col-lg-6">
+              <label for="typeAdjuntos">¿Qué contenido deseas subir? <span class="colorRed">(*)</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fas fa-file-upload"></i>
 
-                </span>
-              </div>
-              <select (change)="clearFiles($event.target.value)" [(ngModel)]="ngTypeAdjuntos"   required ngModel name="typeAdjuntos" #typeAdjuntos="ngModel" class="form-control" >
+                  </span>
+                </div>
+                <select (change)="clearFiles($event.target.value)" [(ngModel)]="ngTypeAdjuntos" required ngModel
+                  name="typeAdjuntos" #typeAdjuntos="ngModel" class="form-control">
 
-                  <option value="Fotos" selected >Fotos</option>
-                  <option value="Catálogo PDF" >PDF</option>
+                  <option value="Fotos" selected>Fotos</option>
+                  <option value="Catálogo PDF">PDF</option>
                   <!-- <option value="Catálogo PDF">Catálogo PDF</option> -->
 
                 </select>
 
-          </div>
+              </div>
 
-          <div class="errorSpace" *ngIf="( this.enviado == true && typeAdjuntos.invalid ) || (typeAdjuntos.invalid && (typeAdjuntos.dirty || typeAdjuntos.touched))" >
-            <small *ngIf="typeAdjuntos.errors.required">
-              Este campo es obligatorio
-            </small>
+              <div class="errorSpace"
+                *ngIf="( this.enviado == true && typeAdjuntos.invalid ) || (typeAdjuntos.invalid && (typeAdjuntos.dirty || typeAdjuntos.touched))">
+                <small *ngIf="typeAdjuntos.errors.required">
+                  Este campo es obligatorio
+                </small>
 
-          </div>
-
-
-          </div>
+              </div>
 
 
-            <div *ngIf="this.ngTypeAdjuntos != null"  class="form-group col-md-12 col-lg-6">
+            </div>
+
+
+            <div *ngIf="this.ngTypeAdjuntos != null" class="form-group col-md-12 col-lg-6">
               <!-- {{ this.ngTypeAdjuntos }} -->
 
               <label for="files">Selecciona los adjuntos <span class="colorRed">(*)</span></label>
               <div class="input-group">
 
                 <div class="custom-file" *ngIf="this.ngTypeAdjuntos != 'Catálogo PDF' ">
-                  <input accept="image/*" multiple (change)="selectFiles($event)"  required ngModel name="files" #files="ngModel" type="file" class="custom-file-input" id="exampleInputFile">
+                  <input accept="image/*" multiple (change)="selectFiles($event)" required ngModel name="files"
+                    #files="ngModel" type="file" class="custom-file-input" id="exampleInputFile">
                   <label class="custom-file-label" for="exampleInputFile">Selecciona 10 {{this.ngTypeAdjuntos}}</label>
 
                 </div>
 
                 <div class="custom-file" *ngIf="this.ngTypeAdjuntos == 'Catálogo PDF' ">
-                  <input accept="application/pdf" (change)="selectFiles($event)"  required ngModel name="files" #files="ngModel" type="file" class="custom-file-input" id="exampleInputFile">
+                  <input accept="application/pdf" (change)="selectFiles($event)" required ngModel name="files"
+                    #files="ngModel" type="file" class="custom-file-input" id="exampleInputFile">
                   <label class="custom-file-label" for="exampleInputFile">Selecciona un {{this.ngTypeAdjuntos}}</label>
 
                 </div>
@@ -753,20 +776,23 @@
           </div>
 
           <div class="row" *ngIf="this.ngTypeAdjuntos != 'Catálogo PDF'">
-            <div class="form-group col-12" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
+            <div class="form-group col-12"
+              style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
 
-              <img data-toggle="tooltip" data-placement="top" title="Eliminar"
-              (click)="deleteSelected(i)" class="imgSelected" *ngFor="let item of urlFiles; let i = index" [src]="item" alt="">
+              <img data-toggle="tooltip" data-placement="top" title="Eliminar" (click)="deleteSelected(i)"
+                class="imgSelected" *ngFor="let item of urlFiles; let i = index" [src]="item" alt="">
 
             </div>
           </div>
 
           <div class="row" *ngIf="this.ngTypeAdjuntos == 'Catálogo PDF' && this.urlFiles.length == 1">
-            <div class="form-group col-12" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
+            <div class="form-group col-12"
+              style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
               <!-- <img (click)="deleteSelected(item)" class="imgSelected" *ngFor="let item of urlFiles" [src]="item" alt=""> -->
 
-              <div class="row formButtons centerCustom" >
-                <button (click)="deleteSelected()" type="button" class="buttonCustom btn btn-danger btn-flat">Eliminar PDF</button>
+              <div class="row formButtons centerCustom">
+                <button (click)="deleteSelected()" type="button" class="buttonCustom btn btn-danger btn-flat">Eliminar
+                  PDF</button>
               </div>
 
             </div>
@@ -774,55 +800,58 @@
 
 
 
-             <div class="row terms">
-              <div class="col-12">
+          <div class="row terms">
+            <div class="col-12">
 
-                  <div class="form-group clearfix">
+              <div class="form-group clearfix">
 
-                      <div class="icheck-success">
+                <div class="icheck-success">
 
-                          <label for="aceptarTerminosPublic">
-                            <input required  ngModel name="Terms" #Terms="ngModel" type="checkbox" id="aceptarTerminosPublic1">
-                              Autorizo para usar mi  información en concordancia con lo previsto en esta <a target="_blank" href="../../../assets/dist/documents/Política de Privacidad y Tratamiento de los Datos Personales-min.pdf" class="hiperbutton">Política de Privacidad y tratamiento de datos personales</a>
-                          </label>
-                        </div>
+                  <input class="customInput" required ngModel name="Terms" #Terms="ngModel" type="checkbox" id="aceptarTerminosPublic1">
 
-                  </div>
+                  <label for="aceptarTerminosPublic1" class="labelRadio">
+                    <i class="true far fa-check-square"></i>
+                    <i class="false far fa-square"></i>
+                  </label>
+                  <label for="aceptarTerminosPublic">
 
-                  <div class="errorSpace" *ngIf=" (Terms) && (( this.enviado == true && Terms.invalid ) || (Terms.invalid && (Terms.dirty || Terms.touched)))" >
-                    <small *ngIf=" (Terms) && Terms.errors.required">
-                      Este campo es obligatorio
-                    </small>
-
-                  </div>
-
-
+                    Autorizo para usar mi información en concordancia con lo previsto en esta <a target="_blank"
+                      href="../../../assets/dist/documents/Política de Privacidad y Tratamiento de los Datos Personales-min.pdf"
+                      class="hiperbutton">Política de Privacidad y tratamiento de datos personales</a>
+                  </label>
                 </div>
-            </div>
 
-              <div class="row formButtons ">
-                <button
-                (click)="alEnviar()"
-                type="submit"
-                style="margin-left: auto;"
-                class="buttonCustom btn btn-success btn-flat">
-                <i class="fas fa-money-check    "></i>
-                IR A PAGAR
-              </button>
-                <!-- <button -->
-                <!-- (click)="alEnviar()" -->
-                <!-- type="submit" class="buttonCustom btn btn-success btn-flat">¡Paga y publica ahora!</button> -->
               </div>
-              <!-- <div class="row formButtons centerCustom"> -->
-              <!-- </div> -->
+
+              <div class="errorSpace"
+                *ngIf=" (Terms) && (( this.enviado == true && Terms.invalid ) || (Terms.invalid && (Terms.dirty || Terms.touched)))">
+                <small *ngIf=" (Terms) && Terms.errors.required">
+                  Este campo es obligatorio
+                </small>
+
+              </div>
+
+
+            </div>
+          </div>
+
+          <div class="row formButtons ">
+            <button (click)="alEnviar()" type="submit" style="margin-left: auto;"
+              class="buttonCustom btn btn-success btn-flat">
+              <i class="fas fa-money-check    "></i>
+              IR A PAGAR
+            </button>
+            <!-- <button -->
+            <!-- (click)="alEnviar()" -->
+            <!-- type="submit" class="buttonCustom btn btn-success btn-flat">¡Paga y publica ahora!</button> -->
+          </div>
+          <!-- <div class="row formButtons centerCustom"> -->
+          <!-- </div> -->
 
         </form>
 
 
-    </div>
-    </div>
+      </div>
     </div>
   </div>
-
-
-
+</div>

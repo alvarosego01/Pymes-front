@@ -41,7 +41,7 @@ export class PaginatorComponent implements OnInit {
 
   async paginate(type: any){
 
-    // //////////////console.log('pag', type);
+    // ////// console.log('pag', type);
 
     if(this._searchService.paginator.currentPage ==  Number(type) ){
 
@@ -61,7 +61,7 @@ export class PaginatorComponent implements OnInit {
 
 
     await this._searchService.getParameters().then(resp => {
-      // // //////////////console.log('la respuesta de parametros', resp);
+      // // ////// console.log('la respuesta de parametros', resp);
       this.urlParams = resp;
     });
 
@@ -70,17 +70,17 @@ export class PaginatorComponent implements OnInit {
       change: type
     }
 
-    // ////////////console.log('')
+    // //// console.log('')
 
-    // ////////////console.log('params enviados desde paginador', ppp);
+    // //// console.log('params enviados desde paginador', ppp);
 
     var args = this._searchService.changePaginator(ppp);
 
-    // ////////////console.log('args que se mandan desde paginador', args);
+    // //// console.log('args que se mandan desde paginador', args);
 
     this.GlobalConfigService.spinner = true;
     this._searchService.recallPaginatePOST(args).subscribe((resp) => {
-      // ////// //////////////console.log(resp);
+      // ////// ////// console.log(resp);
 
       if (resp.status == 200 && resp.ok == true) {
 
@@ -92,8 +92,8 @@ export class PaginatorComponent implements OnInit {
           this._searchService.setActualReactions();
 
 
-          // // //////////////console.log('paginador que regresa', this._searchService.paginator);
-          // //////////////console.log('los args cuando se regresa', args);
+          // // ////// console.log('paginador que regresa', this._searchService.paginator);
+          // ////// console.log('los args cuando se regresa', args);
 
           // if(args.typeFind == 'all'){
           //   this._searchService.setParameters(
@@ -126,7 +126,7 @@ export class PaginatorComponent implements OnInit {
           // }
 
 
-          //// //////////////console.log('actualiza', this._searchService.registros);
+          //// ////// console.log('actualiza', this._searchService.registros);
         } else {
           //
         }

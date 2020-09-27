@@ -45,7 +45,7 @@ export class PaymentService {
 
   getFacturaByIdGET(id: string) {
     let url = `${_SERVICIOS}/billing/${id}?t=${this._userService.token}`;
-    //console.log("el url", url);
+    ////// console.log("el url", url);
     return this.http.get(url).pipe(
       map((resp: any) => {
         return resp;
@@ -125,7 +125,7 @@ export class PaymentService {
 
     let url = `${_SERVICIOS}/billing/byPost/${this._userService.usuario._id}/${postId}?t=${this._userService.token}&paginate=${paginate}`;
 
-    //console.log('envio datos', url);
+    ////// console.log('envio datos', url);
     return this.http.get(url).pipe(
         map((resp: any) => {
         return resp;

@@ -136,22 +136,42 @@
 
 
 
-                      <td class="project-actions text-right">
-                        <button  [routerLink]="['/publication/infoPost', item._id ]" style="width: 100%!important;" class="buttonCustom btn btn-success btn-flat">
+
+
+                      <td >
+
+                        <div class="row formButtons">
+
+
+                          <button  [routerLink]="['/publication/infoPost', item._id ]"  class="buttonCustom btn btn-success btn-flat">
                             <i class="fas fa-folder">
                             </i>
                             Ver
+                          </button>
+
+                        </div>
+                        <div class="row formButtons">
+                          <button (click)="deletePublic(item._id)"
+                          class="buttonCustom btn btn-danger btn-flat">
+                          <i class="fas fa-trash">
+                          </i>
+                          Eliminar
                         </button>
 
+                        </div>
+                          <div
+                          *ngIf="item.typePost != 'borrador'"
+                          class="row formButtons">
 
                         <button
                         [routerLink]="[ '/dashboard/historialBillingPost', item._id ]"
-                        *ngIf="item.typePost != 'borrador'" style="width: 100%!important;"  class="buttonCustom btn btn-primary btn-flat">
+                           class="buttonCustom btn btn-primary btn-flat">
 
                             <i class="fas fa-file-invoice-dollar    "></i>
                             Ver facturas
                         </button>
 
+                      </div>
 
                     </td>
 

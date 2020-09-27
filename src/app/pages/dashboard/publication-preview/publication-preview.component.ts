@@ -58,7 +58,7 @@ export class PublicationPreviewComponent implements OnInit {
       this.ciudades = '';
       let p = this.publication._cityTarget;
       p.forEach((element) => {
-        // ////// //////////////console.log(element);
+        // ////// ////// console.log(element);
         if (p[p.length - 1] === element) {
           this.ciudades += `${element.city}`;
         } else {
@@ -80,17 +80,17 @@ export class PublicationPreviewComponent implements OnInit {
   }
 
   setActiveIMG(files, index) {
-    // ////// //////////////console.log(files);
+    // ////// ////// console.log(files);
     this.imgActive = files;
     this.idxActiveImg = index;
-    //// //////////////console.log('seteado', index);
+    //// ////// console.log('seteado', index);
   }
 
 
   getCategoryPrincipal(id){
 
 
-    // //console.log('las categorys', this._categoryService.allCategoryList);
+    // ////// console.log('las categorys', this._categoryService.allCategoryList);
 
      let principal = this._categoryService.allCategoryList.filter( r => {
 
@@ -118,8 +118,8 @@ export class PublicationPreviewComponent implements OnInit {
 
     let total_pages = Math.ceil(this.publication._files.length / 4);
 
-    //// //////////////console.log(this.idxActiveImg);
-    // ////// //////////////console.log('total', total_pages);
+    //// ////// console.log(this.idxActiveImg);
+    // ////// ////// console.log('total', total_pages);
     switch (n) {
 
       case -1:
@@ -127,7 +127,7 @@ export class PublicationPreviewComponent implements OnInit {
         this.imgPaginate = ( (this.imgPaginate > 0)  )? this.imgPaginate = this.imgPaginate - 1: this.imgPaginate;
         if(this.publication._files[this.idxActiveImg -1]){
           this.idxActiveImg = this.idxActiveImg - 1;
-          //// //////////////console.log('atras', this.publication._files[this.idxActiveImg]);
+          //// ////// console.log('atras', this.publication._files[this.idxActiveImg]);
           this.imgActive = this.publication._files[this.idxActiveImg];
         }
         break;
@@ -136,7 +136,7 @@ export class PublicationPreviewComponent implements OnInit {
 
         if(this.publication._files[this.idxActiveImg + 1]){
           this.idxActiveImg = this.idxActiveImg + 1;
-          //// //////////////console.log('palante', this.publication._files[this.idxActiveImg]);
+          //// ////// console.log('palante', this.publication._files[this.idxActiveImg]);
           this.imgActive = this.publication._files[this.idxActiveImg];
         }
 
@@ -150,7 +150,7 @@ export class PublicationPreviewComponent implements OnInit {
 
       }
 
-      // ////// //////////////console.log('pagina', this.imgPaginate);
+      // ////// ////// console.log('pagina', this.imgPaginate);
     }
 
 
@@ -159,7 +159,7 @@ export class PublicationPreviewComponent implements OnInit {
 guardarBorrador(){
 
   // accion
-  //console.log('se envia la accion emit');
+  ////// console.log('se envia la accion emit');
   this.accion.emit('borrador');
   this.closePreviewPublication.emit(true);
 
@@ -168,7 +168,7 @@ guardarBorrador(){
 goPay(){
 
     // accion
-    //console.log('se envia la accion emit');
+    ////// console.log('se envia la accion emit');
     this.accion.emit('goPay');
     this.closePreviewPublication.emit(true);
 

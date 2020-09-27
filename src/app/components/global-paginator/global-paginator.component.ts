@@ -22,7 +22,7 @@ export class GlobalPaginatorComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //console.log('paginator paginate', this.paginator);
+    ////// console.log('paginator paginate', this.paginator);
 
   }
 

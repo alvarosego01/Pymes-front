@@ -84,7 +84,7 @@ export class PaymentComponent implements OnInit {
       this.GlobalConfigService.setTitle('Factura de cobro por servicios');
 
 
-      //console.log('this factura', this.factura);
+      ////// console.log('this factura', this.factura);
 
       this.GlobalConfigService.spinner = false;
     }, (err) => {
@@ -202,7 +202,7 @@ this.GlobalConfigService.spinner = false;
 
       // window.open(`/#/checkoutResponse/${this.factura.post._id}?ref_payco=${this.factura.process.referencePay}`);
 
-      window.location.href = `/#/checkoutResponse/${this.factura.post._id}?ref_payco=${this.factura.process.referencePay}`;
+      window.location.href = `/#/checkoutResponse/${this.factura._id}?ref_payco=${this.factura.process.referencePay}`;
 
     }
 

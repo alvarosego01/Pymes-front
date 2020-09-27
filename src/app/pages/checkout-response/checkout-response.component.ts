@@ -27,25 +27,26 @@ export class CheckoutResponseComponent implements OnInit {
 
 
 
+
       // if (response.success) {
 
       //   if (response.data.x_cod_response == 1) {
       //     //Codigo personalizado
       //     alert("Transaccion Aprobada");
 
-      //     //console.log('transacción aceptada');
+      //     ////// console.log('transacción aceptada');
       //   }
       //   //Transaccion Rechazada
       //   if (response.data.x_cod_response == 2) {
-      //     //console.log('transacción rechazada');
+      //     ////// console.log('transacción rechazada');
       //   }
       //   //Transaccion Pendiente
       //   if (response.data.x_cod_response == 3) {
-      //     //console.log('transacción pendiente');
+      //     ////// console.log('transacción pendiente');
       //   }
       //   //Transaccion Fallida
       //   if (response.data.x_cod_response == 4) {
-      //     //console.log('transacción fallida');
+      //     ////// console.log('transacción fallida');
       //   }
 
       //   $('#fecha').html(response.data.x_transaction_date);
@@ -90,22 +91,7 @@ export class CheckoutResponseComponent implements OnInit {
 
     await this._searchService.getParameters().then( async (r: any) => {
 
-      //console.log('params', r);
-
-      if(r.ref_payco != null){
-        this.refEpayco = r.ref_payco;
-        await this.paymentVerify(this.refEpayco).then(r => {
-
-          this.consultEpayco = r;
-
-          //console.log('la maldita consulta de epayco', this.consultEpayco);
-
-        }, err => {
-
-        });
-      }else{
-
-      }
+      ////// console.log('params', r);
 
       await this.activatedRoute.params.subscribe( async (params) => {
         let id = params["id"];
@@ -113,7 +99,7 @@ export class CheckoutResponseComponent implements OnInit {
 
         await this.getFacturaById(id).then((r: any) => {
           this.factura = r.data;
-          //console.log('la factura', this.factura);
+          ////// console.log('la factura', this.factura);
         }, err => {
 
         });
@@ -140,18 +126,60 @@ export class CheckoutResponseComponent implements OnInit {
   }
 
 
-  confirmBillPUT(){
+  async confirmBillPUT(){
+
+
+    await this._searchService.getParameters().then( async (r: any) => {
+
+      ////// console.log('params', r);
+
+      if(r.ref_payco != null){
+        this.refEpayco = r.ref_payco;
+        await this.paymentVerify(this.refEpayco).then(r => {
+
+          this.consultEpayco = r;
+
+          ////// console.log('la maldita consulta de epayco', this.consultEpayco);
+
+        }, err => {
+
+        });
+      }else{
+
+      }
+
+    });
 
 
     let l = {
       idFactura: this.idFactura,
-      consultEpayco: this.consultEpayco,
+      consultEpayco: this.consultEpayco || null,
       refEpayco: this.refEpayco,
       validate: true,
     }
     this.GlobalConfigService.spinner = true;
-    this._paymentService.confirmBillPUT(l).subscribe((resp: any) => {
-      // var data = resp.data;
+    this._paymentService.confirmBillPUT(l).subscribe( async (resp: any) => {
+
+      //// console.log('la maldita respuesta', resp);
+
+      let n = {
+        type: 'nBillPayed',
+        idPost: resp.data.bill.post,
+        idUser: resp.data.bill.user,
+        // idForeign: ,
+        infoData: resp.data.bill,
+      }
+
+      //// console.log('manda notif', n);
+
+      await this._notifyService.sendNotifyEmailPOST(n).subscribe((resp: any) => {
+
+      }, err => {
+
+      });
+
+
+
 
       this._notifyService.Toast.fire({
         title: resp.message,
@@ -160,21 +188,17 @@ export class CheckoutResponseComponent implements OnInit {
       })
 
 
+
+
       this.GlobalConfigService.spinner = false;
 
       let url = document.URL;
       url = url.replace('/verify', '');
 
-      // if(document.querySelector('#overlay-epayco')){
-
-      //   let el = document.querySelector('#overlay-epayco');
-      //   el.parentNode.removeChild(el);
-
-      // }
 
       window.location.href = url;
 
-      location.reload();
+      // location.reload();
     }, (err: any) => {
 
       this._notifyService.Toast.fire({
@@ -192,7 +216,7 @@ return new Promise((resolve,reject) => {
 
   this._paymentService.paymentVerifyGET(ref).subscribe((resp: any) => {
 
-    //console.log('los parametros de epayco a consulta', resp);
+    ////// console.log('los parametros de epayco a consulta', resp);
 
     resolve(resp);
 

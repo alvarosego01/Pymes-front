@@ -52,7 +52,7 @@ export class NotifyViewComponent implements OnInit {
               icon: 'success'
             })
 
-            ////console.log("notificacion", resp.data);
+            //////// console.log("notificacion", resp.data);
             this.GlobalConfigService.spinner =false;
           },
           (err) => {
@@ -126,7 +126,7 @@ export class NotifyViewComponent implements OnInit {
             //   this.existNotif = true;
             // }
 
-            ////console.log("notificaciones", resp.data);
+            //////// console.log("notificaciones", resp.data);
           },
           (err) => {}
         );

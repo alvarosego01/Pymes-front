@@ -177,19 +177,19 @@ a.active
     align-items: center
     align-content: center
 .buttonCustom
-    padding: 5px 30px
+    padding: 5px 15px
     transition: $trans
     border: 0!important
     margin-bottom: 0px
-    font-size: 18px
+    font-size: 16px
     border-radius: 0!important
     width: fit-content!important
-    display: flex
-    flex-direction: row
-    justify-items: center
-    justify-content: center
-    align-items: center
-    align-content: center
+    // display: flex
+    // flex-direction: row
+    // justify-items: center
+    // justify-content: center
+    // align-items: center
+    // align-content: center
 .smallButton.btn-success,
 .buttonCustom.btn-success
     background-color: $VerdeOscur
@@ -198,17 +198,17 @@ a.active
         background-color: $VerdeClar
         color: white!important
 .leftCustom
-        display: flex
-        justify-content: flex-start
+    display: flex
+    justify-content: flex-start
 .rightCustom
-        display: flex
-        justify-content: flex-end
+    display: flex
+    justify-content: flex-end
 .centerCustom
-        display: flex
-        justify-content: center
+    display: flex
+    justify-content: center
 .spacebetweenCustom
-        display: flex
-        justify-content: space-between
+    display: flex
+    justify-content: space-between
 
 .fullWidth
     #homeContainer,
@@ -321,10 +321,10 @@ form.formDataSend
             display: none!important
             margin: 0 auto!important
             width: fit-content!important
-            display: block!important
+            display: flex!important
             label
                 // padding-left: 15px!important
-                padding: 5px 25px!important
+                padding: 5px!important
                 text-align: center!important
     .input-group-prepend
         span.input-group-text
@@ -416,6 +416,8 @@ div#spinner
     align-content: center
     justify-content: center
     align-items: center
+    background-color: rgba(0,0,0,0.1)
+    transition: $trans
 
     div
         width: 100px
@@ -452,13 +454,15 @@ div#spinner
     animation-delay: -1.0s
 
 @-webkit-keyframes sk-bounce
-    0%, 100%
+    0%,
+    100%
         -webkit-transform: scale(0.0)
     50%
         -webkit-transform: scale(1.0)
 
 @keyframes sk-bounce
-    0%, 100%
+    0%,
+    100%
         transform: scale(0.0)
         -webkit-transform: scale(0.0)
     50%
@@ -478,18 +482,12 @@ div#spinner
             display: block!important
 
 .sidebar-mini.sidebar-collapse,
-    #navDashboard
-        .entireLogo
-            display: none!important
+#navDashboard
+    .entireLogo
+        display: none!important
                 // display: none
 
-// .sidebar-mini
-//     #navDashboard
-//         .favLogo
-//             display: none!important
-//                 // display: none
-//         .entireLogo
-//             display: block!important
+
 
 form.formDataSend .terms .icheck-success label
     // padding: 0!important
@@ -632,7 +630,7 @@ img.profile-user-img.img-fluid.img-circle
 
 
 // para las listas de pdf
-pdf-viewer.pdfList
+.pdf-viewer.pdfList
     display: block
     width: 100%!important
     height: 100%!important
@@ -657,8 +655,9 @@ pdf-viewer.pdfList
     @include responsivo(resto)
         padding-top: 100px!important
     .container
-        margin: 0!important
-        padding: 0!important
+        margin: 0 auto
+        padding: 0
+        margin-top: 25px
 
 #id01.withForm
     .w3-modal-content.w3-animate-top.w3-card-4
@@ -703,11 +702,13 @@ pdf-viewer.pdfList
     font-weight: normal!important
 
 div.errorSpace
+    margin-bottom: 5px
     small
         color: salmon
 
 
 #floatButton
+    z-index: 9999
     position: fixed
     right: 0
     button
@@ -817,3 +818,28 @@ ul#listImgs
 .resalte
     font-weight: bold
     color: $VerdeOscur
+
+
+
+.formButtons
+    button
+        margin-top: 5px
+        margin-bottom: 5px
+    @include responsivo(telefonoTable)
+        flex-direction: column!important
+        display: flex!important
+        justify-content: center!important
+        align-items: center!important
+        margin-bottom: 0
+        button
+            width: fit-content!important
+
+    @include responsivo(pcMedio)
+        flex-direction: column!important
+        display: flex!important
+        justify-content: center!important
+        align-items: center!important
+        margin-bottom: 0
+        button
+            width: fit-content!important
+

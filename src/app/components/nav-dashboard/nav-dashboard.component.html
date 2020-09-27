@@ -127,6 +127,12 @@ class="main-sidebar sidebar-dark-primary elevation-4" [ngClass]="{
 
           <li
           class="nav-item">
+            <a  #navlink class="nav-link" [routerLink]="['/admin/alertaPymes']" routerLinkActive="active">
+              <i class="fas nav-icon fa-chart-pie    "></i>
+              <p>Alerta Pymes</p>
+            </a>
+          </li>
+          class="nav-item">
             <a  #navlink class="nav-link" [routerLink]="['/admin/generalBalance']" routerLinkActive="active">
               <i class="fas nav-icon fa-chart-pie    "></i>
               <p>Balances y reportes</p>

@@ -160,7 +160,7 @@ export class FormsResourcesService {
     emptyField(id){
 
       // document.getElementById('fechaPautas')
-      // //console.log('emptyfield', id);
+      // ////// console.log('emptyfield', id);
       // let l: any = document.getElementById(id).value;
       let l: any = (document.getElementById(id) as HTMLInputElement).value;
 

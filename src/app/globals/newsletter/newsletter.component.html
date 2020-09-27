@@ -27,18 +27,43 @@
     class="form-inline ml-3">
 
       <div class="row input-group input-group-sm">
-        <input required name="Nombre" ngModel class="form-control form-control-navbar" type="text" placeholder="Nombre completo" aria-label="Nombre">
+        <input required name="Nombre" ngModel #Nombre="ngModel" class="form-control form-control-navbar" type="text" placeholder="Nombre completo" aria-label="Nombre">
+
       </div>
+        <div style="width: 100%;" class="errorSpace"
+        *ngIf="( this.enviado == true && Nombre.invalid ) || (Nombre.invalid && (Nombre.dirty || Nombre.touched))">
+        <small *ngIf="Nombre.errors.required">
+          Este campo es obligatorio
+        </small>
+
+      </div>
+
       <div class="row input-group input-group-sm">
-        <input required name="Email" ngModel class="form-control form-control-navbar" type="email" placeholder="Dirección de email" aria-label="Email">
+        <input required name="Email" #Email="ngModel" ngModel class="form-control form-control-navbar" type="email" placeholder="Dirección de email" aria-label="Email">
       </div>
+      <div style="width: 100%;" class="errorSpace"
+      *ngIf="( this.enviado == true && Email.invalid ) || (Email.invalid && (Email.dirty || Email.touched))">
+      <small *ngIf="Email.errors.required">
+        Este campo es obligatorio
+      </small>
+
+    </div>
+
       <div class="row input-group input-group-sm">
-        <input required name="Ciudad" ngModel class="form-control form-control-navbar" type="text" placeholder="Ciudad" aria-label="Ciudad">
+        <input required name="Ciudad" #Ciudad="ngModel" ngModel class="form-control form-control-navbar" type="text" placeholder="Ciudad" aria-label="Ciudad">
       </div>
+      <div style="width: 100%;" class="errorSpace"
+      *ngIf="( this.enviado == true && Ciudad.invalid ) || (Ciudad.invalid && (Ciudad.dirty || Ciudad.touched))">
+      <small *ngIf="Ciudad.errors.required">
+        Este campo es obligatorio
+      </small>
+
+    </div>
+
 
 
       <div class="row formButtons">
-        <button type="submit" class="smallButton btn btn-success btn-flat">Suscribir</button>
+        <button (click)="this.alEnviar()" type="submit" class="smallButton btn btn-success btn-flat">Suscribir</button>
       </div>
 
     </form>

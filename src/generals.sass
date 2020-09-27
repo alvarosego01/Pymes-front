@@ -35,6 +35,7 @@ $hastaG: $desdeG + 500
     @else if $media == resto
         @media only screen and (min-width: $hastaG + 1)
             @content
+
 // ------------------------
 // colors
 
@@ -91,4 +92,52 @@ $boxShadow2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
 // /* Handle */
 // ::-webkit-scrollbar-thumb
 //     background: $azulOscuro
+
+
+
+
+input[type="radio"].customInput,
+input[type="checkbox"].customInput
+    display: none !important
+
+
+label.labelRadio
+    margin-right: 5px
+    i
+        font-size: 20px
+        color: $VerdeOscur
+        transition: $trans
+        margin: 0
+    i.true
+        display: none
+
+    // i.true
+        // display: block!important
+    // i.false
+        // display: none!important
+
+input[type="checkbox"]:checked + label.labelRadio,
+input[type="radio"]:checked + label.labelRadio
+    i.true
+        display: block!important
+    i.false
+        display: none!important
+
+
+label.labelRadio
+    cursor: pointer
+    position: relative
+    padding: 0!important
+    width: fit-content!important
+    // display: block
+    &:hover
+        i
+            color: $VerdeClar
+    &:after
+        border-right: 2.5px solid $VerdeOscur
+        position: absolute
+        right: 0
+        bottom: 0
+        top: 0
+        display: block
 

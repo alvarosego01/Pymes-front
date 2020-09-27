@@ -18,8 +18,8 @@ import { ProfileViewComponent } from "../../profile-view/profile-view.component"
 import { _PostModel } from "src/app/models/postModel";
 import { GlobalConfigService } from "src/app/services/-global-config.service";
 
-
-import { FormResourcePipe } from 'src/app/pipes/form-resource.pipe';
+import { FormResourcePipe } from "src/app/pipes/form-resource.pipe";
+import { _NotifyModel } from "src/app/models/notifyModel";
 
 @Component({
   selector: "app-post-control",
@@ -92,8 +92,6 @@ export class PostControlComponent implements OnInit {
   openPlanesPauta: boolean = false;
   infoPlanPauta: any = null;
 
-
-
   constructor(
     public _usersService: UsersService,
     public _notifyService: NotifyService,
@@ -105,18 +103,16 @@ export class PostControlComponent implements OnInit {
     public router: Router,
     public _paymentService: PaymentService
   ) {
-
-    this.GlobalConfigService.setTitle('Creación de publicaciones');
+    this.GlobalConfigService.setTitle("Creación de publicaciones");
 
     this.getCategory();
     this.initCitys();
+
+    // this.GlobalConfigService.spinner = true;
+    // this.GlobalConfigService.porcentaje = 35;
   }
 
-  ngOnInit(): void {
-
-  }
-
-
+  ngOnInit(): void {}
 
   deleteCityTarget(i) {
     this.cityTargets.splice(i, 1);
@@ -215,7 +211,7 @@ export class PostControlComponent implements OnInit {
 
   activateEconomicActivity() {
     // this.estadosActividad[e] = !this.estadosActividad[e];
-    ////////// //////////////console.log(this.estadosActividad);
+    ////////// ////// console.log(this.estadosActividad);
   }
 
   setCiudades(i) {
@@ -229,7 +225,7 @@ export class PostControlComponent implements OnInit {
   setSubCategory(i, nro) {
     let k = JSON.parse(i);
 
-    //////////console.log('la mierda esta', k );
+    // console.log('la mierda esta', k );
 
     let p = k._category;
     let c = k._child;
@@ -348,8 +344,8 @@ export class PostControlComponent implements OnInit {
       celPhone: this.ngcelPhone,
     };
 
-    //////////console.log('forma.value.Category1', forma.value.Category1);
-    //////////console.log('forma.value.subCategory1Form', forma.value.subCategory1Form);
+    // console.log('forma.value.Category1', forma.value.Category1);
+    // console.log('forma.value.subCategory1Form', forma.value.subCategory1Form);
 
     var catGroup = [
       {
@@ -400,10 +396,10 @@ export class PostControlComponent implements OnInit {
             ? JSON.parse(forma.value.subCategory3Form).name
             : null,
       },
-      // ////////////console.log(cat);
+      // //// console.log(cat);
     ];
 
-    //////////console.log('group cat', catGroup);
+    // console.log('group cat', catGroup);
 
     this.categoryError = true;
 
@@ -462,12 +458,12 @@ export class PostControlComponent implements OnInit {
       content: this.ngIncludeDesc,
       notContent: this.ngnotIncludeDesc,
       type: forma.value.Type,
-      _infoContact: contactData,//JSON.stringify(contactData),
-      _category: catGroup,//JSON.stringify(catGroup),
-      _cityTarget: this.cityTargets,//JSON.stringify(this.cityTargets),
-      _socialNet: social,//JSON.stringify(social),
+      _infoContact: contactData, //JSON.stringify(contactData),
+      _category: catGroup, //JSON.stringify(catGroup),
+      _cityTarget: this.cityTargets, //JSON.stringify(this.cityTargets),
+      _socialNet: social, //JSON.stringify(social),
       costoPlan: forma.value.costoPlan,
-      typePost: "Publicación"
+      typePost: "Publicación",
     };
   }
 
@@ -543,16 +539,14 @@ export class PostControlComponent implements OnInit {
   }
 
   async selectFiles(event) {
-
     if (event.target.files) {
-
-      //////// //////////////console.log('total', event.target.files);
+      //////// ////// console.log('total', event.target.files);
       for (let index = 0; index < event.target.files.length; index++) {
         var reader = new FileReader();
         var promesa = new Promise((resolve, reject) => {
           reader.readAsDataURL(event.target.files[index]);
           var fileup = event.target.files[index];
-          //////// //////////////console.log('imagen nro ', index, fileup);
+          //////// ////// console.log('imagen nro ', index, fileup);
 
           reader.onload = (event: any) => {
             var image = new Image();
@@ -576,13 +570,13 @@ export class PostControlComponent implements OnInit {
             if (this.ngTypeAdjuntos != "Catálogo PDF") {
               // return;
               var x = new Promise((resolve, reject) => {
-                // //////// //////////////console.log('entra en promesa', index);
+                // //////// ////// console.log('entra en promesa', index);
                 image.onload = function () {
-                  // //////// //////////////console.log('datos de imagn',image);
+                  // //////// ////// console.log('datos de imagn',image);
                   var k = [image.width, image.height];
                   resolve(k);
-                  //////// //////////////console.log('datos promesa', image);
-                  //////// //////////////console.log('Sale de promesa, resuelve', index);
+                  //////// ////// console.log('datos promesa', image);
+                  //////// ////// console.log('Sale de promesa, resuelve', index);
                 };
               });
 
@@ -608,8 +602,8 @@ export class PostControlComponent implements OnInit {
                   if (r[0] >= 200 && r[1] >= 200) {
                     this.urlFiles.push(event.target.result);
                     this.imagenesSubir.push(fileup);
-                    // //////// //////////////console.log(fileup.size);
-                    // //////// //////////////console.log(this.urlFiles, 'urlfiles');
+                    // //////// ////// console.log(fileup.size);
+                    // //////// ////// console.log(this.urlFiles, 'urlfiles');
                   } else {
                     this._notifyService.Toast.fire({
                       title: "Dimensiones no permitidas",
@@ -626,7 +620,7 @@ export class PostControlComponent implements OnInit {
             }
 
             if (this.ngTypeAdjuntos == "Catálogo PDF") {
-              ////////// //////////////console.log('archivo', reader);
+              ////////// ////// console.log('archivo', reader);
               // return;
 
               if (
@@ -681,7 +675,7 @@ export class PostControlComponent implements OnInit {
 
         this._categoryService.allCategoryList = resp.data;
 
-        //console.log("las categorias", resp.data);
+        ////// console.log("las categorias", resp.data);
       },
       (err) => {
         console.error(err);
@@ -709,8 +703,7 @@ export class PostControlComponent implements OnInit {
   }
 
   accion(e) {
-    //console.log("la accion", e);
-
+    ////// console.log("la accion", e);
 
     if (e == "borrador") {
       let copyPost = this.post;
@@ -723,75 +716,98 @@ export class PostControlComponent implements OnInit {
       this.createPublication(copyPost);
     }
 
-    if(e == 'goPay'){
-
+    if (e == "goPay") {
       let p = null;
 
-      if(this.infoPlanPauta != null){
-
-         p = {
+      if (this.infoPlanPauta != null) {
+        p = {
           plan: this.infoPlanPauta.plan,
-          files: this.infoPlanPauta.files
-        }
-
-      }else{
-         p = 'No aplica'
+          files: this.infoPlanPauta.files,
+        };
+      } else {
+        p = "No aplica";
       }
 
       let l = {
-        typeRequest: 'payProcess',
+        typeRequest: "payProcess",
         post: {
           infoPost: this.post,
-          files: this.imagenesSubir
+          files: this.imagenesSubir,
         },
-        planPauta: p
-      }
+        planPauta: p,
+      };
 
+      //// console.log('el conjunto que se envia', l);
 
       this.goPayProcess(l);
-      return
-
-
+      return;
     }
   }
 
-  goPayProcess(data: any){
-
+  goPayProcess(data: any) {
     // this.router.navigate(["/dashboard/paymentProcess"]);
 
     this.GlobalConfigService.spinner = true;
-    this._postService.goPayProcessPOST(data).then((resp: any) => {
-      this.GlobalConfigService.spinner = false;
+    this._postService
+      .goPayProcessPOST(data)
+      .then(async (resp: any) => {
+        // //// console.log('la maldita respuesta de esta mierda')
+
+        /*
+      La resp
+      user
+      post
+      description
+      price
+      process
+      serial
+      */
+
+        let n = {
+          type: "nBillCreateOrder",
+          idPost: resp.data.post,
+          idUser: resp.data.user,
+          // idForeign: ,
+          infoData: resp.data,
+        };
+
+        await this._notifyService
+          .sendNotifyEmailPOST(n, this._usersService.token)
+          .subscribe(
+            (resp: any) => {},
+            (err) => {}
+          );
+
+        this.GlobalConfigService.porcentaje = 0;
+        this.GlobalConfigService.spinner = false;
 
         this._notifyService.Toast.fire({
           title: resp.message,
           icon: "success",
         });
 
-        this.router.navigate(['/dashboard/paymentProcess', resp.data._id]);
+        this.router.navigate(["/dashboard/paymentProcess", resp.data._id]);
 
-
-      // this._notifyService.swalNormal
-      //   .fire({
-      //     title: "¡Publicación procesada con exito!",
-      //     text:
-      //       "¡Gracias por participar y pautar con nosotros, con tan solo un click estarás a la vista de todos!",
-      //     icon: "success",
-      //     confirmButtonText: "Aceptar",
-      //   })
-      //   .then((result) => {
-      //     this.router.navigate(["/us"]);
-      //   });
-    })
-    .catch((e) => {
-      this.GlobalConfigService.spinner = false;
-      this._notifyService.Toast.fire({
-        title: e.message,
-        text: "Intente más tarde por favor",
-        icon: "error",
+        this._notifyService.swalNormal
+          .fire({
+            title: "¡Publicación procesada con exito!",
+            text:
+              "¡Gracias por participar y pautar con nosotros, con tan solo un click estarás a la vista de todos!",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+          })
+          .then((result) => {
+            // this.router.navigate(["/us"]);
+          });
+      })
+      .catch((e) => {
+        this.GlobalConfigService.spinner = false;
+        this._notifyService.Toast.fire({
+          title: e.message,
+          text: "Intente más tarde por favor",
+          icon: "error",
+        });
       });
-    });
-
   }
 
   cerrarModal() {
@@ -803,45 +819,31 @@ export class PostControlComponent implements OnInit {
   }
 
   addPlanPauta(plan: any) {
-
     this.infoPlanPauta = plan;
 
-    //console.log('el plan se recibe', plan);
-    window.scroll(0,0);
+    ////// console.log('el plan se recibe', plan);
+    window.scroll(0, 0);
 
-    // //console.log('prueba de stringi',
+    // ////// console.log('prueba de stringi',
     //   JSON.stringify(plan.plan)
     // )
 
     this._notifyService.Toast.fire({
       title: `Plan ${plan.plan.planPauta.nombre} seleccionado`,
-      icon: 'success'
-    })
-
-
+      icon: "success",
+    });
   }
 
-  removePlanPauta(){
-
-
+  removePlanPauta() {
     this.infoPlanPauta = null;
 
     this._notifyService.Toast.fire({
-      title: 'Plan de pauta retirado',
-      icon: 'success'
-    })
-
+      title: "Plan de pauta retirado",
+      icon: "success",
+    });
   }
 
-
-  pruebaRapida(){
-
-
+  pruebaRapida() {
     this.router.navigate(["/dashboard/paymentProcess"]);
-
   }
-
-
 }
-
-

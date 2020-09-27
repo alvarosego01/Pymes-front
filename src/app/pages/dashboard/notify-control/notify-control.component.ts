@@ -91,7 +91,7 @@ export class NotifyControlComponent implements OnInit {
 
           this.paginator = resp.paginator;
 
-          //console.log('la respuesta', resp);
+          ////// console.log('la respuesta', resp);
           this.GlobalConfigService.spinner = false;
         },
         (err) => {

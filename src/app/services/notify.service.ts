@@ -47,20 +47,34 @@ export class NotifyService {
   constructor(
     public http: HttpClient,
     public _userService: UsersService
-    ) {}
+  ) { }
 
-  sendNotifyEmailPOST(data: _NotifyModel, token: string = null) {
+  sendNotifyEmailPOST(data: any, token: string = null) {
     // return;
     let url = _SERVICIOS + "/notify";
-    url = (token != null)? `${url}?t=${token}`: url;
-
-
-    ////console.log('correo que se envia', data);
+    url = (token != null) ? `${url}?t=${token}` : url;
+    //// console.log('la maldita notif', data);
 
     return this.http.post(url, data).pipe(
-      map((resp: any) => {
+      map( (resp: any) => {
 
 
+         new Promise((resolve, reject) => {
+
+          this.getAllNotifyByUserGET(1).subscribe((r) => {
+            resolve(r);
+
+          }, (e) => {
+            reject(e);
+          });
+        }).then((r: any) => {
+          this.notificaciones = r.data;
+          this.paginator = r.paginator;
+        }, er => {
+
+        })
+
+        // this.getnoti
         return resp;
       }),
       catchError((err) => {
@@ -73,58 +87,74 @@ export class NotifyService {
 
 
 
-  getNotifyByUserGET(id){
+  getNotifyByUserGET(id) {
 
 
     let url = `${_SERVICIOS}/notify/${id}?t=${this._userService.token}`;
 
-    ////console.log('envia notif', url);
+    //////// console.log('envia notif', url);
     return this.http.get(url).pipe(
-        map((resp: any) => {
+      map((resp: any) => {
 
-          ////console.log(this.notificaciones);
+        //////// console.log(this.notificaciones);
 
         return resp;
-    }),
-    catchError((err) => {
+      }),
+      catchError((err) => {
         return throwError(err);
-    })
+      })
     );
 
   }
 
-  getAllNotifyByUserGET(paginate: number = 1){
+  getAllNotifyByUserGET(paginate: number = 1) {
 
 
     let url = `${_SERVICIOS}/notify?t=${this._userService.token}&paginate=${paginate}`;
 
-    //console.log('envia notif', url);
+    ////// console.log('envia notif', url);
     return this.http.get(url).pipe(
-        map((resp: any) => {
-
-          ////console.log(this.notificaciones);
-
-        return resp;
-    }),
-    catchError((err) => {
-        return throwError(err);
-    })
-    );
-
-  }
-
-  deleteNotificactionDELETE(id){
-
-    let url = `${_SERVICIOS}/notify/${id}?t=${this._userService.token}`;
-
-    return this.http.delete(url).pipe(
       map((resp: any) => {
+
+        //////// console.log(this.notificaciones);
+
         return resp;
       }),
       catchError((err) => {
         return throwError(err);
       })
-      );
+    );
+
+  }
+
+  deleteNotificactionDELETE(id) {
+
+    let url = `${_SERVICIOS}/notify/${this._userService.usuario._id}/${id}?t=${this._userService.token}`;
+
+    return this.http.delete(url).pipe(
+      map((resp: any) => {
+
+        new Promise((resolve, reject) => {
+
+          this.getAllNotifyByUserGET(1).subscribe((r) => {
+            resolve(r);
+
+          }, (e) => {
+            reject(e);
+          });
+        }).then((r: any) => {
+          this.notificaciones = r.data;
+          this.paginator = r.paginator;
+        }, er => {
+
+        })
+
+        return resp;
+      }),
+      catchError((err) => {
+        return throwError(err);
+      })
+    );
   }
 
 
