@@ -1,35 +1,33 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { UsersService } from 'src/app/services/users.service';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { UsersService } from "src/app/services/users.service";
 
-import Litepicker from 'litepicker';
-import { NgForm } from '@angular/forms';
-import { NotifyService, Filebase64Service, FormsResourcesService } from 'src/app/services/service.index';
-import { GlobalConfigService } from 'src/app/services/-global-config.service';
-import { Router } from '@angular/router';
-
-
+import Litepicker from "litepicker";
+import { NgForm } from "@angular/forms";
+import {
+  NotifyService,
+  Filebase64Service,
+  FormsResourcesService,
+} from "src/app/services/service.index";
+import { GlobalConfigService } from "src/app/services/-global-config.service";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-plan-pauta',
-  templateUrl: './plan-pauta.component.html',
-  styleUrls: ['./plan-pauta.component.sass']
+  selector: "app-plan-pauta",
+  templateUrl: "./plan-pauta.component.html",
+  styleUrls: ["./plan-pauta.component.sass"],
 })
 export class PlanPautaComponent implements OnInit {
-
   tipo: string = null;
   costo: string = null;
   paso: number = 0;
 
   enviado: boolean = false;
 
-
-
   @Input("openPlanesPauta") openPlanesPauta: boolean = false;
   @Input("typePurchase") typePurchase: string = null;
 
-  @Output() closePlanes  =  new EventEmitter<boolean>();
-  @Output() infoPlanPauta  =  new EventEmitter<any>();
-
+  @Output() closePlanes = new EventEmitter<boolean>();
+  @Output() infoPlanPauta = new EventEmitter<any>();
 
   imagenSubir: File;
   imagenesSubir = [];
@@ -37,7 +35,6 @@ export class PlanPautaComponent implements OnInit {
   imageName: string = "Seleccionar";
   citysError: boolean = false;
   filesError: boolean = false;
-
 
   ngTypeAdjuntos = null;
   nroFotos: number = 2;
@@ -50,7 +47,7 @@ export class PlanPautaComponent implements OnInit {
   cityTargets: any = [];
 
   nroCiudades: number = 0;
-  ngfechaPautas: string = '';
+  ngfechaPautas: string = "";
 
   picker: any;
   //
@@ -87,52 +84,32 @@ export class PlanPautaComponent implements OnInit {
   palabrasBuscador: string = "";
   nroRecursos: number = 2;
 
-
   constructor(
     public _usersService: UsersService,
     public _notifyService: NotifyService,
     public GlobalConfigService: GlobalConfigService,
     public _fileBase64: Filebase64Service,
     public _formsResource: FormsResourcesService,
-    public router: Router,
+    public router: Router
+  ) {}
 
-  ) {
+  ngOnInit(): void {}
 
-
-  }
-
-  ngOnInit(): void {
-
-
-
-
-  }
-
-
-
-  cerrarModal(){
+  cerrarModal() {
     this.openPlanesPauta = false;
     this.closePlanes.emit(false);
   }
 
-
-  Atras(){
+  Atras() {
     this.tipo = null;
     this.paso = 0;
   }
 
-
-
-  ocultarClick(e){
+  ocultarClick(e) {
     // this._postService.PDFFILE = null;
     this.openPlanesPauta = false;
     this.closePlanes.emit(false);
-
-
-
   }
-
-
 
   deleteCityTarget(i) {
     this.cityTargets.splice(i, 1);
@@ -183,7 +160,6 @@ export class PlanPautaComponent implements OnInit {
     }
   }
 
-
   initCitys() {
     for (
       let index = 0;
@@ -199,7 +175,6 @@ export class PlanPautaComponent implements OnInit {
     }
   }
 
-
   setCiudades(i) {
     let k = JSON.parse(i);
     i = k.id;
@@ -208,126 +183,119 @@ export class PlanPautaComponent implements OnInit {
     this.ciudades = dp[i].ciudades;
   }
 
+  async selectPauta(tipo, costo) {
+    this.imagenesSubir = [];
+    this.urlFiles = [];
+    this.ngDepartment = "";
+    this.ngCity = null;
 
-  async selectPauta(tipo, costo){
+    this.ciudades = [];
 
+    this.cityTargets = [];
 
+    this.nroCiudades = 0;
+    this.ngfechaPautas = "";
 
-  this.imagenesSubir = [];
-  this.urlFiles = [];
-  this.ngDepartment = "";
-  this.ngCity = null;
-
-  this.ciudades = [];
-
-  this.cityTargets = [];
-
-  this.nroCiudades = 0;
-  this.ngfechaPautas = '';
-
-  this.ngCuentaPublico = '';
-  this.palabrasBuscador = '';
+    this.ngCuentaPublico = "";
+    this.palabrasBuscador = "";
 
     this.GlobalConfigService.spinner = true;
     this.tipo = tipo;
     this.costo = costo;
     this.paso = 1;
 
-
-    if(this.tipo == 'Micro' || this.tipo == 'Pequeño' || this.tipo == 'Mediano' ){
-
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      let copyfecha = this.fechas;
-      let d = new Date();
-
-       this.picker = new Litepicker({
-        element: document.getElementById("fechaPautas"),
-      singleMode: false,
-      numberOfColumns: 2,
-      numberOfMonths: 2,
-      lang: "es",
-      maxDays: 3,
-      minDays: 3,
-      format: "DD/MMMM/YYYY",
-      inlineMode: false,
-      selectForward: true,
-      mobileFriendly: true,
-      minDate: d.setDate(d.getDate() + 2),
-      tooltipText: {
-        one: "día",
-        other: "días",
-      },
-      onSelect: function () {
-        let aux = document.querySelectorAll("#fechaPautas")[0]["value"];
-        aux = aux.replaceAll("/", " de ");
-        document.querySelectorAll("#fechaPautas")[0]["value"] = aux;
-        aux = aux.split(" - ");
-
-        copyfecha.inicio = aux[0];
-        copyfecha.finalizacion = aux[1];
-        this.fechas = copyfecha;
-      },
-    });
-
-  this.nroCiudades = 1;
-
-}
-
-if(this.tipo == 'Mediano'){
-
-  this.nroCiudades = 2;
-    }
-
-if(this.tipo == 'Grande'){
-
-  await new Promise(resolve => setTimeout(resolve, 1000));
+    if (
+      this.tipo == "Micro" ||
+      this.tipo == "Pequeño" ||
+      this.tipo == "Mediano"
+    ) {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       let copyfecha = this.fechas;
       let d = new Date();
 
-       this.picker = new Litepicker({
+      this.picker = new Litepicker({
         element: document.getElementById("fechaPautas"),
-      singleMode: false,
-      numberOfColumns: 2,
-      numberOfMonths: 2,
-      lang: "es",
-      maxDays: 5,
-      minDays: 5,
-      format: "DD/MMMM/YYYY",
-      inlineMode: false,
-      selectForward: true,
-      mobileFriendly: true,
-      minDate: d.setDate(d.getDate() + 2),
-      tooltipText: {
-        one: "día",
-        other: "días",
-      },
-      onSelect: function () {
-        let aux = document.querySelectorAll("#fechaPautas")[0]["value"];
-        aux = aux.replaceAll("/", " de ");
-        document.querySelectorAll("#fechaPautas")[0]["value"] = aux;
-        aux = aux.split(" - ");
+        autoApply: true,
+        singleMode: false,
+        allowRepick: true,
+        numberOfColumns: 2,
+        numberOfMonths: 2,
+        autoclose: true,
+        lang: "es",
+        maxDays: 3,
+        minDays: 3,
+        disallowLockDaysInRange: true,
+        format: "DD/MMMM/YYYY",
+        inlineMode: false,
+        selectForward: true,
+        mobileFriendly: true,
+        minDate: d.setDate(d.getDate() + 2),
+        tooltipText: {
+          one: "día",
+          other: "días",
+        },
+        onSelect: function () {
+          let aux = document.querySelectorAll("#fechaPautas")[0]["value"];
+          aux = aux.replaceAll("/", " de ");
+          document.querySelectorAll("#fechaPautas")[0]["value"] = aux;
+          aux = aux.split(" - ");
 
-        copyfecha.inicio = aux[0];
-        copyfecha.finalizacion = aux[1];
-        this.fechas = copyfecha;
-      },
-    });
+          copyfecha.inicio = aux[0];
+          copyfecha.finalizacion = aux[1];
+          this.fechas = copyfecha;
+        },
+      });
 
-  this.nroCiudades = 3;
+      this.nroCiudades = 1;
     }
 
+    if (this.tipo == "Mediano") {
+      this.nroCiudades = 2;
+    }
+
+    if (this.tipo == "Grande") {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      let copyfecha = this.fechas;
+      let d = new Date();
+
+      this.picker = new Litepicker({
+        element: document.getElementById("fechaPautas"),
+        singleMode: false,
+        numberOfColumns: 2,
+        numberOfMonths: 2,
+        lang: "es",
+        maxDays: 5,
+        minDays: 5,
+        format: "DD/MMMM/YYYY",
+        inlineMode: false,
+        selectForward: true,
+        mobileFriendly: true,
+        minDate: d.setDate(d.getDate() + 2),
+        tooltipText: {
+          one: "día",
+          other: "días",
+        },
+        onSelect: function () {
+          let aux = document.querySelectorAll("#fechaPautas")[0]["value"];
+          aux = aux.replaceAll("/", " de ");
+          document.querySelectorAll("#fechaPautas")[0]["value"] = aux;
+          aux = aux.split(" - ");
+
+          copyfecha.inicio = aux[0];
+          copyfecha.finalizacion = aux[1];
+          this.fechas = copyfecha;
+        },
+      });
+
+      this.nroCiudades = 3;
+    }
 
     this.GlobalConfigService.spinner = false;
-
   }
 
-
-
   savePlanPauta(forma: NgForm) {
-
-
     if (this.imagenesSubir.length == 0) {
       this._notifyService.Toast.fire({
         title: "Debes seleccionar al menos un archivo",
@@ -336,7 +304,6 @@ if(this.tipo == 'Grande'){
       return;
     }
 
-
     if (forma.invalid) {
       this._notifyService.Toast.fire({
         title: "Datos invalidos",
@@ -344,7 +311,6 @@ if(this.tipo == 'Grande'){
       });
       return;
     }
-
 
     if (this.cityTargets.length == 0) {
       this._notifyService.Toast.fire({
@@ -361,30 +327,33 @@ if(this.tipo == 'Grande'){
     var x = {
       nombre: this.tipo,
       costo: this.costo,
-
-    }
+    };
 
     var l = {
       plan: {
-        planPauta: x,//JSON.stringify(x),
-        redesPublico: (forma.value.redesPublico != null && forma.value.redesPublico != '')? forma.value.redesPublico: 'No aplica',
+        planPauta: x, //JSON.stringify(x),
+        redesPublico:
+          forma.value.redesPublico != null && forma.value.redesPublico != ""
+            ? forma.value.redesPublico
+            : "No aplica",
         generoObj: this.generoObj, //JSON.stringify(this.generoObj),
         edadesObj: this.edadesObj, //JSON.stringify(this.edadesObj),
         estadoCivilObj: this.estadoCivilObj, //JSON.stringify(this.estadoCivilObj),
         cuentaPublico: this.ngCuentaPublico,
-        palabrasBuscador: (this.palabrasBuscador != null && this.palabrasBuscador != '')? this.palabrasBuscador: 'No aplica',
+        palabrasBuscador:
+          this.palabrasBuscador != null && this.palabrasBuscador != ""
+            ? this.palabrasBuscador
+            : "No aplica",
         fechas: this.fechas, //JSON.stringify(this.fechas),
         cityTargets: this.cityTargets, //JSON.stringify(this.cityTargets),
       },
-      files: this.imagenesSubir
-    }
+      files: this.imagenesSubir,
+    };
 
     // se retornan los elementos al componente padre...
     this.infoPlanPauta.emit(l);
     this.openPlanesPauta = false;
     this.closePlanes.emit(false);
-
-
 
     // ////// console.log('redesPublico', this.redesPublico);
     // ////// console.log("generoObj", this.generoObj);
@@ -395,16 +364,11 @@ if(this.tipo == 'Grande'){
     // ////// console.log("cityTargets", this.cityTargets);
   }
 
-
   alEnviar() {
     this.enviado = true;
   }
 
-
-
-
   async selectFiles(event) {
-
     if (event.target.files) {
       //////// ////// console.log('total', event.target.files);
       for (let index = 0; index < event.target.files.length; index++) {
@@ -484,8 +448,6 @@ if(this.tipo == 'Grande'){
 
               resolve(true);
             }
-
-
           };
         });
 
@@ -493,6 +455,4 @@ if(this.tipo == 'Grande'){
       }
     }
   }
-
-
 }

@@ -45,8 +45,8 @@ export class NewsletterComponent implements OnInit {
         // //// ////// console.log(resp);
       },
       (ERR) => {
-        // var resp = ERR;
-        // // //// ////// console.log(resp.error);
+        var resp = ERR;
+        console.error('error custom', resp.error);
         // this._notifyService.Toast.fire({
         //   title: resp.error.message,
         //   icon: "error",
@@ -94,6 +94,10 @@ export class NewsletterComponent implements OnInit {
     this.enviado = true;
 
   }
+
+
+
+
 
 
 }

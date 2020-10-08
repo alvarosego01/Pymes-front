@@ -84,7 +84,7 @@
   </section>
 
 
-  <section *ngIf="(this.posts) && (this.posts.length > 0)" class="content">
+  <section  class="content">
 
     <div class="container-fluid">
       <div class="row mb-2">
@@ -98,9 +98,27 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <div class="card-header">
-            <!-- <h3 class="card-title">Fixed Header Table</h3> -->
 
+          <div class="card-header">
+
+
+            <div class="card-tools">
+              <form ngNativeValidate #f="ngForm" (ngSubmit)="this.searchPost( f )" class="formDataSend"
+              >
+
+                <div class="input-group input-group-sm">
+                  <input required ngModel name="arg" placeholder="Búsqueda de públicaciones" type="text" class="form-control" >
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-success">
+                      <i class="fas fa-search"></i>
+                    </button>
+                    <button (click)="this.getAllPublications(1)" type="button" class="btn btn-success">
+                      Todos
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
 
           </div>
           <!-- /.card-header -->

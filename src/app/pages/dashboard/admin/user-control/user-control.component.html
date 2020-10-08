@@ -1,11 +1,23 @@
 <div class="containerFull">
+
+
+
+
+  <app-single-report
+  *ngIf="this.openUserReport == true"
+  [open]="this.openUserReport"
+  [usuario]="this.userReport"
+  (close)="this.cerrarModal()">
+</app-single-report>
+
+
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1>
-            Control de usuarios - <span *ngIf="this.paginator != null">{{ this.paginator.itemCount }}</span>
+            Control de usuarios <span *ngIf="this.paginator != null"> - {{ this.paginator.itemCount }}</span>
 
           </h1>
         </div>
@@ -19,6 +31,30 @@
 
     <!-- Default box -->
     <div class="card card-solid">
+
+      <div class="card-header">
+
+
+        <div class="card-tools">
+          <form ngNativeValidate #f="ngForm" (ngSubmit)="this.searchUser( f )" class="formDataSend"
+          >
+
+            <div class="input-group input-group-sm">
+              <input required ngModel name="arg" placeholder="Búsqueda de usuarios" type="text" class="form-control" >
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-success">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button (click)="this.getAlUsers(1)" type="button" class="btn btn-success">
+                  Todos
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- /.card-tools -->
+      </div>
+
       <div class="card-body pb-0">
         <div *ngIf="(this._users) && (this._users.length > 0)" class="row d-flex align-items-stretch">
 
@@ -28,7 +64,19 @@
             <div style="width: 100%;" class="card bg-light">
               <div class="card-header text-muted border-bottom-0">
                 {{ item.role | roleTransform }}
+                <!-- card tools -->
+                <div class="card-tools">
+
+                  <button
+                  (click)="this.confirmDeleteUser(item._id)"
+                  type="button" class="btn btn-danger" >
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+
               </div>
+
+
               <div class="card-body pt-0">
                 <div class="row infoUser">
                   <div class="col-md-12 col-lg-7">
@@ -44,6 +92,12 @@
                       <li *ngIf="(item.celPhone) && (item.celPhone != null)" class="small"><span class="fa-li"><i
                             class="fas fa-lg fa-phone"></i></span>
                         Teléfono Movil: {{ item.celPhone }}
+                      </li>
+                      <li *ngIf="(item.celPhone) && (item.celPhone != null)" class="small">
+                        <span class="fa-li">
+                          <i class="fas fa-envelope    "></i>
+                        </span>
+                        Email: {{ item.email }}
                       </li>
                     </ul>
                   </div>
@@ -62,12 +116,19 @@
 
                     <button [routerLink]="['/user', item._id]" routerLinkActive="active" type="button"
                       class="btn btn-success btn-flat">
-                      <i class="fas fa-user"></i> Ver usuario
+                      <i class="fas fa-user"></i> Ver perfil
                     </button>
 
-                    <button (click)="this.confirmDeleteUser(item._id)" type="button" class="btn btn-danger btn-flat">
-                      <i class="fas fa-trash"></i> Eliminar usuario
+                    <button
+                    *ngIf="item.rol != 'ADMIN_ROLE'"
+                    (click)="this.openReportUser(item)"
+                    routerLinkActive="active" type="button"
+                      class="btn btn-warning btn-flat">
+                      <i class="fas fa-info    "></i>
+                      Información
                     </button>
+
+
 
 
 

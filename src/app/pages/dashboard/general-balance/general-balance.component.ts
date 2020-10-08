@@ -156,7 +156,6 @@ usuarioInfo: any = [];
 
         this.usuarioInfo.statsGeneral = r;
 
-        //// console.log('this.usuarioInfo', this.usuarioInfo);
 
         }, err => {
           console.error(err);
@@ -166,10 +165,7 @@ usuarioInfo: any = [];
         //// console.log('el retorno', resp);
         this.statsGeneral = resp.data;
 
-
         if(this.statsGeneral.dateUserPublications.posts != null && this.statsGeneral.dateUserPublications.posts.length > 0){
-
-
 
         this.statsGeneral.dateUserPublications.posts[0].meses.forEach( (element,idx) => {
 

@@ -9,6 +9,8 @@ import {
 } from "src/app/models/models.index";
 import { Router, ActivatedRoute } from "@angular/router";
 import { GlobalConfigService } from "src/app/services/-global-config.service";
+import { WebsocketService } from 'src/app/services/websocket.service';
+import { i_Visit } from 'src/interfaces/I_visit';
 
 @Component({
   selector: "app-profile-view",
@@ -91,13 +93,22 @@ export class ProfileViewComponent implements OnInit {
     public _usersService: UsersService,
     public _notifyService: NotifyService,
     public GlobalConfigService: GlobalConfigService,
-    public _postService: PostsService
+    public _postService: PostsService,
+    public wsService: WebsocketService,
   ) {
     // return;
     activatedRoute.params.subscribe((params) => {
       let id = params["id"];
 
       this.getUserProfile(id);
+
+      let l: i_Visit = {
+        type: 'profile',
+        _post: id
+      }
+      this.wsService.beginVisit(l).then(r => {
+      });
+
     });
 
     if (

@@ -255,4 +255,51 @@ export class PostManagerComponent implements OnInit {
 
   }
 
+
+
+
+  async searchPost(forma: NgForm){
+
+
+    if(forma.invalid){
+      return;
+    }
+
+
+    let l = {
+      arg: forma.value.arg
+    }
+
+    this.GlobalConfigService.spinner = true;
+
+    await this._postService.searchPostPOST(l).subscribe((resp) => {
+
+
+
+      this.allPublications = resp.data;
+
+      this.paginator = null;
+
+
+      this.allPublications.sort(function (a, b) {
+        var textA = a.title.toUpperCase();
+        var textB = b.title.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      });
+
+
+
+
+      this.GlobalConfigService.spinner = false;
+    }, (err) => {
+
+      this.GlobalConfigService.spinner = false;
+    });
+
+    forma.reset();
+
+
+  }
+
+
 }

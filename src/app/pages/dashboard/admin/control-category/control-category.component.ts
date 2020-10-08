@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService, NotifyService,   PostsService } from 'src/app/services/service.index';
 import { GlobalConfigService } from 'src/app/services/-global-config.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-control-category',
@@ -334,6 +335,47 @@ export class ControlCategoryComponent implements OnInit {
     this.postsPaginator.currentPage = paginate;
 
     this.getAllPublications(this.postsPaginator.currentPage);
+
+  }
+
+
+
+  async searchPost(forma: NgForm){
+
+
+    if(forma.invalid){
+      return;
+    }
+
+
+    let l = {
+      arg: forma.value.arg
+    }
+
+    this.GlobalConfigService.spinner = true;
+
+    await this._postService.searchPostPOST(l).subscribe((resp) => {
+      this.posts = resp.data;
+
+      this.postsPaginator = null;
+
+      this.posts.sort(function (a, b) {
+        var textA = a.title.toUpperCase();
+        var textB = b.title.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      });
+
+
+
+
+      this.GlobalConfigService.spinner = false;
+    }, (err) => {
+
+      this.GlobalConfigService.spinner = false;
+    });
+
+    forma.reset();
+
 
   }
 

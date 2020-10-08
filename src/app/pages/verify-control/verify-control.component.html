@@ -32,44 +32,83 @@
 
                           <div class="row">
 
-                            <div class="form-group clearfix col-md-12 ">
-                              <label for="Pass">Contraseña <span class="colorRed">(*)</span></label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text">
-                                    <i class="fa fa-lock" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <input  ngModel  name="Pass" #Pass="ngModel" type="password" class="form-control" required>
-                            </div>
 
-                            <div class="errorSpace" *ngIf="( this.enviado == true && Pass.invalid ) || (Pass.invalid && (Pass.dirty || Pass.touched))" >
-                              <small *ngIf="Pass.errors.required">
-                                Este campo es obligatorio
-                              </small>
+                  <div class="form-group clearfix col-md-12 col-lg-4">
+                    <label for="Pass">Contraseña <span class="colorRed">(*)</span></label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                      </div>
+                      <input
+                      [type]="fieldTextType ? 'text' : 'password'"
+                      ngModel name="Pass" #Pass="ngModel" type="password" class="form-control" required>
 
-                            </div>
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i
+                          class="fa"
+                          [ngClass]="{
+                            'fa-eye-slash': !fieldTextType,
+                            'fa-eye': fieldTextType
+                          }"
+                          (click)="toggleFieldTextType()"
+                        ></i>
+                        </span>
+                      </div>
 
-                            </div>
-                             <div class="form-group clearfix col-md-12 ">
-                              <label for="CPass">Confirma contraseña <span class="colorRed">(*)</span></label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text">
-                                    <i class="fa fa-lock" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                                <input  ngModel  name="CPass" #CPass="ngModel" type="password" class="form-control" required>
-                              </div>
+                    </div>
 
-                              <div class="errorSpace" *ngIf="( this.enviado == true && CPass.invalid ) || (CPass.invalid && (CPass.dirty || CPass.touched))" >
-                                <small *ngIf="CPass.errors.required">
-                                  Este campo es obligatorio
-                                </small>
 
-                              </div>
 
-                            </div>
+                    <div class="errorSpace"
+                      *ngIf="( this.enviado == true && Pass.invalid ) || (Pass.invalid && (Pass.dirty || Pass.touched))">
+                      <small *ngIf="Pass.errors.required">
+                        Este campo es obligatorio
+                      </small>
+
+                    </div>
+
+                  </div>
+                  <div class="form-group clearfix col-md-12 col-lg-4">
+                    <label for="CPass">Confirma contraseña <span class="colorRed">(*)</span></label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                      </div>
+                      <input
+                      [type]="repeatFieldTextType ? 'text' : 'password'"
+                      ngModel name="CPass" #CPass="ngModel" type="password" class="form-control" required>
+
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i
+                            class="fa"
+                            [ngClass]="{
+                              'fa-eye-slash': !repeatFieldTextType,
+                              'fa-eye': repeatFieldTextType
+                            }"
+                            (click)="toggleRepeatFieldTextType()"
+                          ></i>
+                        </span>
+                      </div>
+
+
+                    </div>
+
+                    <div class="errorSpace"
+                      *ngIf="( this.enviado == true && CPass.invalid ) || (CPass.invalid && (CPass.dirty || CPass.touched))">
+                      <small *ngIf="CPass.errors.required">
+                        Este campo es obligatorio
+                      </small>
+
+                    </div>
+
+                  </div>
+
 
                           </div>
 

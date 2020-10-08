@@ -410,6 +410,26 @@ this._searchService.registros = resp.data;
     }
 
 
+    shuffle(array) {
+      var currentIndex = array.length, temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+    }
+
+
   setFirstLook() {
 
     //// console.log('llama first');
@@ -426,8 +446,7 @@ this._searchService.registros = resp.data;
 
           this._searchService.homeTitleResults = 'Destacados';
 
-
-this._searchService.registros = resp.data;
+this._searchService.registros = this.shuffle(resp.data);
           this._searchService.paginator = resp.paginator || null;
           this._searchService.setActualReactions();
 

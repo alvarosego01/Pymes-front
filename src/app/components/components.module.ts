@@ -17,10 +17,14 @@ import { DpDatePickerModule } from "ng2-date-picker";
 
 import { GlobalPaginatorComponent } from "src/app/components/global-paginator/global-paginator.component";
 import { LoadingComponent } from "./loading/loading.component";
+import { SingleReportComponent } from './single-report/single-report.component';
 // import { COMPONENTS_MODULE } from 'src/app/components/components.module';
 
+import { ChartsModule } from 'ng2-charts';
+
+
 @NgModule({
-  declarations: [GlobalPaginatorComponent, LoadingComponent],
+  declarations: [GlobalPaginatorComponent, LoadingComponent, SingleReportComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -37,13 +41,14 @@ import { LoadingComponent } from "./loading/loading.component";
       swapThreshold: 1,
     }),
     DpDatePickerModule,
+    ChartsModule,
 
     // COMPONENTS_MODULE
     // AppModule
     // InfoPostComponent
     // PublicationPreviewComponent
   ],
-  exports: [GlobalPaginatorComponent, LoadingComponent],
+  exports: [GlobalPaginatorComponent, LoadingComponent, SingleReportComponent],
   // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class GLOBALCOMPONENTS_MODULE {}
+export class GLOBALCOMPONENTS_MODULE { }

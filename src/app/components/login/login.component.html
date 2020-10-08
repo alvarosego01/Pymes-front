@@ -42,7 +42,25 @@
                           <i class="fa fa-key" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <input required ngModel name="Pass" type="password" class="form-control">
+                    <input
+                    [type]="fieldTextType ? 'text' : 'password'"
+                    required ngModel name="Pass" type="password" class="form-control">
+
+
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i
+                        class="fa"
+                        [ngClass]="{
+                          'fa-eye-slash': !fieldTextType,
+                          'fa-eye': fieldTextType
+                        }"
+                        (click)="toggleFieldTextType()"
+                      ></i>
+                      </span>
+                    </div>
+
+
                   </div>
                   </div>
 
@@ -56,7 +74,7 @@
 
                 <div class="row spacebetweenCustom">
                   <a class="hiperButton" [routerLink]="['/register']" routerLinkActive="active">
-                    Inscríbete hoy
+                    Crea tu cuenta
                   </a>
 
                   <a

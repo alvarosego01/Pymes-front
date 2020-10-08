@@ -18,6 +18,12 @@ export class VerifyControlComponent implements OnInit {
 
   type: string = null;
 
+
+
+  fieldTextType: boolean;
+  repeatFieldTextType: boolean;
+
+
   constructor(
 
     public router: Router,
@@ -238,6 +244,16 @@ export class VerifyControlComponent implements OnInit {
 
     this.enviado = true;
 
+  }
+
+
+
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
+
+  toggleRepeatFieldTextType() {
+    this.repeatFieldTextType = !this.repeatFieldTextType;
   }
 
 

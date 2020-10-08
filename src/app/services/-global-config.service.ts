@@ -133,10 +133,10 @@ export class GlobalConfigService {
           );
         }
 
-      newsLetterGET(){
+      newsLetterGET(paginate){
 
 
-          let url = `${_SERVICIOS}/newsLetter?t=${this._userService.token}`;
+          let url = `${_SERVICIOS}/newsLetter?t=${this._userService.token}&paginate=${paginate}`;
 
           return this.http.get(url).pipe(
               map( (resp: any) => {
@@ -156,6 +156,67 @@ export class GlobalConfigService {
               })
           );
         }
+      newsLetterAllGET(){
+
+
+          let url = `${_SERVICIOS}/newsLetter/all?t=${this._userService.token}`;
+
+          return this.http.get(url).pipe(
+              map( (resp: any) => {
+
+
+                return resp;
+              }),
+              catchError( err =>{
+                ////////// ////// console.log(err);
+                // this._notifyService.Toast.fire({
+                //   title: 'Algo ha salido mal',
+                //   icon: 'error'
+                // });
+                // this.GlobalConfigService.spinner = false;
+                return throwError(err);
+
+              })
+          );
+        }
+
+
+
+
+        newsLetterSearchPOST(data: any){
+
+
+    let url = `${_SERVICIOS}/newsLetter/search?t=${this._userService.token}`;
+    return this.http.post(url, data).pipe(
+        map((resp: any) => {
+        return resp;
+    }),
+    catchError((err) => {
+        return throwError(err);
+    })
+    );
+
+
+
+  }
+
+
+
+  deleteNewsLetter(id: string){
+
+
+    let url = `${_SERVICIOS}/newsLetter/${id}?t=${this._userService.token}`;
+    return this.http.delete(url).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((err) => {
+        return throwError(err);
+      })
+    );
+
+
+  }
 
 
 

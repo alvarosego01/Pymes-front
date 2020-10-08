@@ -188,43 +188,34 @@ export class PostsService {
   }
 
   getUserPublicationGET(idUser, limites) {
-    // publicacionesUser/5ec5cb9121f1fc03d8067b34
+
 
     let url = `${_SERVICIOS}/post/publicacionesUser/${idUser}`;
-    // ////// console.log('url', url);
-    //////////// ////// console.log(data, "llega data notif");
+
     return this.http.post(url, limites).pipe(
       map((resp: any) => {
-        //////////// ////// console.log("respuesta notificacion", resp);
-        // alert('Usuario registrado');
 
         return resp;
       }),
       catchError((err) => {
-        //////////// ////// console.log("respuesta notificacion", err);
-        // alert('Error en al registrar');
-        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+
         return throwError(err);
       })
     );
   }
 
   getSuggestPublicPOST(category, limites) {
-    // publicacionesUser/5ec5cb9121f1fc03d8067b34
+
     let url = `${_SERVICIOS}/post/sameCategory/${category}`;
-    // ////// console.log('url', url);
-    //////////// ////// console.log(data, "llega data notif");
+
     return this.http.post(url, limites).pipe(
       map((resp: any) => {
-        //////////// ////// console.log("respuesta notificacion", resp);
-        // alert('Usuario registrado');
+
 
         return resp;
       }),
       catchError((err) => {
-        //////////// ////// console.log("respuesta notificacion", err);
-        // alert('Error en al registrar');
-        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+
         return throwError(err);
       })
     );
@@ -250,9 +241,7 @@ export class PostsService {
         return resp;
       }),
       catchError((err) => {
-        //////////// ////// console.log("respuesta notificacion", err);
-        // alert('Error en al registrar');
-        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+ 
         return throwError(err);
       })
     );
@@ -260,9 +249,7 @@ export class PostsService {
 
   deleteCommentDELETE(ideComment, publicationId) {
     let url = `${_SERVICIOS}/post/comments/${publicationId}/${ideComment}?t=${this._usersService.token}`;
-    //////////// ////// console.log(data, "llega data notif");
 
-    ////// ////// console.log('url', url);
     return this.http.delete(url).pipe(
       map((resp: any) => {
         //////////// ////// console.log("respuesta notificacion", resp);
@@ -271,9 +258,7 @@ export class PostsService {
         return resp;
       }),
       catchError((err) => {
-        //////////// ////// console.log("respuesta notificacion", err);
-        // alert('Error en al registrar');
-        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+ 
         return throwError(err);
       })
     );
@@ -290,9 +275,9 @@ export class PostsService {
         return resp;
       }),
       catchError((err) => {
-        //////////// ////// console.log("respuesta notificacion", err);
-        // alert('Error en al registrar');
-        // swal( 'Error en al registrar', err.error.mensaje, 'error');
+
+
+
         return throwError(err);
       })
     );
@@ -746,4 +731,25 @@ export class PostsService {
       })
     );
   }
+
+
+
+
+  searchPostPOST(data: any){
+
+
+    let url = `${_SERVICIOS}/post/searchPost?t=${this._usersService.token}`;
+    return this.http.post(url, data).pipe(
+        map((resp: any) => {
+        return resp;
+    }),
+    catchError((err) => {
+        return throwError(err);
+    })
+    );
+
+
+  }
+
+
 }

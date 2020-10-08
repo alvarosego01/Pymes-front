@@ -6,6 +6,7 @@ import {
   UsersService,
 } from "src/app/services/service.index";
 import { GlobalConfigService } from "src/app/services/-global-config.service";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: "app-user-control",
@@ -15,6 +16,10 @@ import { GlobalConfigService } from "src/app/services/-global-config.service";
 export class UserControlComponent implements OnInit {
   paginator: any = null;
   _users: any = [];
+
+
+  openUserReport: boolean = false;
+  userReport: any = null;
 
   constructor(
     public _postService: PostsService,
@@ -35,7 +40,7 @@ export class UserControlComponent implements OnInit {
 
     await this._userService.getAllUsers(paginate).subscribe(
       (resp) => {
-        ////// console.log('resultados', resp);
+        console.log('resultados', resp);
         var data = resp.data;
 
         this._users = data;
@@ -45,6 +50,7 @@ export class UserControlComponent implements OnInit {
         this.GlobalConfigService.spinner = false;
       },
       (err) => {
+        console.error('error', err);
         this.GlobalConfigService.spinner = false;
       }
     );
@@ -94,4 +100,57 @@ export class UserControlComponent implements OnInit {
       }
     );
   }
+
+
+
+  async searchUser(forma: NgForm){
+
+
+    if(forma.invalid){
+      return;
+    }
+
+
+    let l = {
+      arg: forma.value.arg
+    }
+
+    this.GlobalConfigService.spinner = true;
+
+    await this._userService.searchUserPOST(l).subscribe((resp) => {
+      var data = resp.data;
+
+      this._users = data;
+
+      this.paginator = null
+
+
+    }, (err) => {
+
+    });
+
+    forma.reset();
+
+    this.GlobalConfigService.spinner = false;
+
+  }
+
+
+
+  openReportUser(user: any){
+
+    console.log('el id de user que se pide', user._id);
+
+    this.userReport = user;
+
+    this.openUserReport = true;
+  }
+
+  cerrarModal() {
+    this.openUserReport = false;
+  }
+
+
+
+
 }

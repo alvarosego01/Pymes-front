@@ -21,7 +21,7 @@ const appRoutes: Routes = [
     { path: 'verify/:type', component: VerifyControlComponent },
     { path: 'us', component: UsComponent },
     { path: 'contact', component: ContactComponent },
-    { path: 'zonaPymes', component: ZonaPymesComponent },
+    { path: 'zonaPyme', component: ZonaPymesComponent },
     { path: 'checkoutResponse/:id', component: CheckoutResponseComponent },
     { path: 'checkoutResponse/:id/:validate', component: CheckoutResponseComponent },
     { path: 'publication/infoPost/:id', component: InfoPostComponent },

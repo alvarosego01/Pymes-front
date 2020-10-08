@@ -21,11 +21,43 @@
     <section class="content">
 
         <!-- Default box -->
-        <div class="card" *ngIf=" (this.allPublications) && this.allPublications.length > 0">
+        <div class="card" >
+
+
+            <div class="card-header">
+
+
+                <div class="card-tools">
+                  <form ngNativeValidate #f="ngForm" (ngSubmit)="this.searchPost( f )" class="formDataSend"
+                  >
+
+                    <div class="input-group input-group-sm">
+                      <input required ngModel name="arg" placeholder="Búsqueda de públicaciones" type="text" class="form-control" >
+                      <div class="input-group-append">
+                        <button type="submit" class="btn btn-success">
+                          <i class="fas fa-search"></i>
+                        </button>
+                        <button (click)="this.getAllPublications(1)" type="button" class="btn btn-success">
+                          Todos
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
 
             <div class="card-body p-0">
 
-                <table class="table table-striped projects">
+
+        <div class="jumbotron" *ngIf="(this.allPublications) && this.allPublications.length == 0">
+            <h1 class="titleSpecial2">Sin resultados</h1>
+            <p>No hay publicaciones en este momento</p>
+        </div>
+
+                <table
+                *ngIf=" (this.allPublications) && this.allPublications.length > 0"
+                class="table table-striped projects">
                     <thead>
                         <tr>
 
@@ -163,10 +195,6 @@
         </app-global-paginator>
 
 
-        <div class="jumbotron" *ngIf="(this.allPublications) && this.allPublications.length == 0">
-            <h1 class="titleSpecial2">Sin resultados</h1>
-            <p>No hay publicaciones en este momento</p>
-        </div>
         <!-- /.card -->
 
     </section>

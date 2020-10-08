@@ -430,6 +430,18 @@ export class UsersService {
       })
     );
   }
+  getDataSingleInfoGET(id) {
+    let url = `${_SERVICIOS}/stats/single/${id}?t=${this.token}`;
+    //// console.log('la url que se manda', url);
+    return this.http.get(url).pipe(
+      map((resp: any) => {
+        return resp;
+      }),
+      catchError((err) => {
+        return throwError(err);
+      })
+    );
+  }
 
   removeUserDELETE(id) {
     let url = `${_SERVICIOS}/user/${id}?t=${this.token}`;
@@ -442,4 +454,41 @@ export class UsersService {
       })
     );
   }
+
+
+
+  searchUserPOST(data: any){
+
+
+    let url = `${_SERVICIOS}/user/searchUsers?t=${this.token}`;
+    return this.http.post(url, data).pipe(
+        map((resp: any) => {
+        return resp;
+    }),
+    catchError((err) => {
+        return throwError(err);
+    })
+    );
+
+
+
+  }
+
+
+  getPersonalUserStats(id: string){
+
+
+    let url = `${_SERVICIOS}/${id}?t=${this.token}`;
+    return this.http.get(url).pipe(
+        map((resp: any) => {
+        return resp;
+    }),
+    catchError((err) => {
+        return throwError(err);
+    })
+    );
+
+
+  }
+
 }

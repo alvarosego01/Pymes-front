@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
   enviado: boolean = false;
 
 
-  registerControlSelect: string = null;
+  registerControlSelect: string = 'Seleccionar';
 
 
   ciudades = [];
@@ -48,12 +48,13 @@ export class RegisterComponent implements OnInit {
   coordsMap:any = {};
   activateMap = false;
   altMapUrl: string = null;
-  // estadosActividad = {
-  //   Produccion: false,
-  //   Comercialización: false,
-  //   Servicios: false,
-  //   Otro: false,
-  // }
+
+
+  fieldTextType: boolean;
+  repeatFieldTextType: boolean;
+
+
+
   constructor(
     public router: Router,
     public _usuarioService: UsersService,
@@ -67,7 +68,6 @@ export class RegisterComponent implements OnInit {
     ) {
     this._usuarioService.setCaptcha();
 
-      this.welcomeMessage();
 
     // //////// ////// console.log(this._globaConfig.departamentos);
   }
@@ -98,6 +98,8 @@ export class RegisterComponent implements OnInit {
     this.activateMap = false;
 
     this.enviado = false;
+
+    this.welcomeMessage(this.registerControlSelect);
 
   }
 
@@ -532,13 +534,34 @@ if(type == 'company'){
 
 
 
-  welcomeMessage(){
+  welcomeMessage(type: string){
 
-    this._notifyService.swalNormal.fire({
-      title: '¡Te damos la bienvenida al registro de Mercado Pyme!',
-      text: 'Llena los datos de nuestro formulario'
-    })
 
+    switch (type) {
+      case 'Persona natural':
+
+        this._notifyService.swalNormal.fire({
+          title: '¡Te damos la bienvenida al registro de usuario como Persona Natural de Mercado Pyme!',
+          text: 'Llena los datos de nuestro formulario'
+        })
+
+
+        break;
+
+        case 'Empresa':
+
+          this._notifyService.swalNormal.fire({
+            title: '¡Te damos la bienvenida al registro de usuario como Empresa de Mercado Pyme!',
+            text: 'Llena los datos de nuestro formulario'
+          })
+
+
+
+        break;
+
+      default:
+        break;
+    }
   }
 
 
@@ -550,6 +573,17 @@ if(type == 'company'){
 
     this.enviado = true;
 
+  }
+
+
+
+
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
+
+  toggleRepeatFieldTextType() {
+    this.repeatFieldTextType = !this.repeatFieldTextType;
   }
 
 }

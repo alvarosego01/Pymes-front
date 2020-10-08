@@ -78,6 +78,19 @@ import { ZonaPymesComponent } from "./pages/zona-pymes/zona-pymes.component";
 import { EditUserComponent } from "./pages/dashboard/admin/edit-user/edit-user.component";
 // import { GlobalPaginatorComponent } from './components/global-paginator/global-paginator.component';
 
+
+
+// config sockets
+// sockets
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { _SERVICIOS } from "./config/config";
+import { WebsocketService } from './services/websocket.service';
+const config: SocketIoConfig = {
+  url: _SERVICIOS , options: {}
+};
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -132,9 +145,11 @@ import { EditUserComponent } from "./pages/dashboard/admin/edit-user/edit-user.c
     // COMPONENTS_MODULE,
     DASHBOARD_MODULE,
     ADMIN_MODULE,
+    SocketIoModule.forRoot(config),
   ],
 
   providers: [
+    WebsocketService,
     PostsService,
     UsersService,
     SearchService,

@@ -26,12 +26,12 @@
                 <select (change)="changeForm()" [(ngModel)]="this.registerControlSelect" name="TypeId" #TypeId="ngModel"
                   class="form-control">
 
-                  <!-- <option value="" disabled selected></option>+ -->
+                  <option value="Seleccionar" disabled selected>Seleccionar</option>
                   <option value="Persona natural">
-                    Seleccionar: Persona natural
+                    Persona natural
                   </option>
                   <option value="Empresa">
-                    Seleccionar: Empresa
+                    Empresa
                   </option>
 
 
@@ -129,21 +129,16 @@
                           <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                       </div>
-                      <input ngModel name="Age" #Age="ngModel" type="number" class="form-control" required>
+                      <input ngModel name="Age" #Age="ngModel" type="number" class="form-control">
                     </div>
 
-                    <div class="errorSpace"
+                    <!-- <div class="errorSpace"
                       *ngIf="( this.enviado == true && Age.invalid ) || (Age.invalid && (Age.dirty || Age.touched))">
                       <small *ngIf="Age.errors.required">
                         Este campo es obligatorio
                       </small>
-                      <!-- <div *ngIf="Name.errors.minlength">
-                      Name cannot be more than 30 characters long.
-                    </div>
-                    <div *ngIf="Name.errors.minlength">
-                      Name must be at least 2 characters long.
+
                     </div> -->
-                    </div>
 
                   </div>
 
@@ -393,29 +388,18 @@
                 <hr>
                 <div class="row">
                   <div class="form-group clearfix col-md-12 col-lg-3">
-                    <label for="Phone">Teléfono fijo <span class="colorRed">(*)</span> </label>
+                    <label for="Phone">Teléfono fijo  <span class="colorRed">(*)</span></label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text">
                           <i class="fa fa-phone" aria-hidden="true"></i>
                         </span>
                       </div>
-                      <input required ngModel name="Phone" #Phone="ngModel" type="tel"
+                      <input ngModel name="Phone"  type="tel"
                         [imask]="this._formService.phoneMask()" class="form-control">
                     </div>
 
-                    <div class="errorSpace"
-                      *ngIf="( this.enviado == true && Phone.invalid ) || (Phone.invalid && (Phone.dirty || Phone.touched))">
-                      <small *ngIf="Phone.errors.required">
-                        Este campo es obligatorio
-                      </small>
-                      <!-- <div *ngIf="Name.errors.minlength">
-                          Name cannot be more than 30 characters long.
-                        </div>
-                        <div *ngIf="Name.errors.minlength">
-                          Name must be at least 2 characters long.
-                        </div> -->
-                    </div>
+
 
                   </div>
 
@@ -430,6 +414,14 @@
                       <input ngModel name="celPhone" #celPhone="ngModel" type="tel"
                         [imask]="this._formService.phoneMask()" class="form-control">
                     </div>
+
+                    <div class="errorSpace"
+                    *ngIf="( this.enviado == true && celPhone.invalid ) || (celPhone.invalid && (celPhone.dirty || celPhone.touched))">
+                    <small *ngIf="celPhone.errors.required">
+                      Este campo es obligatorio
+                    </small>
+
+                  </div>
 
                   </div>
 
@@ -457,12 +449,7 @@
                       <small *ngIf="Department.errors.required">
                         Este campo es obligatorio
                       </small>
-                      <!-- <div *ngIf="Name.errors.minlength">
-                      Name cannot be more than 30 characters long.
-                    </div>
-                    <div *ngIf="Name.errors.minlength">
-                      Name must be at least 2 characters long.
-                    </div> -->
+
                     </div>
 
                   </div>
@@ -593,6 +580,8 @@
 
                   </div>
 
+
+
                   <div class="form-group clearfix col-md-12 col-lg-4">
                     <label for="Pass">Contraseña <span class="colorRed">(*)</span></label>
                     <div class="input-group">
@@ -601,8 +590,26 @@
                           <i class="fa fa-lock" aria-hidden="true"></i>
                         </span>
                       </div>
-                      <input ngModel name="Pass" #Pass="ngModel" type="password" class="form-control" required>
+                      <input
+                      [type]="fieldTextType ? 'text' : 'password'"
+                      ngModel name="Pass" #Pass="ngModel" type="password" class="form-control" required>
+
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i
+                          class="fa"
+                          [ngClass]="{
+                            'fa-eye-slash': !fieldTextType,
+                            'fa-eye': fieldTextType
+                          }"
+                          (click)="toggleFieldTextType()"
+                        ></i>
+                        </span>
+                      </div>
+
                     </div>
+
+
 
                     <div class="errorSpace"
                       *ngIf="( this.enviado == true && Pass.invalid ) || (Pass.invalid && (Pass.dirty || Pass.touched))">
@@ -626,7 +633,24 @@
                           <i class="fa fa-lock" aria-hidden="true"></i>
                         </span>
                       </div>
-                      <input ngModel name="CPass" #CPass="ngModel" type="password" class="form-control" required>
+                      <input
+                      [type]="repeatFieldTextType ? 'text' : 'password'"
+                      ngModel name="CPass" #CPass="ngModel" type="password" class="form-control" required>
+
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i
+                            class="fa"
+                            [ngClass]="{
+                              'fa-eye-slash': !repeatFieldTextType,
+                              'fa-eye': repeatFieldTextType
+                            }"
+                            (click)="toggleRepeatFieldTextType()"
+                          ></i>
+                        </span>
+                      </div>
+
+
                     </div>
 
                     <div class="errorSpace"
@@ -1108,7 +1132,6 @@
 
                   </div>
 
-
                   <div class="form-group clearfix col-md-12 col-lg-3">
                     <label for="Age">Edad <span class="colorRed">(*)</span></label>
                     <div class="input-group">
@@ -1117,16 +1140,16 @@
                           <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                       </div>
-                      <input ngModel name="Age" #Age="ngModel" type="number" class="form-control" required>
+                      <input ngModel name="Age" #Age="ngModel" type="number" class="form-control">
                     </div>
 
-                    <div class="errorSpace"
+                    <!-- <div class="errorSpace"
                       *ngIf="( this.enviado == true && Age.invalid ) || (Age.invalid && (Age.dirty || Age.touched))">
                       <small *ngIf="Age.errors.required">
                         Este campo es obligatorio
                       </small>
 
-                    </div>
+                    </div> -->
 
                   </div>
 
@@ -1401,6 +1424,9 @@
 
                   </div>
 
+
+
+
                   <div class="form-group clearfix col-md-12 col-lg-4">
                     <label for="Pass">Contraseña <span class="colorRed">(*)</span></label>
                     <div class="input-group">
@@ -1409,22 +1435,34 @@
                           <i class="fa fa-lock" aria-hidden="true"></i>
                         </span>
                       </div>
-                      <input ngModel name="Pass" #Pass="ngModel" type="password" class="form-control" required>
+                      <input
+                      [type]="fieldTextType ? 'text' : 'password'"
+                      ngModel name="Pass" #Pass="ngModel" type="password" class="form-control" required>
+
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i
+                          class="fa"
+                          [ngClass]="{
+                            'fa-eye-slash': !fieldTextType,
+                            'fa-eye': fieldTextType
+                          }"
+                          (click)="toggleFieldTextType()"
+                        ></i>
+                        </span>
+                      </div>
+
                     </div>
+
+
 
                     <div class="errorSpace"
                       *ngIf="( this.enviado == true && Pass.invalid ) || (Pass.invalid && (Pass.dirty || Pass.touched))">
                       <small *ngIf="Pass.errors.required">
                         Este campo es obligatorio
                       </small>
-                      <!-- <div *ngIf="Name.errors.minlength">
-                      Name cannot be more than 30 characters long.
-                    </div>
-                    <div *ngIf="Name.errors.minlength">
-                      Name must be at least 2 characters long.
-                    </div> -->
-                    </div>
 
+                    </div>
 
                   </div>
                   <div class="form-group clearfix col-md-12 col-lg-4">
@@ -1435,7 +1473,24 @@
                           <i class="fa fa-lock" aria-hidden="true"></i>
                         </span>
                       </div>
-                      <input ngModel name="CPass" #CPass="ngModel" type="password" class="form-control" required>
+                      <input
+                      [type]="repeatFieldTextType ? 'text' : 'password'"
+                      ngModel name="CPass" #CPass="ngModel" type="password" class="form-control" required>
+
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i
+                            class="fa"
+                            [ngClass]="{
+                              'fa-eye-slash': !repeatFieldTextType,
+                              'fa-eye': repeatFieldTextType
+                            }"
+                            (click)="toggleRepeatFieldTextType()"
+                          ></i>
+                        </span>
+                      </div>
+
+
                     </div>
 
                     <div class="errorSpace"
@@ -1443,16 +1498,11 @@
                       <small *ngIf="CPass.errors.required">
                         Este campo es obligatorio
                       </small>
-                      <!-- <div *ngIf="Name.errors.minlength">
-                        Name cannot be more than 30 characters long.
-                      </div>
-                      <div *ngIf="Name.errors.minlength">
-                        Name must be at least 2 characters long.
-                      </div> -->
+
                     </div>
 
-
                   </div>
+
 
                 </div>
 

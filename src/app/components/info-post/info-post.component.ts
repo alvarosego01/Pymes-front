@@ -11,6 +11,8 @@ import {
 import { LocationStrategy } from "@angular/common";
 import { ImagenPipe } from "src/app/pipes/image-control.pipe";
 import { GlobalConfigService } from "src/app/services/-global-config.service";
+import { i_Visit } from 'src/interfaces/I_visit';
+import { WebsocketService } from 'src/app/services/websocket.service';
 
 @Component({
   selector: "app-info-post",
@@ -80,13 +82,22 @@ export class InfoPostComponent implements OnInit {
     public _notifyService: NotifyService,
     private url: LocationStrategy,
     public _userService: UsersService,
-    public _searchService: SearchService
+    public _searchService: SearchService,
+    public wsService: WebsocketService,
   ) {
     this.setTypeVisit();
     this.activatedRoute.params.subscribe((params) => {
       let id = params["id"];
 
       this.setPublication(id);
+
+      let l: i_Visit = {
+        type: 'post',
+        _post: id
+      }
+      this.wsService.beginVisit(l).then(r => {
+      });
+
     });
 
     if (this._userService.estaLogueado() == true) {

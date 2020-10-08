@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
 
 
 
+  fieldTextType: boolean;
+  repeatFieldTextType: boolean;
 
   constructor(
     public _notifyService: NotifyService,
@@ -94,6 +96,15 @@ export class LoginComponent implements OnInit {
   }
 
 
+
+
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
+
+  toggleRepeatFieldTextType() {
+    this.repeatFieldTextType = !this.repeatFieldTextType;
+  }
 
 
 

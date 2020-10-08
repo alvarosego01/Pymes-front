@@ -123,8 +123,17 @@
                     <i class="fa fa-tag" aria-hidden="true"></i>
                   </span>
                 </div>
-                <input required ngModel name="Title" #Title="ngModel" type="text" class="form-control">
+                <input [maxlength]="75" required ngModel name="Title" #Title="ngModel" type="text" class="form-control">
+
+
+
               </div>
+
+              <small *ngIf="(Title.value.length > 0)">{{ Title.value.length }}/75</small>
+
+
+
+
 
               <div class="errorSpace"
                 *ngIf="( this.enviado == true && Title.invalid ) || (Title.invalid && (Title.dirty || Title.touched))">
@@ -675,8 +684,6 @@
                 </small>
 
               </div>
-
-
             </div>
 
 
